@@ -84,8 +84,15 @@ Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型�
   +  应用场景：
     + 排行榜，电话姓名排序
 + BitMap 类型：
+  + 实现：使用 String 类型实现，保存为二进制的字节数组
+  + 常用命令：SETBIT，GETBIT，BITCOUNT，BITOP，BITPOS
+  + 应用场景：签到统计，判断用户登陆状态，连续签到用户总数
 + HyperLogLog 类型：
+  + 目的：提供**不精确**的去重计数，误差率大约是 0.81%
+  + 常用命令：PFADD，PFCOUNT，PFMERGE
+  + 应用场景：百万级网页 UV 计数
 + GEO 类型：
+  + 目的：存储地理信息，并且对存储的信息操作，用于位置信息服务
 + Stream 类型：
 
 
