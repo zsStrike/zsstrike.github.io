@@ -1675,7 +1675,7 @@ CREATE TABLE `t` (
 
 
 
-## 40 insert语句的锁为什么这么多
+## 40 insert 语句的锁为什么这么多
 
 假设存在以下表和执行语句：
 
@@ -1706,9 +1706,9 @@ insert into t2(c,d) select c,d from t;
 
 ![img](MySQL实战45讲/33e513ee55d5700dc67f32bcdafb9386.png)
 
-实际的执行效果是，如果session B先执行，由于这个语句对表t主键索引加了(-∞,1]这个next-key lock，会在语句执行完成后，才允许session A的insert语句执行。
+实际的执行效果是，如果 session B 先执行，由于这个语句对表 t 主键索引加了 $(-\infty,1]$ 这个 next-key lock，会在语句执行完成后，才允许 session A 的 insert 语句执行。
 
-但如果没有锁的话，就可能出现session B的insert语句先执行，但是后写入binlog的情况。binglog 情况如下：
+但如果没有锁的话，就可能出现 session B 的 insert 语句先执行，但是后写入 binlog 的情况。binglog 情况如下：
 
 ```sql
 insert into t values(-1,-1,-1);
@@ -1723,13 +1723,13 @@ insert into t2(c,d) select c,d from t;
 insert into t2(c,d)  (select c+1, d from t force index(c) order by c desc limit 1);
 ```
 
-这个语句的加锁范围，就是表t索引c上的(4,supremum]这个next-key lock和主键索引上id=4这一行。
+这个语句的加锁范围，就是表 t 索引 c 上的 $(4, \infty]$ 这个 next-key lock 和主键索引上 id=4 这一行。
 
 唯一键冲突：
 
 ![img](MySQL实战45讲/83fb2d877932941b230d6b5be8cca6ca.png)
 
-session A执行的insert语句，发生主键冲突的时候，并不只是简单地报错返回，还在冲突的索引上加了锁，持有索引c上的(5,10]共享next-key lock（读锁）。
+session A 执行的 insert 语句，发生主键冲突的时候，并不只是简单地报错返回，还在冲突的索引上加了锁，持有索引 c 上的 (5,10] 共享 next-key lock（读锁）。
 
 ![img](MySQL实战45讲/63658eb26e7a03b49f123fceed94cd2d.png)
 
