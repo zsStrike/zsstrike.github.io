@@ -914,7 +914,7 @@ ul.h-list > li {
   -o-transition: all 0.25s ease;
 }
 .l_header .wrapper a.logo {
-  color: #04bbf8;
+  color: #262626;
 }
 .l_header.no_sidebar .wrapper {
   max-width: 768px;
@@ -2686,7 +2686,7 @@ ul.h-list > li {
 }
 .article h1,
 .article h2 {
-  color: #04bbf8;
+  color: #262626;
   margin-top: 3em;
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
   padding-bottom: 0.2em;
@@ -2707,7 +2707,7 @@ ul.h-list > li {
 }
 .article h3 {
   font-size: 20.8px;
-  color: #04bbf8;
+  color: #262626;
   text-align: left;
 }
 .article h4 {
