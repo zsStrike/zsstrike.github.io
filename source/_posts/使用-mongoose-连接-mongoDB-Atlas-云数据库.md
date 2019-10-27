@@ -8,5 +8,11 @@ test
 
 <!--  More  -->
 
+## 注册一个 MongoDB Atlas 账号，然后申请免费试用的集群服务器
+
+## 创建一个数据库，名字 Student， 下面有colletions
+
+## 本地连接数据库
+
 cdshvhsv
 
