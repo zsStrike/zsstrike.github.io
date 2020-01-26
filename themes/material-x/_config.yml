@@ -306,3 +306,8 @@ search:
 # Less渲染
 less:
   compress: true
+
+# MathJax Support
+mathjax:
+  enable: true
+  per_page: true
