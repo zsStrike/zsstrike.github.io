@@ -313,4 +313,75 @@ svm = SGDClassifier(loss='hinge')
 
 SVM受欢迎的一个原因是：通过“核技巧”可以很容易解决非线性可分问题。
 
-首先来了解非线性可分问题到底是什么。
+首先来了解非线性可分问题到底是什么。通过NumPy的`logicol_xor`来创建数据集，其中100个样本属于类别1，另外的100个样本属于类别-1：
+
+```python
+np.random.seed(0)
+X_xor = np.random.randn(200, 2)
+y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
+y_xor = np.where(y_xor, 1, -1)
+plt.scatter(X_xor[y_xor==1, 0], X_xor[y_xor==1, 1], c='b', marker='x', label='1')
+plt.scatter(X_xor[y_xor==-1, 0], X_xor[y_xor==-1, 1], c='r', marker='s', label='-1')
+plt.ylim(-3.0)
+plt.legend()
+plt.show()
+```
+
+执行以上代码后，我们得到了一个“异或”数据集，二维分布如下：
+
+![img](./Fri,%2031%20Jan%202020%20134018.png)
+
+显然，使用前面提到的线性逻辑斯蒂回归或者是线性SVM模型，都无法将样本正确划分为正类别和负类别。
+
+核方法的基本思想是：通过映射函数$ \phi(\cdot) $将样本的原始特征映射到一个使样本线性可分的更高维的空间中，然后找到分界面后作反变换$ \phi^{-1}(\cdot) $可得到最初的划分平面。
+
+但是这种映射会带来非常大的计算成本，这个时候我们就可以使用**核技巧**的方法。在实践中，我们所需要做的就是将点积$ x^{iT}x^j $映射为$ \phi((x^i)^T \phi(x^j) $，为此定义
+$$
+k(x^i, x^j) = \phi((x^i)^T \phi(x^j)
+$$
+一个最常使用的核函数就是径向基核函数（RBF kernel）：
+$$
+k(x^i, x^j) = exp(-\frac{||x^i-x^j||^2}{2\sigma^2}) = exp(-\gamma ||x^i-x^j||^2)
+$$
+其中，$ \gamma = \frac{1}{2\sigma^2} $是待优化的自由参数。接下来，就使用scikit-learn来训练一个核SVM使之可以对“异或”数据集进行分类：
+
+```python
+svm = SVC(kernel='rbf', random_state=0, gamma=0.10, C=10.0)
+svm.fit(X_xor, y_xor)
+plot_decision_regions(X_xor, y_xor, classifier=svm)
+plt.legend()
+plt.show()
+```
+
+得到的决策边界如下：
+
+![img](./Fri,%2031%20Jan%202020%20140538.png)
+
+正如图像所示，核SVM较好地完成了对“异或”数据的划分。
+
+在此，我们将$ \gamma $参数设置为了0.1，可以将其理解为高斯球面的截止参数（cut-off parameter）。为了更好的理解$ \gamma $参数，我们将基于RBF的SVM应用于鸢尾花数据集：
+
+```python
+svm = SVC(kernel='rbf', random_state=0, gamma=0.20, C=10.0)
+svm.fit(X_train_std, y_train)
+plot_decision_regions(X_combined_std, y_combined, classifier=svm, test_idx=range(105, 150))
+plt.xlabel('length')
+plt.ylabel('width')
+plt.legend()
+plt.show()
+```
+
+得到的图像如下：
+
+![img](./Fri,%2031%20Jan%202020%20141237.png)
+
+现在改变$ \gamma = 5.0 $，得到的图像如下：
+
+![img](./Fri,%2031%20Jan%202020%20141428.png)
+
+通过图像可以看出，使用一个较大的$ \gamma $值，会使得类别0核类别1的决策边界变得紧凑了许多。
+
+虽然模型对训练数据的你和很好，但是类似的分类器对未知数据会有较大的泛化误差。
+
+## 决策树
+
