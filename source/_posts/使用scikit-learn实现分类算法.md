@@ -385,3 +385,121 @@ plt.show()
 
 ## 决策树
 
+基于训练集的特征，决策树模型通过一系列的问题来推断样本的类标。
+
+![img](./v2-ff4fe0d16ec17c5520837b3aad52ed54_hd.jpg)
+
+从树根开始，基于可获得最大**信息增益（Information Gain, IG）**的特征来对数据进行划分，通过迭代处理，在每个节点重复此过程，直到叶子节点。
+
+### 最大化信息增益----获知尽可能准确的结果
+
+就目前来说，大多数的库中实现的树算法都是二叉决策树。二叉决策树中常用的三个不纯度衡量标准或者划分标准分别是：基尼系数（Gini index, $ I_G $），熵（entropy， $ I_H $）以及误分类率（classification error， $ I_E $）。
+
+非空类别熵的定义是
+$$
+I_H(t) = -\sum_{i=1}^c p(i|t)\log_2p(i|t)
+$$
+其中，$ p(i|t) $为在特定节点t中，属于类别i的样本占特定样本t中样本总数的比例。如果某一个节点中所有样本都属于同一个类别，那么它的熵是0，当样本以相同的比例分属于不同的类时，熵的值最大。
+
+直观地说，基尼系数可以理解为降低误分类可能性的标准：
+$$
+I_G(t) = \sum_{i=1}^{c}p(i|t)(1-p(i|t)) = 1 - \sum_{i=1}^c p(i|t)^2
+$$
+和熵类似，当所有样本时等比例分布时，基尼系数的值最大。
+
+误分类率的定义如下：
+$$
+I_E = 1 - max\{p(i|t)\}
+$$
+这是对于剪枝方法很有用的准则，但不建议用于决策树的构建过程，因为它对节点中各类别样本数量的变动不敏感。
+
+### 构建决策树
+
+通过使用scikit-learn来构建一颗二叉决策树，需要注意的是，决策树的深度不是越大越好，深度过大的决策树，很容易产生过拟合的现象。在此，构建一棵深度是3的决策树：
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+
+tree = DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)
+tree.fit(X_train, y_train)
+X_combined = np.vstack((X_train, X_test))
+y_combined = np.hstack((y_train, y_test))
+plot_decision_regions(X_combined, y_combined, classifier=tree, test_idx=range(105, 150))
+plt.xlabel('length')
+plt.ylabel('width')
+plt.legend()
+plt.show()
+```
+
+得到的决策边界如下：
+
+![img](./Fri,%2031%20Jan%202020%20145128.png)
+
+### 通过随机森林将弱分类器集成为强分类器
+
+直观上，随机森林可以看作是多颗决策树的集成。随机森林算法可以概括为一下几个步骤：
+
+1. 使用bootstrap抽样方法随机选择 n 个样本用于训练（从训练集中随机可重复选择n个样本）
+2. 使用第 1 步选定的样本构建一棵决策树，节点划分如下：
+   1. 不重复选择d个特征
+   2. 根据目标函数的要求，使用选定的特征对节点进行划分
+3. 重复上述过程1~2000次
+4. 汇总每棵树的类标进行多数投票
+
+使用scikit-learn来实现随机森林：
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+forest = RandomForestClassifier(criterion='entropy', n_estimators=10, random_state=1, n_jobs=2)
+forest.fit(X_train, y_train)
+plot_decision_regions(X_combined, y_combined, classifier=forest, test_idx=range(105, 150))
+plt.xlabel('length')
+plt.ylabel('width')
+plt.legend()
+plt.show()
+```
+
+得到的决策区域如下：
+
+![img](./Fri,%2031%20Jan%202020%20150555.png)
+
+上述代码中，我们以熵作为不纯度衡量标准，且使用了10棵决策树进行随机森林的训练，同时我们还规定算法中使用的处理器内核数量为2。
+
+## 惰性学习算法之k-近临算法
+
+k-近临算法（k-nearest neighbor classifier，KNN）是惰性学习算法的典型例子。KNN算法本身是简单的，可以归纳为以下几步：
+
+1. 选择近临数量k和距离衡量方法
+2. 找到待分类样本的k个最近邻居
+3. 根据最近临的类标进行多数投票
+
+下图说明了当k=3时，范围内红色三角形多，这个待分类点属于红色三角形；当K = 5 时，范围内蓝色正方形多，这个待分类点属于蓝色正方形。
+
+![img](./v2-e780b42d95a9d577c264fa1183b571ef_hd.jpg)
+
+KNN算法可以快速适应新的训练数据，不过它的缺点也是显而易见的，在最坏情况下，计算复杂度随着样本的增多而线性增长。
+
+接下来使用scikit-learn实现KNN模型，在此，我们选择欧几里得距离作为度量标准：
+
+```python
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=5, p=2, metric='minkowski')
+knn.fit(X_train_std, y_train)
+plot_decision_regions(X_combined_std, y_combined, classifier=knn, test_idx=range(105, 150))
+plt.xlabel('length')
+plt.ylabel('width')
+plt.legend()
+plt.show()
+```
+
+得到的决策区域如下：
+
+![img](./Fri,%2031%20Jan%202020%20152419.png)
+
+在代码中用到的“闵可夫斯基（minkowski）”距离是对欧几里得距离和曼哈顿距离的一种泛化，可写作：
+$$
+d(x^i, x^j) = \sqrt[p]{\sum_k|x^i_kx^j_k|^p}
+$$
+如果将参数p设置为2，那么就是欧几里得距离，设置为1，则为曼哈顿距离。
