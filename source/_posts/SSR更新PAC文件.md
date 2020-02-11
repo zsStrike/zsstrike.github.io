@@ -8,7 +8,7 @@ SSR项目已经不再维护，它的PAC文件更新功能已经失效，本文�
 
 <!-- More -->
 
-虽然原来的PAC地址已经失效了，但是gfwlist项目组维护了被墙的网站，GitHub地址：https://github.com/gfwlist/gfwlist。首先，我们下载gfwlist.txt：
+虽然原来的PAC地址已经失效了，但是gfwlist项目组维护了被墙的网站，GitHub地址：https://github.com/gfwlist/gfwlist/ 。首先，我们下载gfwlist.txt：
 
 ```bash
 curl https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt > gfwlist.txt
