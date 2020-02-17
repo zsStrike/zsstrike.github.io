@@ -19,7 +19,7 @@ avatar: /assets/avatar.jpg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: 'http://zsstrike.top/'
+url: 'http://blog.zsstrike.top/'
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
