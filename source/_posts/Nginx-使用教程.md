@@ -250,7 +250,49 @@ make && make install
 3. 完成高可用的配置
 
    1. 修改/etc/keepalived/keepalived.conf
+
+      ```
+      ! Configuration File for keepalived
+      global_defs {
+         router_id LVS_DEVEL
+      }
+      vrrp_script chk_http_port {
+          script "/usr/local/src/nginx_check.sh"
+          interval 2
+          weight 2
+      }
+      vrrp_instance VI_1 {
+          state BACKUP
+          interface ens33
+          virtual_router_id 51
+          priority 90
+          advert_int 1
+          authentication {
+              auth_type PASS
+              auth_pass 1111
+          }
+          track_script {
+              chk_http_port
+          }
+          virtual_ipaddress {
+              192.168.85.120
+          }
+      }
+      ```
+
    2. 在/usr/local/src/中添加nginx_check.sh文件
+
+      ```bash
+      #!/bin/bash
+      A=`ps -C nginx --no-header | wc -l`
+      if [ $A -eq 0 ];then
+              /usr/local/nginx/sbin/nginx
+              sleep 2
+              if [`ps -C nginx --no-header | wc -l` -eq 0];then
+                      killall keepalived
+              fi
+      fi
+      ```
 
 4. 测试
 
