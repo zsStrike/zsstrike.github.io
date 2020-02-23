@@ -6,6 +6,8 @@ tags: ["MySQL"]
 
 本文介绍MySQL数据库的简单使用方法，包括数据库的启动和连接，以及数据的增删改查等。操作环境在CentOS 7中。
 
+<!-- More -->
+
 ## 数据库连接和断开连接
 
 在进行数据库的连接之前，我们需要先启动数据库服务：
@@ -807,10 +809,8 @@ shell> mysqldump -u root -p --tab=/dir_name db1
 
 > 如果报错：Got error: 1290: The MySQL server is running with the --secure-file-priv option so it cannot execute this statement when executing 'SELECT INTO OUTFILE'，我们可以使用如下方法来解决：
 >
-> ```
-> mysql> show global variables like '%secure%'
-> ```
->
+> `mysql> show global variables like '%secure%'`
+> 
 > 查看secure-file-priv对用的目录，然后将上面的`dirname`改为对应的目录就可以。
 
 恢复文件内容：
