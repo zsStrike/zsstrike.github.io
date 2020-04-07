@@ -20,4 +20,4 @@ after_success:
   - git commit -m "Travis CI Auto Build"
   - git config user.name "zsStrike"
   - git config user.email "2439758713@qq.com"
-  - git push --quiet --force https://5faa7930eb33511fdb9d446c596fb45760bbb1de@github.com/zsstrike.github.io master
+  - git push --quiet --force https://5faa7930eb33511fdb9d446c596fb45760bbb1de@github.com/zsstrike.github.io.git master
