@@ -85,6 +85,6 @@ theme: material-x
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/zsStrike/zsstrike.github.io
+  repo: git@github.com:zsStrike/zsstrike.github.io.git
   branch: master
 
