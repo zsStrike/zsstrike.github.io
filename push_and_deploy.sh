@@ -6,4 +6,4 @@ git push origin hexo-project
 hexo clean
 hexo g -d
 # pause
-read -n1 -p "Press any key to continue..."
+# read -n1 -p "Press any key to continue..."
