@@ -116,7 +116,7 @@ const UserSchema = new mongoose.Schema({
 
 > A library to help you hash passwords. Based on the [Blowfish](https://en.wikipedia.org/wiki/Blowfish_(cipher)) cipher.
 
-### 用户登录
+## 用户登录
 
 接下来，创建用户登录请求路由：
 
@@ -177,7 +177,7 @@ app.post('/api/login', (req, res) => {
 
 注意，本文中为了演示，将`SECRET`硬编码进了 server.js 中，更实际的情况时我们将其保存在一个被 gitignore 的文件中，通过读取文件配置 `SECRET`。
 
-### 用户授权
+## 用户授权
 
 当用户登录之后，客户端保存下来了 token 值，接下来假设用户想要获取个人信息，这只有在用户登录之后才有权限进行操作，为此就需要 token 的帮助了：
 
