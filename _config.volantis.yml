@@ -90,7 +90,10 @@ navbar:
 comments:
   title: <i class='fas fa-comments'></i> 评论
   subtitle:
-  service: #valine # valine, minivaline, disqus, gitalk, vssue, livere, isso, hashover
+  service: minivaline # valine, minivaline, disqus, gitalk, vssue, livere, isso, hashover
+  minivaline:
+    appId: tWs7XQSCiyujf3bcAXGG0pqc-gzGzoHsz # Your leancloud application appid
+    appKey: PVSUuPBvrSbYymTQtbTw9BBv # Your leancloud application appkey  
 sidebar:
   # 主页、分类、归档等独立页面
   for_page: [blogger, tagcloud]
