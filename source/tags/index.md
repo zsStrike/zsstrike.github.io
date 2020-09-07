@@ -1,6 +1,7 @@
 ---
-title: tags
-date: 2015-10-20 06:49:50
-type: "tags"
-comments: false
+layout: tag
+index: true
+title: 所有标签
+cover: true
+sidebar: [blogger, tagcloud]    
 ---

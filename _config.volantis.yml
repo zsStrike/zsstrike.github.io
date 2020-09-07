@@ -1,0 +1,132 @@
+custom_css:
+  font_smoothing: true # font-smoothing for webkit
+  max_width: 1080px # Sum of body width and sidebar width
+  navbar:
+    height: 64px
+    effect: [shadow, blur] # [shadow, floatable, blur]
+  fontfamily:
+    logofont:
+      fontfamily: '"Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      name: 'Varela Round'
+      url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf
+      weight: normal
+      style: normal
+    bodyfont:
+      fontfamily: 'UbuntuMono, "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      name: 'UbuntuMono'
+      url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf
+      weight: normal
+      style: normal
+    codefont:
+      fontfamily: 'Menlo, Monaco'
+      name: 'Monaco'
+      url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/Monaco/Monaco.ttf
+      weight: normal
+      style: normal
+search:
+  enable: true
+  service: hexo  # hexo, google, algolia, azure, baidu
+  js: https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2.6.4/js/search.js
+seo:
+  # When there are no keywords in the article's front-matter, use tags as keywords.
+  use_tags_as_keywords: true
+  # When there is no description in the article's front-matter, use excerpt as the description.
+  use_excerpt_as_description: true
+  robots:
+    home_first_page: index,follow
+    home_other_pages: noindex,follow
+    archive: noindex,follow
+    category: noindex,follow
+    tag: noindex,follow
+    # robots can be written in front-matter
+plugins:
+  # 文章字数统计、阅读时长，开启需要安装插件: npm i --save hexo-wordcount
+  wordcount:
+    enable: true
+  # highlight.js
+  highlightjs:
+    enable: #true # Please set hexo.config.highlight.enable = false !!!
+    js: https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js
+    css: https://cdn.jsdelivr.net/npm/highlight.js@9.18.1/styles/solarized-light.css
+    # css: https://cdn.jsdelivr.net/npm/highlight.js@9.18.1/styles/atom-one-light.css
+    # more: https://www.jsdelivr.com/package/npm/highlight.js?path=styles
+  # Codeblock Copy Button
+  clipboard:
+    enable: true
+    js: https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js    
+  # 暗黑模式 darkmodejs
+  # https://darkmodejs.learn.uno
+  # 暗黑模式样式：https://github.com/volantis-x/hexo-theme-volantis/blob/master/source/css/_third-party/darkmode.styl
+  darkmodejs:
+    enable: true
+    js: https://cdn.jsdelivr.net/npm/darkmode-js@1.5/lib/darkmode-js.min.js
+    button: # button 使用默认或自行开发
+      enable: true
+      left: '16px'
+      bottom: '32px'
+      buttonDark: '#333'
+      buttonLight: '#ddd'
+    compatible: true # 卡片兼容性处理，如果未发现卡片出现兼容问题设置为false    
+article:
+  body:
+    top_meta: [author, date, wordcount, counter]
+    meta_library:
+      author:
+        name: zsStrike
+        avatar: /assets/avatar.jpg
+        url: https://github.com/zsStrike
+navbar:
+  menu:
+    # The following can be written in `blog/source/_data/menu.yml`
+    - name: 博客
+      icon: fas fa-rss
+      url: /
+    - name: 标签
+      icon: fas fa-tags
+      url: /tags/
+    - name: 归档
+      icon: fas fa-archive
+      url: /archives/
+    # - name: 友链
+    #   icon: fas fa-link
+    #   url: friends/
+    - name: 关于
+      icon: fas fa-info-circle
+      url: /about/
+comments:
+  title: <i class='fas fa-comments'></i> 评论
+  subtitle:
+  service: #valine # valine, minivaline, disqus, gitalk, vssue, livere, isso, hashover
+sidebar:
+  # 主页、分类、归档等独立页面
+  for_page: [blogger, tagcloud]
+  # layout: docs/post 这类文章页面
+  for_post: [blogger, tagcloud, toc]        
+  # 侧边栏组件库
+  widget_library:
+    # blogger info widget
+    blogger:
+      class: blogger
+      display: [desktop, mobile] # [desktop, mobile]
+      avatar: /assets/avatar.jpg
+      shape: circle # circle, rectangle
+      url: /about/
+      title: 
+      subtitle:
+      jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
+      social: false 
+site_footer:
+  # layout of footer: [aplayer, social, license, info, copyright]
+  # layout: [aplayer, social, license, info, copyright]
+  social:
+    # - icon: fas fa-rss
+    #   url: atom.xml
+    - icon: fas fa-envelope
+      url: mailto:zslovezj@mail.ustc.edu.cn
+    - icon: fab fa-github
+      url: https://github.com/zsStrike
+    # - icon: fas fa-headphones-alt
+    #   url: https://music.163.com/#/user/home?id=63035382
+  # copyright: '[Copyright © 2017-2020 Mr. X](https://xaoxuu.com)'
+  # You can add your own property here. (Support markdown, for example: br: '<br>')
+  br: '<br>'      
