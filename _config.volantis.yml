@@ -43,12 +43,6 @@ plugins:
   # 文章字数统计、阅读时长，开启需要安装插件: npm i --save hexo-wordcount
   wordcount:
     enable: true
-  # 预加载
-  preload:
-    enable: true
-    service: flying_pages # instant_page, flying_pages
-    instant_page: https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js
-    flying_pages: https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js
 
   # Codeblock Copy Button
   clipboard:
