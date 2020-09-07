@@ -88,4 +88,4 @@ deploy:
   repo: git@github.com:zsStrike/zsstrike.github.io.git
   branch: master
 
-# use_cdn: true
+use_cdn: true
