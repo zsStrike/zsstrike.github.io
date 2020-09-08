@@ -148,7 +148,7 @@ layout:
 # 侧边栏小部件配置
 sidebar:
   - widget: author
-    avatar: /assets/avatar.jpg
+    avatar: https://s1.ax1x.com/2020/09/08/wQFm7j.jpg
     social: true
   - widget: toc
   - widget: grid

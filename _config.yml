@@ -14,8 +14,8 @@ language:
 - zh-HK
 - zh-TW
 timezone:
-favicon: /assets/avatar.jpg
-avatar: /assets/avatar.jpg
+favicon: https://s1.ax1x.com/2020/09/08/wQFm7j.jpg
+avatar: https://s1.ax1x.com/2020/09/08/wQFm7j.jpg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -23,6 +23,12 @@ url: 'http://blog.zsstrike.top/'
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+
+# deploy to home.ustc.edu.cn
+# url: 'http://home.ustc.edu.cn/'
+# root: /~zslovezj/blog/
+# permalink: :year/:month/:day/:title/
+# permalink_defaults:
 
 # Directory
 source_dir: source
