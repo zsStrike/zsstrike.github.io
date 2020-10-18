@@ -69,6 +69,35 @@ article:
         name: zsStrike
         avatar: https://s1.ax1x.com/2020/09/08/wQFm7j.jpg
         url: https://github.com/zsStrike
+cover:
+  height_scheme: half # full, half
+  layout_scheme: search # blank (留白), search (搜索), dock (坞), featured (精选), focus (焦点)
+  display:
+    home: true
+    archive: true
+    others: false # can be written in front-matter 'cover: true'
+  background: https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg
+  logo: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-Cover@3x.png
+  title: 'Volantis'
+  subtitle: ''
+  search: Search What You Want # search bar placeholder
+  features:
+    - name: 博客
+      icon: #
+      img: https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg
+      url: /
+    - name: 标签
+      icon: #
+      img: https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg
+      url: /tags/
+    - name: 归档
+      icon: #
+      img: https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg
+      url: /archives/
+    - name: 关于
+      icon: #
+      img: https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg
+      url: /about/
 navbar:
   menu:
     # The following can be written in `blog/source/_data/menu.yml`
@@ -90,7 +119,7 @@ navbar:
 comments:
   title: <i class='fas fa-comments'></i> 评论
   subtitle:
-  service: minivaline # valine, minivaline, disqus, gitalk, vssue, livere, isso, hashover
+  service:  # valine, minivaline, disqus, gitalk, vssue, livere, isso, hashover
   minivaline:
     appId: tWs7XQSCiyujf3bcAXGG0pqc-gzGzoHsz # Your leancloud application appid
     appKey: PVSUuPBvrSbYymTQtbTw9BBv # Your leancloud application appkey  
