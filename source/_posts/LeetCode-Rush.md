@@ -152,3 +152,4 @@ tags: ["Algorithm"]
 + 在 Java 中使用 int[] 作为 HashMap 的键并不会得到想要的结果，因为其会使用 int[] 的索引作为 hashcode，可以使用 `List<Integer>` 或者重写一个类，该类重新实现 hashcode 和 equals 算法，亦或直接使用 TreeMap
 + Integer.valueOf() 和 Integer.parseInt() 两者都是对字符串进行解析，不过它们的返回值类型不同，前者是 Integer，后者是 int
 + `List<Integer>` 到 `int[]` 类型的转换不能直接使用 toArray，可以借助流：`list.stream().mapToInt(Integer.intValue).toArray()`
++ 想要对自定义类实现排序，要么实现 `Comparable<T>` 接口，重写 `compareTo` 方法，或者是排序的时候传入一个 `Comparator<T>` 对象，重写 `compare` 方法
