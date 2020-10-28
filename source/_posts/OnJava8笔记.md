@@ -82,6 +82,26 @@ Java 没有 sizeof 运算符，因为每种类型的值都是固定的。
 
 
 
+## 第五章 控制流
+
+true 和 false：所有关系运算符都能产生条件语句，注意在 Java 中使用数值作为布尔值是非法的。
+
+条件控制：`if-else`。
+
+迭代语句：`while`，`do-while`，`for`，`for-in`。
+
+return：退出当前的方法，放回一个方法值。
+
+break 和 continue：break 用于中止内层循环，continue 用于跳过此次迭代。
+
+goto：Java 不支持 `goto` 语句，但是支持标签语法，可以和 break 和 continue 一起使用。
+
+switch-case：每个 case 后面跟上 break，同时在 Java7 的时候开始支持字符串匹配。
+
+
+
+
+
 
 
 
