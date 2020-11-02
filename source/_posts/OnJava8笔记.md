@@ -230,6 +230,50 @@ final 关键字：final 修饰的数据通常指该数据不能被改变：
 
 
 
+## 第十二章 集合
+
+泛型和类型安全的集合：通过使用泛型，规定了向某个集合中可以添加的变量类型，方便进行处理，同时不会引发类型转型错误等问题。
+
+Java 集合类库的两个概念：集合（Collection）和映射（Map）。
+
+添加元素组：通过 Arrays.asList 和 Collections.addAll 方法来添加元素组。注意 Arrays.asList 的返回值是一个 List，但是这个 List 不能调整大小。
+
+集合的打印：必须使用 Arrays.toString 来生成数组的可打印形式，但是打印集合无需任何操作。
+
+列表 List：有 ArrayList 和 LinkedList，前者擅长随机访问，后者擅长插入删除操作。当确定元素是否是属于某个 **List** ，寻找某个元素的索引，以及通过引用从 **List** 中删除元素时，都会用到 `equals()` 方法。`toArray()` 方法将任意的 Collection 转换为数组。
+
+迭代器 Iterators：在任何集合中，都必须有某种方式可以插入元素并再次获取它们。毕竟，保存事物是集合最基本的工作。对于 **List** ， `add()` 是插入元素的一种方式， `get()` 是获取元素的一种方式。如果从更高层次的角度考虑，会发现这里有个缺点：要使用集合，必须对集合的确切类型编程。为此引入迭代器，迭代器相关方法有`iterator，next，hasNext，remove`。迭代器统一了对集合的访问方式。
+
+ListIterator：ListIterator 是一个更强大的 Iterator 子类型，它只能由各种 List 类生成。 Iterator 只能向前移动，而 ListIterator 可以双向移动。它可以生成迭代器在列表中指向位置的后一个和前一个元素的索引，并且可以使用 `set()` 方法替换它访问过的最近一个元素。
+
+LinkedList：LinkedList 还添加了一些方法，使其可以被用作栈、队列或双端队列（deque） 。在这些方法中，有些彼此之间可能只是名称有些差异，或者只存在些许差异，以使得这些名字在特定用法的上下文环境中更加适用（特别是在 Queue 中）。如 element，peek，poll，offer 等。
+
+栈 Stack：后进先出规则，Java 1.0 中附带了一个 Stack 类，结果设计得很糟糕（为了向后兼容，我们永远坚持 Java 中的旧设计错误）。Java 6 添加了 ArrayDeque ，其中包含直接实现堆栈功能的方法。
+
+集合 Set：Set 不保存重复的元素，Set 具有与 Collection 相同的接口，因此没有任何额外的功能。HashSet 产生的输出没有可辨别的顺序，这是因为出于对速度的追求， HashSet 使用了散列。由 HashSet 维护的顺序与 TreeSet 或 LinkedHashSet 不同，因为它们的实现具有不同的元素存储方式。TreeSet 将元素存储在红-黑树数据结构中，而 HashSet 使用散列函数。LinkedHashSet 因为查询速度的原因也使用了散列，但是看起来使用了链表来维护元素的插入顺序。
+
+映射 Map：根据键快速查找值的结构。Map 可以返回由其键组成的 Set ，由其值组成的 Collection ，或者其键值对的 Set 。keySet() 方法生成由在 petPeople 中的所有键组成的 Set ，它在 for-in 语句中被用来遍历该 Map 。
+
+队列 Queue：先进先出的集合，LinkedList 实现了 Queue 接口，并且提供了一些方法以支持队列行为，因此 LinkedList 可以用作 Queue 的一种实现。offer() 是与 Queue 相关的方法之一，它在允许的情况下，在队列的尾部插入一个元素，或者返回 false 。 peek() 和 element() 都返回队头元素而不删除它，但是如果队列为空，则 element() 抛出 NoSuchElementException ，而 peek() 返回 null 。 poll() 和 remove() 都删除并返回队头元素，但如果队列为空，poll() 返回 null ，而 remove() 抛出 NoSuchElementException 。
+
+优先级队列 PriorityQueue：先进先出（FIFO）描述了最典型的队列规则（queuing discipline）。优先级队列声明下一个弹出的元素是最需要的元素（具有最高的优先级）。当在 PriorityQueue 上调用 offer() 方法来插入一个对象时，该对象会在队列中被排序。默认的排序使用队列中对象的自然顺序（natural order），但是可以通过提供自己的 Comparator 来修改这个顺序。 PriorityQueue 确保在调用 peek()， poll() 或 remove() 方法时，获得的元素将是队列中优先级最高的元素。
+
+集合和迭代器：Collection 是所有序列集合共有的根接口，使用接口描述的一个理由是它可以使我们创建更通用的代码。通过针对接口而非具体实现来编写代码，我们的代码可以应用于更多类型的对象。为了对集合进行遍历操作，我们可以使用迭代器来进行操作。
+
+for-in 迭代器：到目前为止，for-in 语法主要用于数组，但它也适用于任何 Collection 对象。这样做的原因是 Java 5 引入了一个名为 Iterable 的接口，该接口包含一个能够生成 Iterator 的 iterator() 方法。for-in 使用此 Iterable 接口来遍历序列。
+
+适配器惯用法：如果已经有一个接口并且需要另一个接口时，则编写适配器就可以解决这个问题。在这里，若希望在默认的正向迭代器的基础上，添加产生反向迭代器的能力，因此不能使用覆盖，相反，而是添加了一个能够生成 Iterable 对象的方法，该对象可以用于 for-in 语句。
+
+注意：不要在新代码中使用遗留类 Vector ，Hashtable 和 Stack 。
+
+Java 集合框架简图：黄色为接口，绿色为抽象类，蓝色为具体类。虚线箭头表示实现关系，实线箭头表示继承关系。
+
+![collection](OnJava8笔记/collection.png)
+
+![map](OnJava8笔记/map.png)
+
+
+
 
 
 
