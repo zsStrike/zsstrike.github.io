@@ -274,6 +274,51 @@ Java 集合框架简图：黄色为接口，绿色为抽象类，蓝色为具体
 
 
 
+## 第十四章 流式编程
+
+流式编程的特点：代码可读性更高；懒加载，意味着它只在绝对必要时才计算，由于计算延迟，流使我们能够表示非常大（甚至无限）的序列，而不需要考虑内存问题。
+
+流支持：Java 8 通过在接口中添加`default`修饰的方法实现流的平滑嵌入。流操作有三种类型：创建流，修改流元素（中间操作），消费流元素（终端操作）。
+
+流创建：通过 Stream.of 将一组元素转化为流，除此之外，每个集合都可以通过调用 stream 方法来产生一个流。除此以外，还有：
+
++ 随机数流：`new Random().ints()`
++ int 类型流：`IntStream.range(start, end, step)`
++ generate：`Stream.generate(obj)`
++ iterate：`Stream.iterate(initValue, cb)`
++ 流的构造着模式：首先创建一个 builder 对象，然后将创建流所需的多个信息传递给它，最后builder 对象执行“创建”流的操作。
++ Arrays: `Arrays.stream()`
+
+中间操作：用于从一个流中获取对象，并将对象作为另一个流从后端输出，以连接到其他操作。
+
++ peek：无修改地查看流中的元素
++ sorted：排序，可以使用 lambda 参数
++ distinct：消除重复元素
++ filter：通过过滤条件的被保存下来，否则删除
++ map：将函数操作应用在输入流的元素中，并将返回值传递到输出流中。还有 mapToInt, mapToLong 等
++ flatMap：将产生流的函数应用在每个元素上（与 `map()` 所做的相同），然后将每个流都扁平化为元素，因而最终产生的仅仅是元素。对应还有 flatMapToInt 等
+
+Optimal 类：一些标准流操作返回 Optional 对象，因为它们并不能保证预期结果一定存在。当流为空的时候你会获得一个 Optional.empty 对象，而不是抛出异常。
+
++ 解包 Optimal 的函数：`ifPresent(Consumer)`, `orElse(otherObject)`
++ 创建 Optimal：静态方法有`empty(), of(value), ofNullable(value)`
++ Optimal 流：假设你的生成器可能产生 null 值，那么当用它来创建流时，你会自然地想到用 Optional 来包装元素。可以使用 filter() 来保留那些非空 Optional
+
+终端操作：以下操作将会获取流的最终结果，终端操作（Terminal Operations）总是我们在流管道中所做的最后一件事。
+
++ 数组：toArray
++ 循环：forEach，forEachOrdered
++ 集合：collect
++ 组合：reduce
++ 匹配：allMatch，anyMatch，noneMatch
++ 查找：findFirst，findAny
++ 信息：count，max，min
++ 数字流信息：average，max，min
+
+
+
+
+
 
 
 
