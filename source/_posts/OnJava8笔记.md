@@ -378,7 +378,7 @@ Java 集合框架简图：黄色为接口，绿色为抽象类，蓝色为具体
 
 
 
-## 第十三章 函数时编程
+## 第十三章 函数式编程
 
 Lambda 表达式：`(params) -> { statements; }`，只有一个参数的时候，可以省略括号，如果只有一行的话，花括号应该省略。
 
@@ -387,11 +387,58 @@ Lambda 表达式：`(params) -> { statements; }`，只有一个参数的时候�
 + 未绑定的方法引用：未绑定的方法引用是指没有关联对象的普通（非静态）方法。 使用未绑定的引用时，我们必须先提供对象。
 + 构造函数的引用：`ClassName::new`
 
-函数式接口：
+函数式接口：Lambda 表达式包含类型推导，但是如果存在`(x, y) -> x + y`这样的 lambda 表达式，编译器就不能自动进行类型推导了。因为 x, y 既可以是 String 类型，也可以是 int 类型。此时引入`java.util.function`包，包含了一组接口，每个接口只有一个抽象方法，称为函数式方法。Java 8 允许我们将函数赋值给接口，这样的语法更加简单漂亮。
 
++ 多参数函数式接口：在 function 包中，只有很少的接口，我们可以自己定义一个函数接口，如下：
 
+  ```java
+  // functional/TriFunction.java
+  
+  @FunctionalInterface
+  public interface TriFunction<T, U, V, R> {
+      R apply(T t, U u, V v);
+  }
+  
+  ```
 
+高阶函数：消费或产生函数的函数。
 
+```java
+// functional/ProduceFunction.java
+
+import java.util.function.*;
+
+interface FuncSS extends Function<String, String> {} // [1]
+
+public class ProduceFunction {
+  static FuncSS produce() {
+    return s -> s.toLowerCase(); // [2]
+  }
+  public static void main(String[] args) {
+    FuncSS f = produce();
+    System.out.println(f.apply("YELLING"));
+  }
+}
+
+```
+
+闭包：对外部变量引用的函数。
+
+```java
+// functional/Closure1.java
+
+import java.util.function.*;
+
+public class Closure1 {
+  int i;
+  IntSupplier makeFun(int x) {
+    return () -> x + i++;
+  }
+}
+
+```
+
+柯里化和部分求值：柯里化意为：将一个多参数的函数，转换为一系列单参数函数。
 
 
 
