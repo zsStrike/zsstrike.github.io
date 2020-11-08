@@ -485,6 +485,81 @@ Optimal 类：一些标准流操作返回 Optional 对象，因为它们并不�
 
 
 
+## 第十八章 字符串
+
+字符串的不可变性：String 对象是不可变的，String 类中的每个看起来会修改 String 值的方法，实际上都是创建了一个全新的 String 对象。
+
+`+` 的重载与 StringBuilder：在 String 中，`+` 代表了字符串之间的 append 操作，每次 `+` 都会创建一个 String 对象，代价高昂。StringBuilder 提供了丰富全面的方法，包括`insert，replace，append，delete`。另外还有 StringBuffer，和 StringBuilder 不同点在于后者是线程不安全的，前者是线程安全的。
+
+意外递归：如`"som string" + this `，我们想要打印出某个字符串的地址，但是编译器首先辨别出左边是 String 对象，`+` 要求右边的变量也是 String 对象（先进行转换），这就涉及到了意外递归。可以使用`Object.toString()`打印地址。
+
+字符串操作：当需要改变字符串的内容时，`String` 类的方法都会返回一个新的 `String` 对象。同时，如果内容不改变，`String` 方法只是返回原始对象的一个引用而已。这可以节约存储空间以及避免额外的开销。
+
+格式化输出：
+
++ System.out.printf, System.out.format
+
++ 格式化修饰符：`%[argument_index$][flags][width][.precision]conversion `
+
++ Formatter 转换：
+
+  | 类型 | 含义               |
+  | ---- | ------------------ |
+  | `d`  | 整型（十进制）     |
+  | `c`  | Unicode字符        |
+  | `b`  | Boolean值          |
+  | `s`  | String             |
+  | `f`  | 浮点数（十进制）   |
+  | `e`  | 浮点数（科学计数） |
+  | `x`  | 整型（十六进制）   |
+  | `h`  | 散列码（十六进制） |
+  | `%`  | 字面值“%”          |
+
++ String.format
+
+正则化表达式：
+
++ 在正则表达式中，用 `\d` 表示一位数字。如果在其他语言中使用过正则表达式，那你可能就能发现 Java 对反斜线 \ 的不同处理方式。在其他语言中，`\\` 表示“我想要在正则表达式中插入一个普通的（字面上的）反斜线，请不要给它任何特殊的意义。”而在Java中，`\\` 的意思是“我要插入一个正则表达式的反斜线，所以其后的字符具有特殊的意义。”例如，如果你想表示一位数字，那么正则表达式应该是 `\\d`。如果你想插入一个普通的反斜线，应该这样写 `\\\`。不过换行符和制表符之类的东西只需要使用单反斜线：`\n\t`。如果要表示“可能有一个负号，后面跟着一位或多位数字”，可以这样：
+
+  ```
+  -?\\d+
+  ```
+
++ 表达式：
+
+  | 表达式         | 含义                                           |
+  | -------------- | ---------------------------------------------- |
+  | `.`            | 任意字符                                       |
+  | `[abc]`        | 包含`a`、`b`或`c`的任何字符（和`a              |
+  | `[^abc]`       | 除`a`、`b`和`c`之外的任何字符（否定）          |
+  | `[a-zA-Z]`     | 从`a`到`z`或从`A`到`Z`的任何字符（范围）       |
+  | `[abc[hij]]`   | `a`、`b`、`c`、`h`、`i`、`j`中的任意字符（与`a |
+  | `[a-z&&[hij]]` | 任意`h`、`i`或`j`（交）                        |
+  | `\s`           | 空白符（空格、tab、换行、换页、回车）          |
+  | `\S`           | 非空白符（`[^\s]`）                            |
+  | `\d`           | 数字（`[0-9]`）                                |
+  | `\D`           | 非数字（`[^0-9]`）                             |
+  | `\w`           | 词字符（`[a-zA-Z_0-9]`）                       |
+  | `\W`           | 非词字符（`[^\w]`）                            |
+
++ CharSequence：接口从 CharBuffer，String，StringBuffer，StringBuilder 抽象出了一般化定义
+
+  ```java
+  interface CharSequence {   
+      char charAt(int i);   
+      int length();
+      CharSequence subSequence(int start, int end);
+      String toString(); 
+  }
+  
+  ```
+
++ Pattern 和 Matcher：更具一个 String 对象生成一个 Pattern 对象，通过 Pattern 对象的 match 方法产生一个 Matcher 对象。
+
++ 组（group）：`A(B(C))D` 中有三个组：组 0 是 `ABCD`，组 1 是 `BC`，组 2 是 `C`。通过 Matcher 对象的 group 方法可以获取到每个组。
+
+
+
 ## 第二十一章 数组
 
 数组特性：效率，类型，保存基本数据类型的能力。
