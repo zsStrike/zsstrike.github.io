@@ -526,6 +526,31 @@ Try-With-Resources 用法：`try(){  }catch(Exception e){  }`，在 try 小括�
 
 
 
+## 第十七章 文件
+
+文件和目录路径：一个 **Path** 对象表示一个文件或者目录的路径，是一个跨操作系统（OS）和文件系统的抽象，通过 `Paths.get(URL)` 来获得一个对应的 Path 对象。
+
++ 选取路径部分片段：getName
++ 路径分析：**Files** 工具类包含一系列完整的方法用于获得 **Path** 相关的信息，如`exists，size，isDirectory`
++ Paths 的增删修改：relative，resolve
+
+遍历目录：Files.walkFileTree，具体操作实现由参数二 FileVisitor 里面的四个抽象方法决定：
+
+1.  **preVisitDirectory()**：在访问目录中条目之前在目录上运行。 
+2.  **visitFile()**：运行目录中的每一个文件。  
+3.  **visitFileFailed()**：调用无法访问的文件。   
+4.  **postVisitDirectory()**：在访问目录中条目之后在目录上运行，包括所有的子目录。
+
+文件系统：可以使用静态的 FileSystems 工具类获取默认的文件系统
+
+路径监听：通过文件系统的 **WatchService** 可以设置一个进程对目录中的更改做出响应
+
+文件查找：通过在 FileSystem 对象上调用 getPathMatcher 可以获得一个 PathMatcher，传入对应的两种模式：glob 或者 regex。
+
+文件读写：如果文件比较小，使用 Files.readAllLines 可以一次性读取整个文件，返回一个 `List<String>`；使用 Files.write 写入 byte 数组或者任何可迭代对象。对于文件比较大的时候，可以使用 Files.lines 将文件转换为输入流。
+
+
+
 ## 第十八章 字符串
 
 字符串的不可变性：String 对象是不可变的，String 类中的每个看起来会修改 String 值的方法，实际上都是创建了一个全新的 String 对象。
