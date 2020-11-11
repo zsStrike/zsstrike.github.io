@@ -626,6 +626,47 @@ Try-With-Resources 用法：`try(){  }catch(Exception e){  }`，在 try 小括�
 
 
 
+## 第十九章 类型信息
+
+Java 在运行时识别对象和类的信息的方式：传统的 RTTI(RunTime Type Information，运行时类型信息)，反射机制。
+
+RTTI 必要性：下面这个代码展示了 Shape 基类下的派生类的相关操作，使用 RTTI，我们可以在运行时进行类型确认，同时，编码的时候只需要注意对基类的处理就行，不会影响代码的可扩展性。
+
+```java
+public class Shapes {
+    public static void main(String[] args) {
+        Stream.of(
+            new Circle(), new Square(), new Triangle())
+            .forEach(Shape::draw);
+    }
+}
+```
+
+实际上，上述代码编译时候，Stream 和 Java 泛型系统确保放入的都是 Shape 对象或者其派生类，运行时，自动类型转换确保从 Stream 中取出的对象都是 Shape 类型。
+
+Class 对象：Class 对象包含了与类有关的信息，每个类都会产生一个 Class 对象，每当编译一个新类，就会产生一个 Class 对象（保存在同名的 .class 文件中），为了生成该类的对象，JVM 首先会调用类加载器子系统将这个类加载到内存中。Java 是动态加载的，即只有在类需要的时候才会进行类的加载。所有的 Class 对象都属于 Class 类，可以通过`Class.forName()`来得到类的 Class 对象，或者通过`someInstance.getClass()`得到。
+
++ 类字面常量：对于一个 FancyToy.class 的文件，我们可以直接使用`FancyToy.class`得到对应的类对象，相较于`Class.forName`的方式，该种方式更加简单和安全，并且效率更高。另外，使用类字面常量的时候，不会自动初始化该 Class 对象。为了使用类的三个步骤：
+  + 加载：查找字节码，并且创建一个 Class 对象
+  + 链接：验证字节码，为 static 字段分配存储空间，如果需要，将解析这个类对其他类的引用
+  + 初始化：先初始化基类，然后执行 static 初始化器和 static 初始化块
++ 泛化的 Class 引用：Class 引用总是指向某个 Class 对象，而 Class 对象可以用于产生类的实例，并且包含可作用于这些实例的所有方法代码。使用 `Class<?>` 表示通配所有类型，`Class<? extends Sup>`表示通配所有 Sup 的派生类型，`Class<? super Sub>`表示通配 Sub 的基类。
++ cast 方法：接受参数对象，并将其类型转换为 `Class` 引用的类型。
+
+类型转换检测：Java 中支持自动向上转型，但是向下转型是强制的，需要用户指代向下转换的类型，如果没有通过向下类型转换，就会报错，否则转型成功。另外，可以使用 instanceof 判断某个实例是否是某个对象的实例。Class.isInstance 可以动态测试对象类型。
+
+类的等价比较：当查询类型信息的时候，使用 instanceof 或者 isInstance，这两种方式产生的结果相同，但是 Class 对象直接比较与上述方式不同。instanceof 说的是“你是这个类，还是从这个类派生的类？”。而如果使用 == 比较实际的Class 对象，则与继承无关 —— 它要么是确切的类型，要么不是。
+
+反射：运行时类信息。`java.lang.reflect`库中包含了相关的类来实现反射这一机制。RTTI 和反射的真正区别在于，使用 RTTI 时，编译器在编译时会打开并检查 .class 文件。换句话说，你可以用“正常”的方式调用一个对象的所有方法；而通过反射，.class 文件在编译时不可用，它由运行时环境打开并检查。
+
++ 类方法提取器：getMethods 和 getConstructors 获取对应的类方法
+
+动态代理：代理是基本的设计模式之一。一个对象封装真实对象，代替其提供其他或不同的操作---这些操作通常涉及到与“真实”对象的通信，因此代理通常充当中间对象。通过调用静态方法`Proxy.newProxyInstance`来创建动态代理。
+
+接口和类型：interface 关键字的一个重要目标就是允许程序员隔离组件，进而降低耦合度。
+
+
+
 ## 第二十一章 数组
 
 数组特性：效率，类型，保存基本数据类型的能力。
