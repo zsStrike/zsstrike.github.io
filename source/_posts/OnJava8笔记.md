@@ -667,6 +667,96 @@ Class 对象：Class 对象包含了与类有关的信息，每个类都会产�
 
 
 
+## 第二十章 泛型
+
+简单泛型：直接使用类型暂代符表示某种类型即可，下图是一个二元组：
+
+```java
+// onjava/Tuple2.java
+package onjava;
+
+public class Tuple2<A, B> {
+    public final A a1;
+    public final B a2;
+    public Tuple2(A a, B b) { a1 = a; a2 = b; }
+}
+```
+
+泛型接口：泛型可以应用于接口，例如生成器，这是一种专门负责创建对象的类。注意，Java 中支持基本类型作为泛型类型。
+
+泛型方法：泛型方法独立于类而改变方法。作为准则，请“尽可能”使用泛型方法。通常将单个方法泛型化要比将整个类泛型化更清晰易懂。
+
+```java
+// generics/GenericMethods.java
+
+public class GenericMethods {
+    public <T> void f(T x) {
+        System.out.println(x.getClass().getName());
+    }
+}
+```
+
+泛型擦除：Java 泛型是使用擦除实现的。这意味着当你在使用泛型时，任何具体的类型信息都被擦除了，你唯一知道的就是你在使用一个对象。因此，`List<String>` 和 `List<Integer>` 在运行时实际上是相同的类型。它们都被擦除成原生类型 List，使用 getClass 得到的结果相同。
+
++ 特殊方式：当我们想要调用某个泛型类型的方法的时候，我们可以使用`<T extends Sup>`，这样我们才能调用 Sup 里面的相关方法。
++ 擦除的问题：由于擦除的存在，所有关于参数的信息就丢失了。当你在编写泛型代码时，必须时刻提醒自己，你只是看起来拥有有关参数的类型信息而已。
+
+补偿擦除：由于擦除的存在，我们无法在运行时知道参数的确切类型，为了解决这个问题，我们显式传递一个 Class 对象，以在类型表达式中使用。
+
++ 创建类型的实例：直接通过`new T()`是行不通的，但是我们可以通过对应的 Class 对象的 newInstance 方法来创建新的实例
++ 泛型数组：我们无法创建泛型数组，解决方式是在试图创建泛型数组的时候使用 ArrayList
+
+边界：由于擦除会删除类型信息，因此唯一可用的无限制泛型参数的方法是那些 Object 可用的方法。但是，如果将该参数限制为某类型的子集，则可以调用该子集中的方法。为了应用约束，Java 泛型使用了 extends 关键字。
+
+通配符：使用`？`表示。使用`<? extends Sup>`表示继承自 Sup 的类，使用`<? super Sub>`表示 Sub 的基类，使用`<?>`表示任意一种类型。
+
+使用泛型的问题：
+
++ 任何基本类型都不能作为类型参数
+
++ 一个类不能实现同一个泛型接口的两种变体，由于擦除的原因，这两个变体会成为相同的接口
+
++ 使用带有泛型类型参数的转型或 **instanceof** 不会有任何效果
+
+自限定的类型：下图代码展示了这种惯用法：
+
+```java
+class SelfBounded<T extends SelfBounded<T>> { // ...
+```
+
++ 古怪的循环泛型（CRG）：
+
+  ```java
+  // generics/CuriouslyRecurringGeneric.java
+  
+  class GenericType<T> {}
+  
+  public class CuriouslyRecurringGeneric
+    extends GenericType<CuriouslyRecurringGeneric> {}
+  ```
+
++ 自限定：
+
+  ```java
+  class A extends SelfBounded<A>{}
+  ```
+
++ 参数协变：自限定类型的价值在于它们可以产生协变参数类型，即方法参数类型会随子类而变化。
+
+动态类型安全：Java5 中的 Collections 有一组便利工具函数，可以解决类型检查问题，如`checkedMap`等。
+
+泛型异常：由于擦除的原因，catch 语句不能捕获泛型类型的异常，因为在编译期和运行时都必须知道异常的确切类型。
+
+混型（Mixin）：最基本的概念是混合多个类的能力，以产生一个可以表示混型中所有类型的类。
+
++ 与接口混合
++ 使用装饰器模式
++ 与动态代理混合
+
+潜在类型机制：也称作鸭子类型机制，即“如果它走起来像鸭子，并且叫起来也像鸭子，那么你就可以将它当作鸭子对待”。
+
+
+
 ## 第二十一章 数组
 
 数组特性：效率，类型，保存基本数据类型的能力。
