@@ -536,14 +536,14 @@ Try-With-Resources 用法：`try(){  }catch(Exception e){  }`，在 try 小括�
 
 遍历目录：Files.walkFileTree，具体操作实现由参数二 FileVisitor 里面的四个抽象方法决定：
 
-1.  **preVisitDirectory()**：在访问目录中条目之前在目录上运行。 
-2.  **visitFile()**：运行目录中的每一个文件。  
-3.  **visitFileFailed()**：调用无法访问的文件。   
-4.  **postVisitDirectory()**：在访问目录中条目之后在目录上运行，包括所有的子目录。
+1.  preVisitDirectory()：在访问目录中条目之前在目录上运行。 
+2.  visitFile()：运行目录中的每一个文件。  
+3.  visitFileFailed()：调用无法访问的文件。   
+4.  postVisitDirectory()：在访问目录中条目之后在目录上运行，包括所有的子目录。
 
 文件系统：可以使用静态的 FileSystems 工具类获取默认的文件系统
 
-路径监听：通过文件系统的 **WatchService** 可以设置一个进程对目录中的更改做出响应
+路径监听：通过文件系统的 WatchService 可以设置一个进程对目录中的更改做出响应
 
 文件查找：通过在 FileSystem 对象上调用 getPathMatcher 可以获得一个 PathMatcher，传入对应的两种模式：glob 或者 regex。
 
@@ -786,6 +786,26 @@ Arrays 相关方法：
 数组元素修改：通过使用 setAll 方法来索引现有数据元素
 
 
+
+## 第二十一章 枚举
+
+基本 enum 特性：调用 values 方法，可以返回对应的数组，同时调用 ordinal 方法可以知道某个 value 的次序，这个次序默认从 0 开始。可以使用 import static 导入 enum 类型。
+
+方法添加：除了不能继承自一个 enum 之外，我们基本上可以将 enum 看作一个常规的类。如果你打算定义自己的方法，那么必须在 enum 实例序列的最后添加一个分号。
+
+switch 语句中的 enum：enum 的 values 本来就具有顺序，可以搭配 switch 使用。
+
+values 方法：enum 类型的对象会有一个 values 方法，这个方法是由编译器添加的 static 方法。
+
+实现而非继承：enum 继承自 Enum 类，由于 Java 不支持多继承，enum 不能再次继承其他类，但是创建一个新的 enum 时，可以实现一个或者多个接口。
+
+使用接口组织枚举：无法从 enum 继承子类很令人沮丧，但是我们可以尝试使用接口来组织枚举类。
+
+使用 EnumSet 代替 Flags：EnumSet 中的元素必须来自一个 enum。EnumSet 基础是 long，只有 64 位，但是在需要的时候，会增加一个 long。
+
+使用 EnumMap：要求键必须来自一个 enum，EnumMap 在内部使用数组实现。
+
+使用 enum 的状态机：枚举类型很适合用于创建状态机。
 
 
 
