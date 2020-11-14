@@ -787,7 +787,7 @@ Arrays 相关方法：
 
 
 
-## 第二十一章 枚举
+## 第二十二章 枚举
 
 基本 enum 特性：调用 values 方法，可以返回对应的数组，同时调用 ordinal 方法可以知道某个 value 的次序，这个次序默认从 0 开始。可以使用 import static 导入 enum 类型。
 
@@ -809,9 +809,37 @@ values 方法：enum 类型的对象会有一个 values 方法，这个方法是
 
 
 
+## 第二十三章 注解
 
+java.lang 中的注解包括：@Override，@Deprecated，@SuppressWarnings，@SafeVarargs，@FunctionalInterface。
 
+基本语法：
 
++ 定义注解：注解的定义看起来很像接口的定义，事实上，他们和其他 Java 接口一样，也会被编译成 class 文件。
+
+  ```java
+  // onjava/atunit/Test.java
+  // The @Test tag
+  package onjava.atunit;
+  import java.lang.annotation.*;
+  @Target(ElementType.METHOD)
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface Test {}
+  ```
+
+  @target 标示注解的对象，@Retention 标示注解在哪里可用。
+
++ 元注解：@target，@Retention，@Documented，@Inherited，@Repeatable
+
+编写注解处理器：使用反射机制 API 实现注解的读取。
+
++ 注解元素：基本类型，String，Class，enum，Annotation，以上类型的数组
++ 默认值限制：首先，元素不能有不确定的值。也就是说，元素要么有默认值，要么就在使用注解时提供元素的值。任何非基本类型的元素，无论是在源代码声明时还是在注解接口中定义默认值时，都不能使用 null 作为其值。
++ 生成外部文件：Web Service，自定义标签库以及对象/关系映射工具（例如 Toplink 和 Hibernate）通常都需要 XML 描述文件，而这些文件脱离于代码之外。除了定义 Java 类，程序员还必须忍受沉闷，重复的提供某些信息，例如类名和包名等已经在原始类中提供过的信息。每当你使用外部描述文件时，他就拥有了一个类的两个独立信息源，这经常导致代码的同步问题。
++ 注解不支持继承：不能使用 extends 关键字来继承 @interfaces。
++ 实现处理器：通过 getAnnotation 来检查是否存在注解，如果存在的话做出相应的操作
+
+基于注解的单元测试：如 JUnit。
 
 
 
