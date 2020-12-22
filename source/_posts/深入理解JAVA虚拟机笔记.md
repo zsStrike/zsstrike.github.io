@@ -327,7 +327,106 @@ Java模块化系统：
 
   ![image-20201129132525034](深入理解JAVA虚拟机笔记/image-20201129132525034.png)
 
+
+
+
+## 第八章 虚拟机字节码执行引擎
+
+运行时栈帧结构：下图是 JVM 的栈和栈帧的总体结构：
+
+![image-20201201211749470](深入理解JAVA虚拟机笔记/image-20201201211749470.png)
+
+每个栈帧里面包含有局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。
+
++ 局部变量表：是一组变量值的存储空间，用于存放方法参数和方法内部定义的局部变量。变量槽空间一般是 32 位，对于long类型的变量，需要两个槽来保存。当方法被调用的时候，首先存储相关的实参，然后再存储方法内部的局部变量。比如，对于实例方法，局部变量表第0位代表的就是方法所属对象的引用，方法中通过 this 隐式访问到。另外，局部变量表中的变量槽可以被重用，这可能会带来副作用，如 gc 过程。最后，局部变量没有所谓的“准备阶段”，因此，对局部变量引用前需要先赋值。
+
++ 操作数栈：用于保存相应的操作数。在进行运算的时候需要检查指令和对应的数据类型是否匹配。在概念模型上，两个不同的栈帧是完全相互独立的，但是在实际过程中，可能存在重合，这样做的好处是节约空间，同时无需进行额外的实参-形参转换。
+
+  ![image-20201201213604264](深入理解JAVA虚拟机笔记/image-20201201213604264.png)
+
++ 动态链接：每个栈帧都包含一个指向运行时常量池[1]中该栈帧所属方法的引用，持有这个引用是为了支持方法调用过程中的动态连接（Dynamic Linking）。
+
++ 方法返回地址：正常返回上层方法调用者，可能会提供返回值，异常返回的话，不带任何返回值。推出的过程实际上等同于将当前栈帧出栈。
+
+方法调用：
+
++ 解析：在类加载的过程中，如果方法的调用版本在运行期不可变，就可以将方法的符号引用转化为直接引用，该类方法的调用称为解析。在 Java 中，这样的方法有静态方法，私有方法，实例构造器，父类方法，final 方法。这些方法称为“非虚方法”，其他的就成为“虚方法”。
+
++ 分派（dispatch）：
+
+  + 静态分派：假设 `Human man = new Man()`，那么Human成为变量的静态类型，或者是外观类型，后面的Man则称为变量的实际类型或者运行时类型。所有依赖静态类型来决定方法执行版本的分派动作，都称为静态分派。静态分派的最典型应用表现就是方法重载。静态分派发生在编译阶段。虽然编译器能够在确定方法重载版本，但是实际上只是选择一个相对更合适的版本。假设有一个类实现了sayHello方法，重载了所有类型的参数。那么对应`sayHello('a')`中的a的类型被解析为char，如果注释掉char类型的重载，那么a会被解析成int类型，依次往后是：Character，Serializable(Character的一个接口)，Object（父类），变长参数。
+
+  + 动态分派：与重写有关。`Human man = new Man()`，man执行重写方法的时候，会执行`Man`类里面的对应的方法，而不是`Woman`里面的重载方法，这与变量的实际类型有关。调用重写方法的时候，执行指令是`invokevirtual`，其运行过程如下：
+
+    1. 找到变量指向对象的实际类型，记做C
+    2. 如果在C中找到与方法签名一直的方法，进行访问权限校验，通过直接返回这个方法的直接调用，否则返回`java.lang.IllegalAccessError`
+    3. 否则，按照继承关系从下往上依次对C的各个父类进行2操作
+    4. 如果始终没有找到合适方法，抛出`java.lang.AbstractMethodError`异常
+
+    注意，方法存在多态，但是字段不存在多态。
+
++ 虚拟机动态分派的实现：通常虚拟机会创建一个虚方法表（vtable，对应的还有接口方法表itable），使用虚方法表索引来代替元数据查找以提高性能。
+
+  ![image-20201201230836050](深入理解JAVA虚拟机笔记/image-20201201230836050.png)
+
+动态类型语言支持：
+
++ 动态类型语言：动态类型语言的关键特征是它的类型检查的主体过程是在运行期而不是编译期进行的，如Javascript等。那相对地，在编译期就进行类型检查过程的语言，譬如C++和Java等就是最常用的静态类型语言。
+
++ Java与动态类型：在 Java7 之前的4条方法调用指令（`invoke*`）的第一个参数都是被调用方法的符号引用。前面已经提到过，方法的符号引用在编译时产生，而动态类型语言只有在运行期才能确定方法的接收者。这样，在Java虚拟机上实现的动态类型语言就不得不使用“曲线救国”的方式（如编译时留个占位符类型，运行时动态生成字节码实现具体类型到占位符类型的适配）来实现，但这样势必会让动态类型语言实现的复杂度增加，也会带来额外的性能和内存开销。
+
++ `java.lang.invoke`：该包提供了一种新的动态确定方法的机制，称为方法句柄。
+
+  ```java
+  import static java.lang.invoke.MethodHandles.lookup;
+  import java.lang.invoke.MethodHandle;
+  import java.lang.invoke.MethodType;
   
+  public class MethodHandleTest {
+      static class ClassA {
+          public void println(String s) {
+          System.out.println(s);
+          }
+      }
+  	public static void main(String[] args) throws Throwable {
+          Object obj = System.currentTimeMillis() % 2 == 0 ? System.out : new ClassA();
+          // 无论obj最终是哪个实现类，下面这句都能正确调用到println方法。
+          getPrintlnMH(obj).invokeExact("icyfenix");
+      }
+      private static MethodHandle getPrintlnMH(Object reveiver) throws Throwable {
+          // MethodType：代表“方法类型”，包含了方法的返回值（methodType()的第一个参数）和具体参数（methodType()第二个及以后的参数）。
+          MethodType mt = MethodType.methodType(void.class, String.class);
+          // lookup()方法来自于MethodHandles.lookup，这句的作用是在指定类中查找符合给定的方法名称、方法类型，并且符合调用权限的方法句柄。
+          // 因为这里调用的是一个虚方法，按照Java语言的规则，方法第一个参数是隐式的，代表该方法的接收者，也即this指向的对象，这个参数以前是放在参数列表中进行传递，现在提供了bindTo()方法来完成这件事情。
+          return lookup().findVirtual(reveiver.getClass(), "println", mt).bindTo(reveiver);
+      }
+  }
+  ```
+
+  MethodHandle在使用方法和效果上与Reflection有众多相似之处。不过，它们也有以下这些区别：
+
+  + Reflection和MethodHandle机制本质上都是在模拟方法调用，但是Reflection是在模拟Java代码层次的方法调用，而MethodHandle是在模拟字节码层次的方法调用。
+  + Reflection中的java.lang.reflect.Method对象远比MethodHandle机制中的java.lang.invoke.MethodHandle对象所包含的信息来得多。
+  + Reflection API的设计目标是只为Java语言服务的，而MethodHandle则设计为可服务于所有Java虚拟机之上的语言。
+
++ invokedynamic指令：作为Java诞生以来唯一一条新加入的字节码指令，都是为了解决原有4条“invoke*”指令方法分派规则完全固化在虚拟机之中的问题，把如何查找目标方法的决定权从虚拟机转嫁到具体用户代码之中。invokedynamic指令的第一个参数不再是代表方法符号引用的CONSTANT_Methodref_info常量，而是变为JDK 7
+  时新加入的CONSTANT_InvokeDynamic_info常量，从这个新常量中可以得到3项信息：引导方法
+  （Bootstrap Method，该方法存放在新增的BootstrapMethods属性中）、方法类型（MethodType）和
+  名称。
+
++ 掌控方法分派规则：子类方法不能直接调用祖父类方法，可以通过MethodHandle来进行访问，如遇到权限问题，可以使用`lookupImpl.setAccessible(true)`来解决。
+
+基于栈的字节码解释执行引擎：
+
++ 解释执行：Java语言被定为解释执行的语言，这在JDK1.0时代算是准确的，但是之后Java也发展出了可以生成本地代码的编译器，这个时候说Java是解释执行的语言就不再准确了。下图中间分支指代解释执行过程，最下面分支指代编译执行过程：
+
+  ![image-20201202095616929](深入理解JAVA虚拟机笔记/image-20201202095616929.png)
+
++ 基于栈的指令集与基于寄存器的指令集：Java指令基于栈结构，x86指令基于寄存器，使用栈结构带来的好处是可移植性更强，缺点是运行速度慢。
+
+
+
+
 
 
 
