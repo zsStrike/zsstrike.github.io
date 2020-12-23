@@ -424,6 +424,31 @@ Java模块化系统：
 
 + 基于栈的指令集与基于寄存器的指令集：Java指令基于栈结构，x86指令基于寄存器，使用栈结构带来的好处是可移植性更强，缺点是运行速度慢。
 
+  
+
+## 第九章 类加载案例
+
+案例分析：
+
++ Tomcat：在Tomcat中一种有四种目录存放Java类库：
+
+  1. 放置在/common目录中。类库可被Tomcat和所有的Web应用程序共同使用。
+  2. 放置在/server目录中。类库可被Tomcat使用，对所有的Web应用程序都不可见。
+  3. 放置在/shared目录中。类库可被所有的Web应用程序共同使用，但对Tomcat自己不可见。
+  4. 放置在/WebApp/WEB-INF目录中。类库仅仅可以被该Web应用程序使用，对Tomcat和其他Web应用程序都不可见。
+
+  为了支持这套目录，并且对目录里面的类库进行加载和隔离，Tomcat实现了自定义的类加载器，按照双亲委派模型：
+
+  ![image-20201203105110135](深入理解JAVA虚拟机笔记/image-20201203105110135.png)
+
+  在Tomcat6之后，只有指定了tomcat/conf/catalina.properties配置文件的server.loader和share.loader项后才会真正建立Catalina类加载器和Shared类加载器的实例，否则会用到这两个类加载器的地方都会用Common类加载器的实例代替。同时前文提到的前三个目录也会被改为一个/lib目录。
+
++ OSGi：是OSGi联盟（OSGi Alliance）制订的一个基于Java语言的动态模块化规范。OSGi中的每个模块（Bundle）可以声明它所依赖的Package（通过Import-Package描述），也可以声明它允许导出发布的Package（通过Export-Package描述）。这和后来出现的Java模块化功能重合了。由于模块之间相依依赖的原因，加载器之间的关系不再是双亲委派模型的树形结构，而是已经进一步发展成一种更为复杂的、运行时才能确定的网状结构。在模块中相互依赖会造成死锁。
+
++ Backport工具：将高级的Java语法转化为低版本Java也能运行的语句代码的工具。
+
+
+
 
 
 
