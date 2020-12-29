@@ -31,6 +31,67 @@ tags: ["Java"]
      + newType：与 newInstance 类似，但是如果工厂方法在不同的类中使用
      + type：一个用来替代 getType 和 newType 的比较简单的方式
 
-   
+2. 当构造函数有多个参数的时候，考虑使用构造器：静态工厂和构造函数都有一个局限，就是不能对大量可选参数做很好的扩展。当我们的可选参数个数大于4个时，往往需要重载很多个构造函数，会降低代码的可维护性。另外一种选择是JavaBean模式，但是JavaBean可能在构建的过程中处于不一致状态。此时我们可以使用构造器来生成所需对象。
 
+   ```java
+   // Builder Pattern
+   public class NutritionFacts {
+       private final int servingSize;
+       private final int servings;
+       private final int calories;
+       private final int fat;
+       private final int sodium;
+       private final int carbohydrate;
    
+       public static class Builder {
+           // Required parameters
+           private final int servingSize;
+           private final int servings;
+           // Optional parameters - initialized to default values
+           private int calories = 0;
+           private int fat = 0;
+           private int sodium = 0;
+           private int carbohydrate = 0;
+   
+           public Builder(int servingSize, int servings) {
+               this.servingSize = servingSize;
+               this.servings = servings;
+           }
+   
+           public Builder calories(int val) {
+               calories = val;
+               return this;
+           }
+   
+           public Builder fat(int val) {
+               fat = val;
+               return this;
+           }
+   
+           public Builder sodium(int val) {
+               sodium = val;
+               return this;
+           }
+   
+           public Builder carbohydrate(int val) {
+               carbohydrate = val;
+               return this;
+           }
+   
+           public NutritionFacts build() {
+               return new NutritionFacts(this);
+           }
+       }
+   
+       private NutritionFacts(Builder builder) {
+           servingSize = builder.servingSize;
+           servings = builder.servings;
+           calories = builder.calories;
+           fat = builder.fat;
+           sodium = builder.sodium;
+           carbohydrate = builder.carbohydrate;
+       }
+   }
+   ```
+
+   这样我们在生成代码的时候就可以通过链式调用来生成我们的对象实例。构造器模式很灵活，一个构造器可以构造多个对象。但是构造器的缺点就是为了创建一个对象，必须首先创建它的构造器。
