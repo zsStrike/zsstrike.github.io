@@ -95,3 +95,38 @@ tags: ["Java"]
    ```
 
    这样我们在生成代码的时候就可以通过链式调用来生成我们的对象实例。构造器模式很灵活，一个构造器可以构造多个对象。但是构造器的缺点就是为了创建一个对象，必须首先创建它的构造器。
+
+3. 使用私有构造函数或枚举类型实施单例模式：实现单例模式的第一种方法：
+
+   ```java
+   // Singleton with public final field
+   public class Elvis {
+       public static final Elvis INSTANCE = new Elvis();
+       private Elvis() { ... }
+       public void leaveTheBuilding() { ... }
+   }
+   ```
+
+   上述代码可以防止用户来自己创建Elvis实例。但是拥有特殊权限的客户端可以借助AccessibleObject.setAccessible 方法利用反射调用私有构造函数，如果需要防范这种问题，需要修改构造器，使其在请求创建第二个实例的时候抛出异常即可。另外一种方法：
+
+   ```java
+   // Singleton with static factory
+   public class Elvis {
+       private static final Elvis INSTANCE = new Elvis();
+       private Elvis() { ... }
+       public static Elvis getInstance() { return INSTANCE; }
+       public void leaveTheBuilding() { ... }
+   }
+   ```
+
+   静态工厂方法的一个优点是，它可以在不更改 API 的情况下决定类是否是单例，如为每个线程返回一个单例；第二个优点是，如果应用程序需要的话，可以编写泛型的单例工厂。实现单例的第三种方法：
+
+   ```java
+   // Enum singleton - the preferred approach
+   public enum Elvis {
+       INSTANCE;
+       public void leaveTheBuilding() { ... }
+   }
+   ```
+
+   这种方法类似于 public 字段方法，但是它更简洁，默认提供了序列化机制，提供了对多个实例化的严格保证，即使面对复杂的序列化或反射攻击也是如此。
