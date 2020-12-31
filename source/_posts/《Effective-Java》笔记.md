@@ -130,3 +130,19 @@ tags: ["Java"]
    ```
 
    这种方法类似于 public 字段方法，但是它更简洁，默认提供了序列化机制，提供了对多个实例化的严格保证，即使面对复杂的序列化或反射攻击也是如此。
+
+4. 用私有构造函数实现不可实例化：对于一个工具类库，如Arrays，实例化这些类是没有意义的。试图通过使类抽象来实施不可实例化是行不通的。因为可以对类进行子类化，并实例化子类。有一个简单的习惯用法来确保不可实例化。只有当类不包含显式构造函数时，才会生成默认构造函数，因此可以通过包含私有构造函数使类不可实例化：
+
+   ```java
+   // Noninstantiable utility class
+   public class UtilityClass {
+       // Suppress default constructor for noninstantiability
+       private UtilityClass() {
+           throw new AssertionError();
+       } ... // Remainder omitted
+   }
+   ```
+
+   因为显式构造函数是私有的，所以在类之外是不可访问的。AssertionError 不是严格要求的，但是它提供了保障，以防构造函数意外地被调用。
+
+   
