@@ -145,4 +145,18 @@ tags: ["Java"]
 
    因为显式构造函数是私有的，所以在类之外是不可访问的。AssertionError 不是严格要求的，但是它提供了保障，以防构造函数意外地被调用。
 
-   
+5. 依赖注入优于硬连接资源：尽量将类依赖的资源在创建新实例时将资源传递给构造函数，从而实现依赖注入。
+
+   ```java
+   // Dependency injection provides flexibility and testability
+   public class SpellChecker {
+       private final Lexicon dictionary;
+       public SpellChecker(Lexicon dictionary) {
+           this.dictionary = Objects.requireNonNull(dictionary);
+       }
+       public boolean isValid(String word) { ... }
+       public List<String> suggestions(String typo) { ... }
+   }
+   ```
+
+   另外，这种模式的一个有用变体是将资源工厂传递给构造函数。Java 8 中引入的 `Supplier<T>` 非常适合表示工厂。尽管依赖注入极大地提高了灵活性和可测试性，但它可能会使大型项目变得混乱，这些项目通常包含数千个依赖项。
