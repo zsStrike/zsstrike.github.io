@@ -160,3 +160,23 @@ tags: ["Java"]
    ```
 
    另外，这种模式的一个有用变体是将资源工厂传递给构造函数。Java 8 中引入的 `Supplier<T>` 非常适合表示工厂。尽管依赖注入极大地提高了灵活性和可测试性，但它可能会使大型项目变得混乱，这些项目通常包含数千个依赖项。
+
+6. 避免创建不必要的对象：作为一个不该做的极端例子，请考虑下面的语句：
+
+   ```java
+   String s = new String("bikini"); // DON'T DO THIS!
+   ```
+
+   该语句每次执行时都会创建一个新的 String 实例，而这些对象创建都不是必需的。String 构造函数的参数 `("bikini")` 本身就是一个 String 实例，在功能上与构造函数创建的所有对象相同。另外，有些对象的创建代价很高，如果你需要重复地使用这样一个「昂贵的对象」，那么最好将其缓存以供复用：
+
+   ```java
+   // Reusing expensive object for improved performance
+   public class RomanNumerals {
+       private static final Pattern ROMAN = Pattern.compile("^(?=.)M*(C[MD]|D?C{0,3})" + "(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+       static boolean isRomanNumeral(String s) {
+           return ROMAN.matcher(s).matches();
+       }
+   }
+   ```
+
+   另外，还需要注意基本类型优于包装类，需要堤防意外的自动自动装箱。
