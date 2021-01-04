@@ -211,3 +211,19 @@ tags: ["Java"]
 
 8. 避免使用终结器和清除器：终结器是不可预测的，通常是危险的，也是不必要的。清除器的危险比终结器小，但仍然不可预测、缓慢，而且通常是不必要的。终结器和清除器的一个缺点是不能保证它们会被立即执行，另外一个缺点是它们可能会使的即将要被清理的对象死而复生。终结器和清除器可以充当一个安全网，以防资源的所有者忽略调用它的 close 方法。
 
+9. 使用try-with-resources优于try-finally：从历史上看，try-finally 语句是确保正确关闭资源的最佳方法，即使在出现异常或返回时也是如此。但是当存在两个资源的时候，可能就需要嵌套的调用了，这会导致代码不易阅读。最好的方法就是使用try-with-resources：
+
+   ```java
+   // try-with-resources on multiple resources - short and sweet
+   static void copy(String src, String dst) throws IOException {
+       try (InputStream in = new FileInputStream(src);OutputStream out = new FileOutputStream(dst)) {
+           byte[] buf = new byte[BUFFER_SIZE];
+           int n;
+           while ((n = in.read(buf)) >= 0)
+               out.write(buf, 0, n);
+       }
+   }
+   ```
+
+   
+
