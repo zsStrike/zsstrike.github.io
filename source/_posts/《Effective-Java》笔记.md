@@ -245,3 +245,34 @@ tags: ["Java"]
     + 对于类中的每个「重要」字段，检查参数的字段是否与该对象的相应字段匹配
     + 是否满足等价关系
 
+11. 当覆盖 equals 方法的时候，总要覆盖 hashCode 方法：由于相等的对象必须具有相等的散列码，如果PhoneNumber没有实现hashCode方法的话：
+
+    ```java
+    Map<PhoneNumber, String> m = new HashMap<>();
+    m.put(new PhoneNumber(707, 867, 5309), "Jenny");
+    // m.get(new PhoneNumber(707, 867,5309)) == null
+    ```
+
+    第三行的结果将是null，而不是`"Jenny"`。实现hashCode方法的一个简单方法步骤：
+
+    + 声明一个名为 result 的 int 变量，并将其初始化为对象中第一个重要字段的散列码 c
+    + 对象中剩余的重要字段 f，执行以下操作：
+      + 为字段计算一个整数散列码 c：如果字段是基本数据类型，计算 `Type.hashCode(f)`，其中 type 是与 f 类型对应的包装类。如果字段是对象引用，并且该类的 equals 方法通过递归调用 equals 方法来比较字段，则递归调用字段上的 hashCode 方法。如果字段是一个数组，则将其每个重要元素都视为一个单独的字段。也就是说，通过递归地应用这些规则计算每个重要元素的散列码，并将每个步骤 2.b 的值组合起来。如果数组中没有重要元素，则使用常量，最好不是 0。如果所有元素都很重要，那么使用 `Arrays.hashCode`。
+      + 将步骤 2.a 中计算的散列码 c 合并到 result 变量
+    + 返回result
+
+    一个简单的demo：
+
+    ```java
+    // Typical hashCode method
+    @Override
+    public int hashCode() {
+        int result = Short.hashCode(areaCode);
+        result = 31 * result + Short.hashCode(prefix);
+        result = 31 * result + Short.hashCode(lineNum);
+        return result;
+    }
+    ```
+
+    
+
