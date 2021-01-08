@@ -276,3 +276,5 @@ tags: ["Java"]
 
 12. 始终覆盖 toString 方法：虽然Object提供了默认的toString方法，但是它返回的字符串通常不是用户希望看到的。提供一个好的 toString 实现（能）使类更易于使用，使用该类的系统（也）更易于调试。当实际使用时，toString 方法应该返回对象中包含的所有有用信息。
 
+13. 明智地覆盖 clone 方法：Cloneable 接口的目的是作为 mixin 接口，用于让类来宣称它们允许克隆。不幸的是，它没有达到这个目的。它的主要缺点是缺少 clone 方法，并且 Object 类的 clone 方法是受保护的。它决定了 Object 类受保护的 clone 实现的行为：如果一个类实现了 Cloneable 接口，Object 类的 clone 方法则返回该类实例的逐字段拷贝；否则它会抛出 CloneNotSupportedException。默认提供的clone方法执行的是浅拷贝，如果需要深拷贝，就需要自己覆盖clone方法，实现该功能。
+
