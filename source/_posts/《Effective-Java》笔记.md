@@ -278,3 +278,18 @@ tags: ["Java"]
 
 13. 明智地覆盖 clone 方法：Cloneable 接口的目的是作为 mixin 接口，用于让类来宣称它们允许克隆。不幸的是，它没有达到这个目的。它的主要缺点是缺少 clone 方法，并且 Object 类的 clone 方法是受保护的。它决定了 Object 类受保护的 clone 实现的行为：如果一个类实现了 Cloneable 接口，Object 类的 clone 方法则返回该类实例的逐字段拷贝；否则它会抛出 CloneNotSupportedException。默认提供的clone方法执行的是浅拷贝，如果需要深拷贝，就需要自己覆盖clone方法，实现该功能。
 
+14. 考虑实现 Comparable 接口：与本章讨论的其他方法不同，compareTo 方法不是在 Object 中声明的。相反，它是 Comparable 接口中的唯一方法。通过让类实现 Comparable，就可与依赖于此接口的所有通用算法和集合实现进行互操作。如果一个类有多个重要的字段，此时就需要用户来指定对应的比较顺序。在 Java 8 中，Comparator 接口配备了一组比较器构造方法，可以流畅地构造比较器。然后可以使用这些比较器来实现 Comparator 接口所要求的 compareTo 方法。
+
+    ```java
+    // Comparable with comparator construction methods
+    private static final Comparator<PhoneNumber> COMPARATOR = comparingInt((PhoneNumber pn) -> pn.areaCode)
+        .thenComparingInt(pn -> pn.prefix)
+        .thenComparingInt(pn -> pn.lineNum);
+    
+    public int compareTo(PhoneNumber pn) {
+        return COMPARATOR.compare(this, pn);
+    }
+    ```
+
+    
+
