@@ -335,3 +335,61 @@ tags: ["Java"]
 
 25. 源文件仅限有单个顶层类：虽然 Java 编译器允许你在单个源文件中定义多个顶层类，但这样做没有任何好处，而且存在重大风险。这种风险源于这样一个事实：在源文件中定义多个顶层类使得为一个类提供多个定义成为可能。
 
+
+
+## 第五章 泛型
+
+26. 不要使用原始类型：声明中具有一个或多个类型参数的类或接口就是泛型类或泛型接口，每个泛型都定义了一个原始类型，它是没有任何相关类型参数的泛型的名称。例如，`List<E>` 对应的原始类型是 List。原始类型的行为就好像所有泛型信息都从类型声明中删除了一样。它们的存在主要是为了与之前的泛型代码兼容。当从集合中检索元素时，编译器会为你执行不可见的强制类型转换，并确保它们不会失败。使用原始类型（没有类型参数的泛型）是合法的，但是你永远不应该这样做。如果使用原始类型，就会失去泛型的安全性和表现力。考虑如下程序：
+
+    ```java
+    // Fails at runtime - unsafeAdd method uses a raw type (List)!
+    
+    public static void main(String[] args) {
+        List<String> strings = new ArrayList<>();
+        unsafeAdd(strings, Integer.valueOf(42));
+        String s = strings.get(0); // Has compiler-generated cast
+    }
+    
+    private static void unsafeAdd(List list, Object o) {
+        list.add(o);
+    }
+    ```
+
+    该程序可以编译，但因为它使用原始类型 List，所以你会得到一个警告：
+
+    ```
+    Test.java:10: warning: [unchecked] unchecked call to add(E) as a
+    member of the raw type List
+    list.add(o);
+    ^
+    ```
+
+    实际上，如果你运行程序，当程序试图将调用 `strings.get(0)` 的结果强制转换为字符串时，你会得到一个 ClassCastException。这是一个由编译器生成的强制类型转换，它通常都能成功，但在本例中，我们忽略了编译器的警告，并为此付出了代价。
+
+    如果将 unsafeAdd 声明中的原始类型 List 替换为参数化类型 `List`，并尝试重新编译程序，你会发现它不再编译，而是发出错误消息：
+
+    ```
+    Test.java:5: error: incompatible types: List<String> cannot be
+    converted to List<Object>
+    unsafeAdd(strings, Integer.valueOf(42));
+    ^
+    ```
+
+    对于元素类型未知且无关紧要的集合，你可能会尝试使用原始类型。这种方法是可行的，但是它使用的是原始类型，这是很危险的。安全的替代方法是使用无界通配符类型。如果你想使用泛型，但不知道或不关心实际的类型参数是什么，那么可以使用问号代替。
+
+    ```
+    // Uses unbounded wildcard type - typesafe and flexible
+    static int numElementsInCommon(Set<?> s1, Set<?> s2) { ... }
+    ```
+
+    对于不应该使用原始类型的规则，有一些小的例外。必须在类字面量中使用原始类型。换句话说，`List.class`，`String[].class` 和 `int.class` 都是合法的，但是 `List.class` 和 `List.class` 不是。第二个例外是 instanceof 运算符。由于泛型信息在运行时被删除，因此在不是无界通配符类型之外的参数化类型上使用 instanceof 操作符是非法的。使用无界通配符类型代替原始类型不会以任何方式影响 instanceof 运算符的行为。在这种情况下，尖括号和问号只是多余的。下面的例子是使用通用类型 instanceof 运算符的首选方法：
+
+    ```java
+    // Legitimate use of raw type - instanceof operator
+    if (o instanceof Set) { // Raw type
+        Set<?> s = (Set<?>) o; // Wildcard type
+        ...
+    }
+    ```
+
+    总之，使用原始类型可能会在运行时导致异常，所以不要轻易使用它们。它们仅用于与引入泛型之前的遗留代码进行兼容和互操作。快速回顾一下，`Set` 是一个参数化类型，表示可以包含任何类型的对象的集合，`Set` 是一个通配符类型，表示只能包含某种未知类型的对象的集合，Set 是一个原始类型，它选择了泛型系统。前两个是安全的，后一个就不安全了。
