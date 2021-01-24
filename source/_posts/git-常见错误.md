@@ -6,7 +6,7 @@ tags: ["Git"]
 
 整理在使用 Git 过程中的一些总结。
 
-<!--  More -->
+<!-- More -->
 
 ## merge / rebase
 
