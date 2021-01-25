@@ -8,6 +8,12 @@ tags: ["Git"]
 
 <!--  More -->
 
+## merge / rebase
+
+两者都是将其他分支上修改应用到当前工作分支上，不同的是 merge 会产生一个与 merge 相关的提交记录，而 rebase 则不会产生，除此之外，两者之间的 git flow 如下：
+
+![rebase-merge](git-常见错误/rebase-merge-16309378159101.png)
+
 ## cherry-pick
 
 用于将一些修改应用到当前工作的分支上：
