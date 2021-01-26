@@ -1,12 +1,22 @@
 ---
 title: git 常见错误
 date: 2019-10-27 20:32:26
-tags: ["git"]
+tags: ["Git"]
 ---
 
-整理在使用 git 过程中遇到的问题以及解决方法。
+整理在使用 Git 过程中的一些总结。
 
 <!--  More -->
+
+## cherry-pick
+
+用于将一些修改应用到当前工作的分支上：
+
+```bash
+git cherry-pick <commitHash> | <HashA>..<HashB>
+```
+
+上面的命令分别表示应用 `<commitHash>` 以及 (HashA, HashB] 到当前工作的分支上。
 
 ## shallow update not allowed
 
