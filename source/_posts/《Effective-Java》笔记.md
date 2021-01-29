@@ -415,3 +415,52 @@ tags: ["Java"]
 
     总之，数组和泛型有非常不同的类型规则。数组是协变的、具体化的；泛型是不变的和可被擦除的。因此，数组提供了运行时类型安全，而不是编译时类型安全，对于泛型反之亦然。一般来说，数组和泛型不能很好地混合。如果你发现将它们混合在一起并得到编译时错误或警告，那么你的第一个反应该是将数组替换为 list。
 
+29. 优先使用泛型：考虑一个泛型栈结构：
+
+    ```java
+    public Stack() {
+        elements = new E[DEFAULT_INITIAL_CAPACITY];
+    }
+    ```
+
+    通常至少会得到一个错误或警告，这个类也不例外。幸运的是，这个类只生成一个错误：
+
+    ```
+    Stack.java:8: generic array creation
+    elements = new E[DEFAULT_INITIAL_CAPACITY];
+    ^
+    ```
+
+    每当你编写由数组支持的泛型时，就会出现这个问题。有两种合理的方法来解决它。第一个解决方案直接绕过了创建泛型数组的禁令：创建对象数组并将其强制转换为泛型数组类型。现在，编译器将发出一个警告来代替错误。这种用法是合法的，但（一般而言）它不是类型安全的：
+
+    ```
+    Stack.java:8: warning: [unchecked] unchecked cast
+    found: Object[], required: E[]
+    elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
+    ^
+    ```
+
+    消除 Stack 中泛型数组创建错误的第二种方法是将字段元素的类型从 E[] 更改为 Object[]。如果你这样做，你会得到一个不同的错误：
+
+    ```
+    Stack.java:19: incompatible types
+    found: Object, required: E
+    E result = elements[--size];
+    ^
+    ```
+
+    通过将从数组中检索到的元素转换为 E，可以将此错误转换为警告，但你将得到警告：
+
+    ```
+    Stack.java:19: warning: [unchecked] unchecked cast
+    found: Object, required: E
+    E result = (E) elements[--size];
+    ^
+    ```
+
+    消除泛型数组创建的两种技术都有其追随者。第一个更容易读：数组声明为 E[] 类型，这清楚地表明它只包含 E 的实例。它也更简洁：在一个典型的泛型类中，从数组中读取代码中的许多点；第一种技术只需要一次转换（在创建数组的地方），而第二种技术在每次读取数组元素时都需要单独的转换。因此，第一种技术是可取的，在实践中更常用。
+
+    泛型比需要在客户端代码中转换的类型更安全、更容易使用。
+
+30. 
+
