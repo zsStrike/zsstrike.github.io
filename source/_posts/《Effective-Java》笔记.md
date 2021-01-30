@@ -462,5 +462,20 @@ tags: ["Java"]
 
     泛型比需要在客户端代码中转换的类型更安全、更容易使用。
 
-30. 
+30. 优先使用泛型方法：允许类型参数被包含该类型参数本身的表达式限制，尽管这种情况比较少见。这就是所谓的递归类型限定。递归类型边界的一个常见用法是与 Comparable 接口相关联，后者定义了类型的自然顺序：
+
+    ```java
+    public interface Comparable<T> {
+        int compareTo(T o);
+    }
+    ```
+
+    许多方法采用实现 Comparable 的元素集合，在其中进行搜索，计算其最小值或最大值，等等。要做到这些，需要集合中的每个元素与集合中的每个其他元素相比较，换句话说，就是列表中的元素相互比较。
+
+    ```java
+    // Using a recursive type bound to express mutual comparability
+    public static <E extends Comparable<E>> E max(Collection<E> c);
+    ```
+
+    类型限定 `<E extends Comparable<E>>` 可以被理解为「可以与自身进行比较的任何类型 E」，这或多或少与相互可比性的概念相对应。
 
