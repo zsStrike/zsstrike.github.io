@@ -479,3 +479,70 @@ tags: ["Java"]
 
     类型限定 `<E extends Comparable<E>>` 可以被理解为「可以与自身进行比较的任何类型 E」，这或多或少与相互可比性的概念相对应。
 
+31. 使用有界通配符增加 API 的灵活性：假设我们想添加一个方法，该方法接受一系列元素并将它们全部推入堆栈。这是第一次尝试：
+
+    ```java
+    // pushAll method without wildcard type - deficient!
+    public void pushAll(Iterable<E> src) {
+        for (E e : src)
+            push(e);
+    }
+    ```
+
+    该方法能够正确编译，但并不完全令人满意。下面的代码将会产生错误：
+
+    ```java
+    Stack<Number> numberStack = new Stack<>();
+    Iterable<Integer> integers = ... ;
+    numberStack.pushAll(integers);
+    ```
+
+    错误信息：
+
+    ```java
+    StackTest.java:7: error: incompatible types: Iterable<Integer>
+    cannot be converted to Iterable<Number>
+            numberStack.pushAll(integers);
+                        ^
+    ```
+
+    Java 提供了一种特殊的参数化类型，有界通配符类型来处理这种情况。pushAll 的输入参数的类型不应该是「E 的 Iterable 接口」，而应该是「E 的某个子类型的 Iterable 接口」，并且有一个通配符类型，它的确切含义是：`Iterable<? extends E>`：
+
+    ```java
+    // Wildcard type for a parameter that serves as an E producer
+    public void pushAll(Iterable<? extends E> src) {
+        for (E e : src)
+            push(e);
+    }
+    ```
+
+    popAll方法的代码如下：
+
+    ```java
+    // popAll method without wildcard type - deficient!
+    public void popAll(Collection<E> dst) {
+        while (!isEmpty())
+            dst.add(pop());
+    }
+    ```
+
+    同样，如果目标集合的元素类型与堆栈的元素类型完全匹配，那么这种方法可以很好地编译。但这也不是完全令人满意：
+
+    ```java
+    Stack<Number> numberStack = new Stack<Number>();
+    Collection<Object> objects = ... ;
+    numberStack.popAll(objects);
+    ```
+
+    同样，有一个通配符类型，它的确切含义是：`Collection<? super E>`。
+
+    ```java
+    // Wildcard type for parameter that serves as an E consumer
+    public void popAll(Collection<? super E> dst) {
+      while (!isEmpty())
+        dst.add(pop());
+    }
+    ```
+
+    总而言之，PECS 表示生产者应使用 extends，消费者应使用 super。
+
