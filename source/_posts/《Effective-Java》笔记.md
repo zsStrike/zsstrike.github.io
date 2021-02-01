@@ -546,3 +546,22 @@ tags: ["Java"]
 
     总而言之，PECS 表示生产者应使用 extends，消费者应使用 super。
 
+32. 明智地合用泛型和可变参数：泛型和可变参数不能很好的结合起来。考虑如下代码：
+
+    ```java
+    // Mixing generics and varargs can violate type safety!
+    // 泛型和可变参数混合使用可能违反类型安全原则！
+    static void dangerous(List<String>... stringLists) {
+        List<Integer> intList = List.of(42);
+        Object[] objects = stringLists;
+        objects[0] = intList; // Heap pollution
+        String s = stringLists[0].get(0); // ClassCastException
+    }
+    ```
+
+    此方法没有显式的强制类型转换，但在使用一个或多个参数调用时抛出 ClassCastException。它的最后一行有一个由编译器生成的隐式强制转换。此转换失败，表明类型安全性受到了影响，并且在泛型可变参数数组中存储值是不安全的。为什么使用泛型可变参数声明方法是合法的，而显式创建泛型数组是非法的？答案是，带有泛型或参数化类型的可变参数的方法在实际开发中非常有用，因此语言设计人员选择忍受这种不一致性。事实上，Java 库导出了几个这样的方法，包括 Arrays.asList(T... a)、Collections.addAll(Collection<? super T> c, T... elements) 以及 EnumSet.of(E first, E... rest)。
+
+    在 Java 7 中添加了 SafeVarargs 注释，以允许使用泛型可变参数的方法的作者自动抑制客户端警告。本质上，SafeVarargs 注释构成了方法作者的一个承诺，即该方法是类型安全的。 
+
+    可变参数方法和泛型不能很好地交互，因为可变参数工具是构建在数组之上的漏洞抽象，并且数组具有与泛型不同的类型规则。虽然泛型可变参数不是类型安全的，但它们是合法的。如果选择使用泛型（或参数化）可变参数编写方法，首先要确保该方法是类型安全的，然后使用 @SafeVarargs 对其进行注释。
+
