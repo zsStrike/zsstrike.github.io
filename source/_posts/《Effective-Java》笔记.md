@@ -565,3 +565,32 @@ tags: ["Java"]
 
     可变参数方法和泛型不能很好地交互，因为可变参数工具是构建在数组之上的漏洞抽象，并且数组具有与泛型不同的类型规则。虽然泛型可变参数不是类型安全的，但它们是合法的。如果选择使用泛型（或参数化）可变参数编写方法，首先要确保该方法是类型安全的，然后使用 @SafeVarargs 对其进行注释。
 
+33. 考虑类型安全的异构容器：
+
+    ```java
+    // Typesafe heterogeneous container pattern - implementation
+    public class Favorites {
+      private Map<Class<?>, Object> favorites = new HashMap<>();
+    
+      public <T> void putFavorite(Class<T> type, T instance) {
+        favorites.put(Objects.requireNonNull(type), instance);
+      }
+    
+      public <T> T getFavorite(Class<T> type) {
+        return type.cast(favorites.get(type));
+      }
+    }
+    
+    ```
+
+    这里发生了一些微妙的事情。每个 Favorites 实例都由一个名为 favorites 的私有 `Map<Class<?>, Object>` 支持。你可能认为由于通配符类型是无界的，所以无法将任何内容放入此映射中，但事实恰恰相反。需要注意的是，通配符类型是嵌套的：通配符类型不是 Map 的类型，而是键的类型。这意味着每个键都可以有不同的参数化类型：一个可以是 `Class<String>`，下一个是 `Class<Integer>`，等等。这就是异构的原理。
+
+    接下来要注意的是 favorites 的值类型仅仅是 Object。换句话说，Map 不保证键和值之间的类型关系，即每个值都是其键所表示的类型。实际上，Java 的类型系统还没有强大到足以表达这一点。但是我们知道这是事实，当需要检索一个 favorite 时，我们会利用它。
+
+    putFavorite 的实现很简单：它只是将从给定 Class 对象到给定 Favorites 实例的放入 favorites 中。如前所述，这将丢弃键和值之间的「类型关联」；将无法确定值是键的实例。但这没关系，因为 getFavorites 方法可以重新建立这个关联。
+
+    getFavorite 的实现比 putFavorite 的实现更复杂。首先，它从 favorites 中获取与给定 Class 对象对应的值。这是正确的对象引用返回，但它有错误的编译时类型：它是 Object（favorites 的值类型），我们需要返回一个 T。因此，getFavorite 的实现通过使用 Class 的 cast 方法，将对象引用类型动态转化为所代表的 Class 对象。
+
+    总之，以集合的 API 为例的泛型在正常使用时将每个容器的类型参数限制为固定数量。你可以通过将类型参数放置在键上而不是容器上来绕过这个限制。你可以使用 Class 对象作为此类类型安全异构容器的键。以这种方式使用的 Class 对象称为类型标记。还可以使用自定义键类型。例如，可以使用 DatabaseRow 类型表示数据库行（容器），并使用泛型类型 `Column<T>` 作为它的键。
+
+    
