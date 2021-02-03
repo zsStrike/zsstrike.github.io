@@ -580,7 +580,6 @@ tags: ["Java"]
         return type.cast(favorites.get(type));
       }
     }
-    
     ```
 
     这里发生了一些微妙的事情。每个 Favorites 实例都由一个名为 favorites 的私有 `Map<Class<?>, Object>` 支持。你可能认为由于通配符类型是无界的，所以无法将任何内容放入此映射中，但事实恰恰相反。需要注意的是，通配符类型是嵌套的：通配符类型不是 Map 的类型，而是键的类型。这意味着每个键都可以有不同的参数化类型：一个可以是 `Class<String>`，下一个是 `Class<Integer>`，等等。这就是异构的原理。
@@ -592,5 +591,35 @@ tags: ["Java"]
     getFavorite 的实现比 putFavorite 的实现更复杂。首先，它从 favorites 中获取与给定 Class 对象对应的值。这是正确的对象引用返回，但它有错误的编译时类型：它是 Object（favorites 的值类型），我们需要返回一个 T。因此，getFavorite 的实现通过使用 Class 的 cast 方法，将对象引用类型动态转化为所代表的 Class 对象。
 
     总之，以集合的 API 为例的泛型在正常使用时将每个容器的类型参数限制为固定数量。你可以通过将类型参数放置在键上而不是容器上来绕过这个限制。你可以使用 Class 对象作为此类类型安全异构容器的键。以这种方式使用的 Class 对象称为类型标记。还可以使用自定义键类型。例如，可以使用 DatabaseRow 类型表示数据库行（容器），并使用泛型类型 `Column<T>` 作为它的键。
+
+
+
+## 第六章 枚举和注解
+
+34. 用枚举类型代替 int 常量：在枚举类型被添加到 JAVA 之前，表示枚举类型的一种常见模式是声明一组 int 的常量，这种技术称为 int 枚举模式，它有许多缺点。它没有提供任何类型安全性，并且几乎不具备表现力。如果你传递一个苹果给方法，希望得到一个橘子，使用 == 操作符比较苹果和橘子时编译器并不会提示错误，或更糟的情况：
+
+    ```java
+    // Tasty citrus flavored applesauce!
+    int i = (APPLE_FUJI - ORANGE_TEMPLE) / APPLE_PIPPIN;
+    ```
+
+    使用 String 常量代替 int 常量。这种称为 String 枚举模式的变体甚至更不可取。虽然它确实为常量提供了可打印的字符串，但是它可能会导致不知情的用户将字符串常量硬编码到客户端代码中，而不是使用字段名。使用枚举可以解决上述问题。
+
+    从表面上看，Java 枚举类型可能与其他语言（如 C、c++ 和 c#）的枚举类型类似，但不能只看表象。Java 的枚举类型是成熟的类，比其他语言中的枚举类型功能强大得多，在其他语言中的枚举本质上是 int 值。除了纠正 int 枚举的不足之外，枚举类型还允许添加任意方法和字段并实现任意接口。
+
+    编写一个富枚举类型很容易，如上述的 Planet。要将数据与枚举常量关联，可声明实例字段并编写一个构造函数，该构造函数接受数据并将其存储在字段中。 枚举本质上是不可变的，因此所有字段都应该是 final。字段可以是公共的，但是最好将它们设置为私有并提供公共访问器。
+
+    有一种更好的方法可以将不同的行为与每个枚举常量关联起来，这些方法称为特定常量方法实现：
+
+    ```java
+    // Enum type with constant-specific method implementations
+    public enum Operation {
+        PLUS {public double apply(double x, double y){return x + y;}},
+        MINUS {public double apply(double x, double y){return x - y;}},
+        TIMES {public double apply(double x, double y){return x * y;}},
+        DIVIDE{public double apply(double x, double y){return x / y;}};
+        public abstract double apply(double x, double y);
+    }
+    ```
 
     
