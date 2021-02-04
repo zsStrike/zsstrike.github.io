@@ -622,4 +622,30 @@ tags: ["Java"]
     }
     ```
 
+35. 使用实例字段替代序数：所有枚举都有一个 ordinal 方法，该方法返回枚举类型中每个枚举常数的数值位置。
+
+    ```java
+    // Abuse of ordinal to derive an associated value - DON'T DO THIS
+    public enum Ensemble {
+        SOLO, DUET, TRIO, QUARTET, QUINTET,SEXTET, SEPTET, OCTET, NONET, DECTET;
     
+        public int numberOfMusicians() { return ordinal() + 1; }
+    }
+    ```
+
+    虽然这个枚举可以工作，但维护却是噩梦。如果常量被重新排序，numberOfMusicians 方法将被破坏。有一个简单的解决方案：不要从枚举的序数派生与枚举关联的值；而是将其存储在实例字段中：
+
+    ```java
+    public enum Ensemble {
+        SOLO(1), DUET(2), TRIO(3), QUARTET(4), QUINTET(5),SEXTET(6), SEPTET(7), OCTET(8), DOUBLE_QUARTET(8),NONET(9), DECTET(10),TRIPLE_QUARTET(12);
+    
+        private final int numberOfMusicians;
+    
+        Ensemble(int size) { this.numberOfMusicians = size; }
+    
+        public int numberOfMusicians() { return numberOfMusicians; }
+    }
+    ```
+
+    枚举规范对 ordinal 方法的评价是这样的：「大多数程序员都不会去使用这个方法。它是为基于枚举的通用数据结构（如 EnumSet 和 EnumMap）而设计的」。除非你使用这个数据结构编写代码，否则最好完全避免使用这个方法。
+
