@@ -649,3 +649,44 @@ tags: ["Java"]
 
     枚举规范对 ordinal 方法的评价是这样的：「大多数程序员都不会去使用这个方法。它是为基于枚举的通用数据结构（如 EnumSet 和 EnumMap）而设计的」。除非你使用这个数据结构编写代码，否则最好完全避免使用这个方法。
 
+36. 用 EnumSet 替代位字段：位字段模式如下：
+
+    ```java
+    // Bit field enumeration constants - OBSOLETE!
+    public class Text {
+        public static final int STYLE_BOLD = 1 << 0; // 1
+        public static final int STYLE_ITALIC = 1 << 1; // 2
+        public static final int STYLE_UNDERLINE = 1 << 2; // 4
+        public static final int STYLE_STRIKETHROUGH = 1 << 3; // 8
+        // Parameter is bitwise OR of zero or more STYLE_ constants
+        public void applyStyles(int styles) { ... }
+    }
+    ```
+
+    允许你使用位运算的 OR 操作将几个常量组合成一个 Set：
+
+    ```java
+    text.applyStyles(STYLE_BOLD | STYLE_ITALIC);
+    ```
+
+    位字段表示方式允许使用位运算高效地执行 Set 操作，如并集和交集。但是位字段具有 int 枚举常量所有缺点，甚至更多。当位字段被打印为数字时，它比简单的 int 枚举常量更难理解。没有一种简单的方法可以遍历由位字段表示的所有元素。
+
+    当之前的示例修改为使用枚举和 EnumSet 而不是位字段时。它更短，更清晰，更安全：
+
+    ```java
+    // EnumSet - a modern replacement for bit fields
+    public class Text {
+        public enum Style { BOLD, ITALIC, UNDERLINE, STRIKETHROUGH }
+        // Any Set could be passed in, but EnumSet is clearly best
+        public void applyStyles(Set<Style> styles) { ... }
+    }
+    ```
+
+    下面是将 EnumSet 实例传递给 applyStyles 方法的客户端代码：
+
+    ```java
+    text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));
+    ```
+
+    EnumSet 类结合了位字段的简洁性和性能。EnumSet 的一个真正的缺点是，从 Java 9 开始，它不能创建不可变的 EnumSet。但是，可以用 `Collections.unmodifiableSet` 包装 EnumSet，实现不可变性，但简洁性和性能将受到影响。
+
