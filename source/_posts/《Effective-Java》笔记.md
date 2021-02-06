@@ -690,3 +690,19 @@ tags: ["Java"]
 
     EnumSet 类结合了位字段的简洁性和性能。EnumSet 的一个真正的缺点是，从 Java 9 开始，它不能创建不可变的 EnumSet。但是，可以用 `Collections.unmodifiableSet` 包装 EnumSet，实现不可变性，但简洁性和性能将受到影响。
 
+37. 使用 EnumMap 替换序数索引：如果想要使用 Enum 里面的美居元素来对一组对象进行分组的话，请不要使用序数索引：
+
+    ```java
+    // Using ordinal() to index into an array - DON'T DO THIS!
+    Set<Plant>[] plantsByLifeCycle =(Set<Plant>[]) new Set[Plant.LifeCycle.values().length];
+    ```
+
+    这样带来的问题是不便于维护。Java 提供了一种简单的方式实现该目的，EnumMap：
+
+    ```java
+    // Using an EnumMap to associate data with an enum
+    Map<Plant.LifeCycle, Set<Plant>> plantsByLifeCycle =new EnumMap<>(Plant.LifeCycle.class);
+    ```
+
+    这个程序比原来的版本更短，更清晰，更安全，速度也差不多。没有不安全的转换；不需要手动标记输出，因为 Map 的键是能转换为可打印字符串的枚举；在计算数组索引时不可能出错。
+
