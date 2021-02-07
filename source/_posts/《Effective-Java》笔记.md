@@ -706,3 +706,40 @@ tags: ["Java"]
 
     这个程序比原来的版本更短，更清晰，更安全，速度也差不多。没有不安全的转换；不需要手动标记输出，因为 Map 的键是能转换为可打印字符串的枚举；在计算数组索引时不可能出错。
 
+38. 使用接口模拟可扩展枚举：利用枚举类型可以实现任意接口这一事实，为 opcode 类型定义一个接口，并为接口的标准实现定义一个枚举：
+
+    ```java
+    // Emulated extensible enum using an interface
+    public interface Operation {
+        double apply(double x, double y);
+    }
+    
+    public enum BasicOperation implements Operation {
+        PLUS("+") {
+            public double apply(double x, double y) { return x + y; }
+        },
+        MINUS("-") {
+            public double apply(double x, double y) { return x - y; }
+        },
+        TIMES("*") {
+            public double apply(double x, double y) { return x * y; }
+        },
+        DIVIDE("/") {
+            public double apply(double x, double y) { return x / y; }
+        };
+    
+        private final String symbol;
+    
+        BasicOperation(String symbol) {
+            this.symbol = symbol;
+        }
+    
+        @Override
+        public String toString() {
+            return symbol;
+        }
+    }
+    ```
+
+39. 
+
