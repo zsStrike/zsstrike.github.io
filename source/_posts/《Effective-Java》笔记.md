@@ -741,5 +741,42 @@ tags: ["Java"]
     }
     ```
 
-39. 
+39. 注解优于命名模式：使用命名模式来标明某些程序元素需要工具或框架特殊处理的方式是很常见的，例如，在版本 4 之前，JUnit 测试框架要求其用户通过以字符 test 开头的名称来指定测试方法。命名模式有几个问题：
 
+    1. 首先，排版错误会导致没有提示的失败
+    2. 无法确保只在相应的程序元素上使用它们
+    3. 它们没有提供将参数值与程序元素关联的好方法
+
+    假设我们声明了一个 Test 注解，那么我们需要相应的工具来解析这些注解：
+
+    ```java
+    // Program to process marker annotations
+    import java.lang.reflect.*;
+    
+    public class RunTests {
+        public static void main(String[] args) throws Exception {
+            int tests = 0;
+            int passed = 0;
+            Class<?> testClass = Class.forName(args[0]);
+            for (Method m : testClass.getDeclaredMethods()) {
+                if (m.isAnnotationPresent(Test.class)) {
+                    tests++;
+                    try {
+                        m.invoke(null);
+                        passed++;
+                    } catch (InvocationTargetException wrappedExc) {
+                        Throwable exc = wrappedExc.getCause();
+                        System.out.println(m + " failed: " + exc);
+                    } catch (Exception exc) {
+                        System.out.println("Invalid @Test: " + m);
+                    }
+            }
+        }
+        System.out.printf("Passed: %d, Failed: %d%n",passed, tests - passed);
+        }
+    }
+    ```
+
+    使用注解很简洁，同时也防止了使用命名模式所带来的一系列的问题。
+
+40. 
