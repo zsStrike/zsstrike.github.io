@@ -787,3 +787,24 @@ tags: ["Java"]
 
 ## 第七章 Lambda表达式和流
 
+42. lambda 表达式优于匿名类：在历史上，带有单个抽象方法的接口被用作函数类型。它们的实例（称为函数对象）表示函数或操作。自从 JDK 1.1 在 1997 年发布以来，创建函数对象的主要方法就是匿名类：
+
+    ```java
+    // Anonymous class instance as a function object - obsolete!
+    Collections.sort(words, new Comparator<String>() {
+        public int compare(String s1, String s2) {
+            return Integer.compare(s1.length(), s2.length());
+        }
+    });
+    ```
+
+    在 Java 8 中官方化了一个概念，即具有单个抽象方法的接口是特殊的，应该得到特殊处理。这些接口现在被称为函数式接口，允许使用 lambda 表达式创建这些接口的实例：
+
+    ```java
+    // Lambda expression as function object (replaces anonymous class)
+    Collections.sort(words,(s1, s2) -> Integer.compare(s1.length(), s2.length()));
+    ```
+
+    一般来说，省略lambda中参数的类型，除非编译器不能自动推断出来。另外，在lambda表达式中this关键字指向的是外部的类的实例，但是匿名类指的是匿名类自己。
+
+43. 
