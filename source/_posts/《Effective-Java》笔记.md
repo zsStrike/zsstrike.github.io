@@ -807,4 +807,16 @@ tags: ["Java"]
 
     一般来说，省略lambda中参数的类型，除非编译器不能自动推断出来。另外，在lambda表达式中this关键字指向的是外部的类的实例，但是匿名类指的是匿名类自己。
 
-43. 
+43. 方法引用优于 lambda 表达式：lambda 表达式与匿名类相比，主要优势是更简洁。Java 提供了一种方法来生成比 lambda 表达式更简洁的函数对象：方法引用。
+
+    ```java
+    map.merge(key, 1, Integer::sum);
+    ```
+
+    而是用lambda代码如下：
+
+    ```java
+    map.merge(key, 1, (count, incr) -> count + incr);
+    ```
+
+    方法引用通常为 lambda 表达式提供了一种更简洁的选择。如果方法引用更短、更清晰，则使用它们；如果没有，仍然使用 lambda 表达式。
