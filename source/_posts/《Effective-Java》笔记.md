@@ -820,3 +820,18 @@ tags: ["Java"]
     ```
 
     方法引用通常为 lambda 表达式提供了一种更简洁的选择。如果方法引用更短、更清晰，则使用它们；如果没有，仍然使用 lambda 表达式。
+
+44. 优先使用标准函数式接口：现在 Java 已经有了 lambda 表达式，编写 API 的最佳实践已经发生了很大的变化。java.util.function 包提供了大量的标准函数接口供你使用。如果一个标准的函数式接口可以完成这项工作，那么你通常应该优先使用它，而不是使用专门构建的函数式接口。六个基本的函数式接口总结如下：
+
+    | Interface        | Function Signature    | Example               |
+    | ---------------- | --------------------- | --------------------- |
+    | `UnaryOperator`  | `T apply(T t)`        | `String::toLowerCase` |
+    | `BinaryOperator` | `T apply(T t1, T t2)` | `BigInteger::add`     |
+    | `Predicate`      | `boolean test(T t)`   | `Collection::isEmpty` |
+    | `Function`       | `R apply(T t)`        | `Arrays::asList`      |
+    | `Supplier`       | `T get()`             | `Instant::now`        |
+    | `Consumer`       | `void accept(T t)`    | `System.out::println` |
+
+    还有 6 个基本接口的 3 个变体，用于操作基本类型 int、long 和 double。Function 接口还有 9 个额外的变体，在结果类型为基本数据类型时使用。
+
+45. 
