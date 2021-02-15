@@ -859,4 +859,38 @@ tags: ["Java"]
     + 将元素序列累积到一个集合中，可能是按某个公共属性对它们进行分组
     + 在元素序列中搜索满足某些条件的元素
 
-46. 
+46. 在流中使用无副作用的函数：你可能会看到如下使用流的代码片段，它用于构建文本文件中单词的频率表：
+
+    ```java
+    // Uses the streams API but not the paradigm--Don't do this!
+    Map<String, Long> freq = new HashMap<>();
+    try (Stream<String> words = new Scanner(file).tokens()) {
+        words.forEach(word -> {
+            freq.merge(word.toLowerCase(), 1L, Long::sum);
+        });
+    }
+    ```
+
+    简单地说，它根本不是流代码，而是伪装成流代码的迭代代码。它没有从流 API 中获得任何好处，而且它（稍微）比相应的迭代代码更长、更难于阅读和更难以维护。这个问题源于这样一个事实：这段代码在一个 Terminal 操作中（forEach）执行它的所有工作，使用一个会改变外部状态的 lambda 表达式（频率表）。改进后的代码：
+
+    ```java
+    // Proper use of streams to initialize a frequency table
+    Map<String, Long> freq;
+    try (Stream<String> words = new Scanner(file).tokens()) {
+        freq = words.collect(groupingBy(String::toLowerCase, counting()));
+    }
+    ```
+
+    这个代码片段与前面的代码片段做了相同的事情，但是正确地使用了流 API。它更短更清晰。
+
+    将流的元素收集到一个真正的 Collection 中的 collector 非常简单。这样的 collector 有三种：`toList()`、`toSet()` 和 `toCollection(collectionFactory)`。它们分别返回 List、Set 和程序员指定的集合类型。
+
+    ```java
+    // Pipeline to get a top-ten list of words from a frequency table
+    List<String> topTen = freq.keySet().stream()
+        .sorted(comparing(freq::get).reversed())
+        .limit(10)
+        .collect(toList());
+    ```
+
+    另外还有 groupingBy 和 join。
