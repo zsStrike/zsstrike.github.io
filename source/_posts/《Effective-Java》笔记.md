@@ -911,4 +911,64 @@ tags: ["Java"]
 
     在执行方法的计算任务之前，应该显式地检查方法的参数，这条规则也有例外。一个重要的例外是有效性检查成本较高或不切实际，或者检查是在计算过程中隐式执行了。例如，考虑一个为对象 List 排序的方法，比如 Collections.sort(List)。List 中的所有对象必须相互比较。在对 List 排序的过程中，List 中的每个对象都会与列表中的其他对象进行比较。如果对象不能相互比较，将抛出 ClassCastException，这正是 sort 方法应该做的。因此，没有必要预先检查列表中的元素是否具有可比性。
 
-50. 
+50. 在需要时制作防御性副本：即使使用一种安全的语言，如果你不付出一些努力，也无法与其他类隔离。你必须进行防御性的设计，并假定你的类的客户端会尽最大努力破坏它的不变量。 随着人们越来越多地尝试破坏系统的安全性，这个观点越来越正确。考虑这样的一个类：
+
+    ```java
+    // Broken "immutable" time period class
+    public final class Period {
+        private final Date start;
+        private final Date end;
+    
+        public Period(Date start, Date end) {
+            if (start.compareTo(end) > 0)
+                throw new IllegalArgumentException(start + " after " + end);
+            this.start = start;
+            this.end = end;
+        }
+    
+        public Date start() {
+            return start;
+        }
+    
+        public Date end() {
+            return end;
+        }
+        ... // Remainder omitted
+    }
+    ```
+
+    乍一看，这个类似乎是不可变的，并且要求一个时间段的开始时间不能在结束时间之后。然而，利用 Date 是可变的这一事实很容易绕过这个约束：
+
+    ```java
+    // Attack the internals of a Period instance
+    Date start = new Date();
+    Date end = new Date();
+    Period p = new Period(start, end);
+    end.setYear(78); // Modifies internals of p!
+    ```
+
+    为了防止这样的攻击，可以选择制作防御性副本：
+
+    ```java
+    // Repaired constructor - makes defensive copies of parameters
+    public Period(Date start, Date end) {
+        this.start = new Date(start.getTime());
+        this.end = new Date(end.getTime());
+        if (this.start.compareTo(this.end) > 0)
+            throw new IllegalArgumentException(this.start + " after " + this.end);
+    }
+    
+    // Repaired accessors - make defensive copies of internal fields
+    public Date start() {
+        return new Date(start.getTime());
+    }
+    
+    public Date end() {
+        return new Date(end.getTime());
+    }
+    ```
+
+    防御性复制可能会带来性能损失，最好的方法是使用不可变类，比如Instant（或 Local-DateTime 或 ZonedDateTime）来代替 Date，Date 已过时，不应在新代码中使用。
+
+51. 
+
