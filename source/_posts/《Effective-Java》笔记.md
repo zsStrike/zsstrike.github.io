@@ -978,5 +978,61 @@ tags: ["Java"]
     + 对于参数类型，优先选择接口而不是类
     + 双元素枚举类型优于 boolean 参数
 
-52. 
+52. 明智地使用重载：考虑下面的代码：
+
+    ```java
+    // Broken! - What does this program print?
+    public class CollectionClassifier {
+        public static String classify(Set<?> s) {
+            return "Set";
+        }
+    
+        public static String classify(List<?> lst) {
+            return "List";
+        }
+    
+        public static String classify(Collection<?> c) {
+            return "Unknown Collection";
+        }
+    
+        public static void main(String[] args) {
+            Collection<?>[] collections = {
+                new HashSet<String>(),new ArrayList<BigInteger>(),new HashMap<String, String>().values()
+            };
+            for (Collection<?> c : collections)
+                System.out.println(classify(c));
+        }
+    ```
+
+    你可能期望这个程序打印 Set，然后是 List 和 Unknown Collection，但是它没有这样做。它打印 Unknown Collection 三次。为什么会这样？因为 classify 方法被重载，并且 在编译时就决定了要调用哪个重载。
+
+    这个程序的行为违反常规，因为重载方法的选择是静态的，而覆盖方法的选择是动态的。 在运行时根据调用方法的对象的运行时类型选择覆盖方法的正确版本。
+
+    ```java
+    class Wine {
+        String name() { return "wine"; }
+    }
+    
+    class SparklingWine extends Wine {
+        @Override
+        String name() { return "sparkling wine"; }
+    }
+    
+    class Champagne extends SparklingWine {
+        @Override
+        String name() { return "champagne"; }
+    }
+    
+    public class Overriding {
+        public static void main(String[] args) {
+            List<Wine> wineList = List.of(new Wine(), new SparklingWine(), new Champagne());
+        for (Wine wine : wineList)
+            System.out.println(wine.name());
+        }
+    }
+    ```
+
+    正如你所期望的，这个程序打印出 wine、sparkling 和 champagne，即使实例的编译时类型是循环每次迭代中的 wine。
+
+    应该避免混淆重载的用法。安全、保守的策略是永远不导出具有相同数量参数的两个重载。这些限制并不十分繁琐，因为你总是可以为方法提供不同的名称，而不是重载它们。
 
