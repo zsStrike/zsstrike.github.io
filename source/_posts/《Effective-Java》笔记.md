@@ -1119,3 +1119,14 @@ tags: ["Java"]
 
 67. 明智地进行优化：不要过早地进行优化。为了获得良好的性能而改变 API 是一个非常糟糕的想法。同时，在每次尝试优化之前和之后测量性能。
 
+68. 遵守被广泛认可的命名约定：
+
+    | Identifier Type    | Example                                              |
+    | ------------------ | ---------------------------------------------------- |
+    | Package or module  | `org.junit.jupiter.api`, `com.google.common.collect` |
+    | Class or Interface | Stream, FutureTask, LinkedHashMap, HttpClient        |
+    | Method or Field    | remove, groupingBy, getCrc                           |
+    | Constant Field     | MIN_VALUE, NEGATIVE_INFINITY                         |
+    | Local Variable     | i, denom, houseNum                                   |
+    | Type Parameter     | T, E, K, V, X, R, U, V, T1, T2                       |
+
