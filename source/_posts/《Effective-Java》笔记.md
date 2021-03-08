@@ -1130,3 +1130,23 @@ tags: ["Java"]
     | Local Variable     | i, denom, houseNum                                   |
     | Type Parameter     | T, E, K, V, X, R, U, V, T1, T2                       |
 
+
+
+## 第十章 异常
+
+69. 仅在确有异常条件下使用异常：异常只适用于确有异常的情况；它们不应该用于一般的控制流程。下列代码不应该使用：
+
+    ```java
+    // Horrible abuse of exceptions. Don't ever do this!
+    try {
+        int i = 0;
+        while(true)
+            range[i++].climb();
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+    }
+    ```
+
+    我们完全可以使用for-each循环实现。
+
+70. 
