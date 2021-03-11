@@ -1155,9 +1155,18 @@ tags: ["Java"]
 
     总之，如果谨慎使用，checked 异常可以提高程序的可靠性；当过度使用时，它们会使 API 难以使用。如果调用者不应从失败中恢复，则抛出 unchecked 异常。如果恢复是可能的，并且你希望强制调用者处理异常条件，那么首先考虑返回一个 Optional 对象。只有当在失败的情况下，提供的信息不充分时，你才应该抛出一个 checked 异常。
 
-72. 
+72. 鼓励复用标准异常：使你的 API 更容易学习和使用，因为它符合程序员已经熟悉的既定约定。最常见的可复用异常：
 
+    | Exception                       | Occasion for Use                                             |
+    | ------------------------------- | ------------------------------------------------------------ |
+    | IllegalArgumentException        | Non-null parameter value is inappropriate（非空参数值不合适） |
+    | IllegalStateException           | Object state is inappropriate for method invocation（对象状态不适用于方法调用） |
+    | NullPointerException            | Parameter value is null where prohibited（禁止参数为空时仍传入 null） |
+    | IndexOutOfBoundsException       | Index parameter value is out of range（索引参数值超出范围）  |
+    | ConcurrentModificationException | Concurrent modification of an object has been detected where it is prohibited（在禁止并发修改对象的地方检测到该动作） |
+    | UnsupportedOperationException   | Object does not support method（对象不支持该方法调用）       |
 
+    另外，不要直接复用 Exception、RuntimeException、Throwable 或 Error。应当将这些类视为抽象类。你不能对这些异常进行可靠的测试，因为它们是方法可能抛出的异常的超类。
 
 
 
