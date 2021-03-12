@@ -1168,6 +1168,19 @@ tags: ["Java"]
 
     另外，不要直接复用 Exception、RuntimeException、Throwable 或 Error。应当将这些类视为抽象类。你不能对这些异常进行可靠的测试，因为它们是方法可能抛出的异常的超类。
 
+73. 抛出能用抽象解释的异常：当一个方法抛出一个与它所执行的任务没有明显关联的异常时，这是令人不安的。这种情况经常发生在由方法传播自低层抽象抛出的异常。为了避免这个问题，高层应该捕获低层异常，并确保抛出的异常可以用高层抽象解释。 这个习惯用法称为异常转换：
+
+    ```java
+    // Exception Translation
+    try {
+        ... // Use lower-level abstraction to do our bidding
+    } catch (LowerLevelException e) {
+        throw new HigherLevelException(...);
+    }
+    ```
+
+    虽然异常转换优于底层异常的盲目传播，但它不应该被过度使用。在可能的情况下，处理低层异常的最佳方法是确保低层方法避免异常。
+
 
 
 
