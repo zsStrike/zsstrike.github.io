@@ -1196,6 +1196,59 @@ tags: ["Java"]
 
 
 
+## 第十一章 并发
+
+78. 对共享可变数据的同步访问：synchronized 关键字确保一次只有一个线程可以执行一个方法或块。没有同步，一个线程所做的的更改可能对其他线程不可见。同步不仅阻止线程察觉到处于不一致状态的对象，而且确保每个进入同步方法或块的线程都能察觉由同一把锁保护的所有已修改的效果。
+
+    ```java
+    // Broken! - How long would you expect this program to run?
+    public class StopThread {
+        private static boolean stopRequested;
+    
+        public static void main(String[] args) throws InterruptedException {
+            Thread backgroundThread = new Thread(() -> {
+            int i = 0;
+            while (!stopRequested)
+                i++;
+            });
+    
+        backgroundThread.start();
+        TimeUnit.SECONDS.sleep(1);
+        stopRequested = true;
+        }
+    }
+    ```
+
+    在缺乏同步的情况下，无法保证后台线程何时（如果有的话）看到主线程所做的 stopRequested 值的更改。在缺乏同步的情况下，虚拟机可以很好地转换这段代码：
+
+    ```java
+    while (!stopRequested)
+        i++;
+    into this code:
+    if (!stopRequested)
+        while (true)
+            i++;
+    ```
+
+    这种优化称为提升，这正是 OpenJDK 服务器 VM 所做的。结果是活性失败：程序无法取得进展。
+
+    注意，写方法（requestStop）和读方法（stopRequested）都是同步的。仅同步写方法是不够的！除非读和写操作都同步，否则不能保证同步工作。虽然 volatile 修饰符不执行互斥，但它保证任何读取字段的线程都会看到最近写入的值。
+
+    ```java
+    // Broken - requires synchronization!
+    private static volatile int nextSerialNumber = 0;
+    
+    public static int generateSerialNumber() {
+        return nextSerialNumber++;
+    }
+    ```
+
+    问题在于增量运算符 (++) 不是原子性的。它对 nextSerialNumber 字段执行两个操作：首先读取值，然后返回一个新值，旧值再加 1。如果第二个线程在读取旧值和写入新值之间读取字段，则第二个线程将看到与第一个线程相同的值，并返回相同的序列号。可以将 synchronized 添加到方法声明中，另外，也使用 AtomicLong 类，它是 `java.util.concurrent.atomic` 的一部分。
+
+    总之，当多个线程共享可变数据时，每个读取或写入数据的线程都必须执行同步。 在缺乏同步的情况下，不能保证一个线程的更改对另一个线程可见。
+
+79. 
+
 
 
 
