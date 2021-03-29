@@ -1290,7 +1290,29 @@ tags: ["Java"]
 
     无论你是否使用默认的序列化形式，必须对对象序列化强制执行任何同步操作，就像对读取对象的整个状态的任何其他方法强制执行的那样。无论选择哪种序列化形式，都要在编写的每个可序列化类中声明显式的序列版本 UID。 这消除了序列版本 UID 成为不兼容性的潜在来源。这么做还能获得一个小的性能优势。如果没有提供序列版本 UID，则需要执行高开销的计算在运行时生成一个 UID。不要更改序列版本 UID，除非你想破坏与现有序列化所有实例的兼容性。
 
-88. 
+88. 防御性地编写 readObject 方法：当对象被反序列化时，对任何客户端不能拥有的对象引用的字段进行防御性地复制至关重要。 因此，对于每个可序列化的不可变类，如果它包含了私有的可变组件，那么在它的 readObjec 方法中，必须要对这些组件进行防御性地复制：
+
+    ```java
+    // readObject method with defensive copying and validity checking
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        // Defensively copy our mutable components
+        start = new Date(start.getTime());
+        end = new Date(end.getTime());
+        // Check that our invariants are satisfied
+        if (start.compareTo(end) > 0)
+            throw new InvalidObjectException(start +" after "+ end);
+    }
+    ```
+
+    下面是编写 readObject 方法的指导原则：
+
+    + 对象引用字段必须保持私有的的类，应防御性地复制该字段中的每个对象
+    + 检查任何不变量，如果检查失败，则抛出 InvalidObjectException
+    + 如果必须在反序列化后验证整个对象图，那么使用 ObjectInputValidation 接口
+    + 不要直接或间接地调用类中任何可被覆盖的方法
+
+89. 
 
 
 
