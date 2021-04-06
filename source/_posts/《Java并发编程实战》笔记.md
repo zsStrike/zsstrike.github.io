@@ -113,6 +113,47 @@ tags: ["Java"]
 
 
 
+## 第六章 任务执行
+
+在线程中执行任务：
+
++ 串行地执行任务：每次只会执行一个任务，但是执行的性能低下。
++ 显式地为任务创建线程：通过为每个请求提供一个新的线程提供服务，实现更高的响应性。
++ 无限制创建线程的不足：线程生命周期开销高，资源消耗，稳定性。
+
+Executor 框架：Java 中，任务执行的主要抽象是 Executor，而不是 Thread。Executor 基于生产者-消费者模式。其接口定义：
+
+```java
+public interface Executor {
+	void execute(Runnable command);
+}
+```
+
++ 线程池：指的是管理一组同构工作线程的资源池。通过重用现有的线程而不是创建新的线程来处理新的请求，可以减少新的线程的创建和销毁的开销。通常需要配置一个合适大小的线程池，使得提高处理器的效率和防止过多线程竞争资源使得内存耗尽。在 Java 中可以通过调用静态工厂方法来创建一个线程池：`newFixedThreadPool`，`newCachedThreadPool`，`newSingleThreadPool`，`newScheduledThreadPool`。
++ Executor 生命周期：添加了 ExecutorService 接口，其中包含了3种状态：运行，关闭和已终止。shutdown 方法将会执行平缓的关闭过程：不再接受新的任务，同时等待已经提交的任务执行完成。而 shutdownNow 方法则执行粗暴的关闭过程：它将尝试取消所有运行中的任务，同时不再启动队列中尚未开始的任务。
++ 延迟任务和周期管理：Timer 类负责管理延迟任务以及周期任务。Timer 在执行所有的定时任务的时候只会创建一个线程。如果某个任务的执行时间过长，那么将会破坏其他 TimerTask 的定时精确性。基于以上原因，建议使用 `ScheduledThreadPoolExecutor`。
+
+找出可利用的并行性：
+
++ 携带结果的任务 Callable 和 Future：Runnable 是一种有很大局限的抽象，虽然 run 能写入到日志文件或者某个共享的数据结构，但是它不能返回一个值或者抛出一个异常。Callable 则是一种更好的抽象，他认为主入口点将返回一个值，并可能抛出一个异常。而 Future 则表示一个任务的生命周期，并且提供相应的方法来判断是否完成，以及获取任务的结果等。
+
+  ```java
+  public interface Callable<V> {
+  	V call() throws Exception;
+  }
+  public interface Future<V> {
+    boolean cancel(boolean mayInterruptIfRunning);
+    boolean isCancelled();
+    boolean isDone();
+    V get() throws InterruptedException, ExecutionException, CancellationException;
+    V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, CancellationException, TimeoutException;
+  }
+  ```
+
++ CompletionService：将 Executor 与 BlockingQueue 的功能结合在一起，通过将一组 Callable 任务提交给它来执行，然后使用 take 和 poll 等方法来获得已经完成的结果，这些结果会被封装成 Future。ExecutorCompletionService 实现了 CompletionService。
+
++ 为任务设置时限：可以通过 Future.get 来支持该需求。
+
 
 
 
