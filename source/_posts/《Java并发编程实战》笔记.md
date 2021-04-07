@@ -156,6 +156,40 @@ public interface Executor {
 
 
 
+## 第七章 取消与关闭
+
+任务取消：
+
++ 中断：线程中断是一种协作机制，每个线程都有一个 boolean 类型的中断状态。当这个线程被被中断的时候，其状态设置为 true。对于中断操作的正确理解：它不会真正地中断一个正在运行的线程，而只是发出中断请求，然后由线程在下一个合适的时刻中断自己。
+
++ 中断策略：合理的中断策略应该是某种形式的线程级取消操作或者是服务级取消操作。如果需要恢复中断状态：
+
+  ```java
+  Thread.currentThread().interrupt();
+  ```
+
++ 响应中断：当调用可中断的阻塞函数时，如  Thread.sleep，有两种策略用于处理 InterruptException。其一是传递异常，其二是恢复中断状态。
+
++ 通过 Future 实现取消：ExecutorService.submit 将返回一个 Future 来描述任务。Future 拥有一个 cancel 方法，该方法带有一个 boolean 类型的参数 mayInterruptIfRunning。
+
++ 采用 newTaskFor 来封装非标准的取消：newTaskFor 是一个工厂方法，它将创建 Future 代表任务，通过定制表示任务的 Future 可以改表 Future.cancel 的行为。
+
+停止基于线程的服务：
+
++ 关闭 ExecutorService：使用 shutdown 或者 shutdownNow。
++ 毒丸对象：另外一种关闭生产者-消费者的方法就是使用毒丸对象：毒丸是指一个放在队列上的对象，当消费者得到这个对象的时候，立刻停止执行。
++ shutdownNow 的局限性：使用该方法的时候，它将会取消所有正在执行的任务，并且返回所有已经提交但尚未开始的任务。然而，我们并不知道那些任务已经开始但是尚未正常结束。
+
+处理非正常的线程中止：导致线程提前死亡的原因主要就是 RuntimeException。如果没有捕获该异常，程序就会在控制台打印栈信息，然后退出执行。在 Thread 中提供了 UncaughtExceptionHandler，它能检测出某个线程由于未捕获的异常而终结的情况。
+
+JVM 关闭：
+
++ 关闭钩子：在正常的关闭中，JVM 首先调用所有已注册过的关闭钩子（Shutdown Hook）。JVM 不保证关闭钩子的调用顺序。
++ 守护线程：守护线程不会阻碍 JVM 的关闭。应该尽量少使用守护线程。
++ 终结期：在回收器释放对象之前，会调用它们的 finalize 方法，从而保证一些持久化的资源被释放。最好不要使用 finalize 方法进行资源回收。
+
+
+
 
 
 
