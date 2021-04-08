@@ -190,6 +190,34 @@ JVM 关闭：
 
 
 
+## 第八章 线程池的使用
+
+在任务与执行策略之间的隐性耦合：
+
++ 线程饥饿死锁：如果两个线程相互依赖对方的执行结果，那么就会发生饥饿死锁。
++ 运行时间较长的任务：如果任务的执行时间较长，那么即使不出现死锁，线程池的响应性也会变得很糟糕。可以限定任务等待资源的事件，而不是无限制的等待。如果等待超时，那么需要中止任务或者将任务重新放回队列中。
+
+设置线程池的大小：配置合适的线程池的大小既不会造成资源的浪费，也不会产生线程频繁切换的代价。
+
+配置 ThreadPoolExecutor：可以使用它的通用构造函数来自定义：
+
+```java
+public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue,
+                          ThreadFactory threadFactory,
+                          RejectedExecutionHandler handler) { ... }
+```
+
++ 线程的创建和销毁：线程池的基本大小，最大大小以及存活时间等因素共同负责线程的创建与销毁。
++ 管理任务队列：ThreadPoolExecutor 允许提供一个 BlockingQueue 来保存等待执行的任务。基本的任务排队方式有三种：无界队列，有界队列和同步移交。
++ 饱和策略：当有界队列被填满后，饱和策略开始发挥作用。如中止，抛弃，抛弃最旧的。调用者运行策略既不会抛弃任务，也不会抛出异常，而是将某些任务会退到调用者，从而降低新任务的流量。
++ 线程工厂：每当线程池需要创建一个线程的时候，都是通过线程工厂方法来完成的。通过实现 ThreadFactory 接口，可以进行定制化的工作。
+
+扩展 ThreadPoolExecutor：可以在子类中改写 beforeExecute，afterExecute 和 terminated 方法来实现定制。
+
 
 
 
