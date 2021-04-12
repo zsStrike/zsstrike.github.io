@@ -295,11 +295,41 @@ public ThreadPoolExecutor(int corePoolSize,
 
 
 
+## 第十三章 显式锁
 
+Lock 与 ReentrantLock：Lock 接口提供了一种无条件的，可轮询的，定时的以及可中断的锁获取操作。ReentrantLock 则实现了 Lock 接口。
 
+```java
+public interface Lock {
+  void lock();
+  void lockInterruptibly() throws InterruptedException;
+  boolean tryLock();
+  boolean tryLock(long timeout, TimeUnit unit) throws InterruptedException;
+  void unlock();
+  Condition newCondition();
+}
+```
 
++ 轮询锁与定时锁：由 tryLock 方法实现，同时具有完善的错误恢复机制，使用这两种锁可以避免死锁的发生。
++ 可中断的锁获取操作：lockInterruptibly 方法能够在获得锁的同时保持对中断的响应。
++ 非块结构的加锁：内置锁中，锁的获取和释放操作都是基于代码块的。而分段锁技术则不是块结构的锁。
 
+性能考虑因素：在 Java5 中，当线程数增大的时候，内置锁的性能急剧下降，而 ReentrantLock 的性能下降更加平缓。在 Java6 中，两者的可伸缩性基本相同。
 
+公平性：ReentrantLock 的构造函数中提供了两种公平性的选择：创建一个非公平的锁（默认）或者一个公平的锁。在公平的锁上，线程将按照他们发出请求的顺序来获得锁，但是在非公平的锁上，则允许插队。大多数的情况下，非公平锁的性能高于公平锁的性能。
+
+在 synchronized 和 ReentrantLock 之间进行选择：ReentrantLock 在加锁和内存上提供的语义与内置锁相同，另外，它还实现了其他功能，如定时的锁等待，公平性以及非块结构的加锁。内置锁则更加简洁，同时能在线程转储中给出哪些栈帧获得了哪些锁。
+
+读写锁：ReentrantLock 实现了一种标准的互斥锁，互斥通常是一种过硬的加锁规则，因此限制了并发性。可以使用读写锁来改善：
+
+```java
+public interface ReadWriteLock {
+	Lock readLock();
+	Lock writeLock();
+}
+```
+
+在读写锁的加锁策略中，允许多个操作同时执行，但每次最多只允许一个写操作。ReentrantReadWriteLock 实现了上述接口，提供可重入的语义，同时构造的时候可以选择是否公平锁。
 
 
 
