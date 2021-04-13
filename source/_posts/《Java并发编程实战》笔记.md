@@ -333,6 +333,45 @@ public interface ReadWriteLock {
 
 
 
+## 第十四章 构建自定义的同步工具
+
+状态依赖性的管理：如 BlockingQueue 中的 put 和 take 操作的前提分别时队列不为空或者满的状态，当前提没有满足的时候，可以抛出异常，或者保持阻塞直到条件被满足。
+
++ 条件队列：使得一组线程（等待线程集合）能够通过某种方式来等待特定的条件变成真。Object 中的 wait，notify 和 notifyAll 方法就构成了内部条件队列的 API。Object.wait 会自动释放锁，并且请求操作系统挂起当前线程。当被挂起的线程醒来的时候，它将在返回之前重新获取锁。
+
+使用条件队列：
+
++ 条件谓词：指的是操作正常执行的前提条件，如队列不为空
++ 过早唤醒：wait 方法的返回并不意味着线程正在等待的条件谓词已经变成真的了。因为可能被其他线程通过 notifyAll 唤醒，但是它的条件为此可能并未变为真的，此时就需要再次进行条件判断。
++ 丢失的信号：也是一种活跃性故障。指的是线程必须等待一个已经为真的条件，但在开始等待之前没有检查条件谓词。
++ 通知：在 put 方法成功执行后，将会调用 notifyAll，向任何等待“不为空”条件的线程发出通知。只使用 notify 可能会造成信号丢失的情况。
+
+显式的 Condition 对象：正如 Lock 是一种广义的内置锁，Condition 也是一种广义的内置条件队列。
+
+```java
+public interface Condition {
+  void await() throws InterruptedException;
+  boolean await(long time, TimeUnit unit) throws InterruptedException;
+  long awaitNanos(long nanosTimeout) throws InterruptedException;
+  void awaitUninterruptibly();
+  boolean awaitUntil(Date deadline) throws InterruptedException;
+  void signal();
+  void signalAll();
+}
+```
+
+内置锁的缺陷在于每个内置锁都只能有一个相关联的条件队列。而 Condition 和 Lock 一起使用就可以消除该问题。和内置条件队列不同的是，对于每个 Lock，可以有任意数量的 Condition 对象。在 Condition 中相应的方法是 await，signal 和 signalAll。
+
+Synchronizer 剖析：在 ReentrantLock 和 Semaphore 两个接口存在许多共同点，如都可以用作阀门，即每次只允许一定数量的线程通过；都支持可中断；都支持公平和非公平的队列操作。事实上，它们的实现都使用了一个共同的基类，AbstractQueuedSynchronizer（AQS）。AQS 是一个用于构建锁和同步器的框架，CountDownLatch，ReentrantReadWriteLock 和 FutureTask 都是基于 AQS 实现。
+
+同步容器中的 AQS：
+
++ ReentrantLock：支持独占，实现了 tryAcquire，tryRelease 和 isHeldExclusively。将同步状态用于保存锁获取操作的次数，还维护一些 owner 的变量保存当前所有者线程的标识符。
++ Semaphore 和 CountDownLatch：前者将同步状态用于保存当前可用许可的数量，后者保存当前的计数值。
++ FutureTask：同步状态用来保存任务的状态。
+
+
+
 
 
 
