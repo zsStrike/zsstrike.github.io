@@ -267,3 +267,20 @@ MySQL使用入门：
 | PASSWORD()     | 返回加密版本       |
 | MD5()          | 返回 MD5 的值      |
 
+
+
+## 第六章 图形化工具的使用
+
+MySQL Workbench：
+
++ SQL 开发
++ 数据建模
++ 服务器管理
++ MySQL Utilities
+
+phpMyAdmin：
+
++ 数据库管理
++ 数据库对象管理
++ 权限管理
++ 导入导出数据
