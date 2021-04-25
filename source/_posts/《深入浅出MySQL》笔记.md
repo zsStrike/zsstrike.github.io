@@ -381,6 +381,32 @@ BTREE 索引与 HASH 索引：
 
 
 
+## 第十一章 视图
+
+视图：一种虚拟存在的表，对于使用视图的用户来说透明，视图相对于表的优点有：简单，安全和数据独立。
+
+视图操作：
+
+```
+// 创建视图
+CREATE [OR REPLACE] VIEW view_name [(column_list)]
+AS select_statement
+[WITH [CASCADED | LOCAL] CHECK OPTION]
+// 修改视图
+ALTER VIEW view_name [(column_list)]
+AS select_statement
+[WITH [CASCADED | LOCAL] CHECK OPTION]
+// 删除视图
+DROP VIEW [IF EXISTS] view_name [, view_name] . .[RESTRICT | CASCADE]
+// 查看视图
+SHOW TABLES;
+SHOW CREATE VIEW view_name;
+```
+
+`WITH [CASCADED | LOCAL] CHECK OPTION`决定了是否允许更新数据使记录不再满足视图的条件，其中`LOCAL`只要满足本视图的条件就可以更新，而`CASCADED`则必须满足所有针对该视图的所有视图的条件才可以更新。
+
+
+
 
 
 
