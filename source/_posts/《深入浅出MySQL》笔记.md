@@ -407,6 +407,185 @@ SHOW CREATE VIEW view_name;
 
 
 
+## 第十二章 存储过程和函数
+
+存储过程和函数：它们都是一段 SQL 语句的集合，不同之处在于函数必须有返回值，并且其参数只能是 IN 类型的，合理使用它们可以减少数据传输量，但是在服务器上进行大量的运算也会占用服务器的 CPU，需要综合考虑。
+
+存储过程和函数的相关操作：
+
+```
+// 创建
+CREATE PROCUDURE p_name ([proc_parameter[,...]])
+[characteristic ..] routine_body
+
+CREATE FUNCTION f_name ([func_parameter[,. .]])
+RETURNS type
+[characteristic ..] routine_body
+
+// 修改
+ALTER {PROCEDURE | FUNCTION} sp_name [characteristic . .]
+
+// 调用
+CALL sp_name([parameter[,...]])
+
+// 删除
+DROP {PROCEDURE | FUNCTION} [IF EXISTS] sp_name
+
+// 查看
+SHOW {PROCEDURE | FUNCTION} STATUS [LIKE 'pattern']
+
+```
+
+通常，`routine_body`包含多条语句，为了不出现错误，我们可以使用`DELIMITER $$`命令将语句的结束符从“;”修改成其他符号（$$）。
+
+`characteristic`特征值说明如下：
+
++ LANGUAGE SQL：说明 BODY 是使用 SQL 语言编写的
++ [NOT] DETERMINISTIC：DETERMINISTIC确定的,即每次输入一样输出也一样的程序，NOT DETERMINISTIC非确定的，默认是非确定的
++ { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }：提供额外信息给服务器
++ SQL SECURITY { DEFINER | INVOKER }：可以用来指定子程序该用创建子程序者的许可来执行，还是使用调用者的许可来执行。默认值是DEFINER
+
+变量的使用：
+
+```
+// 定义
+DECLARE var_name[,. .] type [DEFAULT value]
+
+// 赋值
+SET var_name = expr [, var_name = expr] ..
+SELECT col_name[,. .] INTO var_name[,. .] table_expr
+```
+
+条件的使用：
+
+```
+// 定义
+DECLARE condition_name CONDITION FOR condition_value
+condition_value: SQLSTATE [VALUE] sqlstate_value | mysql_error_code
+
+// 条件处理
+DECLARE handler_type HANDLER FOR condition_value[,...] sp_statement
+handler_type: CONTINUE | EXIT | UNDO
+condition_value: SQLSTATE [VALUE] sqlstate_value
+| condition_name
+| SQLWARNING
+| NOT FOUND
+| SQLEXCEPTION
+| mysql_error_code
+```
+
+光标使用：
+
+```
+// 声明
+DECLARE cursor_name CURSOR FOR select_statement
+
+// OPEN -> FETCH -> CLOSE
+OPEN cursor_name
+FETCH cursor_name INTO var_name[, var_name]..
+CLOSE cursor_name
+```
+
+流程控制：
+
+```
+// IF
+IF condition THEN statement_list
+[ELSEIF condition THEN statement_list] ...
+[ELSE statement_list]
+END IF
+
+// CASE
+CASE case_value
+WHEN when_value THEN statement_list
+[WHEN when_value THEN statement_list] ...
+[ELSE statement_list]
+END CASE
+
+// LOOP，通常结合 LEAVE 使用，LEAVE 作用类似于 BREAK
+[begin_label:] LOOP
+statement_list
+END LOOP [end_label]
+
+// ITERATE：跳过当前循环的剩下的语句，直接进入下一轮循环，类似 CONTINUE
+
+// REPEAT
+[begin_label:] REPEAT
+statement_list
+UNTIL condition
+END REPEAT [end_label]
+
+// WHILE
+[begin_label:] WHILE condition DO
+statement_list
+END WHILE [end_label]
+```
+
+事件调度器：可以在某个时间点触发操作，或者每隔一段时间执行固定代码：
+
+```
+// 时间点
+CREATE EVENT myevent
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 HOUR
+DO
+UPDATE myschema.mytable SET mycol = mycol + 1;
+// 时间间隔
+CREATE EVENT myevent
+ON SCHEDULE EVERY 5 SECOND
+DO
+UPDATE myschema.mytable SET mycol = mycol + 1;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
