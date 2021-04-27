@@ -538,6 +538,27 @@ UPDATE myschema.mytable SET mycol = mycol + 1;
 
 
 
+##  第十三章 触发器
+
+触发器操作：
+
+```
+// 创建
+CREATE TRIGGER trigger_name [BEFORE | AFTER] [INSERT | DELETE | UPDATE]
+ON table_name FOR EACH ROW trigger_stmt
+// 删除
+DROP TRIGGER [schema_name.]trigger_name
+// 查看
+show triggers
+```
+
+触发器使用：在触发器中，使用别名 OLD 和 NEW 来引用发生变化的记录内容。另外，触发器存在如下限制：
+
++ 触发程序不能调用将数据返回客户端的存储程序
++ 不能在触发器中使用以显式或隐式方式开始或结束事务的语句
+
+
+
 
 
 
