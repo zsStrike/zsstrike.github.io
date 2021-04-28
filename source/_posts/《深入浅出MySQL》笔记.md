@@ -559,9 +559,30 @@ show triggers
 
 
 
+## 第十四章 事务控制和锁定语句
 
+锁定级别：MySQL 支持对 MyISAM 和 MEMORY 存储引擎的表进行表级锁定，对 BDB 存储引擎的表进行页级锁定，对 InnoDB 存储引擎的表进行行级锁定。
 
+表锁定：当所需要的锁已经被其他线程获取，此时该线程会进行等待，其操作如下：
 
+```
+LOCK TABLES
+tbl_name {READ [LOCAL] | [LOW_PRIORITY] WRITE}
+[, tbl_name  {READ [LOCAL] | [LOW_PRIORITY] WRITE}] ...
+
+UNLOCK TABLES
+```
+
+事务控制：默认情况，MySQL 是自动提交的，CHAIN 会立即启动一个新事物，并且和刚才的事务具有相同的隔离级别，RELEASE 则会断开和客户端的连接。另外，所有的 DDL 语句都是不能回滚的。在事务中可以通过定义 SAVEPOINT，指定回滚事务的一个部分，但是不能指定提交事务的一个部分。
+
+```
+START TRANSACTION | BEGIN [WORK]
+COMMIT [WORK] [AND [NO] CHAIN] [[NO] RELEASE]
+ROLLBACK [WORK] [AND [NO] CHAIN] [[NO] RELEASE]
+SET AUTOCOMMIT = {0 | 1}
+```
+
+分布式事务：分布式事务通常涉及到一个事务管理器和多个资源管理器，采用两阶段提交。
 
 
 
