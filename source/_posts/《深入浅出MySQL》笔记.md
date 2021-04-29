@@ -586,7 +586,15 @@ SET AUTOCOMMIT = {0 | 1}
 
 
 
+## 第十五章 SQL中的安全问题
 
+SQL 注入：利用数据库的外部接口将用户数据插入到实际的 SQL 语言中，从而达到入侵的目的。常见的语句：`SELECT * FROM user WHERE username='$username' AND password= '$password';`，此时对 username 赋值为`angel' or '1=1`，`angel'/*`或`angel'#`都会导致注入成功，前者使用逻辑，后者使用注释。
+
+应对方式：
+
++ PrepareStatement + Bind-Variable：通过转义用户输入的参数防护
++ 使用应用程序提供的转换函数：如`mysql_real_escape_string() `
++ 自定义：正则校验，特殊字符转义等
 
 
 
