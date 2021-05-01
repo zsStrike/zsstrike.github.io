@@ -621,6 +621,48 @@ SQL Mode 在迁移中使用方式：可以通过组合不同的 sql_mode 来构�
 
 
 
+## 第十七章 MySQL分区
+
+概述：分区有利于管理非常大的表，采用分而治之的思想，将表分成一系列的分区，分区对于应用来说是完全透明的，具体而言，使用分区的好处有：
+
++ 和单个磁盘相比，能存储更多的数据
++ 优化查询
++ 通过删除分区直接删除相关的数据
++ 跨多个磁盘，能获得更大的吞吐量
+
+分区类型：无论那种分区，都只能使用主键或者唯一键
+
++ RANGE 分区：给予一个给定的连续区间范围，将数据分配到不同分区。使用`VALUES LESS THAN`划定范围。
++ LIST 分区：类似 RANGE 分区，不过 LIST 对应的是枚举值。使用`VALUES IN`划定分区。
++ COLUMNS 分区：支持分区的键的数据类型更广，并且支持多列分区（多列排序）。又分为`RANGE COLUMNS`和`LIST COLUMNS`。
++ HASH 分区：给予给定的分区个数，将数据分区。主要用于分散热点读，确保负载均衡。使用`PARTITION BY HASH(expr) PARTITIONS num`进行分区，底层采用的是 MOD 算法。常规的 HASH 算法挺不错，但是需要增加分区或者合并分区的时候，问题就出现了，即需要重新 MOD 计算。为此，可以使用线性 HASH 分区，其优点在于存在分区维护的时候，MySQL 能够处理得更加迅速。
++ KEY 分区：类似于 HASH 分区，只不过 HASH 分区允许使用用户自定义的表达式，而 Key 分区不允许使用用户自定义的表达式，需要使用 MySQL 服务器提供的 HASH 函数。
++ 子分区：指对每个分区的再次分割，使用`SUBPARTITION BY`语句实现。
+
+分区管理：
+
++ RANGE & LIST 分区管理：
+
+  ```
+  // 删除
+  ALTER TABLE tbl_name DROP PARTITION p_name;
+  // 添加
+  ALTER TABLE tbl_name ADD PARTITION (patition_stmt);
+  // 重新组织
+  ALTER TABLE tbl_name REORGANIZE PARTITION p_name into (patition_stmt);
+  ```
+
++ HASH & KEY 分区管理：
+
+  ```
+  // 合并
+  ALTER TABLE tbl_name COALESCE PARTITION p_num;
+  // 增加
+  ALTER TABLE tbl_name ADD PARTITIONS p_num;
+  ```
+
+  
+
 
 
 
