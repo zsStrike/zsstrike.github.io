@@ -1650,6 +1650,15 @@ ForkJoin 框架：
 
 
 
+CountDownLatch：
+
++ 简介：典型用法是将任务划分为 n 个独立的任务，并创建值为 n 的 CountDownLatch，通过 countDown 和 await 方法实现同步，底层通过 AQS 支持
++ 核心函数：
+    + countDown：此函数递减锁存器的计数，如果计数值达到 0，则释放所有的等待线程
+    + await：锁存器计数值为 0 时，立即返回，否则将线程加入 sync queue 中等待
+
+
+
 
 
 
