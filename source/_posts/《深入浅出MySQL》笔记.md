@@ -661,7 +661,88 @@ SQL Mode 在迁移中使用方式：可以通过组合不同的 sql_mode 来构�
   ALTER TABLE tbl_name ADD PARTITIONS p_num;
   ```
 
-  
+
+
+
+## 第十八章 SQL优化
+
+优化 SQL 语句的一般步骤：
+
++ 通过使用`SHOW [SESSION | GLOBAL] STATUS`命令了解各种 SQL 的执行频率
++ 定位执行效率较低的 SQL 语句：使用`--log-slow-queries=[file_name]`启动，或者使用`show processlist`查看进程列表
++ 通过 EXPLANIN 分析低效 SQL 的执行计划
++ 通过 `show profile`分析 SQL
++ 通过`trace`分析优化器如何选择执行计划
++ 确定问题并且采取相应的优化措施
+
+索引问题：
+
++ 索引的存储分类：索引是在存储引擎层中实现的，MySQL 暂时提供以下四种类型的索引：
+
+  ![image-20210306193145571](《深入浅出MySQL》笔记/image-20210306193145571.png)
+
++ 使用索引的场景：
+
+  + 匹配全值
+  + 匹配值的范围查询
+  + 匹配最左前缀：比如在 col1 + col2 + col3 字段上的联合索引能够被包含 col1、(col1 + col2)、(col1 + col2 + col3)的等值查询利用到
+  + 仅仅对索引进行查询
+  + 匹配列前缀：仅仅使用索引中的第一列,并且只包含索引第一列的开头一部分进行查找
+  + 能够实现索引匹配部分精确而其他部分进行范围匹配
+  + 如果列名是索引,那么使用 `column_name is null` 就会使用索引
+
++ .存在索引但不能使用索引的典型场景：
+
+  + 以%开头的 LIKE 查询不能够利用 B-Tree 索引
+  + 数据类型出现隐式转换的时候也不会使用索引
+  + 复合索引的情况下，不满足最左原则
+  + 用 or 分割开的条件，如果 or 前的条件中的列有索引，而后面的列中没有索引，那么涉及的索引都不会被用到
+
++ 查看索引使用情况：show status like 'Handler_read%';
+
+简单的优化方法：
+
++ 定期分析表和检查表：ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name 和 CHECK TABLE tbl_name [, tbl_name] ... [option] 
++ 定期优化表：OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name。
+
+常用的 SQL 优化：
+
++ 大批量数据插入：使用 load 命令，通过简单设置可提高导入速度：
+
+  ```
+  // MyISAM 存储引擎的表
+  ALTER TABLE tbl_name DISABLE KEYS;
+  loading the data
+  ALTER TABLE tbl_name ENABLE KEYS;
+  // InnoDB 存储引擎的表
+  SET UNIQUE_CHECKS=0
+  loading the data
+  SET UNIQUE_CHECKS=1
+  ```
+
++ 优化 INSERT 语句：同一个客户插入很多行，尽量使用多个值表的 INSERT 语句
+
++ 优化 ORDER BY 语句：MySQL 排序方式有使用有序索引，第二种是对返回数据排序（FileSort）。对于 FIleSort 算法，MySQL 有两种方式：两次扫描算法和一次扫描算法，通过增加 max_length_for_sort_data 的大小使得尽可能使用一次扫描算法。
+
++ 优化 GROUP BY 语句：默认情况下，MySQL 对 GROUP BY 字段进行排序，如果想要不排序，可以追加使用 ORDER BY NULL 禁止排序。
+
++ 优化嵌套查询：有些情况下，子查询可以被更有效率的 JOIN 替代
+
++ 优化 OR 条件：对于含有 OR 的查询子句，如果要利用索引，则 OR 之间的每个条件列都必须用到索引；如果没有索引，则应该考虑增加索引。
+
++ 优化分页查询：考虑分页场景`limit 1000,20`，此时 MySQL 排序出前 1020 条记录后仅仅需要返回第 1001-1020 条记录，而前 1000 条记录则会被抛弃。优化方案有：
+
+  + 在索引上完成排序分页的操作，最后根据主键关联回原表查询所需要的其他列内容。
+  + 把 LIMIIT 查询转换成某个位置的查询，如根据上次的查询的最大 id 计算下一次的最大的值。
+
+常用 SQL 技巧：
+
++ 正则表达式的使用
++ 使用 RAND() 提取随机行：`select * from category order by rand()`
++ 使用 BIT GROUP FUNCTION 做统计
++ 使用外键需要注意的问题：在 MySQL 中，InnoDB 存储系统支持对外键约束条件的检查，而对于其他类型存储引擎的表则没有这种检查
+
+
 
 
 
