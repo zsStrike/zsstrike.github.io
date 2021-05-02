@@ -1659,6 +1659,20 @@ CountDownLatch：
 
 
 
+CyclicBarrier：
+
++ 简介：用于同步一组线程，只有所有线程达到屏障时，屏障才会被打开，线程才能继续任务，底层通过 AQS 和 ReentrantLock 支持
++ 构造函数：`CyclicBarrier(int parties, Runnable barrierAction)`，第二个参数用于指定所有线程都进入屏障后的执行动作，该动作由最后一个进入屏障的线程执行
++ 核心方法：
+    + await：表示线程已经达到屏障处，对应的 count 数减 1，若所有线程都到达，则 unpark 所有线程，并且恢复计数，否则线程 park
++ 和 CountDownLatch 对比：
+    + CountDownLatch 是一次性的，CyclicBarrier 可以重用
+    + CountDownLatch 下一步动作实施者是主线程，CyclicBarrier 下一步动作实施者还是其他线程本身
+
+
+
+
+
 
 
 
