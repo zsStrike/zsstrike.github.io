@@ -1684,6 +1684,24 @@ Semaphore：
 
 
 
+Phaser：
+
++ 简介：可以实现 CyclicBarrier 和 CountDownLatch 类似的功能，而且它支持对任务的动态调整，并支持分层结构来达到更高的吞吐量
++ 运行机制：
+    + 注册机制：和其他 barrier 不同，在 Phaser 上注册的 parties 是可以动态改变的，既可以随时注册，也可以在抵达点取消注册，只会影响内部的 count 
+    + 同步机制：既可以阻塞式等待也可以非阻塞式到达，每次所有任务达到同步点时，内部 phase 自增
+    + 终止机制：使用 isTerminated 来检查 phaser 的终止状态
+    + 分层机制：如果单个 Phaser 用来处理成千上万的任务，可能会造成因为竞争同步造成性能消耗，可以设置分层，相同层间的不同 phaser 是不存在竞争冲突的，父节点 phaser 会监控其所有孩子节点 phaser 的状态用于判断其是否可以 advance
+    + 状态监控：获取 parties 的数目，获取已经到达的 parties 数目
++ 核心方法：
+    + register：为 phaser 添加一个新的 party，如果当前正在运行 onAdvance，那么就会等待它运行结束再返回结果
+    + arrive：是当前线程达到 phase，不等待其他任务达到就返回
+    + arriveAndAwaitAdvance：使当前线程到达 phaser 并等待其他任务到达
+
+
+
+
+
 
 
 
