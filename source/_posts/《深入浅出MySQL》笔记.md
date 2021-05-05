@@ -808,6 +808,54 @@ InnoDB 锁问题：InnoDB 相较于 MyISAM 最大的不同点是支持事务和�
 
 
 
+## 第二十一章 优化MySQL Server
+
+MySQL 体系结构概览：体系结构图如下：
+
+![image-20210309145331858](《深入浅出MySQL》笔记/image-20210309145331858.png)
+
+主要包含有以下几类线程：
+
++ master thread：主要负责将脏缓存页刷新到数据文件，执行 purge操作，触发检查点，合并插入缓冲区等
++ insert buffer thread：主要负责插入缓冲区的合并操作
++ read thread
++ write thread
++ log thread
++ purge thread
++ lock thread
+
+MySQL 内存管理及优化：
+
++ MyISAM 内存优化：使用 key buffer 缓存索引块，对于数据块，则依赖于 IO 缓存
+  + key_buffer_size
+  + 使用多个索引缓存：MySQL 通过 session 之间共享 key buffer 提高使用效率，但是不能消除其竞争
+  + 调整中点插入策略：对 LRU 的改进
+  + 调整 read_buffer_size 和 read_rnd_buffer_size
++ InnoDB 内存优化：用一块内存区做 IO 缓存池，该缓存池不仅用来缓存 InnoDB 的索引块，而且也用来缓存InnoDB的数据块，缓存池逻辑上由 free list、flush list 和 LRU list 组成。InnoDB 使用的 LRU 算法是类似两级队列的方法
+  + innodb_buffer_pool_size 的设置
+  + 调整 old sublist 大小
+  + 调整 innodb_old_blocks_time 的设置：确定从 old sublist 到 young sublist 的时间
+  + 调整缓存池数量 innodb_buffer_pool_instances
+  + 控制 innodb buffer 刷新，延长数据缓存时间
+  + InnoDB doublewrite：原因是 MySQL 的数据页大小（一般是 16KB）与操作系统的 IO 数据页大小（一般是 4KB）不一致，无法保证 InnoDB 缓存页被完整、一致地刷新到磁盘。原理是用系统表空间中的一块连续磁盘空间（100个连续数据页，大小为 2MB）作为 doublewrite buffer，当进行脏页刷新时，首先将脏页的副本写到系统表空间的 doublewrite buffer 中，然后调用 fsync 刷新操作系统 IO 缓存，确保副本被真正写入磁盘。
+  + 调整排序缓存大小 sort_buffer_size 和连接缓存大小 join_buffer_size
+
+InnoDB log 机制及优化：采用 redo 日志，优化方法如下
+
++ innodb_flush_log_at_trx_commit 的设置
++ 设置 log file size，控制检查点
++ 调整 innodb_log_buffer_size
+
+调整 MySQL 并发相关的参数：
+
++ 调整 max connections，提高并发连接
++ 调整 back_log：积压请求栈大小
++ 调整 table_open_cache：控制所有 SQL 执行线程可打开表缓存的数量
++ 调整 thread cache size
++ innod block wait timeout 的设置
+
+
+
 
 
 
