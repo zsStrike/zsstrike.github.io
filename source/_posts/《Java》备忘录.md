@@ -1700,6 +1700,23 @@ Phaser：
 
 
 
+Exchanger：
+
++ 简介：用于两个线程之间通过调用 exchange 进行数据交换
++ 实现机制：当 A 线程调用 exchage 方法时，其会将数据放到 slot 中并且等待 B 线程调用 exchange；等 B 线程调用 exchange 时，此时先取 slot 中的值，并且将自己的数据放到 slot 中，最后 A 线程被唤醒，取到 slot 中的数据，就完成数据交换
++ 核心属性和方法：
+    + arena 数组槽：slot 为单个槽，arena 为数组槽，当多个参与者使用同一个 Exchanger 时，会存在严重的伸缩性问题，通过该数组来安排不同的线程使用不同的 slot 来降低竞争问题，并且保证了最终一定会成对交换数据
+    + exchange：等待另一个线程到达此交换点(除非当前线程被中断)，然后将给定的对象传送给该线程，并接收该线程的对象
++ 和 SynchronousQueue 对比：Exchanger 是线程间安全交换数据的机制，交换了两个数据，而 SynchronousQueue 一次只交换一个数据
+
+
+
+ThreadLocal：
+
++ 简介：将在多线程中为每一个线程创建单独的变量副本的类，当使用 ThreadLocal 来维护变量时, ThreadLocal 会为每个线程创建单独的变量副本
++ 原理：主要是利用了 Thread 对象中的 ThreadLocalMap 类型的 map 变量，其保存有 ThreadLocal 变量，第一次不存在的时候，其会调用 ThreadLocal 里面的 initialValue 创建一个初始值
++ 使用场景：由于 SimpleDateFormat 并不是线程安全的，可以使用 ThreadLocal 来为每个线程创建一个 SimpleDateFormat 实例
+
 
 
 
