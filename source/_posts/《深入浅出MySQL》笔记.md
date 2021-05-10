@@ -937,6 +937,53 @@ mysqlshow（数据库对象查看工具）：用来很快地查找存在哪些�
 
 
 
+## 第二十七章 备份与恢复
+
+备份恢复策略：
+
++ 备份的表的存储引擎是事务型还是非事务型
++ 全备份和增量备份
++ 定期备份
++ 使用复制方法来异地备份，但是复制对于数据库的误操作无能为力
+
+逻辑备份和恢复：逻辑备份的最大优点是对于各种存储引擎都可以用同样的方法来备份；而物理备份则不同，不同的存储引擎有着不同的备份方法。
+
++ 备份：将数据库中的数据备份为一个文本文件，可以被查看和编辑，可使用 mysqldump 工具实现
+
++ 完全恢复：`mysql –uroot –p dbname < bakfile`，还需要执行日志重做：`mysqlbinlog binlog-file | mysql -u root –p***`
+
++ 基于时间点恢复：某个时间点发生了误操作，我们只需要不完全恢复即可：
+
+  ```
+  shell>mysqlbinlog --stop-date="2005-04-20 9:59:59" /var/log/mysql/bin.123456 | mysql -u root –pmypwd
+  shell>mysqlbinlog --start-date="2005-04-20 10:01:00" /var/log/mysql/bin.123456| mysql-u root -pmypwd \
+  ```
+
++ 基于位置恢复：
+
+  ```
+  shell>mysqlbinlog --stop-position="368312" /var/log/mysql/bin.123456 | mysql -u root -pmypwd
+  shell>mysqlbinlog --start-position="368315" /var/log/mysql/bin.123456 | mysql -u root -pmypwd 
+  ```
+
+物理备份和恢复：
+
++ 冷备份：就是停掉数据库服务，cp 数据文件的方法。
++ 热备份：
+  + MyISAM：本质是将要备份的表加读锁，然后再复制数据文件到备份目录
+  + InnoDB：使用 ibbackup 或者 Xtrabackup
+
+表的导入和导出：
+
++ 导出：
+  + 使用 SELECT ...INTO OUTFILE ... 命令来导出数据
+  + 使用 mysqldump
++ 导入：
+  + 使用 LOAD DATA INFILE… 命令，该命令加载数据最快
+  + 使用 mysqlimport
+
+
+
 
 
 
