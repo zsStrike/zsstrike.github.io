@@ -984,6 +984,52 @@ mysqlshow（数据库对象查看工具）：用来很快地查找存在哪些�
 
 
 
+## 第二十八章 MySQL权限与安全
+
+MySQL 权限管理：
+
++ 工作原理：首先对连接的用户进行身份认证，然后对通过的用户赋予对应权限
+
++ 权限表：系统会用到 `mysql` 数据库下面的 user，host 和 db 这三个权限表
+
+  ![image-20210314234141680](《深入浅出MySQL》笔记/image-20210314234141680.png)
+
++ 帐号管理：
+
+  ```
+  // 创建帐号，赋予权限
+  GRANT pri_type ON {tbl_name | db_name.*} TO user [IDENTIFIED BY [PASSWORD] 'password']]
+  // 查看帐号权限
+  show grants for user@host;
+  // 撤销权限
+  REVOKE pri_type ON {tbl_name | db_name.*} FROM user.
+  // 修改账户密码
+  SET PASSWORD FOR 'jeffrey'@'%' = PASSWORD('biscuit');
+  // 删除帐号
+  DROP USER user
+  ```
+
+MySQL 安全问题：
+
++ 操作系统相关：
+  + 严格控制操作系统账号和权限
+  + 尽量避免以 root 权限运行 MySQL
+  + 防止 DNS 欺骗，最好使用 IP 地址而不是域名
++ 数据库相关：
+  + 删除匿名帐号
+  + 给 root 帐号设置口令
+  + 只授予帐号必需的权限
+  + 除 root 外，任何用户不应有 mysql 库 user 表的存取权限
+  + 不要把 FILE、PROCESS 或 SUPER 权限授予管理员以外的账号
+  + DROP TABLE 命令并不收回以前的相关访问授权
+  + 使用 SSL
+
+其他安全设置选项：
+
++ old-passwords：PASSWORD生成的密码是 16 位，在 4.1 之后，生成的函数值变为了 41 位
++ skip-grant-tables：不使用权限表
++ skip-network：适用于应用和数据库在一台机器上的情况
+
 
 
 
