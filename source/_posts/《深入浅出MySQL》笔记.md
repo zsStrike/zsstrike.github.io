@@ -1032,6 +1032,25 @@ MySQL 安全问题：
 
 
 
+## 第三十章 MySQL 常见问题和应用技巧
+
+忘记 MySQL 的 root 密码：首先手动 kill 掉 MySQL 进程，接着使用`--skip-grant-tables`选项重启登陆到 MySQL 服务，之后就可以更新密码，并且刷新权限表。
+
+处理MyISAM存储引擎的表损坏：
+
++ 使用 myisamchk 工具：myisamchk -r tablename
++ 使用 SQL 命令：CHECK TABLE 和 REPAIR TABLE
+
+MyISAM 表超过 4GB 无法访问的问题：对数据文件的最大 size 进行扩充
+
+磁盘目录空间不足问题：更改数据文件和索引文件的默认位置
+
+DNS 反向解析问题：`--skip-name-resolve`
+
+mysql.sock 丢失后连接数据库：使用其他协议如`--protocol=TCP|PIPE|SOCKET`
+
+
+
 
 
 
