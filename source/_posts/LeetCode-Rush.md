@@ -50,6 +50,10 @@ tags: ["Algorithm"]
 + 两数之和问题：借助哈希表或者排序实现，如找到和为 target 的两个数，TwoSum 数据结构设计
 + 数组前缀和技巧：寻找数组左右和相等的中心索引，杨辉三角II
 + 二维数组相关：旋转矩阵，对角线遍历
-+ IntegerCache 比较问题
-+ random.nextInt() 和 nextInt(upperBound)
++ 
+
+## Java 编程知识点
+
++ IntegerCache：在自动装箱时，为了提高性能，Java 缓存了 [-128, 127] 的整形值引用，因此，当我们比较两个 Integer 的时候，应该使用 equals 方法，或者借助 intValue 方法，而不是 `==`
++ random.nextInt() 和 nextInt(upperBound)：不加参数的话，int 类型 32 位都会随机 0 或者 1，可能会产生负数，使用取模可能会产生负数，加参数的话返回 [0, upperBound) 之间的整型
 
