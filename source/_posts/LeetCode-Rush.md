@@ -49,6 +49,7 @@ tags: ["Algorithm"]
 + 双指针技巧：删除排序数组中的重复项，删除排序链表中的重复元素，移除元素，移动零，合并区间等
 + 两数之和问题：借助哈希表或者排序实现，如找到和为 target 的两个数，TwoSum 数据结构设计
 + 数组前缀和技巧：寻找数组左右和相等的中心索引
++ 二维数组相关：旋转矩阵，对角线遍历
 + IntegerCache 比较问题
 + random.nextInt() 和 nextInt(upperBound)
 
