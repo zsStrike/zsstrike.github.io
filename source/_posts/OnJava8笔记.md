@@ -558,7 +558,7 @@ Try-With-Resources 用法：`try(){  }catch(Exception e){  }`，在 try 小括�
 
 字符串的不可变性：String 对象是不可变的，String 类中的每个看起来会修改 String 值的方法，实际上都是创建了一个全新的 String 对象。
 
-`+` 的重载与 StringBuilder：在 String 中，`+` 代表了字符串之间的 append 操作，每次 `+` 都会创建一个 String 对象，代价高昂。StringBuilder 提供了丰富全面的方法，包括`insert，replace，append，delete`。另外还有 StringBuffer，和 StringBuilder 不同点在于后者是线程不安全的，前者是线程安全的。
+`+` 的重载与 StringBuilder：在 String 中，`+` 代表了字符串之间的 append 操作，每次 `+` 都会创建一个 String 对象，代价高昂。StringBuilder 提供了丰富全面的方法，包括`insert，replace，append，delete`。另外还有 StringBuffer，和 StringBuilder 不同点在于后者是线程不安全的，前者是线程安全的，从性能上看，可以优先使用 StringBuilder。
 
 意外递归：如`"som string" + this `，我们想要打印出某个字符串的地址，但是编译器首先辨别出左边是 String 对象，`+` 要求右边的变量也是 String 对象（先进行转换），这就涉及到了意外递归。可以使用`Object.toString()`打印地址。
 
