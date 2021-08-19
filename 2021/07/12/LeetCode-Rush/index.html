@@ -472,6 +472,7 @@
 <li>K 站中转内最便宜的航班：dp[i, j] 表示经过最多 i 次中转，到达 j 的最便宜的航班</li>
 <li>正则表达式匹配：dp(i, j) 表示 s[i..] 能否被 p[j..] 匹配，使用递归；或者 dp[i, j] 表示 s[0..i] 能否被 p[0..j] 匹配，使用迭代</li>
 <li>鸡蛋掉落：使用 dp(k, n) 表示从 n 层楼中，使用 k 个鸡蛋，确定 f 的最小确切尝试次数，或者可以使用 dp[k, m] 表示 k 个鸡蛋，最多 m 次操作可以确定 f 的最高的层数，使用迭代解决</li>
+<li>戳气球：使用 dp[i, j] 表示开区间 (i, j) 内能得到的最大分数，通过最后一步思考状态转移方程</li>
 </ul>
 <h2 id="Java-编程知识点"><a href="#Java-编程知识点" class="headerlink" title="Java 编程知识点"></a>Java 编程知识点</h2><ul>
 <li>IntegerCache：在自动装箱时，为了提高性能，Java 缓存了 [-128, 127] 的整形值引用，因此，当我们比较两个 Integer 的时候，应该使用 equals 方法，或者借助 intValue 方法，而不是 <code>==</code></li>
@@ -511,7 +512,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-19T14:39:38+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-19T15:27:39+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2021年8月19日</p>
