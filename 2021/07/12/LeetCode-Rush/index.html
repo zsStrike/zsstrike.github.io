@@ -477,7 +477,7 @@
 <li>四键键盘：N 次操作输出 A 的最多的个数，考虑最后的一次操作，不是 A，就是 C-V，以此作为递推式</li>
 <li>股票买卖问题：定义 dp[n, k, 0] 表示在第 n 天，最多 k 次交易，未持有股票的最大收益，而 dp[n, k, 1] 表示在第 n 天，最多 k 次交易，持有股票的最大收益，找到状态转换关系，使用迭代即可解决，注意一些问题也可以使用贪心算法解决</li>
 <li>打家劫舍问题：dp[i] 表示 num[i..] 开始，能获得的最大价值，变体如增加首尾限制，二叉树限制等</li>
-<li>字符匹配算法：使用 <code>dp[i, j] = next</code> 表示当前状态 i，遇到字符 j 后下一个状态是 next，以此为状态机，来进行匹配，第一次相当于 pat 与 pat[1..] 匹配，第二次相当于 pat 与 text[0..n] 匹配；也可以使用 next 数组表示</li>
+<li>字符匹配算法：使用 <code>dp[i, j] = next</code> 表示当前状态 i，遇到字符 j 后下一个状态是 next，以此为状态机，来进行匹配，第一次相当于 pat 与 pat[1..] 匹配，第二次相当于 pat 与 text[0..n] 匹配；也可以使用 KMP 算法，使用 next 数组表示最大相同真前后缀的前缀末尾索引</li>
 </ul>
 <h2 id="Java-编程知识点"><a href="#Java-编程知识点" class="headerlink" title="Java 编程知识点"></a>Java 编程知识点</h2><ul>
 <li>IntegerCache：在自动装箱时，为了提高性能，Java 缓存了 [-128, 127] 的整形值引用，因此，当我们比较两个 Integer 的时候，应该使用 equals 方法，或者借助 intValue 方法，而不是 <code>==</code></li>
@@ -517,7 +517,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-20T10:22:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-20T10:40:40+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2021年8月20日</p>
