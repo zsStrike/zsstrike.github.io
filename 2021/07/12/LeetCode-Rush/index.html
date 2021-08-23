@@ -483,6 +483,7 @@
 <h2 id="回溯算法（DFS算法）"><a href="#回溯算法（DFS算法）" class="headerlink" title="回溯算法（DFS算法）"></a>回溯算法（DFS算法）</h2><ul>
 <li>回溯算法和动态规划递归算法类似，不过不同的是回溯算法不存在重叠子问题，回溯算法的核心就是做选择，回溯，撤销选择，相关问题如全排列，n 皇后问题</li>
 <li>集合划分：使用两种视角，桶的视角即为每次刚好填满一个桶，站在数字的视角，即为每次进入一个桶，两种算法通过剪枝可以减少运行时间</li>
+<li>子集，组合和排列问题：子集和组合问题都是从当前位置的下个位置开始回溯，但是排列问题不同，另外可以考虑递归思路</li>
 </ul>
 <h2 id="Java-编程知识点"><a href="#Java-编程知识点" class="headerlink" title="Java 编程知识点"></a>Java 编程知识点</h2><ul>
 <li>IntegerCache：在自动装箱时，为了提高性能，Java 缓存了 [-128, 127] 的整形值引用，因此，当我们比较两个 Integer 的时候，应该使用 equals 方法，或者借助 intValue 方法，而不是 <code>==</code></li>
@@ -522,7 +523,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-23T22:50:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-23T23:00:35+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2021年8月23日</p>
