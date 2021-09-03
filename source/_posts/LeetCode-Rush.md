@@ -143,4 +143,4 @@ tags: ["Algorithm"]
 
 + IntegerCache：在自动装箱时，为了提高性能，Java 缓存了 [-128, 127] 的整形值引用，因此，当我们比较两个 Integer 的时候，应该使用 equals 方法，或者借助 intValue 方法，而不是 `==`
 + random.nextInt() 和 nextInt(upperBound)：不加参数的话，int 类型 32 位都会随机 0 或者 1，可能会产生负数，使用取模可能会产生负数，加参数的话返回 [0, upperBound) 之间的整型
-+ 在 Java 中使用 int[] 作为 HashMap 的键并不会得到想要的结果，因为其会使用 int[] 的索引作为 hashcode，可以使用 `List<Integer>` 或者重写一个类，该类重新实现 hashcode 和 equals 算法
++ 在 Java 中使用 int[] 作为 HashMap 的键并不会得到想要的结果，因为其会使用 int[] 的索引作为 hashcode，可以使用 `List<Integer>` 或者重写一个类，该类重新实现 hashcode 和 equals 算法，异或直接使用 TreeMap
