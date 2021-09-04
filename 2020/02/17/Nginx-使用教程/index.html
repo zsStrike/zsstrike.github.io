@@ -631,7 +631,7 @@
               
             
               
-                <p>本文永久链接是：<a href=http://blog.zsstrike.top/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/>http://blog.zsstrike.top/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</a></p>
+                <p>本文永久链接是：<a href=http://blog.zsstrike.xyz/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/>http://blog.zsstrike.xyz/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</a></p>
               
             
           </blockquote>
@@ -673,7 +673,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.zsstrike.top/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&title=Nginx 使用教程 - zsStrike&summary=本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。"
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.zsstrike.xyz/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&title=Nginx 使用教程 - zsStrike&summary=本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。"
           
           >
           
@@ -685,7 +685,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.zsstrike.top/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&title=Nginx 使用教程 - zsStrike&summary=本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。"
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.zsstrike.xyz/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&title=Nginx 使用教程 - zsStrike&summary=本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。"
           
           >
           
@@ -697,7 +697,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.zsstrike.top/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&title=Nginx 使用教程 - zsStrike&summary=本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。"
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.zsstrike.xyz/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/&title=Nginx 使用教程 - zsStrike&summary=本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。"
           
           >
           
@@ -1358,7 +1358,7 @@ const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
       // 请求 PV 并自增
       var pvCtn = document.querySelector('#lc-sv');
       if (pvCtn || enableIncr) {
-        var pvGetter = this.getRecord(Counter, 'http://blog.zsstrike.top' + '/#lc-sv', 'Visits').then((record) => {
+        var pvGetter = this.getRecord(Counter, 'http://blog.zsstrike.xyz' + '/#lc-sv', 'Visits').then((record) => {
           incrArr.push(this.buildIncrement(record.objectId))
           var eles = document.querySelectorAll('#lc-sv #number');
           if (eles.length > 0) {
@@ -1376,7 +1376,7 @@ const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
       // 请求 UV 并自增
       var uvCtn = document.querySelector('#lc-uv');
       if (uvCtn || enableIncr) {
-        var uvGetter = this.getRecord(Counter, 'http://blog.zsstrike.top' + '/#lc-uv', 'Visitors').then((record) => {
+        var uvGetter = this.getRecord(Counter, 'http://blog.zsstrike.xyz' + '/#lc-uv', 'Visitors').then((record) => {
           var vuv = this.validUV();
           vuv && incrArr.push(this.buildIncrement(record.objectId))
           var eles = document.querySelectorAll('#lc-uv #number');
@@ -1398,7 +1398,7 @@ const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
         for (i = 0; i < allPV.length; i++) {
           let pv = allPV[i];
           let title = pv.getAttribute('data-title');
-          var url = 'http://blog.zsstrike.top' + pv.getAttribute('data-path');
+          var url = 'http://blog.zsstrike.xyz' + pv.getAttribute('data-path');
           if (url) {
             var viewGetter = this.getRecord(Counter, url, title).then((record) => {
               // 是当前页面就自增
