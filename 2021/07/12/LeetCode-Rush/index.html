@@ -366,13 +366,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：4.8k字</p>
+      <p>字数：4.9k字</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：16分钟</p>
+      <p>时长：17分钟</p>
     </a>
   </div>
 
@@ -424,7 +424,9 @@
 <li>二叉搜索树的中序遍历结果是有序的，可以解决：BST 第 K 小的元素，BST 转化为累加树</li>
 <li>二叉搜索树的基本操作：删除，插入，搜索，验证 BST（记录当前树范围）</li>
 <li>递归解决二叉搜索树问题：不同的二叉搜索树数量，不同的二叉搜索树所有种类</li>
-<li>图问题：所有可能路径。涉及到图遍历框架，注意和回溯算法的区别</li>
+<li>图中所有可能路径：涉及到图遍历框架，注意和回溯算法的区别，图遍历中 visited 不会重新被设置为 false</li>
+<li>拓扑排序：使用 BFS 算法，构建入度数组，之后将入度为 0 的节点入队，使用 DFS 算法，后续遍历并且反转</li>
+<li>判断图中是否存在环：利用拓扑排序判断，或者是深度优先遍历，后者还可以获得当前的环节点</li>
 <li>二叉树中二叉搜索子树的最大键值和：使用后序遍历可以减少时间复杂度，因为当前节点所做的事情依赖于左右子树，涉及到 BST 的验证</li>
 <li>扁平化嵌套列表迭代器：将其当做是一个多叉树进行遍历保存，使用懒加载模式</li>
 <li>完全二叉树的节点数：考虑左右二叉树是否为满二叉树，分解问题，减少时间复杂度</li>
@@ -563,7 +565,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-06T11:30:02+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-06T14:20:55+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2021年9月6日</p>
