@@ -485,6 +485,7 @@
 <li>打家劫舍问题：dp[i] 表示 num[i..] 开始，能获得的最大价值，变体如增加首尾限制，二叉树限制等</li>
 <li>字符匹配算法：使用 <code>dp[i, j] = next</code> 表示当前状态 i，遇到字符 j 后下一个状态是 next，以此为状态机，来进行匹配，第一次相当于 pat 与 pat[1..] 匹配，第二次相当于 pat 与 text[0..n] 匹配；也可以使用 KMP 算法，使用 next 数组表示最大相同真前后缀的前缀末尾索引</li>
 <li>构造回文的最小插入次数：dp[i, j] 的表示对字符串 s[i..j]，最少需要进行 dp[i, j] 次插入才能变成回文串，注意状态转换关系</li>
+<li>IPO：使用贪心算法，每次选择能投资项目中的最大利润</li>
 </ul>
 <h2 id="回溯算法（DFS-算法）"><a href="#回溯算法（DFS-算法）" class="headerlink" title="回溯算法（DFS 算法）"></a>回溯算法（DFS 算法）</h2><ul>
 <li>回溯算法和动态规划递归算法类似，不过不同的是回溯算法不存在重叠子问题，回溯算法的核心就是做选择，回溯，撤销选择，相关问题如全排列，n 皇后，数独问题</li>
@@ -571,10 +572,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-07T17:04:05+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-08T09:31:50+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年9月7日</p>
+    <p>更新于：2021年9月8日</p>
   </a>
 </div>
 
