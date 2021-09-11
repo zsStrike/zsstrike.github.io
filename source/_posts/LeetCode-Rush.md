@@ -155,3 +155,4 @@ tags: ["Algorithm"]
 + Integer.valueOf() 和 Integer.parseInt() 两者都是对字符串进行解析，不过它们的返回值类型不同，前者是 Integer，后者是 int
 + `List<Integer>` 到 `int[]` 类型的转换不能直接使用 toArray，可以借助流：`list.stream().mapToInt(Integer.intValue).toArray()`
 + 想要对自定义类实现排序，要么实现 `Comparable<T>` 接口，重写 `compareTo` 方法，或者是排序的时候传入一个 `Comparator<T>` 对象，重写 `compare` 方法
++ 想要对 `int[]` 类型进行降序排序，不能直接用 `Arrays.sort`，其只对 `T[]` 提供自定义比较器，可以使用流操作来实现：`Arrays.stream(arr).boxed().sorted((a, b) -> b - a).mapToInt(Integer::intValue).toArray()`
