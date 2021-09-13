@@ -366,13 +366,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：5.1k字</p>
+      <p>字数：5.2k字</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：17分钟</p>
+      <p>时长：18分钟</p>
     </a>
   </div>
 
@@ -516,6 +516,7 @@
 <li>快速选择算法：存在于快速排序算法中，每次 partition 都会使得左边的数字小，右边的数字大，相关问题如数组中的第 k 个最大元素</li>
 <li>分治思路：归并排序，分而治之，相关问题如为运算表达式设计优先级</li>
 <li>区间问题：关键在于排序，以及判断两个区间相交与否，相关问题如删除被覆盖区间，区间合并，区间列表的交集</li>
+<li>使用哈希表：使用哈希表可以快速统计相同位置上出现的次数，相关问题如回旋镖的数量</li>
 </ul>
 <h2 id="高频面试算法"><a href="#高频面试算法" class="headerlink" title="高频面试算法"></a>高频面试算法</h2><ul>
 <li>分割数组为连续子序列：使用两个哈希表，分别统计出现次数和能在结尾放置的次数，优先放在上个序列的结尾</li>
@@ -537,6 +538,7 @@
 <li>Integer.valueOf() 和 Integer.parseInt() 两者都是对字符串进行解析，不过它们的返回值类型不同，前者是 Integer，后者是 int</li>
 <li><code>List&lt;Integer&gt;</code> 到 <code>int[]</code> 类型的转换不能直接使用 toArray，可以借助流：<code>list.stream().mapToInt(Integer.intValue).toArray()</code></li>
 <li>想要对自定义类实现排序，要么实现 <code>Comparable&lt;T&gt;</code> 接口，重写 <code>compareTo</code> 方法，或者是排序的时候传入一个 <code>Comparator&lt;T&gt;</code> 对象，重写 <code>compare</code> 方法</li>
+<li>想要对 <code>int[]</code> 类型进行降序排序，不能直接用 <code>Arrays.sort</code>，其只对 <code>T[]</code> 提供自定义比较器，可以使用流操作来实现：<code>Arrays.stream(arr).boxed().sorted((a, b) -&gt; b - a).mapToInt(Integer::intValue).toArray()</code></li>
 </ul>
 
   
@@ -572,10 +574,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-08T09:31:50+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-13T16:39:12+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年9月8日</p>
+    <p>更新于：2021年9月13日</p>
   </a>
 </div>
 
