@@ -5,10 +5,6 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="noindex,follow">
-      
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -23,9 +19,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>zsStrike</title>
+  <title>MySQL实战45讲 - zsStrike</title>
+  
+    <meta name="keywords" content="MySQL">
   
 
+  
+    <meta name="description" content="本文主要是对 MySQL实战 45 讲中内容的一些总结，以备查阅。">
   
 
   <!-- feed -->
@@ -256,7 +256,7 @@
     <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
           
@@ -326,242 +326,241 @@
         
 
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-  <section class="post-list">
+
+
+  
+  <div class="article-meta" id="top">
     
     
-      
+    
+      <h1 class="title">
+        MySQL实战45讲
+      </h1>
+      <div class='new-meta-box'>
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/02/19/MySQL%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
-        MySQL基本操作
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>本文介绍MySQL数据库的简单使用方法，包括数据库的启动和连接，以及数据的增删改查等。操作环境在CentOS 7中。</p>
-    
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' target="_blank" href="https://github.com/zsStrike" rel="nofollow noopener">
+    <img no-lazy src="https://s1.ax1x.com/2020/09/08/wQFm7j.jpg">
+    <p>zsStrike</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年9月19日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：645字</p>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+          
         
-        <time>2020-02-19</time>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="MySQL实战45讲" data-path="/2021/09/19/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  <p>本文主要是对 MySQL实战 45 讲中内容的一些总结，以备查阅。</p>
+<a id="more"></a>
+
+<h2 id="01-基础架构：SQL查询语句如何执行"><a href="#01-基础架构：SQL查询语句如何执行" class="headerlink" title="01 基础架构：SQL查询语句如何执行"></a>01 基础架构：SQL查询语句如何执行</h2><div class="img-wrap"><div class="img-bg"><img class="img lazyload" src="0d2070e8f84c4801adbfa03bda1f98d9.png" class="lazyload" data-srcset="0d2070e8f84c4801adbfa03bda1f98d9.png" srcset="data:image/png;base64,666" alt="img"/></div><span class="image-caption">img</span></div>
+<p>MySQL 基本架构图如上，大体上分为 Server 层和存储引擎层。前者涵盖了 MySQL 的大多数核心服务，如内置函数，跨存储引擎的功能，如存储过程，触发器，视图等 ；后者则是负责数据的存储和提取，其架构模式是插件式的，如 InnoDB，MyISAM，Memory 等，其中 InnoDB 从 MySQL 5.5 之后成为默认存储引擎。</p>
+<p>考虑这样的一条语句：<code>select * from T where ID=10</code> ，了解一下每个组件的功能。</p>
+<ul>
+<li><p>连接器：用户在发送 SQL 语句前需要和 Server 端连接，TCP 连接之后，连接器对用户身份进行认证。在连接的时候尽量选择长连接，可能会发现 MySQL 的内存占用涨得很快，这是因为执行过程中的临时内存是管理在连接对象里面的。为了解决该问题，可以定期断开连接或者执行 <code>mysql-reset_connection</code> </p>
+</li>
+<li><p>查询缓存：MySQL 拿到一个查询请求后，先去查询缓存里面看看是不是已经执行过该语句，如果存在缓存则直接返回。不建议使用查询缓存，只要对一个表存在更新，这个表上的查询缓存就会被清空，性能提升不大，另外，从 MySQL 8.0 版本开始，不存在查询缓存组件</p>
+</li>
+<li><p>分析器：首先进行词法分析，转换为单词流，之后再进行语法分析，判断语句是否满足 SQL 语法</p>
+</li>
+<li><p>优化器：将上一步的语法树进行语义分析，决定如使用哪个索引或者如何进行 join 操作，生成执行计划</p>
+</li>
+<li><p>执行器：开始执行之前，判断一下用户对该表有没有查询权限，即进行权限验证。假设 ID 字段无索引，那么执行流程如下：</p>
+<ol>
+<li>调用 InnoDB 引擎接口取这个表的第一行，判断 ID 值是不是 10，如果不是则跳过，如果是则将这行存在结果集中</li>
+<li>调用引擎接口取“下一行”，重复相同的判断逻辑，直到取到这个表的最后一行</li>
+<li>执行器将上述遍历过程中所有满足条件的行组成的记录集作为结果集返回给客户端</li>
+</ol>
+<p>对于有索引的表，逻辑差不多相同，只不过会按照索引来进行遍历。</p>
+</li>
+</ul>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2020/02/19/MySQL%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/'>
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://blog.zsstrike.xyz/2021/09/19/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/>http://blog.zsstrike.xyz/2021/09/19/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-19T16:52:21+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年9月19日</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
+          
   
-  
-  
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/MySQL/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>MySQL</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
-    <h2 class="article-title" >
-      <a href="/2020/02/18/CentOS-7%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95/">
-        CentOS 7安装常用软件方法
-      </a>
-    </h2>
-  
-  <div class='md'>
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.zsstrike.xyz/2021/09/19/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/&title=MySQL实战45讲 - zsStrike&summary=本文主要是对 MySQL实战 45 讲中内容的一些总结，以备查阅。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,666">
+          
+        </a>
+      
     
-      <p>本文将会在CentOS 7的情况下安装一下常用的开发软件，主要记录在软件安装中遇到的问题和解决问题的方法。</p>
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.zsstrike.xyz/2021/09/19/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/&title=MySQL实战45讲 - zsStrike&summary=本文主要是对 MySQL实战 45 讲中内容的一些总结，以备查阅。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,666">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.zsstrike.xyz/2021/09/19/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/&title=MySQL实战45讲 - zsStrike&summary=本文主要是对 MySQL实战 45 讲中内容的一些总结，以备查阅。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,666">
+          
+        </a>
+      
+    
+      
+    
+      
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+</div>
+
+
+
         
-        <time>2020-02-18</time>
-        
-      </div>
       
-        <div>
-          <a class='readmore' href='/2020/02/18/CentOS-7%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95/'>
-            阅读全文
-          </a>
-        </div>
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/07/12/LeetCode-Rush/'>
+          <p class='title'>LeetCode Rush<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>本文用于记录在算法题目中使用的技巧或者方法，以备查阅。
+
+
+链表问题
+使用双指针可以解决找固定位置相关问题，环形链表问题，相交链表问题，旋转链表问题
+尝试设置 dummyHead 节点，用于处理...</p>
+        </a>
       
     </div>
   
+</article>
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
-        Nginx 使用教程
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-02-17</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
   
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/">
-        训练和评估
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-02-15</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
   
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/02/14/Keras%E5%87%BD%E6%95%B0%E5%BC%8FAPI/">
-        Keras函数式API
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>本章了解Keras的函数式API以及灵活使用它们的方法。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-02-14</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/02/14/Keras%E5%87%BD%E6%95%B0%E5%BC%8FAPI/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-          <a class="prev" rel="prev" href="/page/3/">
-            <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
-            </section>
-          </a>
-        
-        <p class="current">
-          4 / 8
-        </p>
-        
-          <a class="next" rel="next" href="/page/5/">
-            <section class="post next white-box shadow">
-              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
 
 
 </div>
@@ -618,6 +617,29 @@
 
   
 
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%EF%BC%9ASQL%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C"><span class="toc-text">01 基础架构：SQL查询语句如何执行</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
 
 </aside>
 
@@ -630,8 +652,8 @@
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="MySQL实战45讲";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
 
