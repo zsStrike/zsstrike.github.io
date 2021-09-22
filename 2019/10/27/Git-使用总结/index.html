@@ -258,7 +258,7 @@
     
         <div id="full" class='cover-wrapper post search' style="display: none;">
           
-            <div class='cover-bg' style='background-image:url(https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg)'></div>
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
           
           <div class='cover-body'>
   <div class='top'>
@@ -405,7 +405,7 @@
 <a id="more"></a>
 
 <h2 id="merge-rebase"><a href="#merge-rebase" class="headerlink" title="merge / rebase"></a>merge / rebase</h2><p>两者都是将其他分支上修改应用到当前工作分支上，不同的是 merge 会产生一个与 merge 相关的提交记录，而 rebase 则不会产生，除此之外，两者之间的 git flow 如下：</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="rebase-merge.png" alt="rebase-merge"/></div><span class="image-caption">rebase-merge</span></div>
+<div class="img-wrap"><div class="img-bg"><img class="img lazyload" src="rebase-merge.png" class="lazyload" data-srcset="rebase-merge.png" srcset="data:image/png;base64,666" alt="rebase-merge"/></div><span class="image-caption">rebase-merge</span></div>
 <h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><p>用于将一些修改应用到当前工作的分支上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commitHash&gt; | &lt;HashA&gt;..&lt;HashB&gt;</span><br></pre></td></tr></table></figure>
 
@@ -479,7 +479,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png">
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,666">
           
         </a>
       
@@ -491,7 +491,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png">
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,666">
           
         </a>
       
@@ -503,7 +503,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png">
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,666">
           
         </a>
       
@@ -861,6 +861,33 @@ var loadCSS = function( href, before, media, attributes ){
 
 
 
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
 
 
 
