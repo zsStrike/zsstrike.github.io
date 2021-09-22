@@ -366,13 +366,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1.6k字</p>
+      <p>字数：2.2k字</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：5分钟</p>
+      <p>时长：7分钟</p>
     </a>
   </div>
 
@@ -447,6 +447,25 @@
 </ol>
 <h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p>InnoDB 将 redo log 的分为 prepare 和 commit 状态，称为两阶段提交，主要目的是为了保证两份日志之间的逻辑一致。如果不采用两阶段提交，那么不管是先写redo log后写binlog，还是先写binlog后写redo log，只要在某个 log 写完之后发生重启，两种日志的恢复出来的状态并不一致。</p>
 <p>有了两阶段提交的话，如果在第 4 步发生重启，那么由于 redo log 处于 prepare 状态，并且 binlog 失败，那么事务本身会回滚；如果在第 5 步发生重启，由于 redo log 已经处于 prepare 状态，并且存在相应的 binlog，那么重启后会自动 commit。</p>
+<h2 id="03-事务隔离"><a href="#03-事务隔离" class="headerlink" title="03 事务隔离"></a>03 事务隔离</h2><p>在 MySQL 中，事务支持是在存储引擎层实现的，因此，并不是所有的引擎都支持事务处理，如 MyISAM，这是其被 InnoDB 取代的原因之一。</p>
+<h3 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h3><p>当多个事务并发进行处理的时候，可能会出现脏读，不可重复读，幻象问题，为了解决这些问题，引入了对应的隔离级别。SQL92 中定义了四种隔离级别：未提交读，提交读，可重复读和串行化。</p>
+<div class="img-wrap"><div class="img-bg"><img class="img lazyload" src="7dea45932a6b722eb069d2264d0066f8-16323192554602.png" class="lazyload" data-srcset="7dea45932a6b722eb069d2264d0066f8-16323192554602.png" srcset="data:image/png;base64,666" alt="7dea45932a6b722eb069d2264d0066f8"/></div><span class="image-caption">7dea45932a6b722eb069d2264d0066f8</span></div>
+<ul>
+<li>未提交读：v1 = 2，v2 = 2， v3 = 2</li>
+<li>提交读：v1 = 1，v2 = 2， v3 = 2</li>
+<li>可重复读：v1 =1，v2 = 1， v3 = 2</li>
+<li>串行化：v1 = 1，v2 = 1， v3 = 2（防止幻象）</li>
+</ul>
+<h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p>在实现上，数据库里面会创建一个视图，访问的时候以视图的逻辑结果为准。在“可重复读”隔离级别下，这个视图是在事务启动时创建的，整个事务存在期间都用这个视图。在“读提交”隔离级别下，这个视图是在每个SQL语句开始执行的时候创建的。这里需要注意的是，“读未提交”隔离级别下直接返回记录上的最新值，没有视图概念；而“串行化”隔离级别下直接用加锁的方式来避免并行访问。</p>
+<p>在MySQL中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
+<div class="img-wrap"><div class="img-bg"><img class="img lazyload" src="d9c313809e5ac148fc39feff532f0fee.png" class="lazyload" data-srcset="d9c313809e5ac148fc39feff532f0fee.png" srcset="data:image/png;base64,666" alt="d9c313809e5ac148fc39feff532f0fee"/></div><span class="image-caption">d9c313809e5ac148fc39feff532f0fee</span></div>
+<p>回滚日志不能一直保存，当系统中没有比这个回滚日志更早的 read-view 的时候就会被清理掉。基于该事实，一般建议不要使用长事务。长事务意味着系统里面会存在很老的事务视图，可能会占用很大的空间，另外，长事务也会占用锁资源，可能会拖垮整个库。</p>
+<h3 id="事务启动方式"><a href="#事务启动方式" class="headerlink" title="事务启动方式"></a>事务启动方式</h3><p>MySQL的事务启动方式有以下几种：</p>
+<ol>
+<li>显式启动事务语句， begin 或 start transaction。配套的提交语句是commit，回滚语句是rollback。</li>
+<li>set autocommit=0，这个命令会将这个线程的自动提交关掉。意味着如果你只执行一个select语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你主动执行commit 或 rollback 语句，或者断开连接。</li>
+</ol>
+<p>建议使用 <code>set autocommit=1</code>，显式处理事务流程，防止长事务的产生。</p>
 
   
   
@@ -481,10 +500,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-19T18:08:17+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-22T22:14:30+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年9月19日</p>
+    <p>更新于：2021年9月22日</p>
   </a>
 </div>
 
@@ -655,7 +674,7 @@
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%EF%BC%9ASQL-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C"><span class="toc-text">01 基础架构：SQL 查询语句如何执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%EF%BC%9ASQL-%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C"><span class="toc-text">02 日志系统：SQL 更新语句如何执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log"><span class="toc-text">redo log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binlog"><span class="toc-text">binlog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="toc-text">两阶段提交</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%EF%BC%9ASQL-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C"><span class="toc-text">01 基础架构：SQL 查询语句如何执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%EF%BC%9ASQL-%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C"><span class="toc-text">02 日志系统：SQL 更新语句如何执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log"><span class="toc-text">redo log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binlog"><span class="toc-text">binlog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="toc-text">两阶段提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"><span class="toc-text">03 事务隔离</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-text">隔离性与隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">事务隔离的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">事务启动方式</span></a></li></ol></li></ol>
     </div>
   </section>
 
