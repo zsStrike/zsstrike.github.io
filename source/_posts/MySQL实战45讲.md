@@ -180,7 +180,65 @@ select * from geek where c=N order by a limit 1;
 select * from geek where c=N order by b limit 1;
 ```
 
-答案是（c，a）索引没有存在的必要，找到 `c = N` 的记录后可以直接回表，是按照 a 排序的，符合最左前缀，但是（c，b）需要存在。 
+答案是（c，a）索引没有存在的必要，找到 `c = N` 的记录后可以直接回表，是按照 a 排序的，符合最左前缀，但是（c，b）需要存在。
+
+
+
+##  06 全局锁和表锁
+
+数据库锁设计的初衷是处理并发问题，并发时需要合理控制资源的访问规则，而锁就是用来实现这些访问规则的重要数据结构。
+
+### 全局锁
+
+全局锁就是对整个数据库实例加锁，MySQL 提供加全局读锁的方法，命令是 `Flush tables with read lock `(FTWRL)，该命令会让整个库处于只读状态。
+
+全库逻辑备份方案：
+
++ FTWRL：整个数据库只读，会降低系统性能甚至拖垮数据库
++ mysqldump：使用参数 `--single-transaction`，导数据之前就会启动一个事务，来确保拿到一致性视图（可重复读级别下开启事务），需要引擎支持 RR 隔离级别
+
+全库只读另外一个命令`set global readonly=true`，但是不推荐使用，主要有
+
++ 在有些系统中，readonly的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库
++ 在异常处理机制上有差异。如果执行 FTWRL 命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库回到可以正常更新的状态。而将整个库设置为readonly之后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写状态，风险较高
+
+### 表级锁
+
+MySQL里面表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)。
+
+表锁的语法是 lock tables … read/write，同 FTWRL 一样，在客户端断开的时候自动释放。
+
+MDL 则不需要显式使用，在访问一个表的时候会被自动加上，保证读写的正确性。MySQL 5.5版本中引入了MDL，当对一个表做增删改查操作的时候，加 MDL 读锁；当要对表做结构变更操作的时候，加 MDL 写锁。事务中的MDL锁，在语句执行开始时申请，但是语句结束后并不会马上释放，而会等到整个事务提交后再释放。
+
+如何安全地给小表加字段？首先要解决长事务，如果要变更的表是一个热点表，虽然数据量不大，但是上面的请求很频繁，此时可以使用 DDL NOWAIT/WAIT n 语法，等待一段时间，如果还是没有获取到，先放弃。之后开发人员或者DBA再通过重试命令重复这个过程。
+
+### 问题
+
+备份一般都会在备库上执行，你在用–single-transaction方法做逻辑备份的过程中，如果主库上的一个小表做了一个DDL，比如给一个表上加了一列。这时候，从备库上会看到什么现象呢？
+
+```sql
+Q1:SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+Q2:START TRANSACTION  WITH CONSISTENT SNAPSHOT；
+/* other tables */
+Q3:SAVEPOINT sp;
+/* 时刻 1 */
+Q4:show create table `t1`;
+/* 时刻 2 */
+Q5:SELECT * FROM `t1`;
+/* 时刻 3 */
+Q6:ROLLBACK TO SAVEPOINT sp; /* release MDL */
+/* 时刻 4 */
+/* other tables */
+```
+
+参考答案如下：
+
+1. 如果在Q4语句执行之前到达，现象：没有影响，备份拿到的是DDL后的表结构。
+2. 如果在“时刻 2”到达，则表结构被改过，Q5执行的时候，报 Table definition has changed, please retry transaction，现象：mysqldump终止；
+3. 如果在“时刻2”和“时刻3”之间到达，mysqldump占着t1的MDL读锁，binlog被阻塞，现象：主从延迟，直到Q6执行完成。
+4. 从“时刻4”开始，mysqldump释放了MDL读锁，现象：没有影响，备份拿到的是DDL前的表结构。
+
+
 
 
 
