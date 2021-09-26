@@ -10,7 +10,7 @@ tags: ["MySQL"]
 
 ## 01 基础架构：SQL 查询语句如何执行
 
-![img](MySQL实战45讲/0d2070e8f84c4801adbfa03bda1f98d9.png)
+<img src="MySQL实战45讲/0d2070e8f84c4801adbfa03bda1f98d9.png" alt="img" style="zoom: 25%;" />
 
 MySQL 基本架构图如上，大体上分为 Server 层和存储引擎层。前者涵盖了 MySQL 的大多数核心服务，如内置函数，跨存储引擎的功能，如存储过程，触发器，视图等 ；后者则是负责数据的存储和提取，其架构模式是插件式的，如 InnoDB，MyISAM，Memory 等，其中 InnoDB 从 MySQL 5.5 之后成为默认存储引擎。
 
@@ -42,7 +42,7 @@ MySQL 基本架构图如上，大体上分为 Server 层和存储引擎层。前
 
 没有 redo log 的时候，每次更新一条数据都需要至少进行一次 IO 访问，降低了系统的性能，为此，可以采用redo log。当需要更新一条记录的时候，InnoDB 引擎会把记录写到 redo log 中，并且更新内存，这样就算更新完成了，之后，其会在适当的时候，将这个操作记录更新到磁盘里面。InnoDB 中的 redo log 可以组织为一个循环文件，写到结尾之后又从开头的地方写，如下图：
 
-![img](MySQL实战45讲/b075250cad8d9f6c791a52b6a600f69c.jpg)
+<img src="MySQL实战45讲/b075250cad8d9f6c791a52b6a600f69c.jpg" alt="img" style="zoom: 33%;" />
 
 `write_pos` 是当前写指针的位置，`checkpoint` 是当前需要擦除的位置，注意擦除前需要将记录更新到数据文件。有了 redo log ，InnoDB 就可以保证即使数据库发生异常重启，之前提交的记录都不会丢失，该能力成为 carsh-safe。
 
