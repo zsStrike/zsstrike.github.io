@@ -38,3 +38,17 @@ git clone --depth=<num> <remote-url>
 git fetch --unshallow <remote-repo>
 ```
 
+## 镜像源
+
+使用镜像源可以加速下载速度，常见的 Github 镜像源有：
+
+1. https://github.com.cnpmjs.org/
+2. https://hub.fastgit.org/
+3. https://github.wuyanzheshui.workers.dev/
+
+可以在克隆的时候替换 `https://github.com` ，也可以通过全局设置，让 git 命令的 url 指向上述镜像源：
+
+```shell
+git config --global url."https://hub.fastgit.org".insteadOf https://github.com
+```
+
