@@ -403,6 +403,45 @@ select * from t where (a between 1 and 1000)  and (b between 50000 and 100000)
 
 
 
+## 11 怎么给字符串字段加索引
+
+假设存在表 SUser(ID, emial, name, ...)，如果分别以`emial`和 `email(6)`来创建索引，其索引结构如下：
+
+![img](MySQL实战45讲/d31da662bee595991862c439a5567eb7.jpg)
+
+![img](MySQL实战45讲/134583875561de914991fc2e192cf842.jpg)
+
+这样，对于查询语句：
+
+```sql
+select id,name,email from SUser where email='zhangssxyz@xxx.com';
+```
+
+index1 只需要回主索引取一次数据即可，而 index2 则需要回主索引取 4 次数据。
+
+上述现象表明使用前缀索引，定义好长度，就可以做到既节省空间，又不用额外增加太多的查询成本。
+
+通过使用
+
+```sql
+select count(distinct left(email, {len}) as L from SUser;
+```
+
+可以查看前缀长度为 len 时，区分度的相对大小。
+
+另外，由于前缀索引并不能准确判断查询条件是否满足，因此必须要回表，也就是说不能使用覆盖索引这一优化了。
+
+对于那些前缀区分度不大的字段，可以使用下列方法：
+
++ 使用倒序索引：每次需要调用 reverse 函数，性能不太稳定，因为还是基于前缀比较
++ 使用 hash 字段：需要增加一个字段，每次需要调用 crc32 函数，性能更加稳定。InnoDB 不支持哈希索引，可以创建自适应哈希索引
+
+注意，上述两种方法都不支持范围查询。
+
+
+
+
+
 
 
 
