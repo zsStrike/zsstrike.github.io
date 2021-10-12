@@ -466,9 +466,31 @@ select count(distinct left(email, {len}) as L from SUser;
 
 
 
+## 13 为什么表数据删掉一半，表文件大小不变
 
+一个 InnoDB 表的数据可以分为两个部分：表结构定义（.frm）和表数据（.idb）。而表数据既可以存放在当前数据库共享表空间中，也可以存储在单独的文件中吗，该行为模式可以通过`innodb_file_per_table`控制。在 MySQL 5.6 之后，默认值为 ON，以下讨论基于该情况。
 
+![img](MySQL实战45讲/f0b1e4ac610bcb5c5922d0b18563f3c8.png)
 
+对于表数据的删除，实际上只是进行了删除标记而已：
 
++ 如果删掉 R4 记录，引擎只会将其标记为删除，并且如果下次需要插入 300-600 之间的数据，就可以复用该空间
++ 如果删除数据页 A 上的所有数据，整个数据页可以被复用，并且可以在任何范围内复用
++ 如果 delete 命令删除整个库，所有的数据页都会被标记为可复用，但是磁盘上，文件不会变小
 
+上述这种可以复用的空间称为空洞，不仅删除数据会造成，插入数据也会造成，可以参考二叉树的分裂。
+
+![img](MySQL实战45讲/8083f05a4a4c0372833a6e01d5a8e6ea.png)
+
+为了解决上述空洞问题，可以重建表：`alter table A engine=InnoDB`。
+
+![img](MySQL实战45讲/02e083adaec6e1191f54992f7bc13dcd.png)
+
+在MySQL 5.5版本之前，tmp 是临时表，自动创建，该过程中，不能对 A 进行更新操作。
+
+![img](MySQL实战45讲/2d1cfbbeb013b851a56390d38b5321f0.png)
+
+而在 5.6 之后，支持 Online DDL，tmp-file 是引擎自己生成的，通过 row log 实现了数据更新。alter 语句会在启动时获取 MDL 写锁，但是这个写锁在真正数据拷贝之前就退化成读锁了。
+
+copy 和 inplace：在 5.6 之后，tmp-file 是在存储引擎层生成的，对于 Server 层是透明的，因此是一个 in-place 操作；而在 5.6 之前，采用的则是 copy 方式，Server 层创建了临时表。DDL 过程如果是 Online 的，则一定是 inplace 的，反之不成立。
 
