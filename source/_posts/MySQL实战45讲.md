@@ -540,6 +540,8 @@ count(?) 操作实际执行情况：
 
 执行效率：count(字段) < count(主键id) < count(1) ≈ count(*)。
 
+
+
 ## 16 orderby 是怎么工作的
 
 假设存在表 t(id, city, name, age, adrr), 主索引是 id，二级索引是 city。现有如下需求：
@@ -592,3 +594,83 @@ select * from t where city=“苏州” order by name limit 100;
 ```
 
 然后在业务层使用归并排序即可。
+
+
+
+## 17 如何正确地显示随机消息
+
+假设存在表 words(id, word)，现在需要从其中随机选择 3 个单词，可以采用如下方式：
+
+```sql
+select word from words order by rand() limit 3;
+```
+
+对应的 explain 命令执行情况如下：
+
+![img](MySQL实战45讲/59a4fb0165b7ce1184e41f2d061ce350.png)
+
+在 Extra 字段中可以看到需要使用临时表，并且需要执行排序操作。
+
+在上一节中，**对于InnoDB表来说**，执行全字段排序会减少磁盘访问，因此会被优先选择。但是对于内存表，回表过程只是简单地根据数据行的位置，直接访问内存得到数据，根本不会导致多访问磁盘。此时 MySQL 就会选择 rowid 排序。
+
+上面的命令对应的执行情况如下：
+
+![img](MySQL实战45讲/2abe849faa7dcad0189b61238b849ffc.png)
+
+上面的 R 就是 random 产生的小数，W 是对应的 word。pos 实际上就是内存临时表中的每行记录的位置。
+
+在 MySQL 中，每个引擎提供了唯一标识数据行的信息：
+
++ 对于有主键的InnoDB表来说，这个rowid就是主键ID
++ 对于没有主键的InnoDB表来说，这个rowid就是由系统生成的
++ MEMORY引擎不是索引组织表，rowid 实际上就是数组的下标
+
+到这里，order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。
+
+如果内存临时表的大小超过了 tmp_table_size，那么内存临时表就会转变为磁盘临时表，磁盘临时表使用的引擎默认是InnoDB。
+
+此时采用的排序方式实际上是优先队列排序算法，而不是归并排序。对应执行流程：
+
+![img](MySQL实战45讲/e9c29cb20bf9668deba8981e444f6897.png)
+
+在上节中，语句
+
+```sql
+select city,name,age from t where city='杭州' order by name limit 1000 ;
+```
+
+执行时，并没有采用优先队列算法，这是因为 1000 行的 （name, rowid），超过了 sort_buffer_size 的大小，只能用归并排序。
+
+为了随机获取 3 个单词，需要对整个表进行排序，代价太大，可以使用以下代码序列：
+
+```sql
+select count(*) into @C from t;
+set @Y1 = floor(@C * rand());
+set @Y2 = floor(@C * rand());
+set @Y3 = floor(@C * rand());
+select * from t limit @Y1，1； //在应用代码里面取Y1、Y2、Y3值，拼出SQL后执行
+select * from t limit @Y2，1；
+select * from t limit @Y3，1；
+```
+
+上述代码总的扫描行数是 C+(Y1+1)+(Y2+1)+(Y3+1)，实际上还可以继续优化：
+
+```sql
+select id from t limit Ymin，(Ymax - Ymin);
+select * from t where id in (id1, id2, id3);
+```
+
+这样扫描的行数是 C + Ymax + 3。
+
+
+
+
+
+
+
+
+
+
+
+
+
