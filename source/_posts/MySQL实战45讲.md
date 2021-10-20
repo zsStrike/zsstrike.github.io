@@ -664,13 +664,81 @@ select * from t where id in (id1, id2, id3);
 
 
 
+## 18 为什么这些SQL语句逻辑相同，性能却差异巨大
 
+假设存在如下表：
 
+```sql
+mysql> CREATE TABLE `tradelog` (
+  `id` int(11) NOT NULL,
+  `tradeid` varchar(32) DEFAULT NULL,
+  `operator` int(11) DEFAULT NULL,
+  `t_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tradeid` (`tradeid`),
+  KEY `t_modified` (`t_modified`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
+现在有如下需求语句：
 
+```sql
+select count(*) from tradelog where month(t_modified)=7;
+```
 
+该语句并不会用到 t_modified 的树搜索功能，因为 t_modified 并不是按照 month 排序的。注意 MySQL 只是不用该索引的树搜索功能，还是会用到该索引，只是用该索引进行遍历而已。
 
+对索引字段做函数操作，可能会破坏索引值的有序性，因此优化器就决定放弃走树搜索功能。注意，即使有些函数不改变有序性，MySQL 仍然不会使用索引搜索功能，如：
 
+```sql
+select * from tradelog where id + 1 = 10000;
+```
 
+另外一个需求：
 
+```sql
+select * from tradelog where tradeid=110717;
+```
+
+在MySQL中，字符串和数字做比较的话，是将字符串转换成数字。上述语句等价于：
+
+```sql
+select * from tradelog where  CAST(tradid AS signed int) = 110717;
+```
+
+该语句同样会遍历索引。
+
+如果还存在以下表：
+
+```sql
+mysql> CREATE TABLE `trade_detail` (
+  `id` int(11) NOT NULL,
+  `tradeid` varchar(32) DEFAULT NULL,
+  `trade_step` int(11) DEFAULT NULL, /*操作步骤*/
+  `step_info` varchar(32) DEFAULT NULL, /*步骤信息*/
+  PRIMARY KEY (`id`),
+  KEY `tradeid` (`tradeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+且存在以下查询语句：
+
+```sql
+select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2; /*语句Q1*/
+```
+
+该语句执行流程如下：
+
+![img](MySQL实战45讲/8289c184c8529acea0269a7460dc62a9.png)
+
+第3步，是根据tradeid值到trade_detail表中查找条件匹配的行。
+
+该现象产生的原因是 tradeid 使用了不同的编码：utf8 和 utf8mb4。改写为以下语句即可：
+
+```sql
+select d.* from tradelog l , trade_detail d where 
+	d.tradeid=CONVERT(l.tradeid USING utf8) and l.id=2; 
+```
+
+总结而言，索引字段不能做函数操作，但是可以对索引字段的参数进行函数操作。
 
