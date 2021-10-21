@@ -742,3 +742,58 @@ select d.* from tradelog l , trade_detail d where
 
 总结而言，索引字段不能做函数操作，但是可以对索引字段的参数进行函数操作。
 
+
+
+## 19 为什么我只查一行的语句，也执行这么慢
+
+假设存在如下表：
+
+```sql
+mysql> CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `c` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+```
+
+该表中有 100000 条数据，且每条数据 id 和 c 相等。
+
+查询长时间不返回，如下列语句：
+
+```sql
+select * from t where id=1;
+```
+
++ 等待 MDL 锁：
+
+  ![img](MySQL实战45讲/742249a31b83f4858c51bfe106a5daca.png)
+
++ 等待 flush：
+
+  ![img](MySQL实战45讲/2bbc77cfdb118b0d9ef3fdd679d0a69c.png)
+
++ 等待行锁
+
+  ![img](MySQL实战45讲/3e68326b967701c59770612183277475.png)
+
++ 一致性读
+
+  ![img](MySQL实战45讲/84667a3449dc846e393142600ee7a2ff.png)
+
+  上述语句中 `select * from t where id=1` 会执行回退操作，以查找适合的版本，而第二个 select 语句只要读到最新值即可。
+
+  ![img](MySQL实战45讲/46bb9f5e27854678bfcaeaf0c3b8a98c.png)
+
+  上图中 -1 表示将前面版本的值减去 1 。
+
+问题：对于下列语句，是怎么加锁的，又是什么时候释放的？
+
+```sql
+begin;
+select * from t where c=5 for update;
+commit;
+```
+
+在 Read Committed 隔离级别下，会锁上聚簇索引中的所有记录；在 Repeatable Read 隔离级别下，会锁上聚簇索引中的所有记录，并且会锁上聚簇索引内的所有 GAP；
+
+在上面两个隔离级别的情况下，如果设置了 innodb_locks_unsafe_for_binlog 开启 semi-consistent read 的话，对于不满足查询条件的记录，MySQL 会提前放锁，不过加锁的过程是不可避免的。对于 c = 5 这一行的行锁，还是会等到commit的时候才释放的。
