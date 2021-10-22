@@ -797,3 +797,59 @@ commit;
 在 Read Committed 隔离级别下，会锁上聚簇索引中的所有记录；在 Repeatable Read 隔离级别下，会锁上聚簇索引中的所有记录，并且会锁上聚簇索引内的所有 GAP；
 
 在上面两个隔离级别的情况下，如果设置了 innodb_locks_unsafe_for_binlog 开启 semi-consistent read 的话，对于不满足查询条件的记录，MySQL 会提前放锁，不过加锁的过程是不可避免的。对于 c = 5 这一行的行锁，还是会等到commit的时候才释放的。
+
+
+
+## 20 幻读是什么，幻读有什么问题
+
+假设存在如下表：
+
+```sql
+CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `c` int(11) DEFAULT NULL,
+  `d` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `c` (`c`)
+) ENGINE=InnoDB;
+
+insert into t values(0,0,0),(5,5,5),
+(10,10,10),(15,15,15),(20,20,20),(25,25,25);
+```
+
+如果执行下列语句：
+
+```sql
+begin;
+select * from t where d=5 for update;
+commit;
+```
+
+如果只在 id = 5 这一行加锁，其他行不加锁的话，则存在以下场景：
+
+![img](MySQL实战45讲/5bc506e5884d21844126d26bbe6fa68b.png)
+
+即 Session A 发生了幻读，并且还违背了 Session A 对所有 d=5 行加锁的语义。
+
+如果把扫描过程中碰到的行，也都加上写锁，再来看看执行效果：
+
+![img](MySQL实战45讲/34ad6478281709da833856084a1e3447.png)
+
+此时，虽然可以防止 Session B 对数据的更新，但是还是不能防止幻读现象。
+
+由此，引入间隙锁（Gap Lock），和间隙锁存在冲突的，是往这个间隙中插入一个记录的操作，间隙锁之间并不存在冲突，如下图，Session A 和 Session B 之间不会存在冲突：
+
+![img](MySQL实战45讲/7c37732d936650f1cda7dbf27daf7498.png)
+
+间隙锁的引入，会带来一些新的问题，可能会导致语句锁住更大的范围，影响并发度。
+
+![img](MySQL实战45讲/df37bf0bb9f85ea59f0540e24eb6bcbe.png)
+
+间隙锁是在可重复读级别下才会生效的，如果设置隔离级别为度提交的话，就没有间隙锁了。但是这样的话需要把 binlog 设置为 row，这也是不少公司使用的配置组合。
+
+
+
+
+
+
+
