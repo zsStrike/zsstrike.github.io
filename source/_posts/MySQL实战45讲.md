@@ -1,6 +1,10 @@
+---
 title: MySQL实战45讲
 date: 2021-09-19 15:56:04
 tags: ["MySQL"]
+---
+
+
 
 本文主要是对 MySQL实战 45 讲中内容的一些总结，以备查阅。
 
@@ -933,6 +937,61 @@ insert into t values(0,0,0),(5,5,5),
 ![img](MySQL实战45讲/3a7578e104612a188a2d574eaa3bd81e.png)
 
 由于是 desc，加锁顺序从大到小，A 在索引 c 上加锁（5，25），在主键上加行锁 10，15 和 20。
+
+
+
+## 22 MySQL有哪些“饮鸩止渴”提高性能的方法
+
+短连接风暴：如果使用的是短连接，在业务高峰期的时候， 可能出现连接数突然暴增的状态。有以下方法：
+
++ 先处理掉那些占着连接但是不工作的线程，即 kill 掉 sleep 状态的会话
++ 减少连接过程的消耗，可以让连接跳过权限检验阶段
++ 增加 max_connections 参数，但是可能会让 CPU 浪费在权限验证等逻辑上
+
+慢查询性能问题：
+
++ 索引没有设计好：先在备库上创建相应索引，然后主备切换，接着为原来主库加上索引
+
++ 语句没写好：可以创建重写规则：
+
+  ```sql
+  insert into query_rewrite.rewrite_rules(pattern, replacement, pattern_database) 
+  values ("select * from t where id + 1 = ?", "select * from t where id = ? - 1", "db1");
+  
+  call query_rewrite.flush_rewrite_rules();
+  ```
+
++ MySQL选错了索引：通过给查询语句加上 force index
+
+QPS 突增问题：
+
++ 由全新业务的bug导致：从数据库白名单删去
++ 新功能使用的是单独的数据库用户：删除用户帐号
++ 新增的功能跟主体功能是部署在一起的：使用查询重写，把压力最大的 SQL 语句重写为 select 1 返回
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
