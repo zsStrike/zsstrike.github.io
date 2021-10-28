@@ -1073,6 +1073,10 @@ insert into t values(10,10, now());
 
 可以通过在 binlog 中插入 server_id 来判断该 binlog 是由谁产生的，从而解决循环复制问题。
 
+但是如果使用命令 set global server_id 修改 server_id，或者下图三节点情况，会引发循环复制问题，
+
+![image-20211124164115615](MySQL实战45讲/image-20211124164115615.png)
+
 
 
 
