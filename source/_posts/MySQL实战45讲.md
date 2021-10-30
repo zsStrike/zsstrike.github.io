@@ -1126,6 +1126,41 @@ insert into t(c) values(1),(2),(3);
 
 
 
+## 26 备库为什么会延迟好几个小时
+
+如果备库执行日志的速度持续低于主库生成日志的速度，那这个延迟就有可能成了小时级别，为此备库引入了并行复制能力。
+
+备库多线程复制模型：
+
+![image-20211125140728356](MySQL实战45讲/image-20211125140728356.png)
+
+此时，coordinator 就是原来的sql_thread, 不过现在它不再直接更新数据了，只负责读取中转日志和分发事务。真正更新日志的，变成了worker线程。而work线程的个数，就是由参数slave_parallel_workers决定的。
+
+由于 CPU 调度，分发顺序可能和完成顺序不同，因此，在 coordinator 分发任务的时候，需要满足：
+
++ 不能造成更新覆盖。这就要求更新同一行的两个事务，必须被分发到同一个worker中
++ 同一个事务不能被拆开，必须放到同一个worker中
+
+MySQL 5.6的并行复制策略：支持粒度是按库并行，将不同的 DB 里面的事务分发给不同的 worker，需要平衡好各个 DB 的访问。
+
+MySQL 5.7的并行复制策略：提供了 slave-parallel-type 参数用来控制复制策略：
+
++ DATABASE：使用按库并行策略
+
++ LOGICAL_CLOCK：可以通过 binlog-transaction-dependency-tracking 参数来设置：
+
+  + COMMIT_ORDER：同时处于 redo log prepare 状态的事务，在备库执行时是可以并行的；处于 prepare 状态的事务和处于 commit 状态的事务之间，在备库执行的时候也是可以并行的，根据同时进入prepare和commit来判断是否可以并行的策略
+  + WRITESET：如果两个事务没有操作相同的行，也就是说它们的writeset没有交集，就可以并行
+  + WRITESET_SESSION，是在WRITESET的基础上多了一个约束，即在主库上同一个线程先后执行的两个事务，在备库执行的时候，要保证相同的先后顺序
+
+  
+
+
+
+## 
+
+
+
 
 
 
