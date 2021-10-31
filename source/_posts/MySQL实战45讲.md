@@ -1157,11 +1157,59 @@ MySQL 5.7的并行复制策略：提供了 slave-parallel-type 参数用来控�
 
 
 
-## 
+## 27 主库出问题了，从库怎么办
 
+互联网应用场景是读多写少，数据库架构首先可能面临的是读性能的问题，可以采用一主多从架构来缓解该情况：
 
+![image-20211125145840027](MySQL实战45讲/image-20211125145840027.png)
 
+其中 A 和 A‘ 互为主备，BCD 是A 的从库。在主库 A 发生故障后，BCD 需要修改 master 为 A’ 节点。
 
+基于位点的主备切换：当需要修改 B 设置为 A‘ 从库的时候，需要执行 change master 命令：
+
+```sql
+CHANGE MASTER TO 
+MASTER_HOST=$host_name 
+MASTER_PORT=$port 
+MASTER_USER=$user_name 
+MASTER_PASSWORD=$password 
+MASTER_LOG_FILE=$master_log_name 
+MASTER_LOG_POS=$master_log_pos  
+```
+
+其中，MASTER_LOG_FILE 和 MASTER_LOG_POS 表示需要从主库的 master_log_name文件的master_log_pos这个位置的日志继续同步，这个位置就是我们所说的同步位点。
+
+一种获取同步位点的方法是这样的：
+
+1. 等待新主库A’把中转日志（relay log）全部同步完成；
+2. 在A’上执行show master status命令，得到当前A’上最新的File 和 Position；
+3. 取原主库A故障的时刻T；
+4. 用mysqlbinlog工具解析A’的File，得到T时刻的位点。
+
+这个位点并不精确，因为 A 故障的时刻 T 可能也已经将 binglog 传给 A‘ 和 BCD 了，如果用上述同步位点，可能会造成主键冲突等错误，为此需要先主动跳过这些错误：
+
++ 主动跳过一个事务：`set global sql_slave_skip_counter=1;`
++ 设置跳过指定的错误：`ste slave_skip_errors = "1032,1062"`，分别表示跳过唯一键冲突和删除找不到指定行
+
+基于 GTID 的主备切换：GTID 是全局全局事务 ID，被定义为`GTID=source_id:transaction_id`，可以通过session变量 gtid_next 来为提交的事务分配 ID。在该模式下，当需要修改 B 设置为 A‘ 从库的时候，需要执行 change master 命令：
+
+```sql
+CHANGE MASTER TO 
+MASTER_HOST=$host_name 
+MASTER_PORT=$port 
+MASTER_USER=$user_name 
+MASTER_PASSWORD=$password 
+master_auto_position=1 
+```
+
+最后一行表示使用 GTID 协议，这样我们就无需指定同步位点了。假设在该时刻下，实例A’的GTID集合记为set_a，实例B的GTID集合记为set_b，对应的切换逻辑：
+
+1. 实例B指定主库A’，基于主备协议建立连接。
+2. 实例B把set_b发给主库A’。
+3. 实例A’算出set_a与set_b的差集，也就是所有存在于set_a，但是不存在于set_b的GITD的集合，判断A’本地是否包含了这个差集需要的所有binlog事务。
+   a. 如果不包含，表示A’已经把实例B需要的binlog给删掉了，直接返回错误；
+   b. 如果确认全部包含，A’从自己的binlog文件里面，找出第一个不在set_b的事务，发给B；
+4. 之后就从这个事务开始，往后读文件，按顺序取binlog发给B去执行。
 
 
 
