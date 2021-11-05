@@ -1296,6 +1296,48 @@ rm 删除数据：只要集群上还有其他节点，就可以选出新的主�
 
 
 
+## 32 为什么还有kill不掉的语句
+
+MySQL 中有两种 kill 命令，`kill query thd_id` 和 `kill [connection] thd_id`。前者用于终于这个线程中正在执行的语句，后者用于断开这个线程的连接，当然如果有语句正在执行，则先停止正在执行的语句。
+
+在收到 `kill query thread_id_B` 命令后，处理 kill 命令线程实际上需要：
+
+1. 把session B的运行状态改成 THD::KILL_QUERY
+2. 给session B的执行线程发一个信号，用于帮助 B 跳出等待，来响应状态 THD::KILL_QUERY 
+
+![img](MySQL实战45讲/17f88dc70c3fbe06a7738a0ac01db4d0.png)
+
+如果 set global innodb_thread_concurrency=2，然后执行该序列：
+
+![img](MySQL实战45讲/32e4341409fabfe271db3dd4c4df696e.png)
+
+由于 C 在等待行锁的时候使用 pthread_cond_timedwait，其等待逻辑是每10毫秒判断一下是否可以进入InnoDB执行，如果不行，就调用nanosleep函数进入sleep状态。尽管发送了信号给 C，但是其只是判断能否跳出 sleep 阶段，最终没有执行对应的响应函数，从而导致 kill query 失效。
+
+在收到 `kill connection` 命令时：
+
+1. 线程状态设置为KILL_CONNECTION
+2. 关掉线程的网络连接
+
+此时，如果调用 show processlist 时， C 的状态将是 killed 状态。
+
+kill 无效的情况分为：
+
++ 线程没有执行到判断线程状态的逻辑：如上述并发连接设置为 2 时的情形
++ 终止逻辑耗时较长：如超大事务执行期间被kill，需要回滚；大查询回滚；DDL命令执行到最后阶段被kill
+
+关于客户端的误解：
+
++ 如果库里面的表特别多，连接就会很慢：当使用默认参数连接的时候，MySQL客户端会提供一个本地库名和表名补全的功能，该功能在表很多的时候就会耗时，这是客户端慢，可以加参数 `-A` 关闭补全
++ `-quick` 参数：跳过自动补全；不缓存，服务器发送一个响应，客户端处理一个，而不是先缓存服务器所有响应结果；不会把执行命令记录到本地的命令历史文件
+
+
+
+
+
+
+
+
+
 
 
 
