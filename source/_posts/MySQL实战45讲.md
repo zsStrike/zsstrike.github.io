@@ -1363,15 +1363,69 @@ InnoDB 采用 Buffer Pool 来进行查询加速，并且逐出策略采用的是
 
 
 
+## 34 到底可不可以使用join
 
+假设存在一下表和对应的数据：
 
+```sql
+CREATE TABLE `t2` (
+  `id` int(11) NOT NULL,
+  `a` int(11) DEFAULT NULL,
+  `b` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `a` (`a`)
+) ENGINE=InnoDB;
 
+delimiter ;;
+create procedure idata()
+begin
+  declare i int;
+  set i=1;
+  while(i<=1000)do
+    insert into t2 values(i, i, i);
+    set i=i+1;
+  end while;
+end;;
+delimiter ;
+call idata();
 
+create table t1 like t2;
+insert into t1 (select * from t2 where id<=100)
+```
 
+Index Nested-Loop Join：下列语句使用 t1 作为驱动表，执行器对表 t1 进行全表扫描，每次取出数据后对表 t2 进行树搜索，然后合并查询结果。驱动表选择小表的时间成本更低。
 
+```sql
+select * from t1 straight_join t2 on (t1.a=t2.a);
+```
 
+Simple Nested-Loop Join：下列语句由于 t2 上面不存在 b 索引，每次从 t1 上取出一行的时候，都需要对 t2 进行一次全表扫描，太笨重，MySQL 中使用 Block Nested-Loop Join。
 
+```sql
+select * from t1 straight_join t2 on (t1.a=t2.b);
+```
 
+Block Nested-Loop Join：不再是每次取出 t1 中一行数据的时候，都对 t2 进行一次全表扫描，而是先将驱动表数据放入 join_buffer 中，然后遍历 t2 以查找满足条件的结果。对应流程：
+
+![img](MySQL实战45讲/15ae4f17c46bf71e8349a8f2ef70d573.jpg)
+
+如果 join_buffer 太小不足以容纳 t1 全部数据，则分批加载 t1 的数据到 join buffer 中，重复上述过程即可。此时，应该选择小表当驱动表。
+
+小表指代的是将两个表按照各自的条件过滤，过滤完成之后，计算参与join的各个字段的总数据量，数据量小的那个表，就是“小表”，应该作为驱动表。
+
+```sql
+select * from t1 straight_join t2 on (t1.b=t2.b) where t2.id<=50;
+select * from t2 straight_join t1 on (t1.b=t2.b) where t2.id<=50;
+```
+
+应该选择 t2 作为驱动表，第二条语句效率更高。
+
+```sql
+select t1.b,t2.* from  t1  straight_join t2 on (t1.b=t2.b) where t2.id<=100;
+select t1.b,t2.* from  t2  straight_join t1 on (t1.b=t2.b) where t2.id<=100;
+```
+
+由于 t1 只需要将 b 加载到 join buffer 中，t1 应该作为驱动表。
 
 
 
