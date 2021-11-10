@@ -1503,11 +1503,70 @@ select v from ht where k >= M order by t_modified desc limit 100;
 
 
 
+## 37 什么时候会使用内部临时表
 
+假设存在以下表和数据：
 
+```sql
+create table t1(id int primary key, a int, b int, index(a));
+delimiter ;;
+create procedure idata()
+begin
+  declare i int;
 
+  set i=1;
+  while(i<=1000)do
+    insert into t1 values(i, i, i);
+    set i=i+1;
+  end while;
+end;;
+delimiter ;
+call idata();
+```
 
+union 执行流程：
 
+```sql
+(select 1000 as f) union (select id from t1 order by id desc limit 2);
+```
+
+以上语句执行过程将会使用到临时表（Using temporary），临时表主键是 f，可以用于唯一性约束：
+
+![image-20211128141852193](MySQL实战45讲/image-20211128141852193.png)
+
+如果上面查询使用的 `union all` ，没有去重的语义，这时就不需要临时表了，因为执行器会依次执行子查询，得到的结果直接作为结果集的一部分，发给客户端。
+
+group by 执行流程：
+
+```sql
+select id%10 as m, count(*) as c from t1 group by m;
+```
+
+以上语句将会使用到临时表(m, c)，其中 m 表示 id%10，c 表示 count，每次遍历叶子节点的时候插入临时表中，最后将会排序并且返回结果：
+
+![image-20211128142301133](MySQL实战45讲/image-20211128142301133.png)
+
+如果不需要对结果进行排序，可以添加 `order by null` 子句，这样就能跳过排序阶段，直接返回临时表中的数据。
+
+上面用到的是内存临时表，对应大小参数 `tmp_table_size` ，如果在执行那个过程中发现内存临时表空间不足，这时就会转换为磁盘临时表（默认使用 InnoDB 引擎），对性能有损失。
+
+group by 优化方法：
+
++ 索引：如果 group by 的对象在扫描过程中已经有序了，那么该语句只要执行一次扫描就行了，可以通过建立 generated column 来实现列数据的关联更新：
+
+  ```sql
+  alter table t1 add column z int generated always as(id % 100), add index(z);
+  ```
+
++ 直接排序：如果数据量很大，超过了 `tmp_table_size` ，那么就需要建立对应的磁盘临时表，这个过程对性能有损失。可以用 `SQL_BIG_RESULT` 来告诉优化器，直接使用磁盘临时表，但是优化器觉得磁盘临时表是B+树存储，存储效率不如数组来得高，将会直接使用数组来存储。
+
+  ```sql
+  select SQL_BIG_RESULT id%100 as m, count(*) as c from t1 group by m;
+  ```
+
+  ![image-20211128143226935](MySQL实战45讲/image-20211128143226935.png)
+
+  
 
 
 
