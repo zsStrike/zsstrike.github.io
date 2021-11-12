@@ -1631,7 +1631,57 @@ t1 的数据组织形式就变为这样：
 
 
 
+## 39 自增主键为什么不是连续的
 
+假设存在以下表和数据：
+
+```sql
+CREATE TABLE `t` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `c` int(11) DEFAULT NULL,
+  `d` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `c` (`c`)
+) ENGINE=InnoDB;
+```
+
+自增值的保存：MyISAM引擎的自增值保存在数据文件中；InnoDB引擎的自增值，保存在内存里，并且到了MySQL 8.0版本后，才有了“自增值持久化”的能力，对于之前的版本，在重启后则需要查找 max(id)。
+
+自增值修改机制：如果要插入的值大于等于当前自增值，新的自增值就是“准备插入的值+1”，否则，自增值不变。
+
+自增值修改时机：在真正执行插入数据的操作之前。
+
+自增值不连续的原因：
+
++ 唯一键冲突：假设表中已经存在 (1, 1, 1)，如果再插入 （null, 1, 1），自增值先修改为 3，但是之后该插入因为 c 唯一键冲突
+
++ 事务回滚：
+
+  ```sql
+  insert into t values(null,1,1);
+  begin;
+  insert into t values(null,2,2);
+  rollback;
+  insert into t values(null,2,2);
+  // 插入的行是(3,2,2)
+  ```
+
+  自增值的回退会导致下一次分配需要做额外工作，如查询数据中是否存在该 id，或者修改修改自增 id 锁为事务级别，这样又会带来并发性能的下降。
+
++ 批量插入数据：包含的语句类型是insert … select、replace … select和load data语句，这时会先分配1个自增值，2个自增值，4个自增值...最后一次插入如果没有用完也会被浪费掉。
+
+  ```sql
+  insert into t values(null, 1,1);
+  insert into t values(null, 2,2);
+  insert into t values(null, 3,3);
+  insert into t values(null, 4,4);
+  create table t2 like t;
+  insert into t2(c,d) select c,d from t;
+  insert into t2 values(null, 5,5);
+  // 插入的行是(8, 5, 5)
+  ```
+
+  
 
 
 
