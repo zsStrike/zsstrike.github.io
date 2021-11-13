@@ -1677,29 +1677,83 @@ CREATE TABLE `t` (
   insert into t values(null, 4,4);
   create table t2 like t;
   insert into t2(c,d) select c,d from t;
+  // 对表t的所有记录和间隙加锁，否则主备数据可能不一致
   insert into t2 values(null, 5,5);
   // 插入的行是(8, 5, 5)
   ```
 
-  
 
 
 
+## 40 insert语句的锁为什么这么多
+
+假设存在以下表和执行语句：
+
+```sql
+CREATE TABLE `t` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `c` int(11) DEFAULT NULL,
+  `d` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `c` (`c`)
+) ENGINE=InnoDB;
+
+insert into t values(null, 1,1);
+insert into t values(null, 2,2);
+insert into t values(null, 3,3);
+insert into t values(null, 4,4);
+
+create table t2 like t
+```
+
+假设在 RR 隔离级别下，binlog_format=statement 时执行：
+
+```sql
+insert into t2(c,d) select c,d from t;
+```
+
+这个语句需要对表 t 的所有行和间隙加锁，原因如下：
+
+![img](MySQL实战45讲/33e513ee55d5700dc67f32bcdafb9386.png)
+
+实际的执行效果是，如果session B先执行，由于这个语句对表t主键索引加了(-∞,1]这个next-key lock，会在语句执行完成后，才允许session A的insert语句执行。
+
+但如果没有锁的话，就可能出现session B的insert语句先执行，但是后写入binlog的情况。binglog 情况如下：
+
+```sql
+insert into t values(-1,-1,-1);
+insert into t2(c,d) select c,d from t;
+```
+
+这个语句到了备库执行的话，就会出现主备不一致。
+
+按需加锁：并不是所有的 `insert ... select` 语句都会对目标表锁全表，而是只锁住需要访问的资源。
+
+```sql
+insert into t2(c,d)  (select c+1, d from t force index(c) order by c desc limit 1);
+```
+
+这个语句的加锁范围，就是表t索引c上的(4,supremum]这个next-key lock和主键索引上id=4这一行。
+
+唯一键冲突：
+
+![img](MySQL实战45讲/83fb2d877932941b230d6b5be8cca6ca.png)
+
+session A执行的insert语句，发生主键冲突的时候，并不只是简单地报错返回，还在冲突的索引上加了锁，持有索引c上的(5,10]共享next-key lock（读锁）。
+
+![img](MySQL实战45讲/63658eb26e7a03b49f123fceed94cd2d.png)
+
+该过程加锁顺序如下，其加锁涉及到 next-lock 退化：
+
+![img](MySQL实战45讲/3e0bf1a1241931c14360e73fd10032b8.jpg)
+
+`insert into … on duplicate key update`：插入一行数据，如果碰到唯一键约束，就执行后面的更新语句。
+
+![img](MySQL实战45讲/5f384d6671c87a60e1ec7e490447d702.png)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+## 
 
 
 
