@@ -1753,15 +1753,49 @@ session A执行的insert语句，发生主键冲突的时候，并不只是简�
 
 
 
-## 
+## 41 怎么最快地复制一张表
 
+`insert ... select`：在源表比较小的时候可以实现两表之间数据拷贝。
 
+mysqldump：将数据导出成一组 INSERT 语句：
 
+```sql
+mysqldump -h$host -P$port -u$user 
+--add-locks=0 --no-create-info --single-transaction  --set-gtid-purged=OFF 
+db1 t --where="a>900" --result-file=/client_tmp/t.sql
+```
 
+之后，通过下列语句进行数据导入：
 
+```sql
+mysql -h127.0.0.1 -P13000  -uroot db2 -e "source /client_tmp/t.sql"
+```
 
+导出 CSV 文件：下列语法将会直接将结果导出到服务端本地目录：
 
+```sql
+select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
+```
 
+之后，通过下列语句导入数据：
 
+```sql
+load data infile '/server_tmp/t.csv' into table db2.t;
+```
 
+上述语句执行流程如下：
 
+![image-20211129100649857](MySQL实战45讲/image-20211129100649857.png)
+
+显然，load data 语句并不会引发主备不一致的状态。
+
+另外，load data 不加 local 的话，是读取服务端的文件，加上 local，则是读取的是客户端的文件；上述方法并不会导出表结构文件，如果需要同时导出表结构定义文件和csv数据文件，可以借助 mysqldump 工具生成表结构：
+
+```sql
+mysqldump -h$host -P$port -u$user ---single-transaction  
+--set-gtid-purged=OFF db1 t --where="a>900" --tab=$secure_file_priv
+```
+
+物理拷贝方法：
+
+![img](MySQL实战45讲/2407737651cdc1f5d6ade4d8907e7c05.jpg)需要注意，在第3步执行完flsuh table命令之后，db1.t整个表处于只读状态，直到执行unlock tables命令后才释放读锁。
