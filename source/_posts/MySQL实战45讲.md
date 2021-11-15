@@ -1799,3 +1799,20 @@ mysqldump -h$host -P$port -u$user ---single-transaction
 物理拷贝方法：
 
 ![img](MySQL实战45讲/2407737651cdc1f5d6ade4d8907e7c05.jpg)需要注意，在第3步执行完flsuh table命令之后，db1.t整个表处于只读状态，直到执行unlock tables命令后才释放读锁。
+
+
+
+## 42 grant之后要跟着flushprivileges吗
+
+![img](MySQL实战45讲/d1885ed1ly1g0ab2twmjaj21gs0js78u.jpg)
+
+grant语句会同时修改数据表和内存，判断权限的时候使用的是内存数据，故不需要 flush privileges 命令。
+
+由于全局权限会保存到连接线程对象中，之后在这个连接中执行的语句，所有关于全局权限的判断，都直接使用线程对象内部保存的权限位，因此，修改全局权限对已存在的连接不生效。
+
+而在 db 权限，表权限和列权限中，由于执行语句时是访问对应内存存储，对所有连接立即生效。
+
+另外，不使用标准的语法 grant 和 revoke 语句操作权限，而是使用 DML 操作系统权限表（不规范的操作），也需要 flush privileges 命令：
+
+![img](MySQL实战45讲/9031814361be42b7bc084ad2ab2aa3ec.png)
+
