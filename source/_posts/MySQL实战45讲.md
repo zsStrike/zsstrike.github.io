@@ -1816,3 +1816,75 @@ grant语句会同时修改数据表和内存，判断权限的时候使用的是
 
 ![img](MySQL实战45讲/9031814361be42b7bc084ad2ab2aa3ec.png)
 
+
+
+## 43 要不要使用分区表
+
+常见的分区方式有 range，hash 和 list 分区，下面的表中采用了 range 分区：
+
+```sql
+CREATE TABLE `t` (
+  `ftime` datetime NOT NULL,
+  `c` int(11) DEFAULT NULL,
+  KEY (`ftime`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+PARTITION BY RANGE (YEAR(ftime))
+(PARTITION p_2017 VALUES LESS THAN (2017) ENGINE = InnoDB,
+ PARTITION p_2018 VALUES LESS THAN (2018) ENGINE = InnoDB,
+ PARTITION p_2019 VALUES LESS THAN (2019) ENGINE = InnoDB,
+PARTITION p_others VALUES LESS THAN MAXVALUE ENGINE = InnoDB);
+insert into t values('2017-4-1',1),('2018-4-1',1);
+```
+
+ 且在磁盘中存在以下文件：
+
+![img](MySQL实战45讲/06f041129783533de9c75580f9decdf5.png)
+
+对于引擎层来说，这是4个表，但是对于Server层来说，这是1个表。
+
+引擎层行为：
+
+![img](MySQL实战45讲/d28d6ab873bd8337d88812d45b9266c7.png)
+
+如果是按照一个表来看的话，加锁范围是 （2017-4-1，2018-4-1），那么 B 的第一条语句应该被 block，从而反推出引擎层是将其当作 4 个表来看的。
+
+Server 层行为：
+
+![img](MySQL实战45讲/0eca5a3190161e59ea58493915bd5e81.png)
+
+如果按照多个表来看的话，只会获取 p_2018 的 MDL 锁，那么 B 的第一条语句应该执行成功，从而反推出Server层是将其当作 1 个表来看的。
+
+使用分区表的注意点：
+
++ MySQL在第一次打开分区表的时候，需要访问所有的分区
++ 在Server层，认为这是同一张表，因此所有分区共用同一个MDL锁
++ 在引擎层，认为这是不同的表，因此MDL锁之后的执行过程，会根据分区表规则，只访问必要的分区
+
+应用场景：对业务透明，很方便地清理历史数据
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
