@@ -208,6 +208,39 @@ InnoDB 存储引擎：
 
 
 
+## 05 分页场景
+
+假设存在表 t_record(id, age, name)，id 上存在主索引，age 上存在辅助索引，下列语句
+
+```sql
+select * from t_record where age > 10 offset 10000 limit 10;
+```
+
+在第一次执行的时候很慢，在第二次有了缓存之后，才会变快。
+
+对于 MySQL，上述语句会使用 age 上的索引，首先找到满足 age > 10 的第一个数据，然后向后遍历 10000 项数据，并且对每一项数据，都会进行回表操作，即使我们不需要这些数据。这样的话引入了大量的随机 IO，自然速度变慢。
+
+分页性能问题优化：
+
++ 产品上绕过，只提供上一页和下一页功能不需要回表，并且没有 offset
+
+  ```sql
+  select * from t_record where id > last_id  limit 10;
+  ```
+
++ 使用覆盖索引：不需要进行额外的回表操作
+
+  ```sql
+  select * from t_record id in
+  (select id from t_record where age > 10 offset 10000 limit 10）;
+  ```
+
+
+
+
+
+
+
 
 
 
