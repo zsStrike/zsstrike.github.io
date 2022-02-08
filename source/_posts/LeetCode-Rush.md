@@ -60,6 +60,7 @@ tags: ["Algorithm"]
 + 最大矩形：先统计左边 1 的个数，再使用直方图面积法求解
 + 课程表 III：给定 [dur, ddl]，求能修读的最大课程数目，使用贪心算法实现
 + 最长重复子串：使用字符串哈希来检查相同的字符串是否存在，提高效率
++ 寻找最近的回文数：给定一个数字，返回和其相差绝对值最小的回文数，附近回文数主要分为 5 类
 
 ## 数据结构设计问题
 
@@ -175,5 +176,4 @@ tags: ["Algorithm"]
 + `List<Integer>` 到 `int[]` 类型的转换不能直接使用 toArray，可以借助流：`list.stream().mapToInt(Integer.intValue).toArray()`
 + 想要对自定义类实现排序，要么实现 `Comparable<T>` 接口，重写 `compareTo` 方法，或者是排序的时候传入一个 `Comparator<T>` 对象，重写 `compare` 方法
 + 想要对 `int[]` 类型进行降序排序，不能直接用 `Arrays.sort`，其只对 `T[]` 提供自定义比较器，可以使用流操作来实现：`Arrays.stream(arr).boxed().sorted((a, b) -> b - a).mapToInt(Integer::intValue).toArray()`
-+ 在 Java 设计中 Stack 继承自 Vector，这是一种错误的设计，应该使用组合而不是继承关系。官方推荐写法：
-  `Deque<Integer> stack = new ArrayDeque<>()`
++ 在 Java 设计中 Stack 继承自 Vector，这是一种错误的设计，应该使用组合而不是继承关系。官方推荐写法：`Deque<Integer> stack = new ArrayDeque<>()`
