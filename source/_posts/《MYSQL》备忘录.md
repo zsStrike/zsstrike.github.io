@@ -382,6 +382,15 @@ MyISAM 引擎和 InnoDB 引擎：执行 count(*) 时，其直接返回表的元�
 
 
 
+## 13 MySQL 死锁避免
+
+多个客户端同时对资源加锁，就可能存在死锁现象，MySQL 中死锁避免方法有：
+
++ 设置事务等待锁的超时时间：innodb_lock_wait_timeout
++ 开启主动死锁检测：innodb_deadlock_detect
+
+
+
 
 
 
