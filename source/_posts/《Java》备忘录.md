@@ -71,9 +71,85 @@ switch：从 Java 7 开始，支持 String 对象（对应的 hashcode ），但
   + 一个类只能继承一个抽象类，但是可以实现多个接口
   + 接口的字段只能是 static 和 final ，成员（字段和方法）只能是 public
 
+super：
 
++ 访问父类的构造函数，需要放到子类构造函数第一行
++ 访问父类的成员
 
+重写和重载：
 
++ 重写：存在于继承体系中，为了满足里式替换原则，需要满足
+  + 子类方法的访问权限必须大于等于父类方法
+  + 子类方法的返回类型必须是父类方法返回类型或为其子类型
++ 重载：存在于同一个类中，指方法名相同，但是参数类型，个数，顺序至少有一个不同，应该注意的是，返回值不同，其它都相同不算是重载
+
+Object 通用方法：getClass，hashCode，equals，clone，toString，notify，notifyAll，wait，finalize
+
+equals 方法实现：
+
++ 检查是否为同一个对象的引用，如果是直接返回 true
++ 检查是否是同一个类型，如果不是，直接返回 false
++ 将 Object 对象进行转型
++ 判断每个关键域是否相等
+
+hashCode：用于返回对象的哈希值，通常将每个字段看作是 R 进制中的某一位，R 一般取 31
+
+clone：是 Object 类的 protected 方法，并不是 public，如果想要重写该方法，还需要实现 Cloneable 空接口。分为浅拷贝和深拷贝两种方式，可以使用更加安全的拷贝构造函数来拷贝一个对象
+
+final：
+
++ 修饰数据时，表示数据是常量，对于引用类型，只是使其引用不变
++ 修饰方法时，表示方法不能被重写，private 方法隐式地指定为 final
++ 修饰类时，表示类不可被继承
+
+static：
+
++ 静态变量：类变量，所有实例共享静态变量
++ 静态方法：在类加载的时候就存在了，不能是抽象方法，不能包含 this 和 super
++ 静态语句块：类初始化时运行一次
++ 静态内部类：非静态内部类依赖于外部类的实例，而静态内部类不需要
++ 静态导包：不用指定类名就可以使用方法，但是可读性降低
++ 初始化顺序：静态变量和静态语句块优先于实例变量和普通语句块，静态变量和静态语句块的初始化顺序取决于它们在代码中的顺序。在存在继承的情况下：
+  + 父类(静态变量、静态语句块)
+  + 子类(静态变量、静态语句块)
+  + 父类(实例变量、普通语句块)
+  + 父类(构造函数)
+  + 子类(实例变量、普通语句块)
+  + 子类(构造函数)
+
+Java 7 版本新特性：
+
+1. Strings in Switch Statement
+2. Type Inference for Generic Instance Creation
+3. Multiple Exception Handling
+4. Support for Dynamic Languages
+5. Try with Resources
+6. Java nio Package
+7. Binary Literals, Underscore in literals
+8. Diamond Syntax
+
+Java 8 版本新特性：
+
+1. Lambda Expressions
+2. Pipelines and Streams
+3. Date and Time API
+4. Default Methods
+5. Type Annotations
+6. Nashhorn JavaScript Engine
+7. Concurrent Accumulators
+8. Parallel operations
+9. PermGen Error Removed
+
+Java 和 C++ 区别：
+
++ Java 是纯粹的面向对象语言，C++ 既支持面向对象也支持面向过程
++ Java 通过虚拟机从而实现跨平台特性，但是 C++ 依赖于特定的平台
++ Java 没有指针，它的引用可以理解为安全指针，而 C++ 具有和 C 一样的指针
++ Java 支持自动垃圾回收，而 C++ 需要手动回收
++ Java 不支持多重继承，只能通过实现多个接口来达到相同目的，而 C++ 支持多重继承
++ Java 不支持操作符重载，虽然可以对两个 String 对象支持加法运算，但是这是语言内置支持的操作，不属于操作符重载，而 C++ 可以
++ Java 的 goto 是保留字，但是不可用，C++ 可以使用 goto
++ Java 不支持条件编译，C++ 通过 #ifdef #ifndef 等预处理命令从而实现条件编译
 
 
 
