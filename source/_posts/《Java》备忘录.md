@@ -147,9 +147,85 @@ Java 和 C++ 区别：
 + Java 没有指针，它的引用可以理解为安全指针，而 C++ 具有和 C 一样的指针
 + Java 支持自动垃圾回收，而 C++ 需要手动回收
 + Java 不支持多重继承，只能通过实现多个接口来达到相同目的，而 C++ 支持多重继承
-+ Java 不支持操作符重载，虽然可以对两个 String 对象支持加法运算，但是这是语言内置支持的操作，不属于操作符重载，而 C++ 可以
++ Java 不支持操作符重载，而 C++ 可以
 + Java 的 goto 是保留字，但是不可用，C++ 可以使用 goto
 + Java 不支持条件编译，C++ 通过 #ifdef #ifndef 等预处理命令从而实现条件编译
+
+
+
+## 面试合集
+
++ Java 中应该使用什么数据类型来代表价格？
+
+  如果不是特别关心内存和性能的话，使用 BigDecimal，否则使用预定义精度的 double 类型
+
++ 怎么将 byte 转换为 String？
+
+  使用 new String(byte[] bytes) 创建，注意需要使用正确的编码 
+
++ Java 中怎样将 bytes 转换为 long 类型？
+
+  先将其转换为 String，再使用 Long.parseLong
+
++ 存在两个类，B 继承 A，C 继承 B，我们能将 B 转换为 C 么? 如 C = (C) B；
+
+  可以，向下转型，不安全，容易出现转型异常
+
++ 哪个类包含 clone 方法? 是 Cloneable 还是 Object？
+
+  Object，Cloneable 只是一个标识性接口，不包含任何方法
+
++ a = a + b 与 a += b 的区别？
+
+  += 隐式的将加操作的结果类型强制转换为持有结果的类型，如果两个整型（byte，short，int）相加，首先会将其提升到 int 类型，再执行加法操作
+
++ int 和 Integer 哪个会占用更多的内存？
+
+  Integer，其需要额外存储对象的元数据
+
++ 我们能在 Switch 中使用 String 吗？
+
+  从 Java 7 开始可以，但实际上是语法糖
+
++ 我们可以在 hashcode() 中使用随机数字吗？
+
+  不可以，相同对象的哈希值必须相同
+
++ Java 中，Comparator 与 Comparable 有什么不同？
+
+  Comparable 接口用于定义对象的自然顺序，而 comparator 通常用于定义用户定制的顺序。Comparable 总是只有一个，但是可以有多个 comparator 来定义对象的顺序。
+
++ final、finalize 和 finally 的不同之处？
+
+  - final 是一个修饰符，可以修饰变量、方法和类。如果 final 修饰变量，意味着该变量的值在初始化后不能被改变
+  - Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的，但是什么时候调用 finalize 没有保证
+  - finally 是一个关键字，与 try 和 catch 一起用于异常的处理。finally 块一定会被执行，无论在 try 块中是否有发生异常
+
++ Java 中，Serializable 与 Externalizable 的区别？
+
+  Serializable 接口是一个序列化 Java 类的接口，以便于它们可以在网络上传输或者可以将它们的状态保存在磁盘上，是 JVM 内嵌的默认序列化方式，成本高、脆弱而且不安全。Externalizable 允许你控制整个序列化过程，指定特定的二进制格式，增加安全机制。 
+
++ 异常关键字：throw、throws、try...catch、finally？
+
+  throws 用在方法签名上，方法内部通过 throw 抛出异常，try 用于检测包住的语句块, 若有异常, catch子句捕获并执行catch块
+
++ finally 执行时机？
+
+  当 try 和 catch 中有 return 时，finally 仍然会执行，finally 比 return 先执行，finally是在 return 后面的表达式运算后执行的（此时并没有返回运算后的值，而是先把要返回的值保存起来，管finally中的代码怎么样，返回的值都不会改变，仍然是之前保存的值），所以函数返回值是在 finally 执行前确定的，通常，finally 里面不要包含 return，否则程序会提前退出
+
++ 如何创建内部类和静态内部类对象？
+
+  内部类：new OuterClass.new InnerClass；静态内部类：new OuterClass.StaticInnerClass
+
++ 不需要序列化的字段？
+
+  声明为static和transient类型的数据不能被序列化， 反序列化需要一个无参构造函数
+
++ 局部变量为什么要初始化？
+
+  局部变量分布在栈上，生命周期短，JVM 并不会主动初始化而降低自己的性能，因此，需要程序员在使用变量前给变量赋值
+
+
 
 
 
