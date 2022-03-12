@@ -153,6 +153,94 @@ Java 和 C++ 区别：
 
 
 
+## 03 泛型机制
+
+引入泛型的意义：
+
++ 适用于多种数据类型执行相同的代码
++ 使用泛型可以提供编译前的检查，不需要强制类型转换，更加安全
+
+泛型的使用：
+
++ 泛型类
++ 泛型接口
++ 泛型方法：相比泛型类，其更加灵活，在使用不同的参数的时候，不需要再次实例化一个对象
+
+泛型的上下限：为类型参数增加限制
+
++ 上限：`<T extends Number>`，注意，extends 后面可以是接口，表示实现了接口的类型
++ 下限：`<T super String>`，表示 T 是 String 或者 String 的父类（Object）
++ 无限制通配符：`<T>` 或者 `<?>`
++ 多个限制：`<T extends A & B >`  或者 `<T extends A , B >`，通常一个类和多个接口
+
+类型擦除：Java 中实现泛型的方式是在编译阶段进行类型擦除，即
+
++ 将所有泛型表示都替换为具体的类型
++ 为了保证类型安全，必要时插入强制类型转换
++ 自动产生桥接方法保证擦除后的代码具有泛型的多态性
+
+证明类型擦除：
+
++ 原始类型相同：如`ArrayList<String>` 和 `ArrayList<Integer>` 的 getClass 返回值相同
+
++ 通过反射可以添加其他类型的元素：
+
+  `strList.getClass().getMethod("add", Object.class).invoke(list, "asd")`
+
+原始类型：指擦除了泛型信息，最后在字节码中的类型变量的真正类型
+
+泛型的编译期检查：Java 编译期会先检查代码中泛型的类型，然后再进行类型擦除，之后进行编译
+
++ 类型检查就是针对引用的，谁是一个引用，用这个引用调用泛型方法，就会对这个引用调用的方法进行类型检测，而无关它真正引用的对象
+
++ 参数化类型不考虑继承关系，下面的引用传递不被允许：
+
+  ```java
+  // 编译错误，ClassCastException  
+  ArrayList<String> list1 = new ArrayList<Object>(); 
+  //编译错误，违背使用泛型的初衷
+  ArrayList<Object> list2 = new ArrayList<String>(); 
+  ```
+
+泛型的多态实现：类型擦除会造成多态的冲突，JVM 采用桥接方法解决该问题
+
+```java
+class DateInter extends Pair<Date> {  
+
+    @Override  
+    public void setValue(Date value) {  
+        super.setValue(value);  
+    }  
+    @Override  
+    public Date getValue() {  
+        return super.getValue();  
+    }  
+		// 编译器添加的桥接方法
+  	public void setValue(Object value) {
+      	setValue((Date)value);
+    }
+  	// 编译期添加的桥接方法
+  	public Object getValue() {
+      	return getValue();
+    }
+}
+
+```
+
+另外，子类中桥接方法`Object getValue()`和`Date getValue()`是同时存在的，虚拟机可以通过返回值和参数类型来区别，但是在编写程序的时候，Java 编译期不允许我们这样做。
+
+基本类型不能作为泛型类型：无限制泛型擦除后将变为 Obejct，而 Obejct 不能存储 int 等基本类型
+
+泛型类型不能实例化：本质上由于类型擦除造成的，如果确实需要实例化泛型，可以使用反射
+
+泛型数组：采用通配符的方式初始化泛型数组（存在警告），因为对于通配符的方式最后取出数据是要做显式类型转换的，符合预期逻辑。更加优雅的方式是使用反射：`Array.newInstance`
+
+泛型类中的静态方法和静态变量：不可以使用泛型类所声明的泛型类型参数，因为静态变量和静态方法不需要使用对象来调用，从而类型参数不确定，但是可以使用泛型静态方法
+
+获取泛型的参数类型：通过反射 `java.lang.reflect.Type` 获取
+
+
+
 ## 面试合集
 
 + Java 中应该使用什么数据类型来代表价格？
