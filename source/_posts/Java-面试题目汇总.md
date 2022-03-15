@@ -334,5 +334,16 @@ tags: ["Java"]
 
     主要是为了优雅解决 null 指针的问题，Optional 类中或者包含一个真实对象引用，或者为空。可以通过 empty，of，ofNullable 方法创建对象，通过 ifPresent/orElse/get 进行解包。
 
+57. Java 中如何进行异常捕获的？
+
+    通常使用 try-catch-finally 语句，在 Java7 后，也可以使用 try-wtih-resource 语句，其会自动关闭实现了 AutoClosable 接口的对象，并且是按照与创建顺序相反的顺序关闭它们，用于优雅关闭资源。
+
+58. Java 中的 try-catch-finally 语句的执行方式，以及在不同代码块中加入 return，结果如何？
+
+    + 无论 catch 是否捕获异常，finally 语句块都是要被执行的；
+
+    + 当 try 块或 catch 块 return 一个值，那么 finally块中的代码会在执行 return 后，返回之前执行。（此时并没有返回运算后的值，而是把要返回的值**暂时保存**起来）。
+    + finally 中如果包含 return，那么程序将**在这里返回**，而不是通过 try 或 catch 中的 return 返回，返回值就不是 try 或 catch 中保存的返回值了。
+
 
 
