@@ -8,6 +8,30 @@ tags: ["Linux"]
 
 <!-- More -->
 
+
+
+## Deepin 装机初始化脚本
+
+每次装机都需要手动安装一系列的安装，很麻烦，可以使用脚本安装必备软件：
+
+```shell
+#!/bin/bash
+
+sudo apt install spark-store
+sudo apt install typora
+sudo apt install google-chrome-stable
+sudo apt install code
+sudo apt install netease-cloud-music
+sudo apt install timeshift
+sudo apt install qv2ray
+sudo apt install goldendict
+sudo apt install vlc
+sudo apt install okular
+sudo apt install wps-office
+```
+
+
+
 ## 阿里云盘挂载
 
 通过 [aliyundrive-webdav](https://github.com/messense/aliyundrive-webdav) 下载插件为阿里云盘提供 webdav 服务，获取 refresh_token 后在命令行执行命令即可开启 webdav 服务器。
