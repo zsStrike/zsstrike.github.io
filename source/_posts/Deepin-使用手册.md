@@ -46,7 +46,7 @@ sudo apt install wps-office
 #!/bin/bash
 
 nohup /home/strike/.local/bin/aliyundrive-webdav \
--r 537e938f650f4cfe97f4997825186e17 \
+-r <refreshToken> \
 --port 7963 \
 -U admin \
 -W admin \

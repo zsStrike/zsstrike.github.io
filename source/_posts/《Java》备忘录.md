@@ -325,6 +325,54 @@ JVM 处理异常的机制：编译器通过编译后，会生成对应的异常�
 
 
 
+## 06 反射机制
+
+反射机制：在运行时，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性。
+
+Class 类：Class 类也是一个类，其实例用于表示运行时的类（class & enum）或接口（interface & annotation），数组和基本类型同样也被映射为 Class 对象的一个类
+
++ 手动编写的类编译后会产生 Class 对象，其被保存在同名 .class 文件中
++ 每个类在内存中只有一个对应的 Class 对象来描述其信息，采用单例模式
++ Class 类只存在似有构造函数，因此对应的 Class 对象只能通过 JVM 加载和创建
+
+Class 类对象的获取：
+
++ 根据类名：类名.class
++ 根据对象：对象.getClass()
++ 根据全限定类名：Class.forName(全限定类名)
+
+Constructor 类：表示 Class 对象所表示类的构造方法，相关方法如下：
+
++ getConstructor(Class<?>... parameterTypes)：返回具有 public 访问权限的构造函数对象
++ getDeclaredConstructor(Class<?>... parameterTypes)：返回所有（包括 private）构造函数对象
++ newInstance()：调用无参构造器创建新的实例
++ newInstance(Object... initargs)
+
+Field 类：提供有关类或接口单个字段的信息，以及对它的动态访问权限
+
++ getField：获取指定的名称，且具有 public 修饰的字段，包括继承字段
++ getDeclaredField：获取指定的字段（包括 private），不包括继承的字段
++ set(Object obj, Object value) &  get(Object obj)：不可设置 final 字段
++ setAccessible(boolean flag)：设置其可访问性，用于访问 private 属性
+
+Method 类：提供关于类或接口上单独某个方法的信息
+
++ getMethod(String name, Class<?>... parameterTypes)
++ getDeclaredMethod(String name, Class<?>... parameterTypes)
++ invoke(Object obj, Object... args)
+
+反射调用流程：
+
++ 反射类和反射方法的获取，都是通过从列表中顺序搜寻查找匹配的方法
++ 当找到需要的方法时，都会 copy 一份出来，保证数据隔离
++ 每个类都可以获取 method 反射方法，并作用到其他实例身上
++ 反射也是线程安全的
++ 反射使用 reflectionData 缓存 Class 信息，避免开销
+
+
+
+
+
 
 
 
