@@ -472,9 +472,14 @@ WeakHashMap：里面的 entry 可能会被 GC 自动删除，即使程序员没�
 
 ![java-io-overview](《Java》备忘录/java-io-overview.jpg)
 
+IO 分类：
 
++ 传输方式：
+    + 字节流：读取单个字节，用来处理二进制文件
+    + 字符流：读取单个字符，用来处理文本文件
++ 操作对象：文件，数组，管道，基本数据类型，打印，对象，缓冲，转换
 
-
+字节转字符：通过 `{Input,Output}Stream{Reader,Writer}` 实现，char 类型使用 UTF-16be 编码
 
 
 
