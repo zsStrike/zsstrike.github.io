@@ -371,11 +371,100 @@ Method 类：提供关于类或接口上单独某个方法的信息
 
 
 
+## 07 SPI 机制
+
+SPI 机制：JDK 内置的服务提供发现机制，可以用来启用框架扩展和替换组件。服务提供者定义接口后，需要在 classpath 下的 `META-INF/services/` 目录下创建一个服务接口命名的文件，这个文件里的内容就是这个接口具体的实现类。
+
+SPI 机制：JDBC DriverManager，在以前开发时，需要先 Class.forName 加载数据库相关的驱动，而在 JDBC4.0 之后直接获取连接就可以了
+
++ JDBC 接口定义：java 中定义了接口 `java.sql.Driver`，但是没有具体实现
++ 实现：
+    + mysql：在 mysql 的 jar 包中，可以找到 `META-INF/services` 目录，该目录下面有一个 `java.sql.Driver` 的文件，文件内容是 `com.mysql.cj.jdbc.Driver`
+    + postgresql：在对应的目录下面，也可以找到对应的配置文件
++ 使用方法：直接通过  `DriverManager.getConnection` 来获取连接，实际执行代码的步骤
+    + 从系统变量中获取有关驱动的定义
+    + 使用 SPI 来获取驱动的实现：`ServiceLoader.load`
+    + 遍历使用 SPI 获取到的具体实现，实例化各个实现类
+
+SPI 的缺点：
+
++ 不能按需加载，需要遍历所有的实现并实例化（懒加载），然后在循环中才能找到我们需要的实现
++ 获取某个实现类的方式不灵活，只能通过 Iterator 形式获取
++ 不是并发安全的
 
 
 
+## 08 Collection 类
 
+集合类：集合类用于容纳其他的 Java 对象，其只能存放对象，基本类型通常需要装包和解包
 
++ Collection：存储对象的集合
+
+    ![img](《Java》备忘录/c25904af60394296a36c41d0c3749ab4.jpg)
+
++ Map：存储键值对的映射表
+
+    ![img](《Java》备忘录/4c0ea9d4d39c4ab09ed7e81ac76993d1.jpg)
+
+ArrayList：实现了 List 接口，允许存放 null 元素，底层通过 Object 数组实现，以便容纳任何类型的对象，为了追求效率，并没有实现线程同步
+
++ add，addAll，get，set，remove，indexOf，lastIndexOf
++ 自动扩容：如果添加数据时，超过 capacity 值，就会自动扩容，每次扩容变为之前容量的 1.5 倍，在实际添加大量元素前，可以通过 ensureCapacity 来提前分配
++ Fail-Fast：采用了快速失败机制，记录 modCount 参数来实现，在并发修改时，迭代器很快就会失败
+
+LinkedList：底层是带有头尾节点的双向链表，同时实现了 List 接口和 Deque 接口，即可以看作是顺序容器，又可以看作是一个队列，同时可看作一个栈。不过关于栈或者队列，现在首选的是 ArrayDeque，其有着更好的性能。如果需要多个线程并发访问，可以采用 `Collections.synchronizedList()` 进行包装
+
++ getFirst，getLast，removeFirst，removeLast，remove，add，addAll，clear，set，get
++ Queue 方法：offer，poll，peek，remove，element
++ Qeque 方法：offerFirst，offerLast，peekFirst，peekLast，pollFirst，pollLast，removeFirstOccurrence，removeLastOccurrence
+
+Stack：当需要使用栈时，推荐使用更高效的 ArrayDeque
+
+Queue：支持两组格式的 api
+
++ 抛出异常：add，remove，element
++ 返回值（null）实现：offer，poll，peek
+
+Deque：同样支持两组格式的 api，无非是如 offerFirst/offerLast 格式，ArrayDeque 实现了 Deque 接口，其底层采用循环数组实现
+
+PriorityQueue：优先队列保证每次取出的元素都是队列中权值最小的（默认），元素大小即可以通过元素本身自然顺序，也可以通过构造时传入的比较器，不允许放入 null 元素，通过完全二叉树实现的小顶堆，意味着可以通过数组作为底层数据结构
+
++ 抛出异常：add，element，remove
++ 返回值：offer，peek，poll
+
+HashMap：实现了 Map 接口，既允许 key 为 null，也允许 value 为 null，该类未实现线程同步
+
++ 插入：采用头插法进行插入，为了解决冲突，采用冲突链表方式
+
++ hashcode 决定了对象会被放到哪个 bucket 中，当多个对象的哈希值冲突时，equals 方法决定了这些对象是否是同一个对象
+
++ 数组扩容：有两个参数会影响 HashMap 的性能，初始容量和负载系数，负载系数用来指定自动扩容的临界值，当 entry 的数量超过 `capacity * load_factor` 时，容器将自动扩容并且重新哈希，每次扩容后容量为原来的 2 倍
+
++ Java 7 采用链表和数组实现 HashMap：
+
+    ![HashMap_base](《Java》备忘录/HashMap_base.png)
+
++ Java 8 采用链表，数组和红黑树实现，主要不同在于当链表中的元素超过 8 个时，会将链表转换为红黑树，使得在进行查找的时候降低时间复杂度
+
+    ![java-collection-hashmap8](《Java》备忘录/java-collection-hashmap8-164923318456410.png)
+
+HashSet：对 HashMap 的一个简单封装，对 HashSet 的函数调用都会转换成合适的 HashMap 方法
+
+LinkedHashMap：实现了 Map 接口，可以看作是 linkedlist 增强的 hashmap，其采用双向链表的形式将所有的 entry 连接起来，这样是为了保证元素的迭代顺序和插入顺序相同，另外，遍历的时候只需要从 header 开始遍历即可，遍历的时间复杂度和元素个数相同
+
+![LinkedHashMap_base.png](《Java》备忘录/LinkedHashMap_base.png)
+
+TreeMap：实现了 SortedMap 接口，会按照 key 的大小顺序对 Map 中的元素排序，其底层采用红黑树
+
++ ceilingKey，floorKey，higherKey，lowerKey
++ headMap，tailMap
++ descendingKeySet，pollFirstEntry，pollLastEntry，subMap
+
+WeakHashMap：里面的 entry 可能会被 GC 自动删除，即使程序员没有调用 remove 或者 clear 方法
+
++ 用于需要缓存的场景，这是在于缓存 miss 并不会造成错误
++ 弱引用：虽然弱引用可以用来访问对象，但是在进行垃圾回收时并不会被考虑在内，仅有弱引用指向的对象依旧会被 GC 回收
++ 并没有 WeakHashSet：可以通过 `Collections.newSetFromMap`
 
 
 
