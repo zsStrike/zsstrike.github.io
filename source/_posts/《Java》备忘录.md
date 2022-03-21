@@ -481,6 +481,10 @@ IO 分类：
 
 字节转字符：通过 `{Input,Output}Stream{Reader,Writer}` 实现，char 类型使用 UTF-16be 编码
 
+IO 设计模式：装饰者模式，FilterInputStream 属于抽象装饰者，为组件提供额外功能，如缓冲
+
+![image](《Java》备忘录/DP-Decorator-java.io.png)
+
 
 
 
