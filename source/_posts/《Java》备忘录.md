@@ -548,7 +548,7 @@ Java IO 和 NIO 区别：
 
 NIO 相关概念：
 
-+ 通道：是对流的模拟，通过通道可以读取并写入文件，即双向的
++ 通道：是对流的模拟，通过通道可以读取并写入数据，即双向的
 + 缓冲区：发送和接受通道中的数据都需要首先放到缓冲区中，包括 capacity，position 和 limit 成员，通过 flip 可以切换缓冲区的读写状态
 + 选择器：通过轮询的方式去监听多个通道上的事件，让一个线程可以处理多个事件
     + 创建选择器：Selector.open
@@ -559,7 +559,20 @@ NIO 相关概念：
 
 内存映射文件：是一种读写文件数据的方法，比常规的基于流和基于通道的 IO 快得多，通过 fc.map 创建该映射缓冲 MappedByteBuffer，就可以像使用 ByteBuffer 一样使用它
 
+典型的多路复用 IO 实现：
 
+| IO模型 | 性能 | 关键思路         | 操作系统      | JAVA 支持情况            |
+| ------ | ---- | ---------------- | ------------- | ------------------------ |
+| select | 较高 | Reactor          | windows/Linux | Reactor 模式             |
+| poll   | 较高 | Reactor          | Linux         | Linux 下的 JAVA NIO 框架 |
+| epoll  | 高   | Reactor/Proactor | Linux         | 使用 epoll 进行支持      |
+| kqueue | 高   | Proactor         | Linux         | 不支持                   |
+
+Reactor 模型：基于事件驱动，主要包括三个组件：
+
++ Reactor：等待客户端的连接，并将其派发给 Acceptor
++ Acceptor：进行客户端连接的获取，之后交给线程池进行网络读写
++ Handler：用于处理连接的网络读写操作，并进行事务处理（可以交给线程池）
 
 
 
