@@ -574,7 +574,14 @@ Reactor 模型：基于事件驱动，主要包括三个组件：
 + Acceptor：进行客户端连接的获取，之后交给线程池进行网络读写
 + Handler：用于处理连接的网络读写操作，并进行事务处理（可以交给线程池）
 
+Java AIO 模型：由于此时采用的是订阅-通知方式，不需要 slector 了，改为 channel 直接到操作系统注册监听，windows 底层通过 IOCP 支持，linux 底层通过 epoll 模拟实现
 
+Java NIO 框架：
+
++ 原生 Java NIO 框架：基于 IO 多路复用
++ Mina：在 Java NIO 基础上提供了抽象的事件驱动程序 API
++ Netty：提供异步的、事件驱动的网络应用程序框架和工具，综合性能最优
++ Grizzly：使用JAVA NIO作为基础，并隐藏其编程的复杂性
 
 
 
