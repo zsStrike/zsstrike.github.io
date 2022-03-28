@@ -264,3 +264,32 @@ tags: ["Java"]
 40. 如何实现继承内部类？
 
     因为内部类的构造器必须连接到指向其外部类对象的引用，所以在继承内部类的时候，事情会变得有点复杂。问题在于，那个指向外部类对象的“秘密的”引用必须被初始化，而在派生类中不再存在可连接的默认对象。因此需要创建一个包含构造器，构造器的参数需要有一个外部类的对象引用，然后通过 `outerObj.super()` 进行初始化。
+
+41. Java 集合类库的两个概念?
+
+    集合（Collection）和映射（Map）。
+
+42. 迭代器工作原理？
+
+    在 Java 中所有的集合类都实现了 iterable 接口，iterable 接口只有一个 iterator() 方法，具体的 iterator 则由集合类自己定义，通常是内部类（private），通过提供如 hasNext，next 等方法实现目的。也可以为了实现其他功能修改 iterator，如 ListIterator 就提供了前后遍历的方式。
+
+43. 如何在遍历 List 的时候删除元素？
+
+    + 使用迭代器提供的 remove 方法进行删除
+    + 使用普通的 for 循环删除，但是需要注意删除后需要修改索引值（不推荐）
+    + Java8 后，可以使用 removeIf 方法进行删除
+
+44. LinkedList 实现了 Queue 接口和继承了 List 接口实现，peek 和 element 方法有什么不同？
+
+    peek 在没有元素的时候会返回 null，但是 element 则会抛出异常。
+
+45. Map 下主要有几类实现类？
+
+    HashMap，TreeMap，LinkedHashMap。
+
+46. ArrayDeque 的实现和作用？
+
+    通过循环数组实现，可以当作栈，队列，双端队列使用。
+
+
+
