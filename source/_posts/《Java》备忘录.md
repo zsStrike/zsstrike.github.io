@@ -583,7 +583,30 @@ Java NIO 框架：
 + Netty：提供异步的、事件驱动的网络应用程序框架和工具，综合性能最优
 + Grizzly：使用JAVA NIO作为基础，并隐藏其编程的复杂性
 
+Java NIO 零拷贝基础：
 
++ 通道：相当于操作系统的内核空间的缓冲区，全双工的
++ 缓冲区：相当于操作系统的用户空间的缓冲区，分为堆内存和堆外内存
+    + 堆内存：在 GC 的时候可能会被自动回收，在 NIO 读写数据时，会将其临时拷贝到堆外内存
+    + 堆外内存（DirectBuffer）：在使用后需要手动回收，通过 malloc 实现
+
+MappedByteBuffer：基于内存映射实现，继承自 ByteBuffer，如 FileChannel 中的 map 方法
+
++ 写文件数据：put & fore
++ 读文件数据：get
++ 实现原理：void *mmap64(void *addr, size_t len, int prot, int flags, int fd, off64_t offset)
+
+DirectByteBuffer：通过 DirectByteBuffer 静态方法 allocateDirect 分配内存，是 MappedByteBuffer 的具体实现类，因此，其本身也具有文件内存映射的功能
+
+FileChannel：用于文件读写，映射和操作的通道，并且是线程安全的
+
++ tranferTo：把文件里面的源数据写入一个 WritableByteChannel 的目的通道
++ tranferFrom：把一个源通道 ReadableByteChannel 中的数据读取到当前 FileChannel 的文件里面
++ tranferTo 底层实现和 sendfile64 相关
+
+RocketMQ 和 Kafka 对比：
+
+![java-io-copy-11](《Java》备忘录/java-io-copy-11-16498313244782.jpg)
 
 
 
