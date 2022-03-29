@@ -610,6 +610,56 @@ RocketMQ 和 Kafka 对比：
 
 
 
+## 10 Java 虚拟机
+
+![jvm-overview](《Java》备忘录/jvm-overview.png)
+
+字节码文件：java 文件首先被编译为字节码文件，然后 JVM 在不同操作系统运行字节码文件，优点：
+
++ 一次编写，处处执行
++ 由于 JVM 直接运行字节码文件，可支持其他语言，如 Kotlin，scala，groovy 语言
+
+字节码文件结构：
+
++ 魔数和文件版本：开头四个字节为魔数，预期值是 0xCAFEBABE
++ 常量池：字节码文件的资源仓库，主要存放字面量和符号引用等
++ 访问标志：表示字节码文件的类型（类/接口），访问类型，是否标记为 final
++ 类索引，父类索引，接口索引
++ 字段表属性：描述接口或类中声明的变量，如作用域，是否 static，final，数据类型
++ 方法表属性：和字段表类似
+
+反编译字节码文件：`javap  -v -p <classfile>`，相关信息解释
+
++ 访问标志：如
+    + ACC_SUPER：是否允许使用invokespecial字节码指令的新语义
+    + ACC_SYNTHETIC：标志这个类并非由用户代码产生
+    + ACC_ANNOTATION：标志这是一个注解
++ 类型信息：基本类型通常首字母表示，但是存在特例：
+    + long 类型：J
+    + boolean 类型：Z
+    + 对象类型：L，如 Ljava/lang/Object;
+    + 数组：[，如定义一个`String[][]`类型的数组，记录为`[[Ljava/lang/String;`
++ 方法表：Code 段里面的属性：
+    + stack：最大操作数栈，JVM 根据这个分配栈帧的深度
+    + locals：局部变量所需的存储空间，以 Slot 为单位，4 个字节，注意 Slot 可以复用
+    + args_size：方法参数个数，包含有隐藏参数 this 在内
+    + LineNumberTable：描述源码行号与字节码行号(字节码偏移量)之间的对应关系
+    + LocalVariableTable：描述帧栈中局部变量与源码中定义的变量之间的关系
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
