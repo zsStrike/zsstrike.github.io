@@ -291,5 +291,24 @@ tags: ["Java"]
 
     通过循环数组实现，可以当作栈，队列，双端队列使用。
 
+47. Java 中 lambda 表达式基本格式？
+
+    `(params) -> { statements; }`，只有一个参数的时候，可以省略括号，如果只有一行的话，花括号应该省略。
+
+48. 方法引用基本格式以及注意事项？
+
+    `ClassName::MethodName`，对于非静态方法，需要先实例化对象，在进行方法引用，对于构造器引用，直接使用 `ClassName::new` 即可。
+
+49. 函数式接口主要分为哪几类？
+
+    + 消费型接口：Consumer/accept，没有返回值，可以通过 andThen 组成消费者链
+    + 供给型接口：Supplier/get，无参数，有返回值
+    + 断言型接口：Predicate/test，有参数，boolean 返回值，可以通过 and，or 组合断言
+    + 函数型接口：Function/apply，有参数和返回值，最为广泛
+
+50. Java 中如何实现闭包？
+
+    可以通过内部类实现，也可以通过函数式接口实现，Java 中的闭包的实现要求局部变量必须是 final 或者 effective final 的，其本质是因为 Java 中传参是按照 capture by value 来实现的，被引用的变量并不会提升到 heap 中。
+
 
 
