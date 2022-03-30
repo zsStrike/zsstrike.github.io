@@ -310,5 +310,29 @@ tags: ["Java"]
 
     可以通过内部类实现，也可以通过函数式接口实现，Java 中的闭包的实现要求局部变量必须是 final 或者 effective final 的，其本质是因为 Java 中传参是按照 capture by value 来实现的，被引用的变量并不会提升到 heap 中。
 
+51. 流式编程的特点？
+
+    代码可读性更高；**懒加载**，意味着它只在绝对必要时才计算，由于计算延迟，流使我们能够表示非常大（甚至无限）的序列，而不需要考虑内存问题。
+
+52. Java 中流操作主要分为三类，分别是？
+
+    创建流，修改流元素（中间操作），消费流元素（终端操作）。
+
+53. 创建流的方式有哪些？
+
+    Stream.of 将一组元素转换为流元素，集合类可以通过 stream 方法产生流，数组则可以通过 Arrays.stream 产生，除此之外，还有随机数流，int 类型流等。
+
+54. 流的中间操作有哪些？
+
+    peek，sorted，distinct，filter，map，flatMap。
+
+55. 流的终端操作有哪些？
+
+    toArray，forEach，collect，reduce，allMatch，anyMatch，findFirst，findAny，count，min，max 等。
+
+56. Optional 类的作用？
+
+    主要是为了优雅解决 null 指针的问题，Optional 类中或者包含一个真实对象引用，或者为空。可以通过 empty，of，ofNullable 方法创建对象，通过 ifPresent/orElse/get 进行解包。
+
 
 
