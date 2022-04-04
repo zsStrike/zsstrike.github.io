@@ -760,6 +760,37 @@ Java 内存模型：JVM 通过栈独占，堆共享来划分内存，方法的�
 + 对象共享后的可见性：由于高速缓存的存在，更新后的值可能其他线程不能看到，使用 volatile
 + 竟态条件：两个线程对共享对象都执行加一操作，结果实际上值只加一，使用 synchronized
 
+并发编程模型：主要分为共享内存和消息传递，Java 采用共享内存实现线程之前的通信，但需要程序员的显式同步操作
+
+重排序：为了提高程序执行时性能，JMM 对于处理器重排序，会在必要时生成内存屏障
+
++ 编译器优化的重排序：调整语句的执行顺序
++ 指令级并行的重排序：多个指令重叠执行
++ 内存系统的重排序：调整加载和存储指令的顺序
+
+内存屏障指令：用来禁止特定类型的处理器重排序，其中，StoreLoad 屏障同时具有其他三个屏障的效果，实现原理是处理器要把写缓冲的数据刷写到内存，开销较大
+
+| 屏障类型            | 指令示例                   | 说明                                                         |
+| ------------------- | -------------------------- | ------------------------------------------------------------ |
+| LoadLoad Barriers   | Load1; LoadLoad; Load2     | 确保 Load1 数据的装载，之前于 Load2 及所有后续装载指令的装载。 |
+| StoreStore Barriers | Store1; StoreStore; Store2 | 确保 Store1 数据对其他处理器可见（刷新到内存），之前于 Store2 及所有后续存储指令的存储。 |
+| LoadStore Barriers  | Load1; LoadStore; Store2   | 确保 Load1 数据装载，之前于 Store2 及所有后续的存储指令刷新到内存。 |
+| StoreLoad Barriers  | Store1; StoreLoad; Load2   | 确保 Store1 数据对其他处理器变得可见（指刷新到内存），之前于 Load2 及所有后续装载指令的装载。 |
+
+happens-before：用来阐述操作之间的内存可见性，a hanppens-before b 表示 a 操作的结果对 b 操作来说是可见的，其满足传递性
+
+as-if-serial：不管怎么重排序，单线程执行的结果不能被改变
+
+Java 内存模型：将顺序一致性模型做为参考，同时对不存在数据依赖性的操作进行重排序
+
++ TSO（total store ordering）：允许写-读操作的重排序
++ PSO（partial store ordering）：在 TSO 基础上，允许写-写操作的重排序
++ RMO（elaxed memory ordering）：在 TSO 基础上，放松程序中读 - 写和读 - 读操作的顺序
+
+![java-jmm-x01](《Java》备忘录/java-jmm-x01.png)
+
+
+
 
 
 
