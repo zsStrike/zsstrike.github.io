@@ -815,7 +815,7 @@ finalize：类似析构函数，用于资源释放，但是 try-with-resources �
 
 + 标记-清除：将存活的对象进行标记，然后清理掉未被标记的对象，碎片化现象严重
 + 标记-整理：让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存
-+ 复制：划分内存大小为相同的两块，每次只使用其中一块，另一块用于下一次复制操作
++ 标记-复制：划分内存大小为相同的两块，每次只使用其中一块，另一块用于下一次复制操作
 + 分代收集：根据对象存活周期，采用不同的收集算法，新生代使用复制算法，老年代使用标记-清除或者标记-整理算法
 
 垃圾回收器：
@@ -919,15 +919,54 @@ G1 活动周期：
 
 
 
+ZGC：JDK11 中引入，适用于大内存低延迟服务的内存管理和回收，设计目标是
 
++ 停顿时间不超过 10ms
++ 停顿时间不会随着堆的大小，或者活跃对象的大小而增加
++ 支持最高 4TB 级别的堆
 
+CMS 和 G1 停顿分析：都使用了标记-复制算法，三个阶段中
 
++ 标记阶段：初始标记阶段和再标记阶段是 STW，并发标记阶段不是 STW
++ 清理阶段：清点出有存活对象的分区和没有存活对象的分区，该阶段是 STW
++ 复制阶段：复制耗时和对象数量成正比，也是 STW
 
+ZGC 原理：
 
++ 全并发的 ZGC：采用标记-复制算法，不过在标记，复制和重定向阶段几乎都是并发的，只有初始标记，再标记和初始转移是 STW 
 
+    ![java-jvm-zgc-2](《Java》备忘录/java-jvm-zgc-2-165036251374311.png)
 
++ ZGC 关键技术：通过着色指针和读屏障技术，解决了转移过程中准确访问对象的问题，实现了并发转移
 
+    + 着色指针：将信息存储在指针中的技术，指针中第42~45位存储元数据，分别表示 Marked 0，Marked 1，Remapped，Finalized 信息
+    + 读屏障：当应用线程从堆中读取对象引用时，就会执行读屏障代码，其作用是在对象标记和转移过程中，用于确定对象的引用地址是否满足条件，并作出相应动作
 
+ZGC 调优：
+
++ ZGC 调优参数：
+
+    ```shell
+    -Xms10G -Xmx10G 
+    -XX:ReservedCodeCacheSize=256m -XX:InitialCodeCacheSize=256m 
+    -XX:+UnlockExperimentalVMOptions -XX:+UseZGC 
+    -XX:ConcGCThreads=2 -XX:ParallelGCThreads=6 
+    -XX:ZCollectionInterval=120 -XX:ZAllocationSpikeTolerance=5 
+    -XX:+UnlockDiagnosticVMOptions -XX:-ZProactive 
+    -Xlog:safepoint,classhisto*=trace,age*,gc*=info:file=/opt/logs/logs/gc-%t.log:time,tid,tags:filecount=5,filesize=50m 
+    ```
+
++ ZGC 触发时机：
+
+    + 阻塞内存分配请求触发：垃圾占满堆空间
+    + 基于分配速率的自适应算法：根据近期对象分配速率以及 GC 时间，计算下一次触发 GC 内存阈值
+    + 基于固定间隔：通过 ZCollectionInterval 控制，适合应对突增流量场景
+    + 主动触发规则：类似于固定间隔规则，但时间间隔不固定，是ZGC自行算出来的时机
+    + 预热规则：服务刚启动时出现，一般不需要关注
+    + 外部触发：代码中显式调用 System.gc() 触发
+    + 元数据分配触发：元数据区不足时导致，一般不需要关注
+
+    
 
 
 
