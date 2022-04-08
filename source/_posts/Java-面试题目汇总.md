@@ -345,5 +345,15 @@ tags: ["Java"]
     + 当 try 块或 catch 块 return 一个值，那么 finally块中的代码会在执行 return 后，返回之前执行。（此时并没有返回运算后的值，而是把要返回的值**暂时保存**起来）。
     + finally 中如果包含 return，那么程序将**在这里返回**，而不是通过 try 或 catch 中的 return 返回，返回值就不是 try 或 catch 中保存的返回值了。
 
+59. Java 中那两个类实现了对文件和路径的抽象？
 
+    Path 和 File，分别有对应的工具类 Paths 和 Files。
+
+60. 如何实现遍历目录的功能？
+
+    通过 Files 下的 walk 或者 walkFileTree 即可实现遍历功能，后者灵活度更高。
+
+61. 如何实现文件监听的功能？
+
+    通过文件系统的 WatchService 可以设置一个进程对目录中的更改做出响应。
 
