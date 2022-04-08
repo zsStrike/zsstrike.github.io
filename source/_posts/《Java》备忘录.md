@@ -851,6 +851,8 @@ finalize：类似析构函数，用于资源释放，但是 try-with-resources �
     + 空间整合：整体上是基于标记-整理算法，局部（两个 region 之间）上基于复制算法
     + 可预测的停顿
 
++ Epsilon 收集器：不执行任何垃圾回收动作的回收器，主要用作性能分析
+
 回收策略：
 
 + Minor GC：发生在新生代上，执行相对比较频繁
@@ -966,7 +968,36 @@ ZGC 调优：
     + 外部触发：代码中显式调用 System.gc() 触发
     + 元数据分配触发：元数据区不足时导致，一般不需要关注
 
-    
+
+
+GC 考虑指标：
+
++ 吞吐量：业务线程占用 CPU 的时间和系统总运行时间比例
++ 停顿时间：垃圾收集过程中一次 STW 的最长时间，越短越好
+
+JVM 常见调优参数：
+
++ -Xms 和 -Xmx：堆初始值和堆最大值，通常设置相同，避免动态扩容的开销
++ -Xmn：新生代大小
++ -XX:newRatio：设置新生代与老年代比值
++ -XX:SurvivorRatio：Eden 区与 Survivor 区大小的比值
++ -XX:PermSize 和 -XX:MaxPermSize：永久代初始值和永久代最大值，Java7 参数
++ -XX:MetaspaceSize 和 -XX:MaxMetaspaceSize：元空间初始值和元空间最大值
++ -XX:MaxTenuringThreshold：新生代转移到老年代的年龄阈值
++ -XX:+AggressiveOpts：加快编译速度
++ -XX:PretenureSizeThreshold：对象超过多大值时直接在老年代中分配
+
+JVM 回收期参数：
+
++ -XX:+UseSerialGC：串行垃圾回收，很少使用
++ -XX:+UseParNewGC：新生代使用并行，老年代使用串行
++ -XX:+UseConcMarkSweepGC：新生代使用并行，老年代使用 CMS
++ -XX:ParallelGCThreads：指定并行的垃圾回收线程的数量
++ -XX:+DisableExplicitGC：禁用 System.gc()，因为它会触发Full GC，这是很浪费性能的
++ -XX:CMSFullGCsBeforeCompaction：在多少次 GC 后进行内存整理，减少碎片化
++ -XX:+UseCMSCompactAtFullCollection：在每一次Full GC时对老年代区域碎片整理
++ -XX:+CmsClassUnloadingEnabled：卸载类信息，也就是对永久带清理
++ -XX:+PrintGCDetails 和 -XX:+PrintGCDateStamps：打印 GC 信息和时戳
 
 
 
