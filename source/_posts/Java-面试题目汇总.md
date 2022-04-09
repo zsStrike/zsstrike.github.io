@@ -357,3 +357,23 @@ tags: ["Java"]
 
     通过文件系统的 WatchService 可以设置一个进程对目录中的更改做出响应。
 
+62. 什么是字符串的不可变性？
+
+    String 对象是不可变的，String 类中的每个看起来会修改 String 值的方法，实际上都是创建了一个全新的 String 对象。但是如果内容并不改变，String 方法只是返回原始对象的一个引用而已。
+
+63. StringBuilder 和 String Buffer 的异同点？
+
+    都是用于原地操作字符串的类，区别在于前者不是线程安全的，后者是线程安全的。
+
+64. CharSequese 接口的作用？
+
+    从 CharBuffer，String，StringBuffer，StringBuilder 抽象出的一般化定义。
+
+65. Pattern 和 Matcher 类的作用？
+
+    根据一个 String 对象生成一个 Pattern 对象，通过 Pattern 对象的 match 方法产生一个 Matcher 对象。
+
+66. Matcher 中的组获取，对于 `A(B(C))D` ？
+
+    `A(B(C))D` 中有三个组：组 0 是 ABCD，组 1 是 BC，组 2 是 C。通过 Matcher 对象的 group 方法可以获取到每个组。
+
