@@ -1001,6 +1001,22 @@ JVM 回收期参数：
 
 
 
+常见的内存溢出问题：
+
++ 堆内存溢出：
+    + 堆内存溢出：大量创建对象，并且让 GC Roots 引用到它们
+    + 大量时间用于 GC，表示即将发生上类错误：98% 时间只回收了 2% 的垃圾
++ 元空间区内存溢出：
+    + 不停加载类，导致元空间内存溢出
+
+堆内存：
+
++ 通过 OOM 获取：-XX:+HeapDumpOnOutOfMemoryError
++ 主动获取：-XX:+HeapDumpOnCtrlBreak
++ 使用 HPROF agent：-agentlib:hprof=heap=dump,format=b，在结束时生成 Dump 文件
++ jmap 获取：`jmap -dump:format=b file=<文件名XX.hprof> <pid>`
++ 堆内存分析：JConsole 和 Jprofile
+
 
 
 
