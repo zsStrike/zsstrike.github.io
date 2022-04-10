@@ -1001,7 +1001,7 @@ JVM 回收期参数：
 
 
 
-常见的内存溢出问题：
+内存溢出问题：
 
 + 堆内存溢出：
     + 堆内存溢出：大量创建对象，并且让 GC Roots 引用到它们
@@ -1009,13 +1009,38 @@ JVM 回收期参数：
 + 元空间区内存溢出：
     + 不停加载类，导致元空间内存溢出
 
-堆内存：
+堆内存 dump 分析：
 
 + 通过 OOM 获取：-XX:+HeapDumpOnOutOfMemoryError
 + 主动获取：-XX:+HeapDumpOnCtrlBreak
 + 使用 HPROF agent：-agentlib:hprof=heap=dump,format=b，在结束时生成 Dump 文件
 + jmap 获取：`jmap -dump:format=b file=<文件名XX.hprof> <pid>`
 + 堆内存分析：JConsole 和 Jprofile
+
+
+
+Thread Dump 分析：诊断 Java 应用问题的工具，提供了当前活动线程的快照，以及 JVM 中所有 Java 线程的堆栈跟踪信息
+
+Thread Dump 抓取：
+
++ `jps && jstack [-l] <pid> | tee -a jstack.log`
+
+Thread 状态分析：
+
++ NEW：刚刚在堆中创建 Thread 对象，但是没有调用 start 方法前
++ RUNNABLE：该状态表示线程具备所有运行条件，在运行队列中准备操作系统的调度，或者正在运行
++ BLOCKED：线程正在等待获取 java 对象的监视器，即线程正在等待进入由 synchronized 代码块
++ WAITING：只有特定的条件满足，才能获得执行机会，如 Object.wait
++ TIMED_WAITING：定时器等待
++ TERMINATED：执行完 run 方法正常返回，或者抛出了运行时异常而结束
+
+异常情况：
+
++ 死锁：表现为程序的停顿，或者不再响应用户的请求，线程 dump 中可以直接报告出 Java 级别的死锁
++ 热锁：往往是导致系统性能瓶颈的主要因素，表现为由于多个线程对临界区，或者锁的竞争，出现
+    + 频繁的线程的上下文切换
+    + 大量的系统调用
+    + 随着CPU数目的增多，系统的性能反而下降
 
 
 
