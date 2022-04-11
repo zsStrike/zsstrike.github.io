@@ -1044,6 +1044,31 @@ Thread 状态分析：
 
 
 
+Java 问题排查工具：
+
++ Linux 命令
+    + 文本操作：grep，awk，sed
+    + 文件操作：tail，find
+    + 网络和进程：ifconfig，iptables，route，netstat，ps，top
+    + 磁盘和内存：free，df，du，/proc/meminfo，fdisk，swapon，swapoff
+    + 用户和组：w，id，last，cut -d: -f1 /etc/passwd
+    + 服务模块和包：crontab -l，lsmod
+    + 系统版本信息：uptime，uname，procfs
++ Java 工具
+    + jps：获取当前 java 进程的工具
+    + jstack：线程堆栈分析工具，导出 Java 应用程序线程堆栈信息
+    + jinfo：用来查看正在运行的 java 应用程序的扩展参数，也可以动态的修改正在运行的 JVM 参数
+    + jmap：可以生成 java 程序的 dump 文件， 也可以查看堆内对象示例的统计信息、查看 ClassLoader 的信息
+    + jstat：输出进程的统计信息
+    + jdb：可以远程 debug
+    + btrace：可以在运行中的java类中动态的注入trace代码，在不停机下得到方法参数，返回值，起到监控作用
+    + Greys：用来分析运行中的java类、方法等信息
+    + Arthas：在线调试，基于 Greys
+    + javOSize：可以修改字节码，并且即时生效，但是侵入性太大
+    + JProfiler：图形化分析工具
+
+
+
 
 
 
