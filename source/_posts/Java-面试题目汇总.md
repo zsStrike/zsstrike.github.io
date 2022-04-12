@@ -434,6 +434,10 @@ tags: ["Java"]
 
     最基本的概念是混合多个类的能力，以产生一个可以表示混型中所有类型的类。Java 中实现方法有与接口混合，使用装饰器模式，与动态代理混合。
 
+80. Arrays 相关方法？
+
+    fill，setAll，asList，copyOfRange，deepToString，stream，sort & binarySearch。
+
 
 
 
