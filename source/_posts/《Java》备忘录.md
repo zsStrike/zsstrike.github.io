@@ -1047,6 +1047,7 @@ Thread 状态分析：
 Java 问题排查工具：
 
 + Linux 命令
+
     + 文本操作：grep，awk，sed
     + 文件操作：tail，find
     + 网络和进程：ifconfig，iptables，route，netstat，ps，top
@@ -1054,7 +1055,9 @@ Java 问题排查工具：
     + 用户和组：w，id，last，cut -d: -f1 /etc/passwd
     + 服务模块和包：crontab -l，lsmod
     + 系统版本信息：uptime，uname，procfs
+
 + Java 工具
+
     + jps：获取当前 java 进程的工具
     + jstack：线程堆栈分析工具，导出 Java 应用程序线程堆栈信息
     + jinfo：用来查看正在运行的 java 应用程序的扩展参数，也可以动态的修改正在运行的 JVM 参数
@@ -1065,7 +1068,20 @@ Java 问题排查工具：
     + Greys：用来分析运行中的java类、方法等信息
     + Arthas：在线调试，基于 Greys
     + javOSize：可以修改字节码，并且即时生效，但是侵入性太大
-    + JProfiler：图形化分析工具
+
++ 可视化工具：
+
+    +  JConsole：自带的基于 JMX 的可视化监视、管理工具
+    + Visual VM：免费的，集成了多个 JDK 命令行工具的可视化工具，它能为您提供强大的分析能力，对 Java 应用程序做性能分析和调优
+    + Visual GC：visualvm 中的图形化查看 gc 状况的插件
+    + JProfiler：通过实时的监控系统的内存使用情况，随时监视垃圾回收，线程运行状况等手段，从而很好的监视 JVM 运行情况及其性能
+    + Eclipse Memory Analyzer (MAT)：快速且功能丰富的 Java 堆分析器，可帮助你发现内存泄漏并减少内存消耗
+
+    
+
+    
+
+    
 
 
 
