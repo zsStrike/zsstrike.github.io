@@ -1047,7 +1047,6 @@ Thread 状态分析：
 Java 问题排查工具：
 
 + Linux 命令
-
     + 文本操作：grep，awk，sed
     + 文件操作：tail，find
     + 网络和进程：ifconfig，iptables，route，netstat，ps，top
@@ -1055,9 +1054,7 @@ Java 问题排查工具：
     + 用户和组：w，id，last，cut -d: -f1 /etc/passwd
     + 服务模块和包：crontab -l，lsmod
     + 系统版本信息：uptime，uname，procfs
-
 + Java 工具
-
     + jps：获取当前 java 进程的工具
     + jstack：线程堆栈分析工具，导出 Java 应用程序线程堆栈信息
     + jinfo：用来查看正在运行的 java 应用程序的扩展参数，也可以动态的修改正在运行的 JVM 参数
@@ -1068,20 +1065,58 @@ Java 问题排查工具：
     + Greys：用来分析运行中的java类、方法等信息
     + Arthas：在线调试，基于 Greys
     + javOSize：可以修改字节码，并且即时生效，但是侵入性太大
-
 + 可视化工具：
-
     +  JConsole：自带的基于 JMX 的可视化监视、管理工具
     + Visual VM：免费的，集成了多个 JDK 命令行工具的可视化工具，它能为您提供强大的分析能力，对 Java 应用程序做性能分析和调优
     + Visual GC：visualvm 中的图形化查看 gc 状况的插件
     + JProfiler：通过实时的监控系统的内存使用情况，随时监视垃圾回收，线程运行状况等手段，从而很好的监视 JVM 运行情况及其性能
     + Eclipse Memory Analyzer (MAT)：快速且功能丰富的 Java 堆分析器，可帮助你发现内存泄漏并减少内存消耗
 
-    
 
-    
 
-    
+## 11 多线程和并发
+
+并发出现问题的根源：
+
++ 可见性：CPU 缓存引起
++ 原子性：分时复用引起
++ 有序性：重排序引起
+
+使用 JMM 解决并发问题：
+
++ 三个关键字：volatile，synchronized，final
++ Happens-Before 规则
+
+线程安全级别：
+
++ 不可变：不可变对象一定是线程安全的，不需要再采取任何线程安全保障措施，包括：
+    + final 关键字修饰的基本数据类型
+    + String
+    + 枚举类型
+    + Number 部分子类，如 Long 和 Double 等包装类型，BigInteger 和 BigDecimal 等大数据类型
+    + 对集合，可以使用 Collections.unmodifiableXXX() 来获取一个不可变集合
++ 绝对线程安全：不管运行时环境如何，调用者都不需要任何额外的同步措施
++ 相对线程安全：单独操作时候，不需要额外的同步措施，但是对一些特定顺序的连续调用，需要在调用段使用额外的同步手段，包括 Vector、HashTable、Collections 的 synchronizedCollection() 方法包装的集合
++ 线程兼容：对象本身不是线程安全的，可以在调用端正确使用同步手段安全使用，如 ArrayList 和HashMap 等
++ 线程对立：无论是否在调用段采取了同步措施，都无法在多线程环境中并发安全使用的代码
+
+线程安全实现：
+
++ 互斥同步：synchronized 和 ReentrantLock，线程阻塞和唤醒可能带来性能问题，悲观并发策略
++ 非阻塞同步：
+    + CAS：乐观并发控制，先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施，如不断重试。硬件支持，CAS 指令包括三个操作数，内存地址 V、旧的预期值 A 和新值 B，当执行操作时，只有当 V 的值等于 A，才将 V 的值更新为 B
+    + AtomicInteger：使用了 Unsafe 类的 CAS 操作封装而成
+    + ABA 问题：如果一个变量初次读取的时候是 A 值，它的值被改成了 B，后来又被改回为 A，那 CAS 操作就会误认为它从来没有被改变过吗，该问题可以通过 AtomicStampedReference 来解决
++ 无同步方案：
+    + 栈封闭：如局部基本类型变量，属于线程私有
+    + 线程本地存储：使用 ThreadLocal 类实现，底层实现是每个 Thread 都有一个 ThreadLocalMap
+    + 可重入代码：在代码执行的任何时刻中断它，转而去执行另外一段代码，在控制权返回后，原来的程序不会出现任何错误
+
+
+
+
+
+
 
 
 
