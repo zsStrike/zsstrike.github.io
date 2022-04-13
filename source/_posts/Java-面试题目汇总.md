@@ -438,6 +438,18 @@ tags: ["Java"]
 
     fill，setAll，asList，copyOfRange，deepToString，stream，sort & binarySearch。
 
+81. enum 类型的本质？
+
+    实际上就是继承自 Enum 类的派生类，在 enum 中的每个枚举值实际上就是 `public static final` 类型的变量。通过使用父类的 values 方法返回枚举值对应的类，使用 ordinal 方法返回枚举值的索引，使用 valueOf 则根据字符串常量创建对应的枚举类型。
+
+82. enum 扩展性？
+
+    enum 本身继承自 Enum 类型，不能再次继承，可以通过接口实现扩展，另外，可以在 enum 中声明自定义的方法和属性。
+
+83. 
+
+
+
 
 
 
