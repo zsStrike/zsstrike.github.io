@@ -1114,6 +1114,54 @@ Java 问题排查工具：
 
 
 
+线程状态转换：
+
+![image](《Java》备忘录/ace830df-9919-48ca-91b5-60b193f593d2.png)
+
+线程使用方式：实现接口或者继承 Thread，推荐使用实现接口方案
+
++ 实现 Runnable 接口：实现 run 方法
++ 实现 Callable 接口：实现 带有返回值的 call 方法
++ 继承 Thread 类：同样实现 run 方法，其实现了 Runnable 接口
+
+基础线程机制：
+
++ Executor：管理多个异步任务的执行，此处异步表示不需要同步操作
+    + CachedThreadPool：一个任务一个线程
+    + FixedThreadPool：所有任务使用固定数量的线程
+    + SingleThreadExecutor： 相当于大小为 1 的 FixedThreadPool
++ Daemon：守护线程，是程序运行时在后台提供服务的线程，当所有非守护线程结束时，程序终止，同时杀死所有守护线程，main() 属于给守护线程，使用 setDaemon 设置某个线程为守护线程
++ sleep：休眠当前正在执行的线程
++ yield：声明了当前线程已经完成了生命周期中最重要的部分，可以切换给其它线程来执行，只是对线程调度器的一个建议，而且也只是建议具有相同优先级的其它线程可以运行
+
+线程中断：
+
++ InterruptedException：使用 interrupt 来中断线程，如果线程处于阻塞，等待状态，就会抛出该异常而提前结束，但是不能中断 IO 阻塞和 synchronized 锁阻塞
++ interrupted：如果线程一直运行一个循环，那么 interrupt 并不会导致其提前结束，可以通过 interrupted 方法检测线程是否被中断过，从而自己合理响应中断
++ Executor 中断操作：shutdown 会等待所有线程执行完毕后再关闭，但是 shutdownNow 则直接调用每个线程的 interrupt 方法，另外，如果只想中断其中某个线程，可以使用 submit 方法得到 Future<?> 对象，然后调用其 cancel 方法中断
+
+线程互斥同步：
+
++ synchronized：JVM 实现
+    + 同步代码块：自定义同步对象
+    + 同步实例方法：作用于同一个对象实例
+    + 同步静态方法：作用于同一个类
+    + 同步一个类：作用于同一个类
++ ReentrantLock：JDK 实现，主要通过 lock 和 unlock 实现同步
++ 比较：
+    + 实现方式：synchronized 是 JVM 实现，ReentrantLock 是 JDK 实现
+    + 性能：新版本对 synchronized 进行了很多优化，两者大致相同
+    + 等待可中断：ReentrantLock 可以，但是 synchronized 不行
+    + 公平锁：默认非公平，但是 ReentrantLock 可以配置为公平的
+    + 锁绑定条件：一个 ReentrantLock 可以同时绑定多个 Condition 对象
++ 使用：优先使用 synchronized， 除非需要 ReentrantLock 的高级功能，使用 synchronized 所有版本支持，并且不用担心没有释放锁而导致死锁问题
+
+线程协作：
+
++ join：在线程中调用另一个线程的 join 方法，会将当前线程挂起，直到目标线程结束
++ wait & notify & notifyAll：属于 Object 一部分，只能在同步方法或者代码块中使用，并且在 wait 期间，线程会释放锁，否则可能会造成死锁
++ await & signal & signalAll：Condition 一部分，相较于 wait，await 可以指定等待的条件，更加灵活
+
 
 
 
