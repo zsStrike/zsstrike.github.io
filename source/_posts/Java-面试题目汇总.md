@@ -446,7 +446,17 @@ tags: ["Java"]
 
     enum 本身继承自 Enum 类型，不能再次继承，可以通过接口实现扩展，另外，可以在 enum 中声明自定义的方法和属性。
 
-83. 
+83. java.lang 中的注解有哪些？
+
+    @Override，@Deprecated，@SuppressWarnings，@SafeVarargs，@FunctionalInterface。
+
+84. 如何定义注解以及元注解是什么？
+
+    使用 @interface 定义注解，元注解即用来注解自定义的注解，包括 @Traget，@Retention，@Documented，@Inherited，@Repetable。
+
+85. 如何编写注解处理器？
+
+    主要通过 Java 提供的反射机制来实现，通过反射可以获取到对应注解元素的注解，并且可以获取注解中的属性。JUnit 便是基于注解的测试单元。
 
 
 
