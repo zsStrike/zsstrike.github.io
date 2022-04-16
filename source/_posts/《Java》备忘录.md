@@ -1210,6 +1210,30 @@ JVM 锁优化：
 
 
 
+volatile 作用：
+
++ 防止重排序：单例模式中的双重检查加锁（DCL）
++ 实现可见性：防止 CPU 缓存造成线程不可见
++ 保证单次读写的原子性：i++ 并不是原子性操作；共享 long 和 double 型变量时，需要使用 volatile
+
+volatile 实现原理：
+
++ 可见性实现：基于内存屏障实现，起作用就是防止编译器和 CPU 对该条内存屏障指令重排序
+    + lock 指令：对 volatile 变量写操作后，JVM 插入的指令，用于将缓存中的数据写到内存
+    + 缓存一致性：由于缓存的存在，使用 MESI 机制保证缓存一致性，其机制是利用了总线嗅探协议
++ 有序性实现：
+    + volatile 的 happens-before 关系
+    + 禁止重排序：JMM 采用保守策略来为每个 volatile 读写操作添加不同屏障
+        + 对于 volatile 写操作，在其前面加入 StoreStore 屏障，在其后面加入 StoreLoad 屏障
+        + 对于 volatile 读操作，在其后面依次加上 LoadLoad 屏障和 LoadStore 屏障
+
+volatile 应用场景：
+
++ 状态标志：用于指示发生了某个一次性事件
++ 独立观察：单个写多个读情况
++ volatile bean 模式：JavaBean 的所有数据成员都是 volatile 类型的，并且 getter 和 setter 必须普通
++ 双重检查：单例模式 DCL
+
 
 
 
