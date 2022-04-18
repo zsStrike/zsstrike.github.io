@@ -1264,6 +1264,31 @@ final 深入理解：
 
 
 
+CAS 问题：CAS 基于乐观锁，synchronized 为悲观锁，通常 CAS 性能更优，但是其存在以下问题：
+
++ ABA 问题：CAS 检测不到变化，但实际上发生了变化，使用 AtomicStampedReference
++ 循环时间开销大：自旋 CAS 如果长时间不成功，会给 CPU 带来非常大的执行开销
++ 只能保证一个共享变量的原子操作：使用对象保证多个变量的原子性，使用 AtomicReference
+
+Unsafe 类：Java 原子类通过 Unsafe 实现，其主要提供一些用于执行低级别、不安全操作的方法，这些方法在提升 Java 运行效率、增强 Java 语言底层资源操作能力方面起到了很大的作用，但是使用 Unsafe 类方法会使得 Java 语言不再安全，应该慎用 Unsafe 类
+
+![java-thread-x-atomicinteger-unsafe](《Java》备忘录/java-thread-x-atomicinteger-unsafe-16505950592513.png)
+
+Unsafe 类部分功能：
+
++  CAS：实际上只提供了三种 CAS 本地方法：`compareAndSwap{Object, Int, Long}`
++ 提供域偏移量：staticFieldOffset
++ 内存操作：allocateMemory & reallocateMemory & freeMemory
+
+Java 中原子类：实现方式基于 volatile 和 Unsafe 中的 CAS 方法，前者保证可见性，后者保证原子性
+
++ 原子更新基本类型：`Atomic{Boolean, Integer, Long}`
++ 原子更新数组：`Atomic{Integer, Long, Reference}Array`
++ 原子更新引用类型：`AtomicReference， Atomic{Stamped, Markable}Reference`
++ 原子更新字段类：`Atomic{Integer, Long, Stamped, Reference}FieldUpdater`
+
+
+
 
 
 
