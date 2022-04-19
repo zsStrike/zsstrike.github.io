@@ -1289,6 +1289,52 @@ Java 中原子类：实现方式基于 volatile 和 Unsafe 中的 CAS 方法，�
 
 
 
+LockSupport：用于创建锁和其他同步类的基本线程阻塞原语，基于 Unsafe 类中的 park & unpark，相当于只有一个许可证的 Semaphore
+
++ park：线程会阻塞，直到以下情况发生
+    + 其他线程将当前线程作为参数调用 unpark
+    + 其他线程中断当前线程
+    + 该调用毫无理由的返回
++ unpark：将等待获得许可的线程作为参数，好让参数线程继续运行
+
+线程同步分析：
+
++ sleep 和 wait 区别：sleep 不会释放锁，wait 会释放锁，当从 wait 状态唤醒时，还是需要进行锁的获取，如果没有获取到，线程进入阻塞状态
++ wait 和 await 区别：原理基本一致，且都释放锁资源，不过 await 底层通过 park 来阻塞线程
++ sleep 和 park 区别：都是阻塞当前线程执行，且都不释放占有的锁资源，不过 park 可以主动被唤醒
++ wait 和 park 区别：
+    + wait 需要在 synchronized 块中执行，park 可以在任何地方
+    + wait 被唤醒后不一定立即执行后续内容，因为需要获取锁，park 唤醒后则会继续执行后续内容
++ wait & notify 和 park & unpark：前者必须先 wait 再 notify，否则一直等待，后者则不用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
