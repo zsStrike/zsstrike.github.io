@@ -1309,6 +1309,48 @@ LockSupport：用于创建锁和其他同步类的基本线程阻塞原语，基
 
 
 
+AQS（AbstractQueuedSynchronizer）：一个用来构建锁和同步器的框架，对资源共享方式：
+
++ 独占：只有一个线程能执行，如 ReentrantLock，还可以分为：
+    + 公平锁：按照 FIFO 规则依次获取锁资源
+    + 非公平锁：当线程要获取锁时，无视队列规则直接去抢锁
++ 共享：多个线程可同时执行，如 Semaphore/CountDownLock
+
+扩展 AQS：AQS 使用了模板方法设计模式，继承者只需要实现以下方法即可
+
++ tryAcquire & tryRelease
++ tryAcquireShared & tryReleaseShared
++ isHeldExclusively
+
+AQS 数据结构：
+
++ sync queue：CLH 实现的双向链表
+    + Node：表示每个被封装的线程，每个节点都有一个状态：
+        - `CANCELLED`，值为 1，表示当前的线程被取消
+        - `SIGNAL`，值为 -1，表示当前节点的后继节点包含的线程需要运行，需要进行 unpark 操作
+        - `CONDITION`，值为 -2，表示当前节点在等待 condition，也就是在 condition queue 中
+        - `PROPAGATE`，值为 -3，表示当前场景下后续的 acquireShared 能够得以执行
+        - 值为0，表示当前节点在 sync queue 中，等待着获取锁
++ condition queue：单向链表实现
+
+AQS 核心方法：
+
++ acquire：以独占模式获取资源，并且忽略中断
+    + tryAcquire 方法如果失败，则将该线程封装线程添加到 sync queue 中，其中，enq 方法会使用无限循环来确保节点的成功插入
+    + acquireQueued 方法则是让 sync queue 中的第二个节点尝试获取资源，如果失败，则自旋等待
++ release：如果头节点不为空，则 unparkSuccessor
+
+AQS 总结：
+
++ AQS 通过一个 int 同步状态码，和一个 FIFO 队列来控制多个线程访问资源
++ 支持独占和共享两种模式获取同步状态码
++ 当线程获取同步状态失败会被加入到同步队列中
++ 当线程释放同步状态，会唤醒后继节点来获取同步状态
++ 共享模式下的节点获取到同步状态或者释放同步状态时，不仅会唤醒后继节点，还会向后传播，唤醒所有同步节点
++ 使用 volatile 关键字保证状态码在线程间的可见性，CAS 操作保证修改状态码过程的原子性
+
+
+
 
 
 
