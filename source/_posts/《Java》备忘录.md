@@ -1309,7 +1309,7 @@ LockSupport：用于创建锁和其他同步类的基本线程阻塞原语，基
 
 
 
-AQS（AbstractQueuedSynchronizer）：一个用来构建锁和同步器的框架，对资源共享方式：
+[AQS（AbstractQueuedSynchronizer）](https://www.cnblogs.com/liqiangchn/p/11960944.html)：一个用来构建锁和同步器的框架，对资源共享方式：
 
 + 独占：只有一个线程能执行，如 ReentrantLock，还可以分为：
     + 公平锁：按照 FIFO 规则依次获取锁资源
@@ -1348,6 +1348,29 @@ AQS 总结：
 + 当线程释放同步状态，会唤醒后继节点来获取同步状态
 + 共享模式下的节点获取到同步状态或者释放同步状态时，不仅会唤醒后继节点，还会向后传播，唤醒所有同步节点
 + 使用 volatile 关键字保证状态码在线程间的可见性，CAS 操作保证修改状态码过程的原子性
+
+
+
+ReentrantLock 源码分析：
+
++ 接口实现：实现了 Lock 接口，定义了 lock 和 unlock 相关操作，并且存在 newCondition 方法
++ 三个内部类：
+    + Sync：继承自 AQS，未实现 lock 算法
+    + NonfairSync & FairSync：继承自 Sync，分别实现非公平锁和公平锁
++ 锁控制：对该类的操作大部分直接转换为对 Sync 类的操作
++ 可重入性：获取独占资源的线程，可以重复获取该独占资源，实现上通过计数器加一即可
+
+ReentrantLock 和 synchronized 对比：
+
++ 底层实现上：ReentrantLock 是 JDK 提供的，synchronized 是 JVM 提供的
++ 手动释放：前者需要手动释放，最好配合 try-finally，后者不需要自己释放
++ 是否可中断：前者可以通过 lockInterruptibly 响应中断，后者不可中断
++ 是否公平锁：前者可以是公平锁，后者不是公平锁
++ 是否可绑定 Condition：前者可以绑定 Condition 结合 await/signal 实现线程精确唤醒，后者则不行
+
+
+
+
 
 
 
