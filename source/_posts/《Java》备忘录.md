@@ -1370,9 +1370,28 @@ ReentrantLock 和 synchronized 对比：
 
 
 
+ReentrantReadWriteLock 源码分析：
 
++ 接口实现：实现了 ReadWriteLock 接口
++ 类的内部类：
+    + Sync：继承自 AQS，使用一个 int 表示写锁（16bit）和读锁（16bit）数量，存在以下两个内部类
+        + HoldCounter：和读锁配套使用
+        + ThreadLocalHoldCounter：和写锁配套使用
+    + NonfairSync & FairSync：继承自 Sync，分别实现非公平锁和公平锁
+    + ReadLock & WriteLock：实现了 Lock 接口
++ 类属性：同步队列 sync 和两个锁资源 readLock & wirteLock
 
+ReentrantReadWriteLock.Sync 关键方法：
 
++ tryRelease：用于尝试释放写锁资源，若释放后资源数量（state）为 0，则成功释放该锁
++ tryAcquire：用于尝试获取写锁资源，如果当前资源数量（state）为 0，则成功获取，根据公平策略判断其是否会阻塞
++ tryReleaseShared：用于尝试释放读锁资源，使用无限循环保证释放成功
++ tryAcquireShared：用于尝试获取读锁资源，若存在写锁，则失败，否则，判断读线程是否需要被阻塞，若之前没有读锁，还需要设置第一个读线程 firstReader 和 firstReaderHoldCount
+
+锁升降级：
+
++ 锁降级：线程把持住（当前拥有的）写锁，再获取到读锁，随后释放（先前拥有的）写锁的过程
++ 锁升级：RentrantReadWriteLock 不支持锁升级，目的是为了保证数据的可见性
 
 
 
