@@ -1395,6 +1395,39 @@ ReentrantReadWriteLock.Sync 关键方法：
 
 
 
+HashTable：利用 synchronized 对 put 等操作进行加锁，从而加锁期间锁住的是整个哈希表，效率低下
+
+ConcurrentHashMap - JDK7：使用分段锁机制实现，从而保证了并发度的提升
+
++ 数据结构：整个 ConcurrentHashMap 由一组 Segment 组成，其通过继承 ReentrantLock 来加锁，外部 ConcurrentHashMap 的并发度由 concurrencyLevel 确定，实际上就是 Segement 的个数
+
+    ![java-thread-x-concurrent-hashmap-1](《Java》备忘录/java-thread-x-concurrent-hashmap-1.png)
+
++ put 操作：
+
+    + 根据 hash 值找到对应的 segment
+    + segment 内部首先尝试获取锁资源，获取成功后进行 put 操作
+
++ get 操作：
+
+    + 计算 hash 值，找到对应的 segment 
+    + 根据 hash 找到该 segment 内部数组对应的位置
+    + 根据链表顺序查找
+
+ConcurrentHashMap - JDK8：
+
++ 数据结构：实现上选择和 HashMap 类似的数组 + 链表 + 红黑树的方式，而加锁采用 CAS 和 synchronized 实现，并发度相较于 JDK7 上升
+
+
+
+
+
+
+
+
+
+
+
 
 
 
