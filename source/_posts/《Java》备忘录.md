@@ -1420,6 +1420,23 @@ ConcurrentHashMap - JDK8：
 
 
 
+CopyOnWriteArrayList：
+
++ 概述：是 ArrayList 的一个线程安全的变体，其中所有可变操作)都是通过对底层数组进行一次新的拷贝来实现的，使用 lock 保证并发安全性
++ 实现关系：实现了 List，RandomAccess，Clonable 接口
++ 内部类：COWIterator，其存在一个 Object 类型的数组作为 CopyOnWriteArrayList 数组的快照，因此，在创建迭代器后，迭代器就不会反映列表的修改，同时，在迭代器上不支持修改操作
++ 类属性：lock 字段用于保证线程安全访问，还有一个 Object 数组，用来存放具体元素，使用反射机制和 CAS 来原子更新 lock 字段
++ 基于数组拷贝实现：add & addIfAbsent & set & remove
++ 缺陷：
+    + 由于写操作的时候，需要拷贝数据，可能会导致 young gc 或者 full gc
+    + 不能用于实时读的场景，因为拷贝数据本身需要时间，其能保持最终一致性，但是没法满足实时性
++ 使用场景：合适读多写少的场景，但是慎用，因为不知道里面到底放置了多少数据
++ 和 Vector 的比较：尽管 Vector 里面的每个方法都是同步的，但是使用上还需要额外在外层加上一层锁，双重锁会导致性能大幅降低，如 size && remove && remove(size - 1)，第一个线程第二次 remove 时会出现错误，可以使用 CopyOnWriteArrayList 来代替 Vector
+
+
+
+
+
 
 
 
