@@ -1450,6 +1450,29 @@ ConcurrentLinkedQueue：
 
 
 
+BlockingQueue & BlockingDeque：
+
++ 简介：阻塞队列和双向阻塞队列接口，适用于生常-消费场景
+
++ 方法：不同操作方法处理异常的情况不同
+
+    |      | 抛异常     | 特定值   | 阻塞    | 超时                        |
+    | ---- | ---------- | -------- | ------- | --------------------------- |
+    | 插入 | add(o)     | offer(o) | put(o)  | offer(o, timeout, timeunit) |
+    | 移除 | remove(o)  | poll(o)  | take(o) | poll(timeout, timeunit)     |
+    | 检查 | element(o) | peek(o)  |         |                             |
+
++ 实现类：
+
+    + ArrayBlockingQueue：有界阻塞队列，并不会自动扩容
+    + DelayQueue：无界阻塞队列，用于放置实现了 Delayed 接口的对象，其中的对象只有在其到期时才能从队列中取走，常见使用如关闭空闲连接，缓存等
+    + LinkedBlockingQueue：链阻塞队列，不定义长度时为 Integer.MAX_VALUE
+    + SynchronousQueue：内部只能容纳单个元素
+    + PriorityBlockingQueue：无界的优先阻塞队列
+    + LinkedBlockingDeque：双向链阻塞队列
+
+
+
 
 
 
