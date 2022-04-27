@@ -1473,6 +1473,28 @@ BlockingQueue & BlockingDeque：
 
 
 
+FutureTask：
+
++ 简介：为 Future 提供了基础实现，如异步获取任务的执行结果和取消任务等，使用 CAS 确保线程安全
+
++ Future 接口：通过该接口可以查看任务是否执行完成，获取执行结果或者取消执行
+
++ 状态转换：
+
+    ![java-thread-x-juc-futuretask-2](《Java》备忘录/java-thread-x-juc-futuretask-2-16506963063202.png)
+
++ 核心方法：
+
+    + run：如果任务状态是 NEW，则利用 CAS 修改线程为当前线程，执行完毕调用 set(result) 设置执行结果
+    + get：如果任务完成，直接返回结果，否则的话则进行等待，见当前线程加入 waiters 节点中
+    + cancel：尝试取消当前任务，如果任务已经完成或者取消，操作失败
+
++ 使用：
+
+    + Future + ExecutorService
+    + FutureTask + ExecutorService
+    + FutureTask + Thread
+
 
 
 
