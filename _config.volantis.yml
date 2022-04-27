@@ -6,21 +6,21 @@ custom_css:
     effect: [shadow, blur] # [shadow, floatable, blur]
   fontfamily:
     logofont:
-      fontfamily: '"Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      fontfamily: '"Microsoft YaHei", "Times New Roman", "PingFang SC", Helvetica, Arial, "Varela Round"'
       name: 'Varela Round'
       url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf
       weight: normal
       style: normal
     bodyfont:
-      fontfamily: 'UbuntuMono, "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      fontfamily: '"Microsoft YaHei", "PingFang SC", Arial'
       name: 'UbuntuMono'
       url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf
       weight: normal
       style: normal
     codefont:
-      fontfamily: 'Menlo, Monaco'
+      fontfamily: 'UbuntuMono, Mono'
       name: 'Monaco'
-      url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/Monaco/Monaco.ttf
+      url: https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf
       weight: normal
       style: normal
 color_scheme:
@@ -138,7 +138,9 @@ plugins:
   # 文章字数统计、阅读时长，开启需要安装插件: npm i --save hexo-wordcount
   wordcount:
     enable: true
-
+  # 图片懒加载，启用的话可能会有图片渲染不出来的问题
+  lazyload:
+    enable: false   
   # Codeblock Copy Button
   clipboard:
     enable: true
@@ -217,7 +219,7 @@ sidebar:
       class: blogger
       display: [desktop, mobile] # [desktop, mobile]
       avatar: https://s1.ax1x.com/2020/09/08/wQFm7j.jpg
-      shape: circle # circle, rectangle
+      shape: rectangle # circle, rectangle
       url: /about/
       title: 
       subtitle:
@@ -237,4 +239,4 @@ site_footer:
     #   url: https://music.163.com/#/user/home?id=63035382
   # copyright: '[Copyright © 2017-2020 Mr. X](https://xaoxuu.com)'
   # You can add your own property here. (Support markdown, for example: br: '<br>')
-  br: '<br>'      
+  br: '<br>'     
