@@ -1497,6 +1497,80 @@ FutureTask：
 
 
 
+ThreadPoolExecutor：
+
++ 简介：线程池能够对线程统一分配，调优和监控，能够提高线程的可管理性。本身实现上就是一个线程集合 workerSet 和一个阻塞队列 workQueue，workerSet 里面的线程在空闲时不断从 workQueue 里面获取任务执行，没有任务时则会阻塞
+
++ 原理：构造方法如下
+
+    ```java
+    public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              RejectedExecutionHandler handler)
+    ```
+
+    + corePoolSize：每次提交一个任务时，都会创建一个线程用来处理该任务，直到线程数为 corePoolSize，当达到该值时，此时新任务会被放到阻塞队列中
+    + maximumPoolSize：当阻塞队列满并且有新任务时，则创建新线程执行任务，直到达到 maximumPoolSize
+    + keepAliveTime：线程空闲时的存活时间，只有在线程数大于 corePoolSize 时有效
+    + workQueue：用来保存等待被执行的任务的阻塞队列，可以是有界或者无界的
+    + handler：自定义的线程池的饱和策略，即当阻塞队列满并且没有空闲线程时，采取的处理策略
+        + `AbortPolicy`：默认策略，直接抛出异常
+        + `CallerRunsPolicy`: 用调用者所在的线程来执行任务
+        + `DiscardOldestPolicy`: 丢弃阻塞队列中靠最前的任务，并执行当前任务
+        + `DiscardPolicy`: 直接丢弃任务
+
++ Executors 提供的三种策略：
+
+    + newFixedThreadPool：饱和策略失效，并且 keepAliveTime 失效
+
+        ```java
+        public static ExecutorService newFixedThreadPool(int nThreads) {
+            return new ThreadPoolExecutor(nThreads, nThreads,
+                                        0L, TimeUnit.MILLISECONDS,
+                                        new LinkedBlockingQueue<Runnable>());
+        }
+        ```
+
+    + newSingleThreadExecutor：和 newFixedThreadPool 相同，不过只有单个线程
+
+    + newCachedThreadPool：可能会导致线程数过大
+
+        ```java
+        public static ExecutorService newCachedThreadPool() {
+            return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                            60L, TimeUnit.SECONDS,
+                                            new SynchronousQueue<Runnable>());
+        }
+        ```
+
++ 关闭线程池：
+
+    + shutdown：不再接收新任务，并且中断所有没有正在执行任务的线程
+    + shutdownNow：不再接受新任务，然后停止所有正在执行或暂停任务的线程
+
++ 任务执行 execute：当线程数小于 corePoolSize 时，创建新的线程处理任务，否则将其放入到阻塞队列中；如果阻塞队列满，并且线程数小于 maximumPoolSize，则创建新的线程处理任务；如果线程数已经达到 maximumPoolSize，则使用 rejector 来处理
+
++ 任务提交 submit：
+
+    ![java-thread-x-executors-3](《Java》备忘录/java-thread-x-executors-3.png)
+
++ 不推荐使用 Executors 去创建线程池的原因：或者队列无限长，或者线程数量无限多，或者饱和策略失效；直接使用 ThreadPoolExecutor 的方式更加明确线程池的运行方式，规避资源耗尽的风险
+
++ 监控线程池状态：
+
+    + getTaskCount & getCompletedTaskCount 
+    + getLargestPoolSize & getPoolSize 
+    + getActiveCount
+
+
+
+
+
+
+
 
 
 
