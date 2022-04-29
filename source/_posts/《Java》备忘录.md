@@ -1567,6 +1567,48 @@ ThreadPoolExecutor：
 
 
 
+ScheduledThreadPoolExecutor：
+
++ 简介：继承自 ThreadPoolExecutor，定时或者延时启动任务，其不同点在于：
+
+    + DelayedWorkQueue：使用无界延迟队列存储任务，保证了任务只有可以执行的时候，wokrer 才能从延迟队列中取到对应的任务来执行。它只能存储 RunnableScheduledFuture 对象，并且自己实现了二叉堆用于排序
+    + ScheduledFutureTask：继承 FutureTask，并且实现了 Delayed 接口，表示延迟执行的任务
+    + 支持可选的 run-after-shutdown 参数，在池被关闭之后来决定是否执行周期或延迟任务
+
++ ScheduledFutureTask：
+
+    + run 方法：先检查是否已经到达可执行时间，然后检查是否是周期任务，如果不是，直接执行，否则将任务再次添加到队列中，并且重新设置任务的可执行时间点
+    + run-afetr-shutdown 参数：
+        + continueExistingPeriodicTasksAfterShutdown
+        + executeExistingDelayedTasksAfterShutdown
+
++ 构造函数：
+
+    ```java
+    public ScheduledThreadPoolExecutor(int corePoolSize,
+                                       ThreadFactory threadFactory,
+                                       RejectedExecutionHandler handler) {
+        super(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,
+              new DelayedWorkQueue(), threadFactory, handler);
+    }
+    ```
+
++ 核心方法：
+
+    + scheduleAtFixedRate：第一次开始执行后，等待 delay 延迟执行第二次任务
+    + scheduleWithFixedDelay：第一次执行完成后，等待 delay 延迟执行第二次任务
+
++ ThreadPoolExecutor 饱和策略不适用于 ScheduledThreadPoolExecutor 的原因：后者使用的是无界延迟队列，maximumPoolSize 不生效，因此饱和策略也不生效
+
++ Executors 提供的方法;
+
+    + newScheduledThreadPool：可指定核心线程数的线程池
+    + newSingleThreadScheduledExecutor：只有一个工作线程的线程池，如果出现异常而导致线程终止，则创建新的线程来代替
+
+
+
+
+
 
 
 
