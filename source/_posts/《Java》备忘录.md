@@ -1607,6 +1607,63 @@ ScheduledThreadPoolExecutor：
 
 
 
+ForkJoin 框架：
+
++ 功能：可以将大任务划分为小任务来异步执行的工具
+
++ 核心思想：
+
+    + 分治思想
+
+    + 工作窃取（work-stealing）算法：工作线程优先处理来自自身队列的任务，然后以FIFO的顺序随机窃取其他队列中的任务
+
+        ![java-thread-x-forkjoin-3](《Java》备忘录/java-thread-x-forkjoin-3-16507282711952.png)
+
++ 三个模块：
+
+    + 任务对象：ForkJoinTask，用户定义的任务可以继承以下三类
+        + RecursiveTask：有返回值的，可递归执行的任务
+        + RecursiveAction：无返回值的，可递归执行的任务
+        + CountedCompleter：任务完成执行后会触发执行一个自定义的钩子函数
+    + 执行 Fork/Join 任务的线程: ForkJoinWorkerThread
+    + 线程池: ForkJoinPool
+
++ 执行流程：
+
+    + 直接通过 FJP 提交的外部事务（external/submissions task），存放在 workQueue 偶数槽位
+        + invoke：会等待任务计算完毕并返回计算结果
+        + execute：直接向池中提交来异步执行，无返回结果
+        + submit：也是异步执行，但是会返回一个 Future 对象，在适当时候通过 get 得到结果
+    + 通过内部 fork 分割的子任务(Worker task)，存放在 workQueues 的奇数槽位
+
+    ![java-thread-x-forkjoin-5](《Java》备忘录/java-thread-x-forkjoin-5.png)
+
++ Fork/Join 的注意事项：
+
+    + 避免不必要的 fork：划分成两个任务后，不要都 fork，然后 join，这样会造成性能下降，可以一个任务 fork，另一个任务直接 coompute，也就是复用工作线程，不过需要注意 fork & compute & join 顺序
+    + 选择合适的子任务粒度：官方文档给出的任务应该执行 100-10000 个基本步骤，并且需要 JNI 预热
+
++ 创建方法：
+
+    + Executors.newWorkStealingPool
+    + ForkJoinPool.commonPool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
