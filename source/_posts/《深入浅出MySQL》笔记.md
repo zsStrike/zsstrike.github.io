@@ -573,7 +573,7 @@ tbl_name {READ [LOCAL] | [LOW_PRIORITY] WRITE}
 UNLOCK TABLES
 ```
 
-事务控制：默认情况，MySQL 是自动提交的，CHAIN 会立即启动一个新事物，并且和刚才的事务具有相同的隔离级别，RELEASE 则会断开和客户端的连接。另外，所有的 DDL 语句都是不能回滚的。在事务中可以通过定义 SAVEPOINT，指定回滚事务的一个部分，但是不能指定提交事务的一个部分。
+事务控制：默认情况，MySQL 是自动提交的，CHAIN 会立即启动一个新事务，并且和刚才的事务具有相同的隔离级别，RELEASE 则会断开和客户端的连接。另外，所有的 DDL 语句都是不能回滚的。在事务中可以通过定义 SAVEPOINT，指定回滚事务的一个部分，但是不能指定提交事务的一个部分。
 
 ```
 START TRANSACTION | BEGIN [WORK]
