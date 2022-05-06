@@ -458,7 +458,25 @@ tags: ["Java"]
 
     主要通过 Java 提供的反射机制来实现，通过反射可以获取到对应注解元素的注解，并且可以获取注解中的属性。JUnit 便是基于注解的测试单元。
 
+86. Java 中的 synchronized 关键字作用以及对应实现原理？
 
+    实现同步锁，修饰实例方法的时候锁住的是方法调用所在的对象，静态的 synchronized 方法以 Class 对象为锁。其实现原理通过 JVM 添加的 monitorenter&monitorexit/Access flags 指令实现，每个 Java 对象都有一个 monitor 对象，当 monitor 被占用时就会处于锁定状态，线程执行 monitorenter 指令时尝试获取 monitor 的所有权：
+
+    + 如果 monitor 的进入数为 0，则该线程进入 monitor，然后将进入数设置为 1，该线程即为 monitor 的所有者。
+    + 如果线程已经占有该 monitor，只是重新进入，则进入 monitor 的进入数加 1。
+    + 如果其他线程已经占用了 monitor，则该线程进入阻塞状态，直到monitor的进入数为0，再重新尝试获取 monitor 的所有权。
+
+    而执行 monitorexit 的线程必须是 objectref 所对应的 monitor 的所有者，指令执行时，monitor 的进入数减1，如果减 1 后进入数为 0，那线程退出 monitor，不再是这个 monitor 的所有者。其他被这个 monitor 阻塞的线程可以尝试去获取这个 monitor 的所有权。
+
+    > 同步代码即为临界区，monitorenter 即为进入区，monitorexit 即为退出区
+
+    ![img](Java-面试题目汇总/v2-c447699ef3e74bd7855c5710cd7308d2_1440w.webp)
+
+87. 什么是可重入锁？
+
+    可重入锁就是说某个线程已经获得某个锁，可以再次获取该锁而不会出现死锁。synchronized 便是可重入锁。
+
+88. 
 
 
 
