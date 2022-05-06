@@ -1719,7 +1719,33 @@ ThreadLocal：
 
 
 
+## 12 Java 8 新增特性
 
+编程方式：
+
++ 面向对象编程：对数据进行抽象，Java 原生支持
++ 面向函数编程：对行为进行抽象，Java 引入lambda 表达式，流 Stream 和改进集合类的 API 支持
+
+lambda 表达式：
+
++ 使用场景：
+    + 预定义使用了 @Functional 注释的函数式接口
+    + 单个抽象方法类型（SAM）
++ 方法引用：可以在 lambda 表达式内使用，使用 `::` 连接对象和方法即可，但是此时不能修改参数
++ 变量捕获：可以使用静态，非静态和局部变量。需要注意，lambda 内部不能修改外部的局部变量，外部的局部变量定义在栈上，JVM 规定了栈上的数据是不需要同步操作的，修改后将产生同步问题
++ JVM 实现：lambda 方法在编译器内部被翻译成私有静态方法，通过 invokedynamic 指令进行调用
+
+内置四大函数接口：
+
++ 消费型接口：`Consumer<T> void accept(T t)`
++ 供给型接口：`Supplier <T> T get()`
++ 断定型接口：`Predicate<T> boolean test(T t)`
++ 函数型接口：`Function<T,R> R apply(T t)`
+
+流：更高的抽象层次上对集合数据进行操作
+
++ 分类：Stream 和 parallelStream
++ 常用方法：filter，sorted，forEach，map，reduce，distinct，limit，count，min，max，collect，summaryStatistics
 
 
 
