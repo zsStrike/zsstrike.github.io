@@ -369,23 +369,27 @@ tags: ["Java"]
 
     从 CharBuffer，String，StringBuffer，StringBuilder 抽象出的一般化定义。
 
-65. Pattern 和 Matcher 类的作用？
+65. String 对象的 length 方法和 codePointCount 方法的区别？
+
+    首先，对于 Java 来说，其采用 UTF-16 来保存文本，length 方法返回的是 code unit（也就是char）的数量，而 codePointCount 返回的是 UTF-16 编码下的字符个数。
+
+66. Pattern 和 Matcher 类的作用？
 
     根据一个 String 对象生成一个 Pattern 对象，通过 Pattern 对象的 match 方法产生一个 Matcher 对象。
 
-66. Matcher 中的组获取，对于 `A(B(C))D` ？
+67. Matcher 中的组获取，对于 `A(B(C))D` ？
 
     `A(B(C))D` 中有三个组：组 0 是 ABCD，组 1 是 BC，组 2 是 C。通过 Matcher 对象的 group 方法可以获取到每个组。
 
-67. Class 对象是什么？
+68. Class 对象是什么？
 
     Class 对象包含了与类有关的信息，每个类都会产生一个 Class 对象，每当编译一个新类，就会产生一个 Class 对象（保存在同名的 .class 文件中）。为了生成该类的对象，JVM 首先会调用类加载器子系统将这个类加载到内存中。Java 是动态加载的，即只有在类需要的时候才会进行类的加载。所有的 Class 对象都属于 Class 类。
 
-68. 如何获取类对应的 Class 对象？
+69. 如何获取类对应的 Class 对象？
 
     `类名.class`，`Class.forName` 和 `instance.getClass()`。
 
-69. 类加载和链接的过程？
+70. 类加载和链接的过程？
 
     加载：查找字节码，并且创建一个 Class 对象
 
@@ -393,78 +397,78 @@ tags: ["Java"]
 
     初始化：先初始化基类，然后执行 static 初始化器和 static 初始化块
 
-70. 如何判断某个实例是否是某个类的实例？
+71. 如何判断某个实例是否是某个类的实例？
 
     + instanceOf：关键字，判断某个实例是否是某个类的实例化对象
     + isInstance：Class 类中的方法，用于动态判断某个对象是否能强转为另外一个类，如 `0 instance of String` 本身会报错，但是 `String.class.isInstance(0)` 则可行。
 
-71. 什么是反射以及反射的作用？
+72. 什么是反射以及反射的作用？
 
     指在程序的运行状态中，可以构造任意一个类的对象，可以了解任意一个对象所属的类，可以了解任意一个类的成员变量和方法，可以调用任意一个对象的属性和方法。 这种动态获取程序信息以及动态调用对象的功能称为Java语言的反射机制。
 
-72. 动态代理是什么，实现原理？
+73. 动态代理是什么，实现原理？
 
     一个对象封装真实对象，代替其提供其他或不同的操作—这些操作通常涉及到与“真实”对象的通信，因此代理通常充当中间对象。通过调用静态方法 Proxy.newProxyInstance 来创建动态代理，同时还需要一个实现了 InvocationHandler 的类用于实现动态代理以便在调用方法前后进行一些个性化操作。
 
-73. 泛型可以在哪些类型上应用？
+74. 泛型可以在哪些类型上应用？
 
     可以应用在泛型接口上，泛型类，泛型方法上。能使用泛型方法的话就不要使用泛型类。
 
-74. `List<String>` 和 `List<Integer>` 在运行时类型信息是否相同？
+75. `List<String>` 和 `List<Integer>` 在运行时类型信息是否相同？
 
     相同，涉及到泛型擦除，它们在运行时通过 getClass 得到的结果相同。
 
-75. 如果想要使用泛型对应的方法，该如何定义泛型？
+76. 如果想要使用泛型对应的方法，该如何定义泛型？
 
     可以使用 `<T extends Sup>` ，这样就可以使用 Sup 里面的方法。
 
-76. 如何根据泛型创建对象？
+77. 如何根据泛型创建对象？
 
     不可以用过 `new T()` 来实现，可以通过反射实现，可以传送一个 T 的 Class 对象，然后调用反射方法创建新的实例即可。
 
-77. 泛型数组的声明和创建？
+78. 泛型数组的声明和创建？
 
     可以通过 `List<String>[] list = new LinkedList[n]; list[0] = new LinkedList<String>();` 方式创建泛型数组；更加优雅的方式是通过 ArrayList 创建泛型数组。
 
-78. 基本类型能否作为泛型类型？
+79. 基本类型能否作为泛型类型？
 
     不能，但是可以使用对应的包装类型。
 
-79. 什么是 Mixin？
+80. 什么是 Mixin？
 
     最基本的概念是混合多个类的能力，以产生一个可以表示混型中所有类型的类。Java 中实现方法有与接口混合，使用装饰器模式，与动态代理混合。
 
-80. Arrays 相关方法？
+81. Arrays 相关方法？
 
     fill，setAll，asList，copyOfRange，deepToString，stream，sort & binarySearch。
 
-81. enum 类型的本质？
+82. enum 类型的本质？
 
     实际上就是继承自 Enum 类的派生类，在 enum 中的每个枚举值实际上就是 `public static final` 类型的变量。通过使用父类的 values 方法返回枚举值对应的类，使用 ordinal 方法返回枚举值的索引，使用 valueOf 则根据字符串常量创建对应的枚举类型。
 
-82. enum 扩展性？
+83. enum 扩展性？
 
     enum 本身继承自 Enum 类型，不能再次继承，可以通过接口实现扩展，另外，可以在 enum 中声明自定义的方法和属性。
 
-83. java.lang 中的注解有哪些？
+84. java.lang 中的注解有哪些？
 
     @Override，@Deprecated，@SuppressWarnings，@SafeVarargs，@FunctionalInterface。
 
-84. 如何定义注解以及元注解是什么？
+85. 如何定义注解以及元注解是什么？
 
     使用 @interface 定义注解，元注解即用来注解自定义的注解，包括 @Traget，@Retention，@Documented，@Inherited，@Repetable。
 
-85. 如何编写注解处理器？
+86. 如何编写注解处理器？
 
     主要通过 Java 提供的反射机制来实现，通过反射可以获取到对应注解元素的注解，并且可以获取注解中的属性。JUnit 便是基于注解的测试单元。
 
-86. Java 中的对象关联的 Monitor 对象是什么？
+87. Java 中的对象关联的 Monitor 对象是什么？
 
     用于处理和锁相关的对象，每个 Java 对象都有一个 Monitor 对象，里面的 owner 是哪个线程便表示哪个线程具有某个对象的锁。
 
     ![img](Java-面试题目汇总/v2-c447699ef3e74bd7855c5710cd7308d2_1440w.webp)
 
-87. Java 中的 synchronized 关键字作用以及对应实现原理？
+88. Java 中的 synchronized 关键字作用以及对应实现原理？
 
     实现同步锁，修饰实例方法的时候锁住的是方法调用所在的对象，静态的 synchronized 方法以 Class 对象为锁。其实现原理通过 JVM 添加的 monitorenter&monitorexit/Access flags 指令实现，每个 Java 对象都有一个 monitor 对象，当 monitor 被占用时就会处于锁定状态，线程执行 monitorenter 指令时尝试获取 monitor 的所有权：
 
@@ -476,32 +480,32 @@ tags: ["Java"]
 
     > 同步代码即为临界区，monitorenter 即为进入区，monitorexit 即为退出区
 
-88. Java 中的 wait&notify 的作用以及实现原理？
+89. Java 中的 wait&notify 的作用以及实现原理？
 
     这两个方法通常用于多线程之间的同步处理，wait 用于将本线程状态修改为 waiting 状态，而 notify 则是将最先进入 waiting 状态的线程唤醒。wait 实现原理是将对应线程移动到 WaitSet 中，而 notify 则是将 WaitSet 中最先进入的线程移动到 EntryList 中，用于竞争锁，竞争到锁才能进入运行态。
 
-89. 调用 notify/notifyAll 是随机从等待线程队列中取一个或者按某种规律取一个来执行？
+90. 调用 notify/notifyAll 是随机从等待线程队列中取一个或者按某种规律取一个来执行？
 
     + 如果是通过 notify 来唤起的线程，那先进入 wait 的线程会先被唤起来
     + 如果是通过 notifyAll 唤起的线程，默认情况是最后进入的会先被唤起来，即 LIFO 的策略
 
-90. 调用 notify/notifyAll 后等待中的线程会立刻运行吗？
+91. 调用 notify/notifyAll 后等待中的线程会立刻运行吗？
 
     并不会，notify 后对应的进程只是进入了 EntryList，可以参与锁竞争，只有获取到了锁才会成为 Owner，进入运行态。
 
-91. wait 会影响性能吗？
+92. wait 会影响性能吗？
 
     wait/nofity 是通过 jvm 里的 park/unpark 机制来实现的，在 linux 下这种机制又是通过 pthread_cond_wait/pthread_cond_signal 来实现的，因此当线程进入到 wait 状态的时候其实是会放弃 cpu的，也就是说这类线程是不会占用 cpu 资源，从而不影响性能。
 
     > 虽然不影响性能，但是可能存在上下文切换的开销
 
-92. join 关键字作用，如何实现？
+93. join 关键字作用，如何实现？
 
     让主线程等待子线程结束之后才能继续运行，用于子线程和主线程之间的同步。
 
     join 方法本身是同步方法，当主线程调用时，主线程会获取子线程对象的 monitor，之后，在 join 方法里面，主线程执行了 wait 操作，其被加入到子线程对象 monitor 中的 WaitSet 中，实现主线程等待；之后，子线程结束时，JVM 会调用 notifyAll 唤醒所有等待进程，达到唤醒主线程的作用。
 
-93. sleep 方法会释放锁资源吗，会释放 CPU 资源吗？
+94. sleep 方法会释放锁资源吗，会释放 CPU 资源吗？
 
     sleep 方法并不会释放锁资源，但是会释放 CPU 资源。其是通过 JVM 封装操作系统底层实现而实现的：
 
@@ -509,17 +513,17 @@ tags: ["Java"]
     + 用 sleep() 提供的参数来设置一个定时器；
     + 当时间结束，定时器会触发，内核收到中断后修改进程（或线程）的状态。例如线程会被标志为就绪而进入就绪队列等待调度。
 
-94. yield 方法作用？
+95. yield 方法作用？
 
     暂停当前线程，以便其他相同优先级的线程有机会执行，不过不能指定暂停的时间，并且也不能保证当前线程马上停止。yield 方法只是将 Running 状态转变为 Runnable 状态。
 
-95. interrupt 方法的作用和实现方式？
+96. interrupt 方法的作用和实现方式？
 
     实际上是提供了一种优雅中止线程的方法。在以前可以通过 Thread.stop 暴力停止一个线程，这种方法太过暴力并且不是安全的，为此，stop 方法被废弃。interrupt 方法则不会真正停止一个线程，它仅仅是给这个线程发了一个信号告诉它它应该结束了（设置一个标志位）。而线程本身应该循环监测自己的中断标志位，以对其进行响应的操作，如回收资源，结束线程自身。
 
     Thread.interrupted() 会返回标记位，并且同时清除标志位，并不是代表线程又恢复了，可以理解为仅仅是代表它已经响应完了这个中断信号然后又重新置为可以再次接收信号的状态。
 
-96. 什么是可重入锁？
+97. 什么是可重入锁？
 
     可重入锁就是说某个线程已经获得某个锁，可以再次获取该锁而不会出现死锁。synchronized 便是可重入锁。
 
