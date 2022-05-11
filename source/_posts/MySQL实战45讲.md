@@ -208,7 +208,7 @@ MDL 则不需要显式使用，在访问一个表的时候会被自动加上，�
 
 ### 问题
 
-备份一般都会在备库上执行，你在用–single-transaction方法做逻辑备份的过程中，如果主库上的一个小表做了一个DDL，比如给一个表上加了一列。这时候，从备库上会看到什么现象呢？
+备份一般都会在备库上执行，你在用 `--single-transaction` 方法做逻辑备份的过程中，如果主库上的一个小表做了一个 DDL，比如给一个表上加了一列。这时候，从备库上会看到什么现象呢？
 
 ```sql
 Q1:SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
@@ -227,10 +227,10 @@ Q6:ROLLBACK TO SAVEPOINT sp; /* release MDL */
 
 参考答案如下：
 
-1. 如果在Q4语句执行之前到达，现象：没有影响，备份拿到的是DDL后的表结构。
-2. 如果在“时刻 2”到达，则表结构被改过，Q5执行的时候，报 Table definition has changed, please retry transaction，现象：mysqldump终止；
-3. 如果在“时刻2”和“时刻3”之间到达，mysqldump占着t1的MDL读锁，binlog被阻塞，现象：主从延迟，直到Q6执行完成。
-4. 从“时刻4”开始，mysqldump释放了MDL读锁，现象：没有影响，备份拿到的是DDL前的表结构。
+1. 如果在 Q4 语句执行之前到达，现象：没有影响，备份拿到的是 DDL 后的表结构。
+2. 如果在"时刻 2"到达，则表结构被改过，Q5 执行的时候，报 Table definition has changed, please retry transaction，现象：mysqldump 终止。
+3. 如果在“时刻2”和“时刻3”之间到达，mysqldump 占着 t1 的 MDL 读锁，binlog 被阻塞，现象：主从延迟，直到 Q6 执行完成。
+4. 从“时刻4”开始，mysqldump 释放了 MDL 读锁，现象：没有影响，备份拿到的是 DDL 前的表结构。
 
 
 
