@@ -546,7 +546,20 @@ tags: ["Java"]
     + 栈封闭：是线程封闭的一种特例，在栈封闭中，只能通过局部变量才能访问到对象。
     + ThreadLocal 类：创建一个只能被当前线程使用的对象。ThreadLocal 提供 get 和 set 方法，这些方法实际上是通过将对应的对象存入 Thread 类中的 threadLocals 映射中实现的。
 
+100. 操作系统中进程状态有哪些，Java 中的线程状态有哪些？
 
+     操作系统中进程状态有 New，Ready，Running，Blocked，Terminated，（Ready-Suspend，Blocked-Suspend）。
+
+     Java 中的状态有：
+
+     + New：A thread which has not yet started.
+     + Runnable：for a runnable thread.  A thread in the runnable state is executing in the Java virtual machine but it may waiting for other resources from the operating system such as processor.
+     + Blocked：for a thread blocked waiting for a monitor lock.
+     + Waiting：for a waiting thread. After call wait, join, park with no timeout. A thread in the waiting state is waiting for another thread to perform a particular action.
+     + Timed-Waiting：for a waiting thread with a specified waiting time. After call sleep, wait, join, parkNanos, parkUntil.
+     + Terminated
+
+     Java 中的 Runnable 状态对应操作系统中的 Ready 和 Running 状态，操作系统中的 BLOCKED 状态对应 Java 中的 Blocked，Waiting，Timed-Waiting 状态。
 
 
 
