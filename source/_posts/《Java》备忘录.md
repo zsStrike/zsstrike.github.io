@@ -1749,6 +1749,99 @@ lambda 表达式：
 
 
 
+Optional 类：
+
++ 功能：可以为 null 的对象容器，提高 null 的安全性
++ 主要方法：
+    + of，ofNullable
+    + isPresent，get
+    + ifPresent，orElse，orElseGet，orElseThrow
+    + map，flatMap
+    + filter
++ 性能：可能没有传统方法 `obj != null` 高性能，但是大多数情况下不会有问题，可用在流处理上
+
+
+
+默认方法：
+
++ 简介：接口可以有实现方法，而且不需要实现类去实现该方法，使用关键字 default 即可
++ 作用：为了兼容，之前的接口不支持默认方法的实现，如果想要修改接口，就需要修改所有的实现类，但是默认方法就可以实现扩展接口并且不修改对应的实现类，实现了向下兼容
++ 多重实现的冲突：同一个方法可以在不同接口引入，会有冲突产生，判定规则：
+    + 一个声明在类里面的方法优先于任何默认方法，可以使用 `interfaceName.super.methodName()`
+    + 否则，则会优先选取路径最短的，若路径最短的有多个，则报错
+
+
+
+类型注解：
+
++ 简介：Java 8 之前注解只能用在类，方法，属性上，而在 Java 8 中，注解可以用在更大的范围上。类型注解只是语法而不是语义，并不会影响 java 的编译时间，加载时间，以及运行时间，也就是说，编译成 class 文件的时候并不包含类型注解
++ 作用：用来支持在 Java 程序中做强类型检查，如 @NonNull，配合插件式的 check framework，可以检测出一些 runtime error，从而提高代码质量
++ 向下兼容：在 Java 8 版本下，将类型注解使用块注释注释掉
+
+
+
+重复注解：
+
++ 简介：允许在同一声明类型中多次使用同一个注解
++ 实现：
+    + Java 8 之前：由 A 注解保存重复注解 B，使用 A 即可
+    + Java 8：创建重复注解 B 时，使用 @Repeatable 指向 A 注解的 Class 对象，使用时多次使用 B 即可，可读性更强
+
+
+
+类型推断优化：支持菱形语法
+
+
+
+JRE 精简：
+
++ 优点：需要更少的计算资源，启动时间增加，消除未使用的代码安全性提升，适应物联网
++ 划分：compact1 < compact2 < compact3 < Full JRE
+
+
+
+移除永久代（PermGen）：
+
++ 简介：在 Java 7 中，永久代主要用来存储一些 Class 和 Meta 的信息，在 Java 8 中被移除，取而代之的是元空间，JVM 内存结构如图：
+
+    ![java8-jvm-1](《Java》备忘录/java8-jvm-1.png)
+
++ Java8 元空间：
+
+    + 大部分类元数据都在本地内存中分配
+    + 通过 MaxMetaspaceSize 限制元空间大小
+    + 只有达到 MaxMetaspaceSize 阈值才会进行垃圾回收
+    + 一些杂项数据移动到 Java 堆空间中，堆空间容量可能会有所增加
+
+
+
+StampedLock：
+
++ 同步实现方法：
+    + synchronized：重量级锁，在 Java6 中有所优化，通过 JVM 实现，代码异常时能够自动释放锁
+    + Lock：接口，核心方法是 lock，unlock，trylock，实现类基本通过 AQS 来实现，相较于 synchronized，提供了定时锁等候和中断锁等候，unlock 必须放在 finally 语句里面
+    + StampedLock：支持乐观读、悲观读锁和写锁，支持多个线程申请乐观读的同时，还允许一个线程申请写锁，底层并不是通过 AQS 来实现的，而是通过 state 和一个队列实现，不支持重入
++ 优点：相较于 Lock，其在读多写少的场景下性能提升较大
+
+
+
+LocalDate/LocalDateTime：
+
++ Java 中时间类演化：
+    + Java 1.0：Date 既要承担日期信息，又要做日期之间的转换，还要做不同格式日期的显示
+    + Java 1.1：日期时间类分开，Date + Calendar + DateFormat，但是存在以下问题：
+        + year 和 month 是从 1900 开始偏移的，month 是从 0 开始偏移的
+        + Date 和 Calendar 所有属性是可变的
+        + SimpleDateTimeFormat 非线程安全
+    + Java 1.8：引入 java.time 包，里面的类是不可变的并且是线程安全的，其中的类：
+        + Instant：时间戳
+        + LocalDate：日期
+        + LocalTime：时间
+        + LocalDateTime：包含日期和时间
+        + ZonedDateTime：包含时区的完整的日期信息
+
+
+
 
 
 
