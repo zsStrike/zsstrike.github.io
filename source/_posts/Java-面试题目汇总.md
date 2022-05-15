@@ -561,5 +561,98 @@ tags: ["Java"]
 
      Java 中的 Runnable 状态对应操作系统中的 Ready 和 Running 状态，操作系统中的 BLOCKED 状态对应 Java 中的 Blocked，Waiting，Timed-Waiting 状态。
 
+101. volatile 和 synchronized 区别？
+
+     volatile 关键字只保证变量的可见性，即修改某个变量后可以保证其他线程可见，但不保证修改操作的原子性；而 synchronized 在修改了本地内存中的变量后，解锁前会将本地内存修改的内容刷新到主内存中，确保了共享变量的值是最新的，也就保证了可见性，另外其通过加锁实现了原子性。
+
+102. final 关键字能保证可见性吗？
+
+     final 可以保证可见性，被 final 修饰的字段在构造方法中一旦被初始化完成，并且构造方法没有把 this 引用传递出去，在其他线程中就能看见 final 字段值。
+
+     + 写 final 域重排序规则：禁止把 final 域的写重排序到构造方法之外，编译器会在 final 域的写后，构造方法的 return 前，插入一个 Store Store 屏障。确保在对象引用为任意线程可见之前，对象的 final 域已经初始化过。
+     + 读 final 域重排序规则：在一个线程中，初次读对象引用和初次读该对象包含的 final 域，JMM 禁止处理器重排序这两个操作。编译器在读 final 域操作的前面插入一个 Load Load 屏障，确保在读一个对象的 final 域前一定会先读包含这个 final 域的对象引用。
+
+     在旧的 JMM 中，一个严重缺陷是线程可能看到 final 值改变。比如一个线程看到一个 int 类型 final 值为 0，此时该值是未初始化前的零值，一段时间后该值被某线程初始化，再去读这个 final 值会发现值变为 1。该漏洞通过 JSR-133 修复。
+
+103. Java 中的单例模式创建方式有哪些？
+
+     线程安全的懒汉式，线程安全的饿汉式，双重校验锁的饿汉式，枚举，静态内部类。
+
+104. Java 中的双重校验锁实现的单例模式？
+
+     ```java
+     //双重校验锁单例
+     public class SingleInstance {
+         //必须volatile修饰 见分析1
+         private volatile static SingleInstance instance;
+         //私有化构造函数
+         private SingleInstance() {
+         }
+     
+         public static SingleInstance getInstance() {
+             //第一个判空 见分析2
+             if (instance == null) {
+                 synchronized (SingleInstance.class) {
+                     //第二个判空 见分析3
+                     if (instance == null) {
+                         //新建实例
+                         instance = new SingleInstance();
+                     }
+                 }
+             }
+             return instance;
+         }
+     }
+     ```
+
+     + 分析2：为什么在进入同步代码块时需要进行进行判空，假如有线程A和线程B，这时线程A先判断instance为null，所以它进入了同步代码块，创建了对象，然后线程B再进来时，它就不必再进入同步代码快了，可以直接返回，也其实也就是懒加载，可以加快执行速度。
+
+     + 分析3：为什么在同步代码块中还要再进行一次判断呢，假如有线程A和线程B，它俩A先调用方法，B紧接着调用，这时A、B在分析2出的判空都是空，所以A进入同步代码块，B进行等待，当A进入同步代码块中创建了对象后，A线程释放了锁，这时B再进入，如果这时不加分析3的判空，B又会创建一个实例，这明显不符合规矩。
+
+     + 分析1：`instance = new SingleInstance()`，实际执行序列如下，
+
+       1. 给 SingleInstance 分配内存
+       2. 调用 SingleInstance 的构造方法
+       3. 把 instance 指向分配的内存空间
+
+       Java内存模型允许这个进行指令重排序，也就是这 3 步可能是 123 也可能是 132，所以这里就有问题了。假如线程 A 和线程 B，线程 A 已经跑到分析 3 处的代码，这时这条指令执行是 132，刚把步骤3执行完，这时线程 B 跑到了分析 1 处的代码，会发现instance不为null了，这时线程B就直接返回了，从而导致错误。既然知道了原因，那 volatile 关键字就是解决这个的，它可以禁止指令重新排序，而且保证所有线程看到这个变量是一致的，也就是不会从缓存中读取(这个特性后面有机会再说)，所以在创建 instance 实例时，它的步骤都是 123，就不会出错了。
+
+105. Java 监视器模式设计？
+
+     通过组合的方式封装内部对象，内部对象可能是线程不安全的，但是通过增加外部监视器对象，其可以变成线程安全的。在 Java 中的 Vector，Stack 和 HashTable 便采用了监视器模式。
+
+106. 为什么 Java 中的 Vector，Stack 等对象被弃用？
+
+     + Vector 默认扩容 1 倍，ArrayList 默认扩容 0.5 倍，节省空间
+
+     + Vector 每个方法加锁，在单线程中没有必要
+
+     + 尽管 Vector 每个方法是线程安全的，但是不代表外部使用者使用它们也是线程安全的
+
+       ```java
+       if (!vector.contains(key)) { vector.add(key); }
+       ```
+
+       加入两个两个线程，先后执行 vector.contains(key)，那么此时 vector 中会被添加两次 key，与预期并不符合。推荐使用 CopyOnWriteArrayList。
+
+107. CopyOnWriteArrayList 如何实现的，是绝对线程安全的吗？
+
+     ReentrantLock + volatile + 数组拷贝 实现，volatile 保证修改后其他线程可见新的内部数组引用。
+
+     也不是，并发执行如下执行序列可能会报错：
+
+     ```java
+     Thread A: size = list.size();
+     Thread B: list.remove(0);
+     Thread A: list.get(size - 1);
+     // ArrayIndexOutOfBound
+     ```
+
+     
+
+
+
+
+
 
 
