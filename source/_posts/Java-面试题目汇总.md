@@ -6,8 +6,6 @@ tags: ["Java"]
 
 
 
-
-
 本文用于记录学习 Java 中遇到的问题，以备查阅。
 
 <!-- More -->
@@ -519,7 +517,7 @@ tags: ["Java"]
 
 96. interrupt 方法的作用和实现方式？
 
-    实际上是提供了一种优雅中止线程的方法。在以前可以通过 Thread.stop 暴力停止一个线程，这种方法太过暴力并且不是安全的，为此，stop 方法被废弃。interrupt 方法则不会真正停止一个线程，它仅仅是给这个线程发了一个信号告诉它它应该结束了（设置一个标志位）。而线程本身应该循环监测自己的中断标志位，以对其进行响应的操作，如回收资源，结束线程自身。
+    实际上是提供了一种优雅中止线程（线程协作）的方法。在以前可以通过 Thread.stop 暴力停止一个线程，这种方法太过暴力并且不是安全的，为此，stop 方法被废弃。interrupt 方法则不会真正停止一个线程，它仅仅是给这个线程发了一个信号告诉它它应该结束了（设置一个标志位）。而线程本身应该循环监测自己的中断标志位，以对其进行响应的操作，如回收资源，结束线程自身。
 
     Thread.interrupted() 会返回标记位，并且同时清除标志位，并不是代表线程又恢复了，可以理解为仅仅是代表它已经响应完了这个中断信号然后又重新置为可以再次接收信号的状态。
 
@@ -648,7 +646,63 @@ tags: ["Java"]
      // ArrayIndexOutOfBound
      ```
 
-     
+108. hashcode 和 equals 方法的作用，以及使用案例？
+
+     都是 Object 类下面的方法，因此所有类都继承该方法：
+
+     + equals 默认比较两个对象的地址，和使用 == 效果相同；
+     + hashcode 则返回对象的哈希码，是一个本地方法
+
+     通常，如果自定义对象需要作为 HashMap，HashSet 等结构的键时，这时我们就需要重写 hashcode 算法，以提高效率，如果两个对象生成的 hashcode 相同，那么此时就需要使用 equals 方法进行比对。因此可以总结出：
+
+     + equals 相同的对象必定含有相同的 hashcode 值，但 hashcode 相同的对象它们不一定 equals 相同
+
+     在实践上，推荐只要重写了 equals 方法的对象，都重写一下 hashcode 方法，免得在使用它们作为 Map 键时遗忘。
+
+109. 什么是 ConcurrentModificationException？如何解决该问题？
+
+     如果在迭代期间对迭代对象进行了修改，可能就会抛出该异常。常用方案：
+
+     + 使用加锁：效率较低
+     + 克隆容器：先克隆容器，然后再其上进行迭代，空间消耗较大，如 CopyOnWriteList
+
+110. ConcurrentHashMap，HashTable 和 Collections.synchronizedMap 有什么不同？
+
+     HashTable 和 Collections.synchronizedMap 都是通过 synchronized 加锁实现的，实现基本类似；
+
+     ConcurrentHashMap 则通过采用分段锁的思想，通过一系列的 Segments 来保存数据，这样就降低了锁粒度，提高了并发度。并发容器类提供的迭代器不会抛出 ConcurrentModificationException，因此不需要在迭代过程中对容器加锁。由于他们返回的迭代器具有弱一致性，也即可以容忍并发的修改，当创建迭代器会遍历已有的元素，并可以（不保证）在迭代器构造后将修改反映给容器。
+
+     > ConcurrentHashMap 在 JDK8 后，若溢出块太多，采用红黑树来管理溢出块，加速访问
+
+111. 阻塞队列中的 take&put 和 poll&offer 方法有什么区别？
+
+     阻塞队列在实现上是通过 Conditon 接口中的 await/signal 实现线程间同步的。
+
+     take 在队列空时会进入等待，会等待下一个生产者通过 signal 唤醒，是可以进入阻塞态的；
+
+     而 poll 在队列空时，直接返回 null，非阻塞实现。
+
+112. Conditon 接口有什么作用？其实现生产者-消费者阻塞队列的原理？
+
+     Condition 是在 java 1.5 中才出现的，它用来替代传统的 Object 的 wait()、notify() 实现线程间的协作，相比使用 Object 的 wait()、notify()，使用 Condition 的 await()、signal() 这种方式实现线程间协作更加安全和高效。
+
+     对于由 Condition 实现的生产者-消费者阻塞队列：当线程 Consumer 中调用 await 方法后，线程Consumer 将释放锁，并且将自己沉睡，等待唤醒，线程 Producer 获取到锁后，开始做事，完毕后，调用Condition 的 signalall 方法，唤醒线程 Consumer，线程 Consumer恢复执行。
+
+113. 有哪些可以实现线程间同步的类或接口？
+
+     + CountDownLatch：像是个门闩，通过 countDown&await 实现线程间同步
+
+     + Semaphore：信号量，通常用作可用资源的计数统计，通过 acquire&release 实现同步
+
+     + Barrier：类似 Latch，但是用于运行速度快的线程等待慢的线程，通过 await 等待，所有线程到达将会自动打开，Java 中实现了 CyclicBarrier
+
+     + FutureTask：实例化可以传入一个 Callable 接口，然后通过 fut.get() 实现线程同步
+
+     + wait&notify：通过 JVM 实现，实现线程同步
+
+     + await&signal：通过 JUC 实现，是 Condition 接口里面的方法
+
+       
 
 
 
