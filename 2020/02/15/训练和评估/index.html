@@ -1,407 +1,149 @@
-<!DOCTYPE html>
-<html lang="zh-CN,en,zh-HK,zh-TW,default">
-<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.2'>
-  <meta charset="utf-8">
-  <!-- SEO相关 -->
+<!DOCTYPE html><html lang="[&quot;zh-CN&quot;,&quot;en&quot;,&quot;zh-HK&quot;,&quot;zh-TW&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>训练和评估 | zsStrike</title><meta name="keywords" content="机器学习,TensorFlow"><meta name="author" content="zsStrike"><meta name="copyright" content="zsStrike"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="训练和评估">
+<meta property="og:url" content="http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/index.html">
+<meta property="og:site_name" content="zsStrike">
+<meta property="og:description" content="本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.zsstrike.xyz/assets/default_cover.png">
+<meta property="article:published_time" content="2020-02-15T04:18:10.000Z">
+<meta property="article:modified_time" content="2022-05-16T07:41:46.369Z">
+<meta property="article:author" content="zsStrike">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.zsstrike.xyz/assets/default_cover.png"><link rel="shortcut icon" href="/assets/avatar.jpg"><link rel="canonical" href="http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":5000,"languages":{"author":"作者: zsStrike","link":"链接: ","source":"来源: zsStrike","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '训练和评估',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-16 15:41:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  
-  <!-- 渲染优化 -->
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <!-- 页面元数据 -->
-  
-  <title>训练和评估 - zsStrike</title>
-  
-    <meta name="keywords" content="机器学习,TensorFlow">
-  
-
-  
-    <meta name="description" content="本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。">
-  
-
-  <!-- feed -->
-  
-
-  <!-- import meta -->
-  
-
-  <!-- link -->
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
-
-  
-  
-
-  
-
-  
-    <link rel="shortcut icon" type='image/x-icon' href="https://s1.ax1x.com/2020/09/08/wQFm7j.jpg">
-  
-
-  
-
-  
-
-  <!-- import link -->
-  
-
-  
-  
-    
-<link rel="stylesheet" href="/css/style.css">
-
-  
-
-  <script id="loadcss"></script>
-
-</head>
-
-<body>
-  
-
-<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
-  <div class='container'>
-  <div id='wrapper'>
-    <div class='nav-sub'>
-      <p class="title"></p>
-      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
-        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
-        
-      </ul>
-    </div>
-		<div class="nav-main">
-      
-        
-        <a class="title flat-box" target="_self" href='/'>
-          
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
-          
-          
-          
-        </a>
-      
-
-			<div class='menu navigation'>
-				<ul class='nav-list-h m-pc'>
-          
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/
-                  
-                  
-                  
-                    id="home"
-                  >
-                  <i class='fas fa-rss fa-fw'></i>博客
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
-                  
-                  
-                  
-                    id="tags"
-                  >
-                  <i class='fas fa-tags fa-fw'></i>标签
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
-                  
-                  
-                  
-                    id="archives"
-                  >
-                  <i class='fas fa-archive fa-fw'></i>归档
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
-                  
-                  
-                  
-                    id="about"
-                  >
-                  <i class='fas fa-info-circle fa-fw'></i>关于
-                </a>
-                
-              </li>
-            
-          
-          
-				</ul>
-			</div>
-
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
-        </form>
-      </div>
-
-			<ul class='switcher nav-list-h m-phone'>
-				
-					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
-				
-				<li>
-          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
-          <ul class="menu-phone list-v navigation white-box">
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/
-                  
-                  
-                  
-                    id="home"
-                  >
-                  <i class='fas fa-rss fa-fw'></i>博客
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
-                  
-                  
-                  
-                    id="tags"
-                  >
-                  <i class='fas fa-tags fa-fw'></i>标签
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
-                  
-                  
-                  
-                    id="archives"
-                  >
-                  <i class='fas fa-archive fa-fw'></i>归档
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
-                  
-                  
-                  
-                    id="about"
-                  >
-                  <i class='fas fa-info-circle fa-fw'></i>关于
-                </a>
-                
-              </li>
-            
-          
-            
-          </ul>
-        </li>
-			</ul>
-		</div>
-	</div>
-  </div>
-</header>
-
-  <div id="l_body">
-    <div id="l_cover">
-  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-        <div id="full" class='cover-wrapper post search' style="display: none;">
-          
-            <div class='cover-bg' style='background-image:url(https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg)'></div>
-          
-          <div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">Volantis</p>
-    
-    
-  </div>
-  <div class='bottom'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="Search What You Want" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <div class='list-h'>
-        
-          
-            <a href="/"
-              
-              
-              id="home">
-              <p>博客</p>
-            </a>
-          
-            <a href="/tags/"
-              
-              
-              id="tags">
-              <p>标签</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              id="archives">
-              <p>归档</p>
-            </a>
-          
-            <a href="/about/"
-              
-              
-              id="about">
-              <p>关于</p>
-            </a>
-          
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
-        </div>
-    
-  
-  </div>
-
-    <div id='safearea'>
-      <div class='body-wrapper' id="pjax-container">
-        
-
-<div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
-  
-
-
-  
-  <div class="article-meta" id="top">
-    
-    
-    
-      <h1 class="title">
-        训练和评估
-      </h1>
-      <div class='new-meta-box'>
-        
-          
-            
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://github.com/zsStrike" rel="nofollow noopener">
-    <img no-lazy src="https://s1.ax1x.com/2020/09/08/wQFm7j.jpg">
-    <p>zsStrike</p>
-  </a>
-</div>
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年2月15日</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：5.1k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：25分钟</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-  <div class="new-meta-item browse leancloud">
-    <a class='notlink'>
-      
-      <div id="lc-pv" data-title="训练和评估" data-path="/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/">
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-        次浏览
-      </div>
-    </a>
-  </div>
-
-
-          
-        
-      </div>
-    
-  </div>
-
-
-  
-  <p>本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">训练和评估</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-15T04:18:10.000Z" title="发表于 2020-02-15 12:18:10">2020-02-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-16T07:41:46.369Z" title="更新于 2022-05-16 15:41:46">2022-05-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="训练和评估"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><p>本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。</p>
 <span id="more"></span>
 
 <h2 id="使用内建API"><a href="#使用内建API" class="headerlink" title="使用内建API"></a>使用内建API</h2><p> 当我们使用内建的API来进行训练和评估时，我们传入的数据必须是<strong>Numpy arrays</strong>或者是<strong>tf.data.Dataset</strong>对象，在接下来的几个小节里，我们将会使用MNIST数据集作为示例。</p>
@@ -424,11 +166,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br></pre></td></tr></table></figure>
 
 <p>注意，metrics参数必须是一个列表，可以传入多个评价指标。对于含有多个输出的模型，我们可以分别为其定义损失函数，评价指标和优化器。同时，一些默认的参数值我们也可以使用字符串。为了重用，我们定义如下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_uncompiled_model</span>():</span></span><br><span class="line">  inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">  x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line">  x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">  outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line">  model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line">  <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_compiled_model</span>():</span></span><br><span class="line">  model = get_uncompiled_model()</span><br><span class="line">  model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">                loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>),</span><br><span class="line">                metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line">  <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_uncompiled_model</span>():</span><br><span class="line">  inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">  x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line">  x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">  outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line">  model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line">  <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_compiled_model</span>():</span><br><span class="line">  model = get_uncompiled_model()</span><br><span class="line">  model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">                loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>),</span><br><span class="line">                metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line">  <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
 
 <h4 id="内建的损失函数，评价指标和优化器"><a href="#内建的损失函数，评价指标和优化器" class="headerlink" title="内建的损失函数，评价指标和优化器"></a>内建的损失函数，评价指标和优化器</h4><p>内建优化器：SGD，RMSprop，Adam；内建损失函数：MeanSquareError，KLDivergence，CosineSimilarity；内建评估指标：AUC，Precision，Recall。</p>
 <h4 id="自定义损失函数"><a href="#自定义损失函数" class="headerlink" title="自定义损失函数"></a>自定义损失函数</h4><p>有两种方法来自定义我们的损失函数，第一种是定义一个函数，接受<code>y_true</code>和<code>y_pred</code>参数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">basic_loss_function</span>(<span class="params">y_true, y_pred</span>):</span></span><br><span class="line">    <span class="keyword">return</span> tf.math.reduce_mean(tf.<span class="built_in">abs</span>(y_true - y_pred))</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.Adam(),</span><br><span class="line">              loss=basic_loss_function)</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, batch_size=<span class="number">64</span>, epochs=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">basic_loss_function</span>(<span class="params">y_true, y_pred</span>):</span><br><span class="line">    <span class="keyword">return</span> tf.math.reduce_mean(tf.<span class="built_in">abs</span>(y_true - y_pred))</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.Adam(),</span><br><span class="line">              loss=basic_loss_function)</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, batch_size=<span class="number">64</span>, epochs=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 
 <p>另外一种方法是构造<code>tf.keras.losses.Loss</code>的子类，并且实现以下两个方法：</p>
 <ul>
@@ -436,7 +178,7 @@
 <li><code>call(self, y_true, y_pred)</code>：用于计算模型的损失</li>
 </ul>
 <p>传向<code>__init__</code>的参数可以被<code>call</code>方法调用。以下方法实现实现了<code>BinaryCrossEntropy</code>损失函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeightedBinaryCrossEntropy</span>(<span class="params">keras.losses.Loss</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">      pos_weight: Scalar to affect the positive labels of the loss function.</span></span><br><span class="line"><span class="string">      weight: Scalar to affect the entirety of the loss function.</span></span><br><span class="line"><span class="string">      from_logits: Whether to compute loss from logits or the probability.</span></span><br><span class="line"><span class="string">      reduction: Type of tf.keras.losses.Reduction to apply to loss.</span></span><br><span class="line"><span class="string">      name: Name of the loss function.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, pos_weight, weight, from_logits=<span class="literal">False</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 reduction=keras.losses.Reduction.AUTO,</span></span></span><br><span class="line"><span class="function"><span class="params">                 name=<span class="string">&#x27;weighted_binary_crossentropy&#x27;</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(reduction=reduction, name=name)</span><br><span class="line">        self.pos_weight = pos_weight</span><br><span class="line">        self.weight = weight</span><br><span class="line">        self.from_logits = from_logits</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">self, y_true, y_pred</span>):</span></span><br><span class="line">        ce = tf.losses.binary_crossentropy(</span><br><span class="line">            y_true, y_pred, from_logits=self.from_logits)[:,<span class="literal">None</span>]</span><br><span class="line">        ce = self.weight * (ce*(<span class="number">1</span>-y_true) + self.pos_weight*ce*(y_true))</span><br><span class="line">        <span class="keyword">return</span> ce</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">WeightedBinaryCrossEntropy</span>(keras.losses.Loss):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">      pos_weight: Scalar to affect the positive labels of the loss function.</span></span><br><span class="line"><span class="string">      weight: Scalar to affect the entirety of the loss function.</span></span><br><span class="line"><span class="string">      from_logits: Whether to compute loss from logits or the probability.</span></span><br><span class="line"><span class="string">      reduction: Type of tf.keras.losses.Reduction to apply to loss.</span></span><br><span class="line"><span class="string">      name: Name of the loss function.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, pos_weight, weight, from_logits=<span class="literal">False</span>,</span></span><br><span class="line"><span class="params">                 reduction=keras.losses.Reduction.AUTO,</span></span><br><span class="line"><span class="params">                 name=<span class="string">&#x27;weighted_binary_crossentropy&#x27;</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(reduction=reduction, name=name)</span><br><span class="line">        self.pos_weight = pos_weight</span><br><span class="line">        self.weight = weight</span><br><span class="line">        self.from_logits = from_logits</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, y_true, y_pred</span>):</span><br><span class="line">        ce = tf.losses.binary_crossentropy(</span><br><span class="line">            y_true, y_pred, from_logits=self.from_logits)[:,<span class="literal">None</span>]</span><br><span class="line">        ce = self.weight * (ce*(<span class="number">1</span>-y_true) + self.pos_weight*ce*(y_true))</span><br><span class="line">        <span class="keyword">return</span> ce</span><br></pre></td></tr></table></figure>
 
 <p>由于数据集由10个类别，但我们使用的是二元损失，所以我们只考虑每个类别的预测，这样就能基于二元损失来计算了。首先创建独热码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">one_hot_y_train = tf.one_hot(y_train.astype(np.int32), depth=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
@@ -452,16 +194,16 @@
 <li><code>reset_states(self)</code>：重新初始化状态</li>
 </ul>
 <p>下面是一个实现了<code>CategoricalTruePositive</code>评价指标：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CategoricalTruePositives</span>(<span class="params">keras.metrics.Metric</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="string">&#x27;categorical_true_positives&#x27;</span>, **kwargs</span>):</span></span><br><span class="line">      <span class="built_in">super</span>(CategoricalTruePositives, self).__init__(name=name, **kwargs)</span><br><span class="line">      self.true_positives = self.add_weight(name=<span class="string">&#x27;tp&#x27;</span>, initializer=<span class="string">&#x27;zeros&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_state</span>(<span class="params">self, y_true, y_pred, sample_weight=<span class="literal">None</span></span>):</span></span><br><span class="line">      y_pred = tf.reshape(tf.argmax(y_pred, axis=<span class="number">1</span>), shape=(-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">      values = tf.cast(y_true, <span class="string">&#x27;int32&#x27;</span>) == tf.cast(y_pred, <span class="string">&#x27;int32&#x27;</span>)</span><br><span class="line">      values = tf.cast(values, <span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line">      <span class="keyword">if</span> sample_weight <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        sample_weight = tf.cast(sample_weight, <span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line">        values = tf.multiply(values, sample_weight)</span><br><span class="line">      self.true_positives.assign_add(tf.reduce_sum(values))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">result</span>(<span class="params">self</span>):</span></span><br><span class="line">      <span class="keyword">return</span> self.true_positives</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reset_states</span>(<span class="params">self</span>):</span></span><br><span class="line">      <span class="comment"># The state of the metric will be reset at the start of each epoch.</span></span><br><span class="line">      self.true_positives.assign(<span class="number">0.</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CategoricalTruePositives</span>(keras.metrics.Metric):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name=<span class="string">&#x27;categorical_true_positives&#x27;</span>, **kwargs</span>):</span><br><span class="line">      <span class="built_in">super</span>(CategoricalTruePositives, self).__init__(name=name, **kwargs)</span><br><span class="line">      self.true_positives = self.add_weight(name=<span class="string">&#x27;tp&#x27;</span>, initializer=<span class="string">&#x27;zeros&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update_state</span>(<span class="params">self, y_true, y_pred, sample_weight=<span class="literal">None</span></span>):</span><br><span class="line">      y_pred = tf.reshape(tf.argmax(y_pred, axis=<span class="number">1</span>), shape=(-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">      values = tf.cast(y_true, <span class="string">&#x27;int32&#x27;</span>) == tf.cast(y_pred, <span class="string">&#x27;int32&#x27;</span>)</span><br><span class="line">      values = tf.cast(values, <span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line">      <span class="keyword">if</span> sample_weight <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        sample_weight = tf.cast(sample_weight, <span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line">        values = tf.multiply(values, sample_weight)</span><br><span class="line">      self.true_positives.assign_add(tf.reduce_sum(values))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">result</span>(<span class="params">self</span>):</span><br><span class="line">      <span class="keyword">return</span> self.true_positives</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reset_states</span>(<span class="params">self</span>):</span><br><span class="line">      <span class="comment"># The state of the metric will be reset at the start of each epoch.</span></span><br><span class="line">      self.true_positives.assign(<span class="number">0.</span>)</span><br></pre></td></tr></table></figure>
 
 <p>下面是使用评价指标的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>),</span><br><span class="line">              metrics=[CategoricalTruePositives()])</span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          epochs=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 
 <h4 id="处理非常规的损失函数和评价指标"><a href="#处理非常规的损失函数和评价指标" class="headerlink" title="处理非常规的损失函数和评价指标"></a>处理非常规的损失函数和评价指标</h4><p>可以通过<code>y_pred</code>和<code>y_true</code>来计算损失函数和评价指标，然而，并非对所有的损失函数和评价指标都是如此。比如，一个正则化的损失函数可能需要某个层的激励值，而这个激励值并非是模型的输出。处理此类问题，我们可以再自定义层中的call方法中加入<code>self.add_loss(loss_value)</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityRegularizationLayer</span>(<span class="params">layers.Layer</span>):</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">self, inputs</span>):</span></span><br><span class="line">    self.add_loss(tf.reduce_sum(inputs) * <span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">return</span> inputs  <span class="comment"># Pass-through layer.</span></span><br><span class="line"></span><br><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert activity regularization as a layer</span></span><br><span class="line">x = ActivityRegularizationLayer()(x)</span><br><span class="line"></span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line"></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># The displayed loss will be much higher than before</span></span><br><span class="line"><span class="comment"># due to the regularization component.</span></span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          epochs=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ActivityRegularizationLayer</span>(layers.Layer):</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, inputs</span>):</span><br><span class="line">    self.add_loss(tf.reduce_sum(inputs) * <span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">return</span> inputs  <span class="comment"># Pass-through layer.</span></span><br><span class="line"></span><br><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert activity regularization as a layer</span></span><br><span class="line">x = ActivityRegularizationLayer()(x)</span><br><span class="line"></span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line"></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># The displayed loss will be much higher than before</span></span><br><span class="line"><span class="comment"># due to the regularization component.</span></span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          epochs=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 <p>同样，对于评价指标也是如此：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MetricLoggingLayer</span>(<span class="params">layers.Layer</span>):</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">self, inputs</span>):</span></span><br><span class="line">    <span class="comment"># The `aggregation` argument defines</span></span><br><span class="line">    <span class="comment"># how to aggregate the per-batch values</span></span><br><span class="line">    <span class="comment"># over each epoch:</span></span><br><span class="line">    <span class="comment"># in this case we simply average them.</span></span><br><span class="line">    self.add_metric(keras.backend.std(inputs),</span><br><span class="line">                    name=<span class="string">&#x27;std_of_activation&#x27;</span>,</span><br><span class="line">                    aggregation=<span class="string">&#x27;mean&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> inputs  <span class="comment"># Pass-through layer.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert std logging as a layer.</span></span><br><span class="line">x = MetricLoggingLayer()(x)</span><br><span class="line"></span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line"></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>))</span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          epochs=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MetricLoggingLayer</span>(layers.Layer):</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, inputs</span>):</span><br><span class="line">    <span class="comment"># The `aggregation` argument defines</span></span><br><span class="line">    <span class="comment"># how to aggregate the per-batch values</span></span><br><span class="line">    <span class="comment"># over each epoch:</span></span><br><span class="line">    <span class="comment"># in this case we simply average them.</span></span><br><span class="line">    self.add_metric(keras.backend.std(inputs),</span><br><span class="line">                    name=<span class="string">&#x27;std_of_activation&#x27;</span>,</span><br><span class="line">                    aggregation=<span class="string">&#x27;mean&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> inputs  <span class="comment"># Pass-through layer.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert std logging as a layer.</span></span><br><span class="line">x = MetricLoggingLayer()(x)</span><br><span class="line"></span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line"></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(learning_rate=<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>))</span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          epochs=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 <p>再函数式API中，我们可以通过<code>model.add_loss(loss_tensor)</code>和<code>model.add_metric(metric_tensor, name, aggregation)</code>来实现：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x1 = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line">x2 = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x1)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x2)</span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line"></span><br><span class="line">model.add_loss(tf.reduce_sum(x1) * <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">model.add_metric(keras.backend.std(x1),</span><br><span class="line">                 name=<span class="string">&#x27;std_of_activation&#x27;</span>,</span><br><span class="line">                 aggregation=<span class="string">&#x27;mean&#x27;</span>)</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=keras.optimizers.RMSprop(<span class="number">1e-3</span>),</span><br><span class="line">              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">True</span>))</span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          epochs=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
@@ -529,7 +271,7 @@
 <li><code>CSVLogger</code>: 将模型的损失值和评价指标保存到CSV文件中</li>
 </ul>
 <h4 id="自建回调对象"><a href="#自建回调对象" class="headerlink" title="自建回调对象"></a>自建回调对象</h4><p>我们可以通过继承<code>Callback</code>对象实现自定义的回调对象，回调对象可以通过<code>self.model</code>获取相关联的模型，下面是一个实例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LossHistory</span>(<span class="params">keras.callbacks.Callback</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_train_begin</span>(<span class="params">self, logs</span>):</span></span><br><span class="line">        self.losses = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_batch_end</span>(<span class="params">self, batch, logs</span>):</span></span><br><span class="line">        self.losses.append(logs.get(<span class="string">&#x27;loss&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LossHistory</span>(keras.callbacks.Callback):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">on_train_begin</span>(<span class="params">self, logs</span>):</span><br><span class="line">        self.losses = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">on_batch_end</span>(<span class="params">self, batch, logs</span>):</span><br><span class="line">        self.losses.append(logs.get(<span class="string">&#x27;loss&#x27;</span>))</span><br></pre></td></tr></table></figure>
 
 <h3 id="保存模型的检查点"><a href="#保存模型的检查点" class="headerlink" title="保存模型的检查点"></a>保存模型的检查点</h3><p>当我们的训练集很大的时候，我们需要定期保存模型的检查点，最简单的方式是使用<code>ModelCheckpoint</code>回调：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">model = get_compiled_model()</span><br><span class="line"></span><br><span class="line">callbacks = [</span><br><span class="line">    keras.callbacks.ModelCheckpoint(</span><br><span class="line">        filepath=<span class="string">&#x27;mymodel_&#123;epoch&#125;&#x27;</span>,</span><br><span class="line">        <span class="comment"># Path where to save the model</span></span><br><span class="line">        <span class="comment"># The two parameters below mean that we will overwrite</span></span><br><span class="line">        <span class="comment"># the current checkpoint if and only if</span></span><br><span class="line">        <span class="comment"># the `val_loss` score has improved.</span></span><br><span class="line">        save_best_only=<span class="literal">True</span>,</span><br><span class="line">        monitor=<span class="string">&#x27;val_loss&#x27;</span>,</span><br><span class="line">        verbose=<span class="number">1</span>)</span><br><span class="line">]</span><br><span class="line">model.fit(x_train, y_train,</span><br><span class="line">          epochs=<span class="number">3</span>,</span><br><span class="line">          batch_size=<span class="number">64</span>,</span><br><span class="line">          callbacks=callbacks,</span><br><span class="line">          validation_split=<span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
@@ -569,7 +311,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">epochs = <span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Start of epoch %d&#x27;</span> % (epoch,))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Iterate over the batches of the dataset.</span></span><br><span class="line">  <span class="keyword">for</span> step, (x_batch_train, y_batch_train) <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_dataset):</span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">      logits = model(x_batch_train)</span><br><span class="line">      loss_value = loss_fn(y_batch_train, logits)</span><br><span class="line">    grads = tape.gradient(loss_value, model.trainable_weights)</span><br><span class="line">    optimizer.apply_gradients(<span class="built_in">zip</span>(grads, model.trainable_weights))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update training metric.</span></span><br><span class="line">    train_acc_metric(y_batch_train, logits)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Log every 200 batches.</span></span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">200</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Training loss (for one batch) at step %s: %s&#x27;</span> % (step, <span class="built_in">float</span>(loss_value)))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Seen so far: %s samples&#x27;</span> % ((step + <span class="number">1</span>) * <span class="number">64</span>))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Display metrics at the end of each epoch.</span></span><br><span class="line">  train_acc = train_acc_metric.result()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Training acc over epoch: %s&#x27;</span> % (<span class="built_in">float</span>(train_acc),))</span><br><span class="line">  <span class="comment"># Reset training metrics at the end of each epoch</span></span><br><span class="line">  train_acc_metric.reset_states()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Run a validation loop at the end of each epoch.</span></span><br><span class="line">  <span class="keyword">for</span> x_batch_val, y_batch_val <span class="keyword">in</span> val_dataset:</span><br><span class="line">    val_logits = model(x_batch_val)</span><br><span class="line">    <span class="comment"># Update val metrics</span></span><br><span class="line">    val_acc_metric(y_batch_val, val_logits)</span><br><span class="line">  val_acc = val_acc_metric.result()</span><br><span class="line">  val_acc_metric.reset_states()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Validation acc: %s&#x27;</span> % (<span class="built_in">float</span>(val_acc),))</span><br></pre></td></tr></table></figure>
 
 <h3 id="处理额外的损失值"><a href="#处理额外的损失值" class="headerlink" title="处理额外的损失值"></a>处理额外的损失值</h3><p>在前面的小节中我们在<code>call</code>方法中调用<code>self.add_loss(values)</code>来正则化损失值，通常来说我们需要将这些额外的损失值也考虑在内，下面是我们实现的其中一个模型：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityRegularizationLayer</span>(<span class="params">layers.Layer</span>):</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">self, inputs</span>):</span></span><br><span class="line">    self.add_loss(<span class="number">1e-2</span> * tf.reduce_sum(inputs))</span><br><span class="line">    <span class="keyword">return</span> inputs</span><br><span class="line"></span><br><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line"><span class="comment"># Insert activity regularization as a layer</span></span><br><span class="line">x = ActivityRegularizationLayer()(x)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line"></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ActivityRegularizationLayer</span>(layers.Layer):</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, inputs</span>):</span><br><span class="line">    self.add_loss(<span class="number">1e-2</span> * tf.reduce_sum(inputs))</span><br><span class="line">    <span class="keyword">return</span> inputs</span><br><span class="line"></span><br><span class="line">inputs = keras.Input(shape=(<span class="number">784</span>,), name=<span class="string">&#x27;digits&#x27;</span>)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_1&#x27;</span>)(inputs)</span><br><span class="line"><span class="comment"># Insert activity regularization as a layer</span></span><br><span class="line">x = ActivityRegularizationLayer()(x)</span><br><span class="line">x = layers.Dense(<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, name=<span class="string">&#x27;dense_2&#x27;</span>)(x)</span><br><span class="line">outputs = layers.Dense(<span class="number">10</span>, name=<span class="string">&#x27;predictions&#x27;</span>)(x)</span><br><span class="line"></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>当我们调用模型的时候：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logits = model(x_train)</span><br></pre></td></tr></table></figure>
@@ -578,1051 +320,49 @@
 <p>为了将额外的损失值考虑在内，我们需要修改我们自定义的训练循环体中的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">optimizer = keras.optimizers.SGD(learning_rate=<span class="number">1e-3</span>)</span><br><span class="line"></span><br><span class="line">epochs = <span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Start of epoch %d&#x27;</span> % (epoch,))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> step, (x_batch_train, y_batch_train) <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_dataset):</span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">      logits = model(x_batch_train)</span><br><span class="line">      loss_value = loss_fn(y_batch_train, logits)</span><br><span class="line"></span><br><span class="line">      <span class="comment"># Add extra losses created during this forward pass:</span></span><br><span class="line">      loss_value += <span class="built_in">sum</span>(model.losses)</span><br><span class="line"></span><br><span class="line">    grads = tape.gradient(loss_value, model.trainable_weights)</span><br><span class="line">    optimizer.apply_gradients(<span class="built_in">zip</span>(grads, model.trainable_weights))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Log every 200 batches.</span></span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">200</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Training loss (for one batch) at step %s: %s&#x27;</span> % (step, <span class="built_in">float</span>(loss_value)))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Seen so far: %s samples&#x27;</span> % ((step + <span class="number">1</span>) * <span class="number">64</span>))</span><br></pre></td></tr></table></figure>
 
-
-  
-  
-    
-    <div class='footer'>
-      
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/>http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/</a></p>
-              
-            
-          </blockquote>
-        </div>
-      
-      
-    </div>
-  
-  
-    
-
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-16T15:41:46+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年5月16日</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/TensorFlow/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>TensorFlow</p></a></div>
-
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/&title=训练和评估 - zsStrike&summary=本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/&title=训练和评估 - zsStrike&summary=本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/&title=训练和评估 - zsStrike&summary=本节主要从两方面学习模型的训练和评估：使用内建的API进行训练和评估或者是自定义函数实现训练和评估。不管使用哪种方法，不同方式构建的模型的训练和评估方式是一样的。"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png">
-          
-        </a>
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </div>
-
-
-  
-  
-
-  
-    <div class="prev-next">
-      
-        <a class='prev' href='/2020/02/17/Nginx-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Nginx 使用教程</p>
-          <p class='content'>本章学习如何在 CentOS 7下使用 Nginx 来搭建反向代理和配置动静分离以及负载均衡过程的步骤。
-
-
-Nginx 基本概念Nginx简介Nginx是以一个高性能的HTTP和反向代理服务器...</p>
-        </a>
-      
-      
-        <a class='next' href='/2020/02/14/Keras%E5%87%BD%E6%95%B0%E5%BC%8FAPI/'>
-          <p class='title'>Keras函数式API<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>本章了解Keras的函数式API以及灵活使用它们的方法。
-
-
-简介我们已经熟悉了如何使用keras.Sequential函数来创建我们的层叠模型，而函数式API是比它更加灵活的创建模型的方法：它...</p>
-        </a>
-      
-    </div>
-  
-</article>
-
-
-  
-
-  
-
-
-
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-</div>
-<aside class='l_side'>
-  
-  
-    
-    
-
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://s1.ax1x.com/2020/09/08/wQFm7j.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">zsStrike</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithm/" style="font-size: 16px; color: #8b8b8b">Algorithm</a> <a href="/tags/CI-CD/" style="font-size: 14px; color: #999">CI/CD</a> <a href="/tags/Git/" style="font-size: 14px; color: #999">Git</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/Java/" style="font-size: 22px; color: #636363">Java</a> <a href="/tags/Linux/" style="font-size: 16px; color: #8b8b8b">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px; color: #707070">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 14px; color: #999">Nodejs</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/Redis/" style="font-size: 16px; color: #8b8b8b">Redis</a> <a href="/tags/SSR/" style="font-size: 14px; color: #999">SSR</a> <a href="/tags/TensorFlow/" style="font-size: 18px; color: #7e7e7e">TensorFlow</a> <a href="/tags/Typora/" style="font-size: 14px; color: #999">Typora</a> <a href="/tags/Vim/" style="font-size: 14px; color: #999">Vim</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 14px; color: #999">分布式</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 14px; color: #999">操作系统</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" style="font-size: 14px; color: #999">计算机系统</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 14px; color: #999">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">设计模式</a>
-    </div>
-  </section>
-
-
-  
-
-  
-    
-    
-
-
-
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
-    
-  <header>
-    
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
-    
-  </header>
-
-
-    <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%86%85%E5%BB%BAAPI"><span class="toc-text">使用内建API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%BB%BAAPI%E6%80%BB%E8%A7%88"><span class="toc-text">内建API总览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">定义损失函数，评价指标和优化器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%BB%BA%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">内建的损失函数，评价指标和优化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">自定义损失函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-text">自定义评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E9%9D%9E%E5%B8%B8%E8%A7%84%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E5%92%8C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-text">处理非常规的损失函数和评价指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%AE%BE%E7%BD%AE%E9%AA%8C%E8%AF%81%E9%9B%86"><span class="toc-text">自动设置验证集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8EDatasets%E4%B8%AD%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0"><span class="toc-text">从Datasets中训练和评估</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">使用测试数据集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">其他输入格式的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%B7%E6%9C%AC%E6%9D%83%E9%87%8D%E5%92%8C%E7%B1%BB%E6%A0%87%E6%9D%83%E9%87%8D"><span class="toc-text">使用样本权重和类标权重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BC%A0%E5%85%A5%E5%A4%9A%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9E%8B"><span class="toc-text">将数据传入多输入输出模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83"><span class="toc-text">使用回调</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%BB%BA%E7%9A%84%E5%9B%9E%E8%B0%83%E5%AF%B9%E8%B1%A1"><span class="toc-text">内建的回调对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%BB%BA%E5%9B%9E%E8%B0%83%E5%AF%B9%E8%B1%A1"><span class="toc-text">自建回调对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="toc-text">保存模型的检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87%E8%A1%A8"><span class="toc-text">使用学习速率表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87%E8%A1%A8%E4%BC%A0%E7%BB%99%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">将学习速率表传给优化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87%E8%A1%A8"><span class="toc-text">使用回调实现动态学习速率表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8D%9F%E5%A4%B1%E5%92%8C%E8%AF%84%E4%BC%B0%E5%80%BC"><span class="toc-text">可视化损失和评估值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Tensorboard%E5%9B%9E%E8%B0%83"><span class="toc-text">使用Tensorboard回调</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-text">编写自己的训练和评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8GradientTape"><span class="toc-text">使用GradientTape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E5%80%BC"><span class="toc-text">实现自定义评估值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E9%A2%9D%E5%A4%96%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%80%BC"><span class="toc-text">处理额外的损失值</span></a></li></ol></li></ol>
-    </div>
-  </section>
-
-
-  
-
-
-</aside>
-
-
-
-        
-        
-          <!--此文件用来存放一些不方便取值的变量-->
-<!--思路大概是将值藏到重加载的区域内-->
-
-<script>
-  window.pdata={}
-  pdata.ispage=true;
-  pdata.postTitle="训练和评估";
-  pdata.commentPath="";
-  pdata.commentPlaceholder="";
-
-  var l_header=document.getElementById("l_header");
-  
-  l_header.classList.add("show");
-  
-</script>
-
-        
-      </div>
-      
-  
-  <footer class="footer clearfix">
-    <br><br>
-    
-      
-        <div class="aplayer-container">
-          
-
-
-        </div>
-      
-    
-      
-        <br>
-        <div class="social-wrapper">
-          
-            
-              <a href="mailto:zslovezj@mail.ustc.edu.cn"
-                class="social fas fa-envelope flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-                
-              </a>
-            
-          
-            
-              <a href="https://github.com/zsStrike"
-                class="social fab fa-github flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-                
-              </a>
-            
-          
-        </div>
-      
-    
-      
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
-</div>
-      
-    
-      
-        
-          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
-</div>
-        
-      
-    
-      
-        本站使用
-        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.2" target="_blank" class="codename">Volantis</a>
-        作为主题
-      
-    
-      
-        <div class='copyright'>
-        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
-
-        </div>
-      
-    
-  </footer>
-
-
-      <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
-    </div>
-  </div>
-  <div>
-    <script>
-window.volantis={};
-/********************脚本懒加载函数********************************/
-function loadScript(src, cb) {
-var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
-var script = document.createElement('script');
-script.setAttribute('type','text/javascript');
-if (cb) script.onload = cb;
-script.setAttribute('src', src);
-HEAD.appendChild(script);
-}
-//https://github.com/filamentgroup/loadCSS
-var loadCSS = function( href, before, media, attributes ){
-	var doc = window.document;
-	var ss = doc.createElement( "link" );
-	var ref;
-	if( before ){
-		ref = before;
-	}
-	else {
-		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
-		ref = refs[ refs.length - 1];
-	}
-	var sheets = doc.styleSheets;
-	if( attributes ){
-		for( var attributeName in attributes ){
-			if( attributes.hasOwnProperty( attributeName ) ){
-				ss.setAttribute( attributeName, attributes[attributeName] );
-			}
-		}
-	}
-	ss.rel = "stylesheet";
-	ss.href = href;
-	ss.media = "only x";
-	function ready( cb ){
-		if( doc.body ){
-			return cb();
-		}
-		setTimeout(function(){
-			ready( cb );
-		});
-	}
-	ready( function(){
-		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
-	});
-	var onloadcssdefined = function( cb ){
-		var resolvedHref = ss.href;
-		var i = sheets.length;
-		while( i-- ){
-			if( sheets[ i ].href === resolvedHref ){
-				return cb();
-			}
-		}
-		setTimeout(function() {
-			onloadcssdefined( cb );
-		});
-	};
-	function loadCB(){
-		if( ss.addEventListener ){
-			ss.removeEventListener( "load", loadCB );
-		}
-		ss.media = media || "all";
-	}
-	if( ss.addEventListener ){
-		ss.addEventListener( "load", loadCB);
-	}
-	ss.onloadcssdefined = onloadcssdefined;
-	onloadcssdefined( loadCB );
-	return ss;
-};
-</script>
-<!-- required -->
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
-
-<script>
-  function pjax_fancybox() {
-    $(".md .gallery").find("img").each(function () { //渲染 fancybox
-      var element = document.createElement("a"); // a 标签
-      $(element).attr("class", "fancybox");
-      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
-      $(element).attr("href", $(this).attr("src"));
-      if ($(this).attr("data-original")) {
-        $(element).attr("href", $(this).attr("data-original"));
-      }
-      $(element).attr("data-fancybox", "images");
-      var caption = "";   // 描述信息
-      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
-        $(element).attr('data-caption', $(this).attr('alt'));
-        caption = $(this).attr('alt');
-      }
-      var div = document.createElement("div");
-      $(div).addClass("fancybox");
-      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
-      var span = document.createElement("span");
-      $(span).addClass("image-caption");
-      $(span).text(caption); // 加描述
-      $(this).after(span);  // 再套一层描述
-      $(this).wrap(element);  // 最后套 a 标签
-    })
-    $(".md .gallery").find("img").fancybox({
-      selector: '[data-fancybox="images"]',
-      hash: false,
-      loop: false,
-      closeClick: true,
-      helpers: {
-        overlay: {closeClick: true}
-      },
-      buttons: [
-        "zoom",
-        "close"
-      ]
-    });
-  };
-  function SCload_fancybox() {
-    if ($(".md .gallery").find("img").length == 0) return;
-    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
-    setTimeout(function() {
-      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
-    }, 1);
-  };
-  $(function () {
-    SCload_fancybox();
-  });
-</script>
-
-
-<!-- internal -->
-
-
-
-
-
-
-
-
-
-  
-  
-    <script>
-      window.FPConfig = {
-        delay: 0,
-        ignoreKeywords: [],
-        maxRPS: 5,
-        hoverDelay: 25
-      };
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
-  
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script>
-    var clipboard = new ClipboardJS('.btn-copy', {
-        target: function (trigger) {
-            return trigger.nextElementSibling
-        }
-    });
-    function wait(callback, seconds) {
-        var timelag = null;
-        timelag = window.setTimeout(callback, seconds)
-    }
-    function pjax_initCopyCode() {
-		if($(".highlight .code pre").length+$(".article pre code").length==0)return;
-        var copyHtml = '';
-        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
-        copyHtml += '</button>';
-        $(".highlight .code pre").before(copyHtml);
-        $(".article pre code").before(copyHtml);
-        clipboard.off('success').on('success', function (e) {
-            let $btn = $(e.trigger);
-            $btn.addClass('copied');
-            let $icon = $($btn.find('i'));
-            $icon.removeClass('fa-copy');
-            $icon.addClass('fa-check-circle');
-            let $span = $($btn.find('span'));
-            $span[0].innerText = 'COPIED';
-            wait(function () {
-                $icon.removeClass('fa-check-circle');
-                $icon.addClass('fa-copy');
-                $span[0].innerText = 'COPY'
-            }, 2000)
-        });
-        clipboard.off('error').on('error', function (e) {
-            e.clearSelection();
-            let $btn = $(e.trigger);
-            $btn.addClass('copy-failed');
-            let $icon = $($btn.find('i'));
-            $icon.removeClass('fa-copy');
-            $icon.addClass('fa-times-circle');
-            let $span = $($btn.find('span'));
-            $span[0].innerText = 'COPY FAILED';
-            wait(function () {
-                $icon.removeClass('fa-times-circle');
-                $icon.addClass('fa-copy');
-                $span[0].innerText = 'COPY'
-            }, 2000)
-        })
-    }
-    $(function () {
-        pjax_initCopyCode()
-    });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-  
-<script src="/js/app.js"></script>
-
-
-
-
-  
-    
-<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2.6.4/js/search.js"></script>
-
-  
-
-
-<!-- optional -->
-
-  <script>
-const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
-const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
-(function ($) {
-  
-    customSearch = new HexoSearch({
-      imagePath: SearchServiceimagePath
-    });
-  
-})(jQuery);
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-  <script defer>
-
-  const LCCounter = {
-    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
-    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
-    custom_api_server: '',
-
-    // 查询存储的记录
-    getRecord(Counter, url, title) {
-      return new Promise(function (resolve, reject) {
-        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
-          .then(resp => resp.json())
-          .then(({results, code, error}) => {
-            if (code === 401) {
-              throw error;
-            }
-            if (results && results.length > 0) {
-              var record = results[0];
-              resolve(record);
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.xyz">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.xyz/2020/02/15/%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0/">http://blog.zsstrike.xyz/2020/02/15/训练和评估/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.xyz" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/TensorFlow/">TensorFlow</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%86%85%E5%BB%BAAPI"><span class="toc-number">1.</span> <span class="toc-text">使用内建API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%BB%BAAPI%E6%80%BB%E8%A7%88"><span class="toc-number">1.1.</span> <span class="toc-text">内建API总览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">定义损失函数，评价指标和优化器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%BB%BA%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">内建的损失函数，评价指标和优化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">自定义损失函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.</span> <span class="toc-text">自定义评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E9%9D%9E%E5%B8%B8%E8%A7%84%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E5%92%8C%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.1.</span> <span class="toc-text">处理非常规的损失函数和评价指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%AE%BE%E7%BD%AE%E9%AA%8C%E8%AF%81%E9%9B%86"><span class="toc-number">1.3.2.</span> <span class="toc-text">自动设置验证集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8EDatasets%E4%B8%AD%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0"><span class="toc-number">1.4.</span> <span class="toc-text">从Datasets中训练和评估</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">使用测试数据集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.5.</span> <span class="toc-text">其他输入格式的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%B7%E6%9C%AC%E6%9D%83%E9%87%8D%E5%92%8C%E7%B1%BB%E6%A0%87%E6%9D%83%E9%87%8D"><span class="toc-number">1.6.</span> <span class="toc-text">使用样本权重和类标权重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BC%A0%E5%85%A5%E5%A4%9A%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.7.</span> <span class="toc-text">将数据传入多输入输出模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83"><span class="toc-number">1.8.</span> <span class="toc-text">使用回调</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%BB%BA%E7%9A%84%E5%9B%9E%E8%B0%83%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.8.1.</span> <span class="toc-text">内建的回调对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%BB%BA%E5%9B%9E%E8%B0%83%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.8.2.</span> <span class="toc-text">自建回调对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="toc-number">1.9.</span> <span class="toc-text">保存模型的检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87%E8%A1%A8"><span class="toc-number">1.10.</span> <span class="toc-text">使用学习速率表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87%E8%A1%A8%E4%BC%A0%E7%BB%99%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">1.10.1.</span> <span class="toc-text">将学习速率表传给优化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87%E8%A1%A8"><span class="toc-number">1.10.2.</span> <span class="toc-text">使用回调实现动态学习速率表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8D%9F%E5%A4%B1%E5%92%8C%E8%AF%84%E4%BC%B0%E5%80%BC"><span class="toc-number">1.11.</span> <span class="toc-text">可视化损失和评估值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Tensorboard%E5%9B%9E%E8%B0%83"><span class="toc-number">1.11.1.</span> <span class="toc-text">使用Tensorboard回调</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%AD%E7%BB%83%E5%92%8C%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">编写自己的训练和评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8GradientTape"><span class="toc-number">2.1.</span> <span class="toc-text">使用GradientTape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E5%80%BC"><span class="toc-number">2.2.</span> <span class="toc-text">实现自定义评估值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E9%A2%9D%E5%A4%96%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%80%BC"><span class="toc-number">2.3.</span> <span class="toc-text">处理额外的损失值</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
             } else {
-              Counter('post', '/classes/Counter', {url, title: title, times: 0})
-                .then(resp => resp.json())
-                .then((record, error) => {
-                  if (error) {
-                    throw error;
-                  }
-                  resolve(record);
-                }).catch(error => {
-                console.error('Failed to create', error);
-                reject(error);
-              });
-            }
-          }).catch((error) => {
-          console.error('LeanCloud Counter Error:', error);
-          reject(error);
-        });
-      })
-    },
-
-    // 发起自增请求
-    increment(Counter, incrArr) {
-      return new Promise(function (resolve, reject) {
-        Counter('post', '/batch', {
-          "requests": incrArr
-        }).then((res) => {
-          res = res.json();
-          if (res.error) {
-            throw res.error;
-          }
-          resolve(res);
-        }).catch((error) => {
-          console.error('Failed to save visitor count', error);
-          reject(error);
-        });
-      });
-    },
-
-    // 构建自增请求体
-    buildIncrement(objectId) {
-      return {
-        "method": "PUT",
-        "path": `/1.1/classes/Counter/${ objectId }`,
-        "body": {
-          "times": {
-            '__op': 'Increment',
-            'amount': 1
-          }
-        }
-      }
-    },
-
-    // 校验是否为有效的 UV
-    validUV() {
-      var key = 'LeanCloudUVTimestamp';
-      var flag = localStorage.getItem(key);
-      if (flag) {
-        // 距离标记小于 24 小时则不计为 UV
-        if (new Date().getTime() - parseInt(flag) <= 86400000) {
-          return false;
-        }
-      }
-      localStorage.setItem(key, new Date().getTime().toString());
-      return true;
-    },
-
-    addCount(Counter) {
-      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
-      enableIncr = true;
-      var getterArr = [];
-      var incrArr = [];
-      // 请求 PV 并自增
-      var pvCtn = document.querySelector('#lc-sv');
-      if (pvCtn || enableIncr) {
-        var pvGetter = this.getRecord(Counter, 'http://blog.zsstrike.xyz' + '/#lc-sv', 'Visits').then((record) => {
-          incrArr.push(this.buildIncrement(record.objectId))
-          var eles = document.querySelectorAll('#lc-sv #number');
-          if (eles.length > 0) {
-            eles.forEach((el,index,array)=>{
-              el.innerText = record.times + 1;
-              if (pvCtn) {
-                pvCtn.style.display = 'inline';
-              }
-            })
-          }
-        });
-        getterArr.push(pvGetter);
-      }
-
-      // 请求 UV 并自增
-      var uvCtn = document.querySelector('#lc-uv');
-      if (uvCtn || enableIncr) {
-        var uvGetter = this.getRecord(Counter, 'http://blog.zsstrike.xyz' + '/#lc-uv', 'Visitors').then((record) => {
-          var vuv = this.validUV();
-          vuv && incrArr.push(this.buildIncrement(record.objectId))
-          var eles = document.querySelectorAll('#lc-uv #number');
-          if (eles.length > 0) {
-            eles.forEach((el,index,array)=>{
-              el.innerText = record.times + (vuv ? 1 : 0);
-              if (uvCtn) {
-                uvCtn.style.display = 'inline';
-              }
-            })
-          }
-        });
-        getterArr.push(uvGetter);
-      }
-
-      // 请求文章的浏览数，如果是当前页面就自增
-      var allPV = document.querySelectorAll('#lc-pv');
-      if (allPV.length > 0 || enableIncr) {
-        for (i = 0; i < allPV.length; i++) {
-          let pv = allPV[i];
-          let title = pv.getAttribute('data-title');
-          var url = 'http://blog.zsstrike.xyz' + pv.getAttribute('data-path');
-          if (url) {
-            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
-              // 是当前页面就自增
-              let curPath = window.location.pathname;
-              if (curPath.includes('index.html')) {
-                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
-              }
-              if (pv.getAttribute('data-path') == curPath) {
-                incrArr.push(this.buildIncrement(record.objectId));
-              }
-              if (pv) {
-                var ele = pv.querySelector('#lc-pv #number');
-                if (ele) {
-                  if (pv.getAttribute('data-path') == curPath) {
-                    ele.innerText = (record.times || 0) + 1;
-                  } else {
-                    ele.innerText = record.times || 0;
-                  }
-                  pv.style.display = 'inline';
-                }
-              }
-            });
-            getterArr.push(viewGetter);
-          }
-        }
-      }
-
-      // 如果启动计数自增，批量发起自增请求
-      if (enableIncr) {
-        Promise.all(getterArr).then(() => {
-          incrArr.length > 0 && this.increment(Counter, incrArr);
-        })
-      }
-
-    },
-
-
-    fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${ api_server }/1.1${ url }`, {
-          method,
-          headers: {
-            'X-LC-Id': this.app_id,
-            'X-LC-Key': this.app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      this.addCount(Counter);
-    },
-
-    refreshCounter() {
-      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
-      if (api_server) {
-        this.fetchData(api_server);
-      } else {
-        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
-          .then(resp => resp.json())
-          .then(({api_server}) => {
-            this.fetchData('https://' + api_server);
-          });
-      }
-    }
-
-  };
-
-  LCCounter.refreshCounter();
-
-  document.addEventListener('pjax:complete', function () {
-    LCCounter.refreshCounter();
-  });
-</script>
-
-
-
-
-
-
-
-
-<script>
-function listennSidebarTOC() {
-  const navItems = document.querySelectorAll(".toc li");
-  if (!navItems.length) return;
-  const sections = [...navItems].map((element) => {
-    const link = element.querySelector(".toc-link");
-    const target = document.getElementById(
-      decodeURI(link.getAttribute("href")).replace("#", "")
-    );
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.scrollTo({
-		top: target.offsetTop + 100,
-		
-		behavior: "smooth"
-		
-	  });
-    });
-    return target;
-  });
-
-  function activateNavByIndex(target) {
-    if (target.classList.contains("active-current")) return;
-
-    document.querySelectorAll(".toc .active").forEach((element) => {
-      element.classList.remove("active", "active-current");
-    });
-    target.classList.add("active", "active-current");
-    let parent = target.parentNode;
-    while (!parent.matches(".toc")) {
-      if (parent.matches("li")) parent.classList.add("active");
-      parent = parent.parentNode;
-    }
-  }
-
-  function findIndex(entries) {
-    let index = 0;
-    let entry = entries[index];
-    if (entry.boundingClientRect.top > 0) {
-      index = sections.indexOf(entry.target);
-      return index === 0 ? 0 : index - 1;
-    }
-    for (; index < entries.length; index++) {
-      if (entries[index].boundingClientRect.top <= 0) {
-        entry = entries[index];
-      } else {
-        return sections.indexOf(entry.target);
-      }
-    }
-    return sections.indexOf(entry.target);
-  }
-
-  function createIntersectionObserver(marginTop) {
-    marginTop = Math.floor(marginTop + 10000);
-    let intersectionObserver = new IntersectionObserver(
-      (entries, observe) => {
-        let scrollHeight = document.documentElement.scrollHeight + 100;
-        if (scrollHeight > marginTop) {
-          observe.disconnect();
-          createIntersectionObserver(scrollHeight);
-          return;
-        }
-        let index = findIndex(entries);
-        activateNavByIndex(navItems[index]);
-      },
-      {
-        rootMargin: marginTop + "px 0px -100% 0px",
-        threshold: 0,
-      }
-    );
-    sections.forEach((element) => {
-      element && intersectionObserver.observe(element);
-    });
-  }
-  createIntersectionObserver(document.documentElement.scrollHeight);
-}
-
-document.addEventListener("DOMContentLoaded", listennSidebarTOC);
-document.addEventListener("pjax:success", listennSidebarTOC);
-</script>
-
-<!-- more -->
-
-
-
-
-    
-      
-
-
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
-
-<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
-
-<div class="pjax-animate">
-  
-    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
-    <script>
-      window.ShowLoading = function() {
-        NProgress.start();
-      };
-      window.HideLoading = function() {
-        NProgress.done();
-      }
-    </script>
-  
-</div>
-
-<script>
-    var pjax;
-    document.addEventListener('DOMContentLoaded', function () {
-      pjax = new Pjax({
-        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
-        selectors: [
-          "title",
-          "#l_cover",
-          "#pjax-container",
-          "#pjax-header-nav-list"
-        ],
-        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
-      });
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-      //window.stop(); // 相当于点击了浏览器的停止按钮
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
+              target.classList.add('has-jax')
             }
           });
-        }
-      } catch (error) {}
-
-      window.subData = null; // 移除标题（用于一二级导航栏切换处）
-      if (typeof $.fancybox != "undefined") {
-        $.fancybox.close();    // 关闭弹窗
+        }, '', false]
       }
-      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
-      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
-      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
-
-      // 解绑事件 避免重复监听
-      volantis.$topBtn.unbind('click');
-      $('.menu a').unbind('click');
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-      window.ShowLoading();
-    });
-
-    document.addEventListener('pjax:complete', function () {
-      // 关于百度统计对 SPA 页面的处理：
-      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
-      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
-      // 
-
-      // 关于谷歌统计对 SPA 页面的处理：
-      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
-      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
-      
-
-      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
-      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-      try{
-          if (typeof $.fancybox == "undefined") {
-            SCload_fancybox();
-          } else {
-            pjax_fancybox();
-          }
-        
-        
-        
-        
-        
-          pjax_initCopyCode();
-        
-        
-        
-        
-        
-      } catch (e) {
-        console.log(e);
-      }
-      window.HideLoading();
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-      window.HideLoading();
-      window.location.href = e.triggerElement.href;
-    });
-</script>
-
-    
-  </div>
-</body>
-</html>
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
