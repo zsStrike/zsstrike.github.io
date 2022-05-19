@@ -1,5 +1,5 @@
 menu:
-  首页: / || fas fa-home
+  首页: /index || fas fa-home
   归档: /archives/ || fas fa-archive
   标签: /tags/ || fas fa-tags
   # 分类: /categories/ || fas fa-folder-open
@@ -101,7 +101,7 @@ lazyload:
   blur: false
 
 medium_zoom: false
-fancybox: false
+fancybox: true
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
