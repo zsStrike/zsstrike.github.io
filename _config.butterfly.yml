@@ -1,0 +1,179 @@
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  # 分类: /categories/ || fas fa-folder-open
+  关于: /about/ || fas fa-heart
+
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true # 手機頁面（ 顯示寬度 < 768px ）是否顯示aside內容
+  position: right # left or right
+  archives: true
+  card_author:
+    enable: true
+    description:
+    button:
+      enable: true
+	    icon: fab fa-github
+      text: Github
+      link: https://github.com/zsStrike
+  card_announcement:
+    enable: false
+    content: This is my Blog
+  card_recent_post:
+    enable: false
+    limit: 5 # if set 0 will show all
+    sort: date # date or updated
+  card_categories:
+    enable: false
+    limit: 8 # if set 0 will show all
+    expand: none # none/true/false
+  card_tags:
+    enable: true
+    limit: 40 # if set 0 will show all
+    color: false
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true    
+  card_archives:
+    enable: false
+    type: monthly # yearly or monthly
+    format: MMMM YYYY # eg: YYYY年MM月
+    order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
+    limit: 8 # if set 0 will show all
+
+local_search:
+  enable: true
+  preload: false
+  CDN:
+
+# 美化頁面顯示
+beautify:
+  enable: false
+  field: site # site/post
+  title-prefix-icon: '\f0c1'
+  title-prefix-icon-color: "#F47466"
+
+wordcount:
+  enable: true
+  post_wordcount: true
+  min2read: true
+  total_wordcount: true
+
+medium_zoom: true
+instantpage: true
+
+# https://github.com/vinta/pangu.js
+# Insert a space between Chinese character and English character (中英文之間添加空格)
+pangu:
+  enable: false
+  field: post # site/post
+
+highlight_theme: mac light
+highlight_copy: true
+highlight_shrink: false
+highlight_lang: true
+
+disable_top_img: true
+
+favicon: /assets/avatar.jpg
+
+cover:
+  # 是否顯示文章封面
+  index_enable: false
+  aside_enable: false
+  archives_enable: false
+  # 封面顯示的位置
+  # 三個值可配置 left , right , both
+  position: both
+  # 當沒有設置cover時，默認的封面顯示
+  default_cover:
+    - /assets/default_cover.png
+
+# Replace Broken Images (替換無法顯示的圖片)
+error_img:
+  flink: /assets/default_cover.png
+  post_page: /assets/default_cover.png
+
+# Related Articles
+related_post:
+  enable: false
+  limit: 6 # Number of posts displayed
+  date_type: created # or created or updated 文章日期顯示創建日或者更新日
+
+post_pagination: false
+
+background: url(/blog/assets/bg.jpg)
+
+post_meta:
+  page:
+    date_type: both # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
+    date_format: relative # date/relative 顯示日期還是相對日期
+    categories: false # true or false 主頁是否顯示分類
+    tags: true # true or false 主頁是否顯示標籤
+    label: true # true or false 顯示描述性文字
+  post:
+    date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
+    date_format: relative # date/relative 顯示日期還是相對日期
+    categories: false # true or false 文章頁是否顯示分類
+    tags: true # true or false 文章頁是否顯示標籤
+    label: true # true or false 顯示描述性文字
+
+post_copyright:
+  enable: true
+  decode: true
+  author_href:
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+avatar:
+  img: /assets/avatar.jpg
+  effect: false # 頭像會一直轉圈
+
+photofigcaption: false
+
+# copy settings
+# copyright: Add the copyright information after copied content (複製的內容後面加上版權信息)
+copy:
+  enable: true
+  copyright:
+    enable: true
+    limit_count: 5000
+
+footer:
+  owner:
+    enable: true
+    since: 2017
+
+busuanzi:
+  site_uv: true
+  site_pv: true
+  page_pv: true
+
+runtimeshow:
+  enable: true
+  publish_date: 6/7/2017 00:00:00  
+  ##網頁開通時間
+  #格式: 月/日/年 時間
+  #也可以寫成 年/月/日 時間
+
+# social:
+#   fab fa-github: https://github.com/zsStrike || Github
+#   fas fa-envelope: mailto: 2439758713@qq.com || Email
+
+
+mathjax:
+  enable: true
+  # true 表示每一頁都加載mathjax.js
+  # false 需要時加載，須在使用的Markdown Front-matter 加上 mathjax: true
+  per_page: false
+
+# A simple 404 page
+error_404:
+  enable: true
+  subtitle: "页面走丢了😭"
+  background: /assets/404.png

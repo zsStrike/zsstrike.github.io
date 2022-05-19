@@ -1,7 +1,5 @@
 ---
-layout: tag
-index: true
-title: 所有标签
-cover: true
-sidebar: [blogger, tagcloud]    
+title: 标签
+date: 2022-05-19 12:29:44
+type: "tags"
 ---
