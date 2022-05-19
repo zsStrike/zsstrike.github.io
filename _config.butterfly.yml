@@ -94,6 +94,15 @@ cover:
   default_cover:
     - /assets/default_cover.png
 
+lazyload:
+  enable: false
+  field: site # site/post
+  placeholder:
+  blur: false
+
+medium_zoom: false
+fancybox: false
+
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
   flink: /assets/default_cover.png
