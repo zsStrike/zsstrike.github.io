@@ -64,7 +64,7 @@ wordcount:
   min2read: true
   total_wordcount: true
 
-medium_zoom: true
+# medium_zoom: true
 instantpage: true
 
 # https://github.com/vinta/pangu.js
@@ -106,8 +106,6 @@ related_post:
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
 
 post_pagination: false
-
-background: url(/blog/assets/bg.jpg)
 
 post_meta:
   page:
