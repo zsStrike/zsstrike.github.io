@@ -36,7 +36,7 @@ tags: ["Java"]
 
    不会，对象字段会被默认初始化。
 
-7. `i = i++` 和 `i = ++i` 的区别，i  初始值为 0？
+7. `i = i++` 和 `i = ++i` 的区别，i 初始值为 0？
 
    每个方法在执行时，都有一个栈帧与之对应，其中包含了局部变量，操作数栈以及其他数据。`i = i++` 表示先将 i 的值入栈，然后执行自增，这时局部变量 i 就变为 1，最后执行赋值操作，也就是将栈顶数据写回给 i，得到的最终值为 0；`i = ++i` 则是先执行自增操作，这是局部变量 i 为 1，接着将 i 入栈，最后执行出栈操作，得到最终值为 1。
 
@@ -691,22 +691,49 @@ tags: ["Java"]
 113. 有哪些可以实现线程间同步的类或接口？
 
      + CountDownLatch：像是个门闩，通过 countDown&await 实现线程间同步
-
      + Semaphore：信号量，通常用作可用资源的计数统计，通过 acquire&release 实现同步
-
      + Barrier：类似 Latch，但是用于运行速度快的线程等待慢的线程，通过 await 等待，所有线程到达将会自动打开，Java 中实现了 CyclicBarrier
-
      + FutureTask：实例化可以传入一个 Callable 接口，然后通过 fut.get() 实现线程同步
-
      + wait&notify：通过 JVM 实现，实现线程同步
-
      + await&signal：通过 JUC 实现，是 Condition 接口里面的方法
 
-       
+114. 在 Java 中如何执行大批量的任务，或者执行任务的优雅方式是什么？
 
+     通过 Executor 来实现任务执行的抽象，其包含有一个 execute 接口。内置的几种默认的 ExecutorService：
 
+     + Executors.newFixedThreadPool：固定线程个数的线程池
+     + Executors.newCachedThreadPool：线程个数不固定的线程池，但是会尝试复用已经创建了的线程
+     + Executors.newSingleThreadPool：单线程的线程池
+     + Executors.newScheduledThreadPool：固定个数的线程池，用于处理周期任务
 
+115. ExecutorService 生命周期是什么？其中的 shutdown 和 shutdownNow 方法的区别？
 
+     生命周期是运行，关闭，已终止。
+
+     shutdown 方法将会执行平缓的关闭过程：不再接受新的任务，同时等待已经提交的任务执行完成。而 shutdownNow 方法则执行粗暴的关闭过程：它将尝试取消所有运行中的任务，同时不再启动队列中尚未开始的任务。
+
+116. ExecutorService 中的 execute 和 submit 的异同点？
+
+     + 都用来向线程池中添加一个任务，让线程池异步执行该任务
+     + execute 只能添加 Runnable 任务，submit 可以添加 Runnable 和 Callable 任务
+     + execute 是在 Executor 接口中定义的，submit 则是在 ExecutorService 中定义的
+     + submit 返回值 Future 类型，execute 没有返回值
+     + submit 方式提交的任务若在执行的过程中抛出了异常的话，异常信息会被吃掉（在控制台中看不到），需要通过 Future.get 方法来获取这个异常；使用 execute 方式提交的任务若在执行的过程中出现异常的话，异常信息会被打印到控制台
+
+117. Java 中如何进行延迟任务和周期任务？
+
+     + 可以使用 Timer 和 TimerTask 实现延迟任务和周期任务
+     + 可以使用 ScheduledExecutorService，Timer 在执行所有的定时任务的时候只会创建一个线程。如果某个任务的执行时间过长，那么将会破坏其他 TimerTask 的定时精确性。基于以上原因，建议使用 ScheduledThreadPoolExecutor。
+
+118. Runnable 和 Callable 的区别？
+
+     两者都可以用作任务的抽象，但是前者不包含返回值，而后者包含返回值。
+
+     当使用 Callable 作为任务的抽象时，可以使用 Future 来检测任务是否执行并且获取运行结果，以便进行线程间的同步。
+
+119. CompletionService 的作用？
+
+     将 Executor 与 BlockingQueue 的功能结合在一起，通过将一组 Callable 任务提交给它来执行，然后使用 take 和 poll 等方法来获得已经完成的结果，这些结果会被封装成 Future。ExecutorCompletionService 实现了 CompletionService。
 
 
 
