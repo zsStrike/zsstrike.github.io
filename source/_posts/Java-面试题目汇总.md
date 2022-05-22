@@ -12,6 +12,8 @@ tags: ["Java"]
 
 
 
+
+
 1. Java 中对象和对象引用的区别？
 
    对象存储在堆内存中，对象引用一般存储在栈内存中，程序员直接操作的是对象引用，对象引用指向实际的对象。
@@ -674,7 +676,13 @@ tags: ["Java"]
 
      > ConcurrentHashMap 在 JDK8 后，若溢出块太多，采用红黑树来管理溢出块，加速访问
 
-111. 阻塞队列中的 take&put 和 poll&offer 方法有什么区别？
+111. ConcurrentHashMap 为什么不允许键值为 null？
+
+     不允许值为 null：会带来二义性问题，如通过 map.get(key) 返回 null 的时候，可能是 map 中本来就没有这个 key，或者 map 中有这个键，但是键对应的值为 null。在 HashMap 中允许值为 null 是因为可以通过 map.containsKey 来进行判断，但是在多线程中，map.containsKey 不是原子执行的，可能在执行过程中，其他线程进行了 put 动作，导致得到非预期的结果。
+
+     不允许键为 null：在源码中定义的，Dogue Lea 强制规定的，他本人比较讨厌 null。
+
+112. 阻塞队列中的 take&put 和 poll&offer 方法有什么区别？
 
      阻塞队列在实现上是通过 Conditon 接口中的 await/signal 实现线程间同步的。
 
@@ -682,13 +690,13 @@ tags: ["Java"]
 
      而 poll 在队列空时，直接返回 null，非阻塞实现。
 
-112. Conditon 接口有什么作用？其实现生产者-消费者阻塞队列的原理？
+113. Conditon 接口有什么作用？其实现生产者-消费者阻塞队列的原理？
 
      Condition 是在 java 1.5 中才出现的，它用来替代传统的 Object 的 wait()、notify() 实现线程间的协作，相比使用 Object 的 wait()、notify()，使用 Condition 的 await()、signal() 这种方式实现线程间协作更加安全和高效。
 
      对于由 Condition 实现的生产者-消费者阻塞队列：当线程 Consumer 中调用 await 方法后，线程Consumer 将释放锁，并且将自己沉睡，等待唤醒，线程 Producer 获取到锁后，开始做事，完毕后，调用Condition 的 signalall 方法，唤醒线程 Consumer，线程 Consumer恢复执行。
 
-113. 有哪些可以实现线程间同步的类或接口？
+114. 有哪些可以实现线程间同步的类或接口？
 
      + CountDownLatch：像是个门闩，通过 countDown&await 实现线程间同步
      + Semaphore：信号量，通常用作可用资源的计数统计，通过 acquire&release 实现同步
@@ -697,7 +705,7 @@ tags: ["Java"]
      + wait&notify：通过 JVM 实现，实现线程同步
      + await&signal：通过 JUC 实现，是 Condition 接口里面的方法
 
-114. 在 Java 中如何执行大批量的任务，或者执行任务的优雅方式是什么？
+115. 在 Java 中如何执行大批量的任务，或者执行任务的优雅方式是什么？
 
      通过 Executor 来实现任务执行的抽象，其包含有一个 execute 接口。内置的几种默认的 ExecutorService：
 
@@ -706,13 +714,13 @@ tags: ["Java"]
      + Executors.newSingleThreadPool：单线程的线程池
      + Executors.newScheduledThreadPool：固定个数的线程池，用于处理周期任务
 
-115. ExecutorService 生命周期是什么？其中的 shutdown 和 shutdownNow 方法的区别？
+116. ExecutorService 生命周期是什么？其中的 shutdown 和 shutdownNow 方法的区别？
 
      生命周期是运行，关闭，已终止。
 
      shutdown 方法将会执行平缓的关闭过程：不再接受新的任务，同时等待已经提交的任务执行完成。而 shutdownNow 方法则执行粗暴的关闭过程：它将尝试取消所有运行中的任务，同时不再启动队列中尚未开始的任务。
 
-116. ExecutorService 中的 execute 和 submit 的异同点？
+117. ExecutorService 中的 execute 和 submit 的异同点？
 
      + 都用来向线程池中添加一个任务，让线程池异步执行该任务
      + execute 只能添加 Runnable 任务，submit 可以添加 Runnable 和 Callable 任务
@@ -720,20 +728,47 @@ tags: ["Java"]
      + submit 返回值 Future 类型，execute 没有返回值
      + submit 方式提交的任务若在执行的过程中抛出了异常的话，异常信息会被吃掉（在控制台中看不到），需要通过 Future.get 方法来获取这个异常；使用 execute 方式提交的任务若在执行的过程中出现异常的话，异常信息会被打印到控制台
 
-117. Java 中如何进行延迟任务和周期任务？
+118. Java 中如何进行延迟任务和周期任务？
 
      + 可以使用 Timer 和 TimerTask 实现延迟任务和周期任务
      + 可以使用 ScheduledExecutorService，Timer 在执行所有的定时任务的时候只会创建一个线程。如果某个任务的执行时间过长，那么将会破坏其他 TimerTask 的定时精确性。基于以上原因，建议使用 ScheduledThreadPoolExecutor。
 
-118. Runnable 和 Callable 的区别？
+119. Runnable 和 Callable 的区别？
 
      两者都可以用作任务的抽象，但是前者不包含返回值，而后者包含返回值。
 
      当使用 Callable 作为任务的抽象时，可以使用 Future 来检测任务是否执行并且获取运行结果，以便进行线程间的同步。
 
-119. CompletionService 的作用？
+120. CompletionService 的作用？
 
      将 Executor 与 BlockingQueue 的功能结合在一起，通过将一组 Callable 任务提交给它来执行，然后使用 take 和 poll 等方法来获得已经完成的结果，这些结果会被封装成 Future。ExecutorCompletionService 实现了 CompletionService。
 
+121. 什么是守护线程，它有什么作用，适用场景？
 
+     守护线程指的是用来在后台执行任务的线程，如 GC 进程。JVM 在进行关闭的时候只需要看是否存在非守护线程正在运行，如果只有守护线程正在运行，JVM 是可以直接结束并且回收守护线程的，因此，守护线程中最好不要放打开资源的执行语句，以防止资源没有正确关闭。
+
+122. FutureTask 类有什么作用？
+
+     FutureTask 实现了 RunnableFuture 接口，该接口同时继承 Runnable 接口和 Future 接口，可以用于异步取消事务。
+
+123. 如何中止正在执行的线程？
+
+     + 使用中断：每个线程都有一个 boolean 类型的中断状态。它不会真正地中断一个正在运行的线程，而只是发出中断请求，然后由线程在下一个合适的时刻中断自己。Thread.interrupted() 会返回中断状态，并且置空中断状态位
+     + 通过 Future 取消：在使用 ExecutorService 提交任务时，会返回一个 Future 对象，可以通过 cancel 来取消
+     + 通过 Executor 取消：使用 shutdown/shutdownNow 
+     + 毒丸对象：在基于生产者-消费者模型中，可以添加一个毒丸对象，是指特定的一个放在队列上的对象，当消费者得到这个对象的时候，立刻停止执行
+
+124. shutdownNow 的局限性？
+
+     使用该方法的时候，它将会取消所有正在执行的任务，并且返回所有已经提交但尚未开始的任务。然而，我们并不知道那些任务已经开始但是尚未正常结束。
+
+125. 如何对非正常的线程中止进行监控？
+
+     导致线程提前死亡的原因主要就是 RuntimeException。如果没有捕获该异常，程序就会在控制台打印栈信息，然后退出执行。在 Thread 中提供了 UncaughtExceptionHandler，它能检测出某个线程由于未捕获的异常而终结的情况。
+
+126. JVM 关闭时的关闭钩子是什么，守护线程会阻碍 JVM 关闭吗？
+
+     在正常的关闭中，JVM 首先调用所有已注册过的关闭钩子（Shutdown Hook）。JVM 不保证关闭钩子的调用顺序。守护线程并不会阻碍 JVM 关闭，因此不要在守护线程中进行资源打开的操作，以防止资源未正确关闭。
+
+127. 
 

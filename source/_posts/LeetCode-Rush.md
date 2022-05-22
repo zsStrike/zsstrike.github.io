@@ -337,3 +337,4 @@ tags: ["Algorithm"]
 + 想要对自定义类实现排序，要么实现 `Comparable<T>` 接口，重写 `compareTo` 方法，或者是排序的时候传入一个 `Comparator<T>` 对象，重写 `compare` 方法
 + 想要对 `int[]` 类型进行降序排序，不能直接用 `Arrays.sort`，其只对 `T[]` 提供自定义比较器，可以使用流操作来实现：`Arrays.stream(arr).boxed().sorted((a, b) -> b - a).mapToInt(Integer::intValue).toArray()`
 + 在 Java 设计中 Stack 继承自 Vector，这是一种错误的设计，应该使用组合而不是继承关系。官方推荐写法：`Deque<Integer> stack = new ArrayDeque<>()`
++ 注意使用三目运算符优先级：`a + b > c ? b : c`，此时判断的是 a+b 和 c 的大小，而不是 b 和 c 的大小。
