@@ -770,5 +770,39 @@ tags: ["Java"]
 
      在正常的关闭中，JVM 首先调用所有已注册过的关闭钩子（Shutdown Hook）。JVM 不保证关闭钩子的调用顺序。守护线程并不会阻碍 JVM 关闭，因此不要在守护线程中进行资源打开的操作，以防止资源未正确关闭。
 
-127. 
+127. 如何构建一个自定义线程池？
 
+     可以通过 ThreadPoolExecutor 实现该需求，该类继承自 AbstractExecutorService：
+
+     ```java
+     public ThreadPoolExecutor(int corePoolSize,
+                               int maximumPoolSize,
+                               long keepAliveTime,
+                               TimeUnit unit,
+                               BlockingQueue<Runnable> workQueue,
+                               ThreadFactory threadFactory,
+                               RejectedExecutionHandler handler) { ... }
+     ```
+
+     handler 用于处理在等待队列满时，应该采取的措施，如中止，抛弃，抛弃最旧的；
+
+     threadFactory 则用于定制化工作，通过实现 ThreadFactory 接口即可；
+
+     另外，也可以继承 ThreadPoolExecutor，并重写 beforeExecute，afterExecute 和 terminated 方法来实现定制。
+
+128. AbstractExecutorService 中的 newTaskFor 作用？
+
+     可以将三类参数转化为 RunnableFuture 对象，是在 Runnable 和 Callable 上的进一步抽象。
+
+129. 什么是死锁，如何进行死锁避免和检测？
+
+     死锁：当多个线程相互持有彼此正在等待的锁而又不释放自己已经持有的锁的时候，就会发生死锁。
+
+     + 支持定时的锁：可以使用 Lock 类的定时 tryLock 功能来代替内置锁机制。当使用内置锁的时候，只要没有获得锁就会一直等待下去，而显式锁则可以指明一个超时时限。
+     + 通过线程转储信息来分析死锁：线程转储信息中包含了加锁信息，例如每个线程持有了哪些锁，在那些栈帧中获得了这些锁，以及被阻塞的线程正在等待哪一个锁。
+
+130. 什么是饥饿，什么是活锁？
+
+     饥饿：当线程无法访问它所需要的资源而不能继续执行的时候，就会发生饥饿。引发饥饿的最常见资源就是 CPU 时钟周期。
+
+     活锁：该问题尽管不会阻塞线程，但也不能继续执行，因为线程将不断重复执行相同的操作，而且总会失败。可以通过引入随机性来解决该问题。
