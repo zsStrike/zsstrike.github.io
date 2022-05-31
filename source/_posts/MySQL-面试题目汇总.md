@@ -603,7 +603,33 @@ tags: ["MySQL"]
        (select id from t_record where age > 10 offset 10000 limit 10）;
        ```
 
-       
+109. InnoDB 是如何保证事务的 ACID 属性的？
 
-     
+     + 持久性是通过 redo log （重做日志）来保证的
+     + 原子性是通过 undo log（回滚日志） 来保证的
+     + 隔离性是通过 MVCC（多版本并发控制） 和锁机制来保证的
+     + 一致性在满足持久性，原子性和隔离性情况下自然满足
+
+110. 事务的隔离级别有哪些，分别是为了解决哪些问题？
+
+     未提交读，提交读，可重复读，串行化；分别解决了脏读，不可重复读，幻读问题。
+
+111. InnoDB 如何支持不同的隔离级别的？
+
+     + 未提交读：直接读取最新的数据
+     + 串行化：加读写锁实现
+     + 读提交和可重复读：通过 Read View 实现，读提交在每次读数据前生成一个 Read View，可重复读则在启动事务时生成一个 Read View，在之后都使用该 Read View
+
+112. MVCC 是如何实现的？
+
+     通过表的隐藏列 trx_id 和 roll_pointer 实现，后者用于生成版本链，通过 trx_id 找到适应的版本数据。
+
+113. ReadView 数据结构是怎样的，如何处理提交读和可重复读？
+
+     ReadView 的数据结构：`(creator_trx_id, running_trx_ids, min_trx_id, max_trx_id)`，其中 max_trx_id 指的是创建 ReadView 时应该给下一个事务的 id 值：
+
+     + 可重复读：遍历记录版本，直到找到 trx_id 小于等于 creator_trx_id 的记录
+     + 读提交：遍历记录版本，直到找到 trx_id 小于 max_trx_id，并且其不在 running_trx_ids 列表中的记录
+
+
 
