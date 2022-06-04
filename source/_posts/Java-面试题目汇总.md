@@ -818,3 +818,27 @@ tags: ["Java"]
      + 缩小锁的范围
      + 减少锁的粒度，如锁分段，ConcurrentHashMap
      + 使用替代独占锁的方式：使用并发容器，ReadWriteLock，不可变对象（String）以及原子变量
+
+133. Lock 和 ReentrantLock 关系，ReentrantLock 相较于 synchronized 有什么特点？
+
+     Lock 接口提供了一种基于条件的，可定时的以及可中断的锁获取操作。ReentrantLock 则实现了 Lock 接口。相较于 synchronized，其特点有：
+
+     + 轮询锁与定时锁：由 tryLock 方法实现，具有完善的错误恢复机制，使用这两种锁可以避免死锁的发生。
+     + 可中断的锁获取操作：lockInterruptibly 方法能够在获得锁的同时保持对中断的响应。
+     + 非块结构的加锁：内置锁中，锁的获取和释放操作都是基于代码块的。而 Lock 技术则不是块结构的锁
+     + 公平锁和非公平锁：ReentrantLock 还可以实现非公平锁，可提高效率，但是可能造成饿死
+
+134. ReentrantLock 中的公平锁和非公平锁区别？
+
+     + 非公平锁在调用 lock 后，首先就会调用 CAS 进行一次抢锁，如果这个时候恰巧锁没有被占用，那么直接就获取到锁返回了
+     + 非公平锁在 CAS 失败后，和公平锁一样都会进入到 tryAcquire 方法，在 tryAcquire 方法中，如果发现锁这个时候被释放了（state == 0），非公平锁会直接 CAS 抢锁，但是公平锁会判断等待队列是否有线程处于等待状态，如果有则不去抢锁，乖乖排到后面
+
+     公平锁和非公平锁就这两点区别，如果这两次 CAS 都不成功，那么后面非公平锁和公平锁是一样的，都要进入到阻塞队列等待唤醒。
+
+135. 如何使用 Lock 接口进行线程间同步？
+
+     使用 Lock 接口中的 newCondition 方法，然后通过 await&signal 实现同步，其作用和 wait&notify 作用相同，但是 Lock 可以创建多个 Condition，以创建多个同步队列。同样地，await&signal 方法需要在获取了锁之后进行调用。
+
+136. ReadWriteLock 有何作用？
+
+     ReentrantLock 实现了一种标准的互斥锁，互斥通常是一种过硬的加锁规则，因此限制了并发性。可以使用读写锁来改善：在读写锁的加锁策略中，允许多个操作同时执行，但每次最多只允许一个写操作。ReentrantReadWriteLock 实现了上述接口，提供可重入的语义，同时构造的时候可以选择是否公平锁。
