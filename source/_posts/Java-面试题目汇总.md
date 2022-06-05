@@ -842,3 +842,13 @@ tags: ["Java"]
 136. ReadWriteLock 有何作用？
 
      ReentrantLock 实现了一种标准的互斥锁，互斥通常是一种过硬的加锁规则，因此限制了并发性。可以使用读写锁来改善：在读写锁的加锁策略中，允许多个操作同时执行，但每次最多只允许一个写操作。ReentrantReadWriteLock 实现了上述接口，提供可重入的语义，同时构造的时候可以选择是否公平锁。
+
+137. Condition 接口的作用以及对应的实现？
+
+     正如 Lock 是一种广义的内置锁，Condition 也是一种广义的内置条件队列。内置锁的缺陷在于每个内置锁都只能有一个相关联的条件队列。而 Condition 和 Lock 一起使用就可以消除该问题。和内置条件队列不同的是，对于每个 Lock，可以有任意数量的 Condition 对象。在 Condition 中相应的方法是 await，signal 和 signalAll。
+
+     真正实现的 Condition 接口的有 ConditionObject，位于 AQS 类中。
+
+138. AbstractQueuedSynchronizer（AQS）有何作用？
+
+     AQS 是一个用于构建锁和同步器的框架，CountDownLatch，ReentrantReadWriteLock， FutureTask，ReentrantLock，Semaphore，CyclicBarrier 等都是基于 AQS 实现。其内部类 ConditionObject 实现了 Condition 接口，用于产生条件队列。
