@@ -852,3 +852,19 @@ tags: ["Java"]
 138. AbstractQueuedSynchronizer（AQS）有何作用？
 
      AQS 是一个用于构建锁和同步器的框架，CountDownLatch，ReentrantReadWriteLock， FutureTask，ReentrantLock，Semaphore，CyclicBarrier 等都是基于 AQS 实现。其内部类 ConditionObject 实现了 Condition 接口，用于产生条件队列。
+
+139. volatile 和 synchronized 的区别？
+
+     + volatile 只能修饰实例变量和类变量，而 synchronized 可以修饰方法，以及代码块
+     + volatile 保证数据的可见性，但是不保证原子性(多线程进行写操作，不保证线程安全)；而 synchronized 是一种排他(互斥)的机制
+     + volatile 用于禁止指令重排序：可以解决单例双重检查对象初始化代码执行乱序问题
+     + volatile 可以看做是轻量版的 synchronized，volatile 不保证原子性，但是**如果是对一个共享变量进行多个线程的赋值，而没有其他的操作**，那么就可以用 volatile 来代替 synchronized，因为赋值本身是有原子性的，而 volatile 又保证了可见性，所以就可以保证线程安全了
+
+140. 原子变量类有何作用，存在的优势是什么，有哪些类型？
+
+     原子变量类 **比锁的粒度更细，更轻量级**，原子变量将发生竞争的范围缩小到单个变量上。原子变量类相当于一种泛化的 `volatile` 变量，能够**支持原子的、有条件的读/改/写操**作。原子类在内部使用 CAS 指令（基于硬件的支持）来实现同步，在高度竞争的情况下，锁的性能超过原子变量的性能；而在适度竞争情况下，原子变量的性能超过锁的性能。常见的原子变量类：
+
+     + 基本类型：AtomicInteger，AtomicLong，AtomicBoolean
+     + 引用类型：AtomicReference，AtomicStampedReference，AtomicMarkableReference
+     + 数组类型：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray
+     + 属性更新器类型：AtomicIntegerFieldUpdater，AtomicLongFieldUpdater，AtomicReferenceFieldUpdater
