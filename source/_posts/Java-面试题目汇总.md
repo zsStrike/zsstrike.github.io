@@ -868,3 +868,31 @@ tags: ["Java"]
      + 引用类型：AtomicReference，AtomicStampedReference，AtomicMarkableReference
      + 数组类型：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray
      + 属性更新器类型：AtomicIntegerFieldUpdater，AtomicLongFieldUpdater，AtomicReferenceFieldUpdater
+
+141. 现代处理器的内存模型是怎样的？
+
+     在共享内存的多处理器体系结构中，每个处理器有自己的缓存，并且定期的与主内存进行协调。在需要进行内存同步的时候，就可以执行内存栅栏指令，来保证数据的一致性。JVM 通过在合适的位置上插入内存栅栏来屏蔽 JMM 与底层平台内存模型的差异。
+
+142. 什么是 Happens-Before 关系，有什么作用，包括哪些规则？
+
+     + 如果一个操作 happens-before 另一个操作，那么第一个操作的执行结果将对第二个操作可见，而且第一个操作的执行顺序排在第二个操作之前。
+     + 两个操作之间存在 happens-before 关系，并不意味着一定要按照 happens-before 原则制定的顺序来执行。如果重排序之后的执行结果与按照 happens-before 关系来执行的结果一致，那么这种重排序并不非法
+
+     要想保证操作 B 看到操作 A 的结果（无论 A 和 B 是否在同一线程），那么 A 和 B 操作之间必须存在 Happens-Before 关系，如果两个操作之间缺乏 Happens-Before 关系，那么 JVM 就可以对他们进行任意重排序。包括：
+
+     + 程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作
+     + **锁定规则**：一个 unLock 操作先行发生于后面对同一个锁的 lock 操作
+     + **对象终结规则**：对一个变量的写操作先行发生于后面对这个变量的读操作
+     + **传递规则**
+     + 线程启动，结束规则
+     + 线程中断规则
+     + 对象终结规则
+
+143. final 关键字能否保证对象的可见性？
+
+     final 确保可见性是指一旦完成初始化，那么在其他线程中就可以看见 final 字段，可以安全使用，唯一需要担心的就是 this 引用逃逸。
+
+     对于 final 域，编译器和处理器要遵守两个重排序规则：
+
+     + 在构造函数内对一个 final 域的写入，与随后把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序（先写入 final 变量，后调用该对象引用）。编译器会在final域的写之后，插入一个StoreStore屏障
+     + 初次读一个包含 final 域的对象的引用，与随后初次读这个 final 域，这两个操作之间不能重排序（先读对象的引用，后读 final 变量）。编译器会在读 final 域操作的前面插入一个 LoadLoad 屏障
