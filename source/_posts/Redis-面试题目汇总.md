@@ -869,6 +869,28 @@ tags: ["Redis"]
      + FAIL 消息：用于广播某个节点已经下线
      + PUBLISH 消息：向指定 Channel 发送消息，所有订阅了频道的都能获取到该信息
 
+163. Redis 发布与订阅功能的实现原理？
+
+     主要由 PUBLISH，SUBSCRIBE，PSUBSCRIB 等命令组成，每当有其他客户端向被订阅的频道发送消息时，频道的所有订阅者都会收到这个消息。
+
+     + 频道的订阅与退订：Redis 将所有订阅关系保存在 RedisServer.pubsub_channels **字典**里面，键是某个被订阅的频道，键值则是一个链表，保存着所有订阅这个频道的客户端。
+     + 模式的订阅与退订：Redis 将所有模式的订阅关系保存在 RedisServer.pubsub_patterns **列表**里面。
+
+164. 当执行 `PUBLISH <channel> <message>` 的时候，Redis 是如何进行处理的？
+
+     服务器需要将消息 message 发送到对应的 channel 的所有订阅者，另外如果有模式匹配这个 channel，那么需要将 message 发送给 pattern 模式的订阅者。
+
+     + 将消息发送给频道订阅者：从 pubsub_channels 字典里面找到订阅者链表，然后将消息发送给名单上的所有客户端
+     + 将消息发送给模式订阅者：遍历 pubsub_patterns 链表，查找那些与 channel 频道匹配的模式，并且将消息发送到这些模式的客户端
+
+165. Redis 如何查看频道或者模式的相关信息？
+
+     + PUBSUB CHANNELS [pattern]：返回与 pattern 匹配的频道
+     + PUBSUB NUMSUB [channel-1 channel-2]：返回频道对应订阅者的数量
+     + PUBSUB NUMPAT：返回当前服务器被订阅模式的数量
+
+     
+
 
 
 
