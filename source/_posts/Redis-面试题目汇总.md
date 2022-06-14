@@ -928,6 +928,15 @@ tags: ["Redis"]
 
      实现：执行 MONITOR 命令后，客户端的 REDIS_MONITOR 标志会被打开，并且这个客户端会被添加到 redisServer.monitors 链表的表尾。服务器每次执行命令之前，都会调用 replicationFeedMonitor 函数，由这个函数将命令请求信息发送给各个监视器。
 
+171. Redis 中的慢查询日志有什么作用，相关参数有哪些，具体实现？
+
+     记录执行时间超过指定时长的命令请求，用户可以通过该功能产生的日志来对语句进行针对性优化。
+
+     + slowlog-log-slower-than: 指定执行时间上限，超过上限的会被记录到日志上
+     + slowlog-max-len: 记录慢查询日志最大条数
+
+     所有的慢查询日志都被保存在 redisServer.slowlog 列表中，发现慢查询日志后就可以将其头插法插入到链表中，正在执行 SLOWLOG 相关指令的时候，会对该列表进行遍历。
+
 
 
 
