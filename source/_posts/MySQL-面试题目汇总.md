@@ -740,7 +740,23 @@ tags: ["MySQL"]
      + 开启安全更新模式，sql_safe_update 参数设置为 1，此时需要 update 有 where 或者 limit 子句
      + 如果带上索引，但是优化器选择走全表扫描，可以使用 force index 语句
 
+122. InnoDB 和 MyISAM 执行 select count(*)  有什么不同，为什么？
 
+     执行 count(*) 时，MyISAM 其直接返回表的元信息中 row_count 值，但是由于 InnoDB 支持 MVCC，并不能简单统计当前的行数作为业务的返回值，但当带上条件查询时，两者行为类似。
+
+123. InnoDB 下，不同 count 形式的执行效率？
+
+     count 性能：count(*) = count(1) > count(主键字段) > count(字段)
+
+     + count(主键字段)：优先走二级索引（减少 IO），没有的话走主键索引，InnoDB 只会返回对应的主键字段
+     + count(1)：和 count(主键字段) 类似，但是不会读取记录中的任何字段的值
+     + count(*)：会被优化为 count(0)，执行效率和 count(1) 相同
+     + count(字段)：会走全表扫描，如果其 NOT NULL，那么 Server 层就不需要额外的判断
+
+124. 如何优化 select count(*) 执行效率？
+
+     + 使用近似值：如 explain select count(*) from table
+     + 额外表保存计数值
 
 
 
