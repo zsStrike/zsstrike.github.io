@@ -785,6 +785,30 @@ tags: ["MySQL"]
      + 索引：注意索引失效的情况，覆盖索引，使用索引排序，前缀索引，删除长期未使用索引
      + 特定类型：优化 count 查询，优化 LIMIT 分页，优化 UNION，优化关联查询（尝试子查询）
 
+129. Buffer pool 有什么作用，哪些数据在 buffer pool 中？
+
+     通过 buffer pool 来提高数据库的读写性能，其以页（16 KB）为单位，通过参数 innodb_buffer_pool_size 调整缓存空间大小，其中存储的数据有：数据页，索引页，undo 页，插入缓存页，锁信息等（不包括 redo log buffer）。
+
+130. InnoDB 是如何管理 buffer pool 中的页的？
+
+     通过三种链表管理缓存页：
+
+     + Free List：管理空闲页
+     + Flush List：管理脏页
+     + LRU List：管理脏页和干净页，在内存不足时用于淘汰
+
+131. InnoDB 如何对 LRU 进行优化的？
+
+     + 预读失效：分为 young 区域和 old 区域，加入缓冲区的页首先被放在 old 区域，只有后续真正被访问才会真正放入 young 区域
+     + 缓存污染：为进入到 young 区域的页增加了一个停留在 old 区域时间的判断，只有本次访问与第一次访问时间大于某个时间间隔（innodb_old_blocks_time），才会将其移动到 young 区域的头部
+
+132. InnoDB 中的脏页刷盘时机？
+
+     + redo log 日志满了，主动触发
+     + Buffer pool 空间不足，逐出脏页，需要刷盘
+     + MySQL 认为空闲时，后向线程定期将适量的脏页刷盘
+     + MySQL 正常关闭之前，所有脏页都需要刷盘
+
 
 
 
