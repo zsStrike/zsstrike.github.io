@@ -809,7 +809,156 @@ tags: ["MySQL"]
      + MySQL 认为空闲时，后向线程定期将适量的脏页刷盘
      + MySQL 正常关闭之前，所有脏页都需要刷盘
 
+133. 在 InnoDB 引擎中，执行一条更新语句涉及到哪些日志，分别有何作用？
 
+     涉及到 redo log，undo log 和 binlog：
+
+     + undo log：InnoDB 存储引擎生成的日志，实现了事务的原子性，用于事务回滚和支持 MVCC
+     + redo log：InnoDB 存储引擎生成的日志，实现了事务的持久性，主要用故意掉电等故障恢复
+     + binlog：Server 层生成的日志，主要用于数据备份和主从复制
+
+134. redo log 产生动机？
+
+     Buffer Pool 为上层应用提供了缓存的功能，脏页并不会立即写到磁盘上，为了防止掉电产生数据不一致的情形，需要先使用 redo log 记录下事务的操作，然后操作内存数据，最后在合适时间点将脏页数据刷到磁盘上，这样就能保证 crash-safe。
+
+135. 修改 undo 页面，需要记录对应的 redo log 吗？
+
+     需要，需要先记录修改 undo 页面的 redo log，再真正修改 undo 页面
+
+136. redo log 同样需要写到磁盘，数据也要写到磁盘，为什么多此一举？
+
+     redo log 采用的是追加写，磁盘操作是顺序写，而写入数据则需要先找到写入位置，对应磁盘操作是随机写，其将 MySQL 的写操作从磁盘的随机写变为顺序写，提高了系统性能
+
+137. 产生的 redo log 是直接写入磁盘吗？
+
+     不是的，首先将操作记录到 redo log buffer 中，后续根据刷盘策略再将其写入到磁盘中
+
+138. redo log 什么时候刷盘？
+
+     主要有下面几个时机：
+
+     + MySQL 正常关闭时
+     + 当 redo log buffer 中记录的写入量大于 redo log buffer 内存空间的一半时，会触发落盘
+     + InnoDB 的后台线程每隔 1 秒，将 redo log buffer 持久化到磁盘
+     + 每次事务提交时都将缓存在 redo log buffer 里的 redo log 直接持久化到磁盘（ innodb_flush_log_at_trx_commit = 1）
+
+139. innodb_flush_log_at_trx_commit 参数控制什么？
+
+     + 当设置该参数为 0 时，表示每次事务提交时 ，还是将 redo log 留在 redo log buffer 中 ，该模式下在事务提交时不会主动触发写入磁盘的操作，此时 MySQL 进程崩溃将损失上一秒内的事务数据
+
+       > InnoDB 的后台线程每隔 1 秒，将 redo log buffer 持久化到磁盘
+
+     + 当设置该参数为 1 时，表示每次事务提交时，都将缓存在 redo log buffer 里的 redo log 直接持久化到磁盘，这样可以保证 MySQL 异常重启之后数据不会丢失
+
+     + 当设置该参数为 2 时，表示每次事务提交时，都只是缓存在 redo log buffer 里的 redo log 写到 redo log 文件，注意写入到「 redo log 文件」并不意味着写入到了磁盘，因为操作系统的文件系统中有个 Page Cache，Page Cache 是专门用来缓存文件数据的，所以写入「 redo log文件」意味着写入到了操作系统的文件缓存，此时 MySQL 进程崩溃不一定会丢失数据，因为操作系统会在合适时机调用 fsync 进行数据落盘
+
+140. redo log 文件写满了怎么办？
+
+     InnoDB 存储引擎有一个重做日志文件组，包含两个文件： ib_logfile0 和 ib_logfile1 。采用循环写的方式，check_point 表示当前要擦除的位置，write_pos 表示下一个 redo log 日志要写入的位置，当 redo log 文件写满了，也就是 write_pos 追上了 check_point，此时 MySQL 不能执行新的更新操作，其会停下来将 buffer pool 中的脏页刷新到磁盘中，以将 check_point 向后推进，使得 MySQL 恢复正常执行。
+
+141. 为什么有了 binlog， 还要有 redo log？
+
+     最初的 MySQL 使用的是 MyISAM 引擎，其只有 binlog，用于归档，InnoDB 以插件形式引入，引入 redo log 是为了 crash-safe 能力。
+
+142. redo log 和 binlog 有什么区别？
+
+     + 适用对象不同，redo log 只适用于 InnoDB 引擎，而 binlog 所有引擎适用
+     + 文件格式不同
+       + binlog：STATEMENT，ROW，MIXED
+       + redo log：物理日志，记录的是某个数据页做了什么修改
+     + 写入方式不同：redo log 采用循环写，binlog 采用追加写
+     + 用途不同：binlog 用于备份恢复，主从复制，redo log 用于掉电等故障恢复
+
+143. 主从复制如何实现？
+
+     MySQL 集群的主从复制过程梳理成 3 个阶段：
+
+     + 写入 Binlog：主库写 binlog 日志，提交事务，并更新本地存储数据
+     + 同步 Binlog：把 binlog 复制到所有从库上，每个从库把 binlog 写到暂存日志（relay log）中
+     + 回放 Binlog：回放 relay log，并更新存储引擎中的数据
+
+144. MySQL 主从复制还有些模型？
+
+     + 同步复制：MySQL 主库提交事务的线程要等待所有从库的复制成功响应，才返回客户端结果。这种方式在实际项目中，基本上没法用，原因有两个：一是性能很差，因为要复制到所有节点才返回响应；二是可用性也很差，主库和所有从库任何一个数据库出问题，都会影响业务。
+     + 异步复制（默认模型）：MySQL 主库提交事务的线程并不会等待 binlog 同步到各从库，就返回客户端结果。这种模式一旦主库宕机，数据就会发生丢失。
+     + 半同步复制：MySQL 5.7 版本之后增加的一种复制方式，介于两者之间，事务线程不用等待所有的从库复制成功响应，只要一部分复制成功响应回来就行，比如一主二从的集群，只要数据成功复制到任意一个从库上，主库的事务线程就可以返回给客户端。这种半同步复制的方式，兼顾了异步复制和同步复制的优点，即使出现主库宕机，至少还有一个从库有最新的数据，不存在数据丢失的风险。
+
+145. 什么时候 binlog cache 会写到 binlog 文件？
+
+     在事务提交的时候，执行器把 binlog cache 里的完整事务写入到 binlog 文件中，并清空 binlog cache。同样地，MySQL 提供一个 sync_binlog 参数来控制数据库的 binlog 刷到磁盘上的频率：
+
+     + sync_binlog = 0 的时候，表示每次提交事务都只 write，不 fsync，后续交由操作系统决定何时将数据持久化到磁盘；
+     + sync_binlog = 1 的时候，表示每次提交事务都会 write，然后马上执行 fsync；
+     + sync_binlog =N(N>1) 的时候，表示每次提交事务都 write，但累积 N 个事务后才 fsync
+
+146. 为什么需要两阶段提交？
+
+     事务提交后，redo log 和 bin log 都需要持久化到磁盘，但是可能出现半成功的状态，对于命令 UPDATE t_user SET name = 'xiaolin' WHERE id = 1：
+
+     + 如果在将 redo log 刷入到磁盘之后， MySQL 突然宕机了，而 binlog 还没有来得及写入。MySQL 重启后，通过 redo log 能将 Buffer Pool 中 id = 1 这行数据的 name 字段恢复到新值 xiaolin，但是 binlog 里面没有记录这条更新语句，在主从架构中，binlog 会被复制到从库，由于 binlog 丢失了这条更新语句，从库的这一行 name 字段是旧值 jay，与主库的值不一致性；
+     + 如果在将 binlog 刷入到磁盘之后， MySQL 突然宕机了，而 redo log 还没有来得及写入。由于 redo log 还没写，崩溃恢复以后这个事务无效，所以 id = 1 这行数据的 name 字段还是旧值 jay，而 binlog 里面记录了这条更新语句，在主从架构中，binlog 会被复制到从库，从库执行了这条更新语句，那么这一行 name 字段是新值 xiaolin，与主库的值不一致性；
+
+     两阶段提交是为了避免出现两份日志之间的逻辑不一致的问题。
+
+147. 两阶段提交的过程是怎样的？
+
+     MySQL 使用内部 XA 事务完成两阶段提交，将 redo log 写入拆分成两个步骤：prepare 和 commit，中间再穿插写入 binlog，具体如下：
+
+     + prepare 阶段：将 XID（内部 XA 事务的 ID） 写入到 redo log，同时将 redo log 对应的事务状态设置为 prepare，然后将 redo log 写入到硬盘；
+     + commit 阶段：把 XID 写入到 binlog，然后将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为 commit，同样需要写入到磁盘；
+
+148. 基于两阶段提交，MySQL 在重启后是如何进行数据恢复的？
+
+     <img src="MySQL-面试题目汇总/640-16703317091106.png" alt="图片" style="zoom:50%;" />
+
+     在 MySQL 重启后会按顺序扫描 redo log 文件，碰到处于 prepare 状态的 redo log，就拿着 redo log 中的 XID 去 binlog 查看是否存在此 XID：
+
+     + 如果 binlog 中没有当前内部 XA 事务的 XID，说明 redolog 完成刷盘，但是 binlog 还没有刷盘，则回滚事务。对应时刻 A 崩溃恢复的情况。
+     + 如果 binlog 中有当前内部 XA 事务的 XID，说明 redolog 和 binlog 都已经完成了刷盘，则提交事务。对应时刻 B 崩溃恢复的情况。可以保证主库和备库的一致性。
+
+     可以看到，对于处于 prepare 阶段的 redo log，即可以提交事务，也可以回滚事务，这取决于是否能在 binlog 中查找到与 redo log 相同的 XID，如果有就提交事务，如果没有就回滚事务。
+
+149. 事务没提交的时候，redo log 会被持久化到磁盘吗？
+
+     会的，MySQL 后台线程会每隔一秒将 redo log buffer 持久化到磁盘，因此，redo log 可以在事务没提交之前持久化到磁盘，但是 binlog 必须在事务提交之后，才可以持久化到磁盘。
+
+150. 两阶段提交的问题？
+
+     + 磁盘 IO 次数高：对于“双1”配置，每个事务提交都会进行两次 fsync（刷盘），一次是 redo log 刷盘，另一次是 binlog 刷盘。
+     + 锁竞争激烈：两阶段提交虽然能够保证「单事务」两个日志的内容一致，但在「多事务」的情况下，却不能保证两者的提交顺序一致，因此，在两阶段提交的流程基础上，还需要加一个锁（prepare_commit_mutex）来保证提交的原子性，从而保证多事务的情况下，两个日志的提交顺序一致。
+
+151. binlog 组提交实现方式？
+
+     MySQL 引入了 binlog 组提交（group commit）机制，当有多个事务提交的时候，会将多个 binlog 刷盘操作合并成一个，从而减少磁盘 I/O 的次数。引入了组提交机制后，prepare 阶段不变，只针对 commit 阶段，将 commit 阶段拆分为三个过程：
+
+     + flush 阶段：多个事务按进入的顺序将 binlog 从 cache 写入文件（不刷盘）；
+     + sync 阶段：对 binlog 文件做 fsync 操作（多个事务的 binlog 合并一次刷盘）；
+     + commit 阶段：各个事务按顺序做 InnoDB commit 操作，将 redo log 状态设置为 commit
+
+     上面的每个阶段都有一个队列，每个阶段有锁进行保护，锁粒度减小，这样就使得多个阶段可以并发执行，从而提升效率。
+
+152. 有 binlog 组提交，那有 redo log 组提交吗？
+
+     MySQL 5.6 没有 redo log 组提交，MySQL 5.7 有 redo log 组提交。
+
+     在 MySQL 5.6 的组提交逻辑中，每个事务各自执行 prepare 阶段，也就是各自将 redo log 刷盘，这样就没办法对 redo log 进行组提交。
+
+     所以在 MySQL 5.7 版本中，做了个改进，在 prepare 阶段不再让事务各自执行 redo log 刷盘操作，而是推迟到组提交的 flush 阶段，也就是说 prepare 阶段融合在了 flush 阶段。
+
+     <img src="MySQL-面试题目汇总/image-20221206212224788.png" alt="image-20221206212224788" style="zoom:50%;" />
+
+153. 组提交相关参数？
+
+     + Binlog_group_commit_sync_delay：控制 flush 阶段后 sync 阶段前的等待时间
+     + Binlog_group_commit_sync_no_delay_count：最大组提交中事务的数目
+
+154. MySQL 磁盘 IO 很高，优化方法有哪些？
+
+     + 设置组提交的两个参数：binlog_group_commit_sync_delay 和 binlog_group_commit_sync_no_delay_count 参数，延迟 binlog 刷盘的时机，从而减少 binlog 的刷盘次数
+     + 将 sync_binlog 设置为大于 1 的值
+     + 将 innodb_flush_log_at_trx_commit 设置为 2
+
+     
 
 
 
