@@ -905,7 +905,7 @@ tags: ["MySQL"]
      MySQL 使用内部 XA 事务完成两阶段提交，将 redo log 写入拆分成两个步骤：prepare 和 commit，中间再穿插写入 binlog，具体如下：
 
      + prepare 阶段：将 XID（内部 XA 事务的 ID） 写入到 redo log，同时将 redo log 对应的事务状态设置为 prepare，然后将 redo log 写入到硬盘；
-     + commit 阶段：把 XID 写入到 binlog，然后将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为 commit，同样需要写入到磁盘；
+     + commit 阶段：把 XID 写入到 binlog，然后将 binlog 刷新到磁盘；接着调用引擎的提交事务接口，将 redo log 状态设置为 commit；
 
 148. 基于两阶段提交，MySQL 在重启后是如何进行数据恢复的？
 
@@ -932,8 +932,12 @@ tags: ["MySQL"]
      MySQL 引入了 binlog 组提交（group commit）机制，当有多个事务提交的时候，会将多个 binlog 刷盘操作合并成一个，从而减少磁盘 I/O 的次数。引入了组提交机制后，prepare 阶段不变，只针对 commit 阶段，将 commit 阶段拆分为三个过程：
 
      + flush 阶段：多个事务按进入的顺序将 binlog 从 cache 写入文件（不刷盘）；
+
      + sync 阶段：对 binlog 文件做 fsync 操作（多个事务的 binlog 合并一次刷盘）；
-     + commit 阶段：各个事务按顺序做 InnoDB commit 操作，将 redo log 状态设置为 commit
+
+     + commit 阶段：各个事务按顺序做 InnoDB commit 操作，即设置 redo log 状态为 commit，**不用刷盘**
+
+       > Commit 阶段队列的作用是承接 Sync 阶段的事务，完成最后的引擎提交，使得Sync可以尽早的处理下一组事务，最大化组提交的效率
 
      上面的每个阶段都有一个队列，每个阶段有锁进行保护，锁粒度减小，这样就使得多个阶段可以并发执行，从而提升效率。
 
@@ -958,7 +962,74 @@ tags: ["MySQL"]
      + 将 sync_binlog 设置为大于 1 的值
      + 将 innodb_flush_log_at_trx_commit 设置为 2
 
-     
+155. 传统的 LRU 算法存在哪些问题？
+
+     + 预读失效：预先读取下一页数据，但是并没有真正使用，导致热数据被逐出
+     + 缓存污染：使用了顺序扫描，这些页数据只会被读取一次，导致之前的热数据被逐出
+
+156. MySQL 中，InnoDB 提供的 buffer pool，用于缓存数据页，采用的 LRU 有哪些优化？
+
+     + 预读失效：划分为 young 区域和 old 区域，预读数据被放在 old 区域上
+     + 缓存污染：在内存页被访问的时候，还需判断其是否满足停留在 old 区域中的时间大于 1s
+
+157. Linux 中，在读磁盘时也存在预读机制，将接下来的块读取到 page cache 中，如何解决问题？
+
+     + 预读失效：实现两个 LRU 链表，即活跃 LRU 链表和非活跃 LRU 链表
+     + 缓存污染：在内存页被访问**第二次**的时候，才将其升级到活跃 LRU 链表中
+
+158. InnoDB 引擎下，其数据文件有哪些？
+
+     在 InnoDB 引擎中，按照数据库名称创建对应的目录，然后在对应目录下面存储对应的表数据，如，对于 my_test 数据库，在 /var/lib/mysql/my_test 目录下，存在以下文件：
+
+     + db.opt：存储当前数据库的默认字符集和字符校验规则
+     + t_order.frm：t_order 的表结构会保存在这个文件
+     + t_order.ibd：t_order 的表数据会保存在这个文件
+
+159. InnoDB 中表空间是如何组织的？
+
+     + 行（row）：数据库表中的记录都是按行进行存放的
+     + 页（page）：记录是按照行来存储的，但是 InnoDB 引擎读写是按照页为单位的
+     + 区（extent）：在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，可以保证链表中相邻的页物理位置上也相邻
+     + 段（segment）：一般分为数据段、索引段和回滚段
+
+160. InnoDB 行格式？
+
+     Redundant，Compact，Dynamic 和 Compressed：
+
+     + Redundant：基本不再使用
+     + Compact：紧凑的行格式
+     + Dynamic 和 Compressed 两个都是紧凑的行格式，它们的行格式都和 Compact 差不多，因为都是基于 Compact 改进一点东西
+
+161. Compact 行格式是怎样的？
+
+     ![image-20221207110311061](MySQL-面试题目汇总/image-20221207110311061.png)
+
+     + 记录的额外信息：
+       + 变长字段长度列表：用于记录各个变长字段的实际长度，每个长度值 1 到 2 字节
+       + NULL 值列表：记录各个可为 NULL 列的值是否是 NULL，每列使用 1 bit 即可
+       + 记录头信息：delete_mask，next_record，record_type
+     + 记录的真实数据
+       + row_id：只有在没有声明主键和唯一约束列，才会存在该列
+       + trx_id：标记哪个事务生成的
+       + roll_pointer：记录上个版本的指针，指向的是额外信息和真实数据之间位置
+
+162. MySQL 如何处理数据单页溢出的？
+
+     MySQL 支持像 TEXT 和 BLOB 数据，这些数据可能单个数据页放不下，因此需要提供溢出页，用来存储额外数据。Compact 格式的行数据是在真实数据处存放部分数据，再通过溢出页指针找到剩余数据，而 Compressed 和 Dynamic 则直接采用溢出指针的方式存储数据，这样，原来的数据页就能存放更多的行数据了
+
+163. MySQL 的 NULL 值是怎么存放的？
+
+     通过 NULL 值列表进行标记，其长度根据可为 NULL 列数目变化
+
+164. MySQL 怎么知道 varchar(n) 实际占用数据的大小？
+
+     通过变长字段长度列表存储实际占用大小
+
+165. varchar(n) 中 n 最大取值为多少？
+
+     MySQL 规定除了 TEXT、BLOBs 这种大对象类型之外，其他所有的列（不包括隐藏列和记录头信息）占用的字节长度加起来不能超过 65535 个字节。如果表只有一个 varchar(n) 字段，允许为 NULL，字符集是 ascii，那么最大值是 65535 - 2 - 1 = 65532；如果有多个字段的话，要保证所有字段的长度 + 变长字段字节数列表所占用的字节数 + NULL值列表所占用的字节数 <= 65535。注意 n 表示字符数目，而不是字节数目，因此对于 UTF8 格式，n 还需要减少
+
+
 
 
 
