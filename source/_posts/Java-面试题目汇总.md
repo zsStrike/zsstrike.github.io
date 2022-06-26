@@ -1011,4 +1011,21 @@ tags: ["Java"]
 
      + Epsilon 收集器：不能够进行垃圾回收的垃圾收集器，主要用于和其他垃圾回收器进行对照
 
+156. Java 中提供了哪些性能检测和故障处理工具？
+
+     基础故障工具有：
+
+     + jps：虚拟机进程状况工具，可以列出正在运行的虚拟机进程，并显示虚拟机执行主类（Main Class，main()函数所在的类）名称以及这些进程的本地虚拟机唯一ID（LVMID，Local Virtual Machine Identifier）。
+     + jstat（JVM Statistics Monitoring Tool）：用于监视虚拟机各种运行状态信息的命令行工具，可以显示本地或者远程[1]虚拟机进程中的类加载、内存、垃圾收集、即时编译等运行时数据。
+     + jinfo（Configuration Info for Java）：实时查看和调整虚拟机各项参数。
+     + jmap（Memory Map for Java）：用于生成堆转储快照（一般称为heapdump或dump文件）。
+     + jhat（JVM Heap Analysis Tool）：与jmap搭配使用，来分析jmap生成的堆转储快照。
+     + jstack（Stack Trace for Java）：用于生成虚拟机当前时刻的线程快照（一般称为threaddump或者 javacore文件），线程快照就是当前虚拟机内每一条线程正在执行的方法堆栈的集合，生成线程快照的目的通常是定位线程出现长时间停顿的原因，如线程间死锁、死循环。
+
+     可视化故障处理工具：
+
+     + JConsole：Java 监视与管理控制台
+     + VisualVM：多合-故障处理工具，是功能最强大的运行监视和故障处理程序之一
+     + JMC（Java Mission Control）：可持续在线的监控工具
+
      
