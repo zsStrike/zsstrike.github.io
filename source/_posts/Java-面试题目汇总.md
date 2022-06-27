@@ -1028,4 +1028,59 @@ tags: ["Java"]
      + VisualVM：多合-故障处理工具，是功能最强大的运行监视和故障处理程序之一
      + JMC（Java Mission Control）：可持续在线的监控工具
 
-     
+157. JVM 平台无关性指的是什么？
+
+     字节码(Byte Code)文件是构成平台无关性的基石，Java 虚拟机只接受字节码文件，而不管这些文件是怎么的得到的，这就为其他语言可以运行在 Java 虚拟机上提供了基础。
+
+158. class 文件结构是怎样的？
+
+     采用一种类似 C 语言的言结构体的伪结构来存储数据，这种伪结构中只有两种数据类型：“无符号数”和“表”。整个 class 文件也可以当做一个表：
+
+     + magic, minor version, major version：分别表示文件魔数，小版本号，大版本号
+     + **constant_pool_count, constant_pool**：分别表示常量数量和常量池
+     + access_flag, this_class, super_class：分别表示类或者接口的访问信息，类索引和父类索引
+     + interfaces_count, interfaces：表示类实现的接口
+     + fields_count, fields：字段数量和字段表
+     + methods_count, methods：方法数量和方法表
+     + attributes_count, attributes：属性表，class 文件、字段表、方法表都可以携带自己的属性表集合
+
+159. 方法中的代码存储在 class 文件中何处？
+
+     方法存储在 class 文件中的方法表中，方法表中的代码实际存储在方法表中的 attribute 中，通过属性名为 Code 的属性存储相应的虚拟机代码。
+
+160. Java 字节码相关指令有哪些？
+
+     Java 采用的是面向操作数栈的架构，所以大多数指令不含操作数，并且只用一个字节来代表操作码，可以尽可能获得短小精干的编译长度：
+
+     + 加载存储指令：iload，iload_n，istore，istore_n
+     + 运算指令：iadd，ladd，fadd，dadd，不原生支持 byte，char，short 和 boolean，通过将这些数据进行符号位扩展和零位扩展实现运算
+     + 类型转换指令：窄化类型转换需要，如 i2b，i2c 等
+     + 对象创建和访问指令：new，newarray，getstatic，getfield，iaload，arraylength，instanceof，checkcast
+     + 操作数管理指令：pop，dup，swap
+     + 控制转移指令：ifeq，ret，if_icmpeq
+     + **方法调用和返回指令**：invokevirtual，invokeinterface，invokespecial，invokestatic，invokedynamic
+     + 异常处理指令：athrow
+     + 同步指令：monitor_enter，monitor_exit
+
+161. 字节码中的 invokevirtual，invokeineterface，invokespecial，invokestatic，invokedynamic 不同点？
+
+     + invokevirtual 指令：用于调用对象的实例方法，根据对象的**实际类型**进行分派（虚方法分派），这也是Java 语言中最常见的方法分派方式。
+     + invokeinterface 指令：用于调用接口方法，它会在运行时搜索一个实现了这个接口方法的对象，找出适合的方法进行调用。
+     + invokespecial 指令：用于调用一些需要特殊处理的实例方法，包括实例初始化方法、私有方法和父类方法。
+     + invokestatic指令：用于调用类静态方法（static方法）。
+     + invokedynamic 指令：用于在运行时动态解析出调用点限定符所引用的方法，并执行该方法。前面四条调用指令的分派逻辑都固化在 Java 虚拟机内部，用户无法改变，而 invokedynamic 指令的分派逻辑是由用户所设定的引导方法决定的。
+
+162. JVM 如何处理 invokedynamic 调用的？
+
+     1. JVM 首次执行 invokedynamic 调用时会调用引导方法（Bootstrap Method）
+     2. 引导方法返回 CallSite 对象，CallSite 内部根据方法签名进行目标方法查找。它的 getTarget 方法返回方法句柄（MethodHandle）对象。
+     3. 在 CallSite 没有变化的情况下，MethodHandle 可以一直被调用，如果 CallSite 有变化的话重新查找即可。
+
+     <img src="Java-面试题目汇总/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE3MzA1MjQ5,size_16,color_FFFFFF,t_70.png" alt="在这里插入图片描述" style="zoom:50%;" />
+
+163. 虚拟机实现方式有哪些方式？
+
+     《Java虚拟机规范》描绘了Java虚拟机应有的共同程序存储格式：Class文件格式以及字节码指令集。但一个优秀的虚拟机实现，在满足《Java虚拟机规范》的约束下对具体实现做出修改和优化也是完全可行的。虚拟机实现的方式主要有以下两种：
+
+     + 将输入的 Java 虚拟机代码在加载时或执行时翻译成另一种虚拟机的指令集；
+     + 将输入的 Java 虚拟机代码在加载时或执行时翻译成宿主机处理程序的本地指令集（即即时编译器代码生成技术）
