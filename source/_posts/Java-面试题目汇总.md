@@ -1188,7 +1188,21 @@ tags: ["Java"]
 
 177. 如何在类中直接调用祖父类中的方法？
 
-     可以通过 MethodHandle 来进行访问，如遇到权限问题，可以使用lookupImpl.setAccessible(true)来解决。
+     可以通过 MethodHandle 来进行访问，如遇到权限问题，可以使用`lookupImpl.setAccessible(true)`来解决。
+
+178. 基于栈的指令集与基于寄存器的指令集有什么优缺点？
+
+     Java 指令基于栈结构，x86 指令基于寄存器，使用栈结构带来的好处是可移植性更强，缺点是运行速度慢。
+
+179. Tomcat 中的自定义类加载器及其作用是什么？
+
+     + Common 类加载器：继承自应用程序类加载器，用于加载 /common 目录中库，可被 Tomcat 和所有的Web 应用程序共同使用
+     + Catalina 类加载器：继承自 Common 类加载器，用于加载 /server 目录中库，只可被 Tomcat使用
+     + Shared 类加载库：继承自 Common 类加载器，用于加载 /shared 目录中库，只可被所有的Web应用程序共同使用
+     + WebApp 类加载器：继承自 Shared 类加载器，用于加载 /WebApp/WEB-INF 目录中库，仅仅可以被某个 Web 应用程序使用
+     + Jsp 类加载器：继承自 WebAPP 类加载器，用于加载 jsp 文件
+
+
 
 
 
