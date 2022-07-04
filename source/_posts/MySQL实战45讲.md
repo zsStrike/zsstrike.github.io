@@ -399,7 +399,7 @@ select * from t where (a between 1 and 1000)  and (b between 50000 and 100000)
 
 ## 11 怎么给字符串字段加索引
 
-假设存在表 SUser(ID, emial, name, ...)，如果分别以`emial`和 `email(6)`来创建索引，其索引结构如下：
+假设存在表 SUser(ID, emial, name, ...)，如果分别以 `emial` 和 `email(6)` 来创建索引，其索引结构如下：
 
 ![img](MySQL实战45讲/d31da662bee595991862c439a5567eb7.jpg)
 
