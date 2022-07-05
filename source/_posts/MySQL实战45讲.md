@@ -434,7 +434,7 @@ select count(distinct left(email, {len}) as L from SUser;
 
 
 
-## 12 为什么我的MySQL会“抖”一下
+## 12 为什么我的 MySQL 会“抖”一下
 
 一条 SQL 语句，通常都执行很快，但有时却变得特别慢，并且这样的现象很难复现。该现象可能是因为刷脏页造成的。
 
@@ -453,8 +453,8 @@ select count(distinct left(email, {len}) as L from SUser;
 上述前两种情况可能都会对性能产生较为严重的影响，可以通过一些参数来进行控制：
 
 + innodb_io_capacity：可以在全力刷脏页的时候提供参考
-+ innodb_max_dirty_pages_pct（M），当前写入的序号和checkpoint之间的差值（N）：算得的F1(M)和F2(N)两个值，取其中较大的值记为R，之后引擎就可以按照innodb_io_capacity定义的能力乘以R%来控制刷脏页的速度
-+ innodb_flush_neighbors：能减少很多随机 IO，在HDD时代能大幅提升性能，在 MySQL 8.0 后，默认为 0
++ innodb_max_dirty_pages_pct（M），当前写入的序号和 checkpoint 之间的差值（N）：算得的 F1(M) 和 F2(N) 两个值，取其中较大的值记为 R，之后引擎就可以按照 innodb_io_capacity 定义的能力乘以 R% 来控制刷脏页的速度
++ innodb_flush_neighbors：能减少很多随机 IO，在 HDD 时代能大幅提升性能，在 MySQL 8.0 后，默认为 0
 
 另外，redo log 设置得太小会导致 write pos 很快就追上 cp，造成虽然磁盘压力很小，但是数据库出现间歇性的性能下跌的现象。
 
