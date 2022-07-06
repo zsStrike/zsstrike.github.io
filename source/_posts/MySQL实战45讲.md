@@ -462,7 +462,7 @@ select count(distinct left(email, {len}) as L from SUser;
 
 ## 13 为什么表数据删掉一半，表文件大小不变
 
-一个 InnoDB 表的数据可以分为两个部分：表结构定义（.frm）和表数据（.idb）。而表数据既可以存放在当前数据库共享表空间中，也可以存储在单独的文件中吗，该行为模式可以通过`innodb_file_per_table`控制。在 MySQL 5.6 之后，默认值为 ON，以下讨论基于该情况。
+一个 InnoDB 表的数据可以分为两个部分：表结构定义（.frm）和表数据（.idb）。而表数据既可以存放在当前数据库共享表空间中，也可以存储在单独的文件中，该行为模式可以通过`innodb_file_per_table`控制。在 MySQL 5.6 之后，默认值为 ON，以下讨论基于该情况。
 
 ![img](MySQL实战45讲/f0b1e4ac610bcb5c5922d0b18563f3c8.png)
 
