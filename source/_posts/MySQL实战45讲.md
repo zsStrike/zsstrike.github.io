@@ -613,13 +613,13 @@ select word from words order by rand() limit 3;
 
 在 MySQL 中，每个引擎提供了唯一标识数据行的信息：
 
-+ 对于有主键的InnoDB表来说，这个rowid就是主键ID
-+ 对于没有主键的InnoDB表来说，这个rowid就是由系统生成的
-+ MEMORY引擎不是索引组织表，rowid 实际上就是数组的下标
++ 对于有主键的 InnoDB 表来说，这个 rowid 就是主键 ID
++ 对于没有主键的 InnoDB 表来说，这个 rowid 就是由系统生成的
++ MEMORY 引擎不是索引组织表，rowid 实际上就是数组的下标
 
 到这里，order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。
 
-如果内存临时表的大小超过了 tmp_table_size，那么内存临时表就会转变为磁盘临时表，磁盘临时表使用的引擎默认是InnoDB。
+如果内存临时表的大小超过了 tmp_table_size，那么内存临时表就会转变为磁盘临时表，磁盘临时表使用的引擎默认是 InnoDB。
 
 此时采用的排序方式实际上是优先队列排序算法，而不是归并排序。对应执行流程：
 
