@@ -656,7 +656,7 @@ select * from t where id in (id1, id2, id3);
 
 
 
-## 18 为什么这些SQL语句逻辑相同，性能却差异巨大
+## 18 为什么这些 SQL 语句逻辑相同，性能却差异巨大
 
 假设存在如下表：
 
@@ -723,7 +723,7 @@ select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2;
 
 ![img](MySQL实战45讲/8289c184c8529acea0269a7460dc62a9.png)
 
-第3步，是根据tradeid值到trade_detail表中查找条件匹配的行。
+第3步，是根据 tradeid 值到 trade_detail 表中遍历查找条件匹配的行。
 
 该现象产生的原因是 tradeid 使用了不同的编码：utf8 和 utf8mb4。改写为以下语句即可：
 
