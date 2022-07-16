@@ -951,11 +951,11 @@ insert into t values(0,0,0),(5,5,5),
   call query_rewrite.flush_rewrite_rules();
   ```
 
-+ MySQL选错了索引：通过给查询语句加上 force index
++ MySQL 选错了索引：通过给查询语句加上 force index
 
 QPS 突增问题：
 
-+ 由全新业务的bug导致：从数据库白名单删去
++ 由全新业务的 bug 导致：从数据库白名单删去
 + 新功能使用的是单独的数据库用户：删除用户帐号
 + 新增的功能跟主体功能是部署在一起的：使用查询重写，把压力最大的 SQL 语句重写为 select 1 返回
 
