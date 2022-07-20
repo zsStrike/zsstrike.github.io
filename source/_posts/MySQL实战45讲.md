@@ -1124,24 +1124,24 @@ insert into t(c) values(1),(2),(3);
 
 ![image-20211125140728356](MySQL实战45讲/image-20211125140728356.png)
 
-此时，coordinator 就是原来的sql_thread, 不过现在它不再直接更新数据了，只负责读取中转日志和分发事务。真正更新日志的，变成了worker线程。而work线程的个数，就是由参数slave_parallel_workers决定的。
+此时，coordinator 就是原来的 sql_thread, 不过现在它不再直接更新数据了，只负责读取中转日志和分发事务。真正更新日志的，变成了 worker 线程。而 worker 线程的个数，就是由参数slave_parallel_workers 决定的。
 
 由于 CPU 调度，分发顺序可能和完成顺序不同，因此，在 coordinator 分发任务的时候，需要满足：
 
-+ 不能造成更新覆盖。这就要求更新同一行的两个事务，必须被分发到同一个worker中
-+ 同一个事务不能被拆开，必须放到同一个worker中
++ 不能造成更新覆盖。这就要求更新同一行的两个事务，必须被分发到同一个 worker 中
++ 同一个事务不能被拆开，必须放到同一个 worker 中
 
-MySQL 5.6的并行复制策略：支持粒度是按库并行，将不同的 DB 里面的事务分发给不同的 worker，需要平衡好各个 DB 的访问。
+MySQL 5.6 的并行复制策略：支持粒度是按库并行，将不同的 DB 里面的事务分发给不同的 worker，需要平衡好各个 DB 的访问。
 
-MySQL 5.7的并行复制策略：提供了 slave-parallel-type 参数用来控制复制策略：
+MySQL 5.7 的并行复制策略：提供了 slave-parallel-type 参数用来控制复制策略：
 
 + DATABASE：使用按库并行策略
 
 + LOGICAL_CLOCK：可以通过 binlog-transaction-dependency-tracking 参数来设置：
 
-  + COMMIT_ORDER：同时处于 redo log prepare 状态的事务，在备库执行时是可以并行的；处于 prepare 状态的事务和处于 commit 状态的事务之间，在备库执行的时候也是可以并行的，根据同时进入prepare和commit来判断是否可以并行的策略
-  + WRITESET：如果两个事务没有操作相同的行，也就是说它们的writeset没有交集，就可以并行
-  + WRITESET_SESSION，是在WRITESET的基础上多了一个约束，即在主库上同一个线程先后执行的两个事务，在备库执行的时候，要保证相同的先后顺序
+  + COMMIT_ORDER：同时处于 redo log prepare 状态的事务，在备库执行时是可以并行的；处于 prepare 状态的事务和处于 commit 状态的事务之间，在备库执行的时候也是可以并行的，根据同时进入 prepare 和 commit 来判断是否可以并行的策略
+  + WRITESET：如果两个事务没有操作相同的行，也就是说它们的 writeset 没有交集，就可以并行
+  + WRITESET_SESSION，是在 WRITESET 的基础上多了一个约束，即在主库上同一个线程先后执行的两个事务，在备库执行的时候，要保证相同的先后顺序
 
   
 
@@ -1167,21 +1167,21 @@ MASTER_LOG_FILE=$master_log_name
 MASTER_LOG_POS=$master_log_pos  
 ```
 
-其中，MASTER_LOG_FILE 和 MASTER_LOG_POS 表示需要从主库的 master_log_name文件的master_log_pos这个位置的日志继续同步，这个位置就是我们所说的同步位点。
+其中，MASTER_LOG_FILE 和 MASTER_LOG_POS 表示需要从主库的 master_log_name 文件的master_log_pos 这个位置的日志继续同步，这个位置就是我们所说的同步位点。
 
 一种获取同步位点的方法是这样的：
 
-1. 等待新主库A’把中转日志（relay log）全部同步完成；
-2. 在A’上执行show master status命令，得到当前A’上最新的File 和 Position；
-3. 取原主库A故障的时刻T；
-4. 用mysqlbinlog工具解析A’的File，得到T时刻的位点。
+1. 等待新主库 A’ 把中转日志（relay log）全部同步完成；
+2. 在 A’ 上执行 show master status 命令，得到当前 A’ 上最新的 File 和 Position；
+3. 取原主库 A 故障的时刻 T；
+4. 用 mysqlbinlog 工具解析 A’ 的 File，得到 T 时刻的位点。
 
 这个位点并不精确，因为 A 故障的时刻 T 可能也已经将 binglog 传给 A‘ 和 BCD 了，如果用上述同步位点，可能会造成主键冲突等错误，为此需要先主动跳过这些错误：
 
 + 主动跳过一个事务：`set global sql_slave_skip_counter=1;`
 + 设置跳过指定的错误：`ste slave_skip_errors = "1032,1062"`，分别表示跳过唯一键冲突和删除找不到指定行
 
-基于 GTID 的主备切换：GTID 是全局全局事务 ID，被定义为`GTID=source_id:transaction_id`，可以通过session变量 gtid_next 来为提交的事务分配 ID。在该模式下，当需要修改 B 设置为 A‘ 从库的时候，需要执行 change master 命令：
+基于 GTID 的主备切换：GTID 是全局全局事务 ID，被定义为`GTID=source_id:transaction_id`，可以通过 session 变量 gtid_next 来为提交的事务分配 ID。在该模式下，当需要修改 B 设置为 A‘ 从库的时候，需要执行 change master 命令：
 
 ```sql
 CHANGE MASTER TO 
@@ -1192,14 +1192,14 @@ MASTER_PASSWORD=$password
 master_auto_position=1 
 ```
 
-最后一行表示使用 GTID 协议，这样我们就无需指定同步位点了。假设在该时刻下，实例A’的GTID集合记为set_a，实例B的GTID集合记为set_b，对应的切换逻辑：
+最后一行表示使用 GTID 协议，这样我们就无需指定同步位点了。假设在该时刻下，实例 A’ 的 GTID 集合记为 set_a，实例 B 的 GTID 集合记为 set_b，对应的切换逻辑：
 
-1. 实例B指定主库A’，基于主备协议建立连接。
-2. 实例B把set_b发给主库A’。
-3. 实例A’算出set_a与set_b的差集，也就是所有存在于set_a，但是不存在于set_b的GITD的集合，判断A’本地是否包含了这个差集需要的所有binlog事务。
-   a. 如果不包含，表示A’已经把实例B需要的binlog给删掉了，直接返回错误；
-   b. 如果确认全部包含，A’从自己的binlog文件里面，找出第一个不在set_b的事务，发给B；
-4. 之后就从这个事务开始，往后读文件，按顺序取binlog发给B去执行。
+1. 实例 B 指定主库 A’，基于主备协议建立连接。
+2. 实例 B 把 set_b 发给主库 A’。
+3. 实例 A’ 算出 set_a 与 set_b 的差集，也就是所有存在于 set_a，但是不存在于 set_b 的 GITD 的集合，判断 A’ 本地是否包含了这个差集需要的所有 binlog 事务。
+   a. 如果不包含，表示 A’ 已经把实例 B 需要的 binlog 给删掉了，直接返回错误；
+   b. 如果确认全部包含，A’ 从自己的 binlog 文件里面，找出第一个不在 set_b 的事务，发给 B；
+4. 之后就从这个事务开始，往后读文件，按顺序取 binlog 发给 B 去执行。
 
 
 
