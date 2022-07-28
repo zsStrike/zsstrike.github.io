@@ -1443,7 +1443,7 @@ BNL 算法的优化：
 
 临时表和内存表并不相同：
 
-+ 内存表：指的是使用Memory引擎的表，建表语法是create table … engine=memory。系统重启后表的数据会被清空，但是表的结构还在
++ 内存表：指的是使用 Memory 引擎的表，建表语法是 create table … engine=memory。系统重启后表的数据会被清空，但是表的结构还在
 + 临时表：可以使用各种引擎类型，有写到内存的，也有写到磁盘上的
 
 临时表的特征：
@@ -1451,7 +1451,7 @@ BNL 算法的优化：
 + 建表语法：create temporary table table-name
 + Session 可见：只能被创建它的 Session 访问
 + 可以和普通表重名
-+ Session 内同时存在同名的临时表和普通表的时候，show create语句，以及增删改查语句访问的是临时表，
++ Session 内同时存在同名的临时表和普通表的时候，show create 语句，以及增删改查语句访问的是临时表
 + show tables 不显示临时表
 + 在 Session 结束的时候自动删除
 
@@ -1465,11 +1465,11 @@ BNL 算法的优化：
 select v from ht where k >= M order by t_modified desc limit 100;
 ```
 
-这时候，由于查询条件里面没有用到分区字段f，只能到所有的分区中去查找满足条件的所有行，然后统一做order by 的操作。有两种思路：
+这时候，由于查询条件里面没有用到分区字段 f，只能到所有的分区中去查找满足条件的所有行，然后统一做 order by 的操作。有两种思路：
 
-+ 在 proxy 层的进程代码中实现排序：对中间层开发能力要求高，对proxy端压力较大
++ 在 proxy 层的进程代码中实现排序：对中间层开发能力要求高，对 proxy 端压力较大
 
-+ 把各个分库拿到的数据，汇总到一个MySQL实例的一个表中，然后在这个汇总实例上做逻辑操作
++ 把各个分库拿到的数据，汇总到一个 MySQL 实例的一个表中，然后在这个汇总实例上做逻辑操作
 
   ![image-20211126221052480](MySQL实战45讲/image-20211126221052480.png)
 
@@ -1485,9 +1485,9 @@ select v from ht where k >= M order by t_modified desc limit 100;
 
 临时表和主备复制：
 
-+ binlog 格式为 row：跟临时表有关的语句，就不会记录到binlog里
-+ binglog 格式为 statement/mixed ：binlog中才会记录临时表的操作，否则可能造成主备数据不一致
-+ 如果主库上创建了两个同名的临时表，那么备库则根据如下规则构建 table_def_key：`库名+临时表名+ server_id(master) + thread_id(session)`
++ binlog 格式为 row：跟临时表有关的语句，就不会记录到 binlog 里
++ binglog 格式为 statement/mixed ：binlog 中才会记录临时表的操作，否则可能造成主备数据不一致
++ 如果主库上创建了两个同名的临时表，那么备库则根据如下规则构建 table_def_key：`库名 + 临时表名 + server_id(master) + thread_id(session)`
 
 临时表由于表结构文件存放于 tmpdir 下，执行 rename 会报错，因为其根据 `库名/表名.frm` 去磁盘查找文件。
 
