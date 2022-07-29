@@ -1548,7 +1548,7 @@ group by 优化方法：
   alter table t1 add column z int generated always as(id % 100), add index(z);
   ```
 
-+ 直接排序：如果数据量很大，超过了 `tmp_table_size` ，那么就需要建立对应的磁盘临时表，这个过程对性能有损失。可以用 `SQL_BIG_RESULT` 来告诉优化器，直接使用磁盘临时表，但是优化器觉得磁盘临时表是B+树存储，存储效率不如数组来得高，将会直接使用数组来存储。
++ 直接排序：如果数据量很大，超过了 `tmp_table_size` ，那么就需要建立对应的磁盘临时表，这个过程对性能有损失。可以用 `SQL_BIG_RESULT` 来告诉优化器，直接使用磁盘临时表，但是优化器觉得磁盘临时表是 B+ 树存储，存储效率不如数组来得高，将会直接使用数组来存储。
 
   ```sql
   select SQL_BIG_RESULT id%100 as m, count(*) as c from t1 group by m;
