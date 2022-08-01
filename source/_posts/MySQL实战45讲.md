@@ -1779,7 +1779,7 @@ load data infile '/server_tmp/t.csv' into table db2.t;
 
 显然，load data 语句并不会引发主备不一致的状态。
 
-另外，load data 不加 local 的话，是读取服务端的文件，加上 local，则是读取的是客户端的文件；上述方法并不会导出表结构文件，如果需要同时导出表结构定义文件和csv数据文件，可以借助 mysqldump 工具生成表结构：
+另外，load data 不加 local 的话，是读取服务端的文件，加上 local，则是读取的是客户端的文件；上述方法并不会导出表结构文件，如果需要同时导出表结构定义文件和 csv 数据文件，可以借助 mysqldump 工具生成表结构：
 
 ```sql
 mysqldump -h$host -P$port -u$user ---single-transaction  
@@ -1788,7 +1788,7 @@ mysqldump -h$host -P$port -u$user ---single-transaction
 
 物理拷贝方法：
 
-![img](MySQL实战45讲/2407737651cdc1f5d6ade4d8907e7c05.jpg)需要注意，在第3步执行完flsuh table命令之后，db1.t整个表处于只读状态，直到执行unlock tables命令后才释放读锁。
+![img](MySQL实战45讲/2407737651cdc1f5d6ade4d8907e7c05.jpg)需要注意，在第 3 步执行完 flush table 命令之后，db1.t 整个表处于只读状态，直到执行 unlock tables 命令后才释放读锁。
 
 
 
