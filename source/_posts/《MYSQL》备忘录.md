@@ -231,7 +231,7 @@ select * from t_record where age > 10 offset 10000 limit 10;
 + 使用覆盖索引：不需要进行额外的回表操作
 
   ```sql
-  select * from t_record id in
+  select * from t_record where id in
   (select id from t_record where age > 10 offset 10000 limit 10）;
   ```
 
