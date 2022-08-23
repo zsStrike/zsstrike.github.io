@@ -19,7 +19,7 @@ avatar: https://s1.ax1x.com/2020/09/08/wQFm7j.jpg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: 'http://blog.zsstrike.xyz/'
+url: 'http://zsstrike.github.io/'
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
