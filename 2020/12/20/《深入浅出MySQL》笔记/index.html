@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://zsstrike.github.io/assets/default_cover.png">
 <meta property="article:published_time" content="2020-12-20T02:42:23.000Z">
-<meta property="article:modified_time" content="2022-05-16T07:41:46.198Z">
+<meta property="article:modified_time" content="2022-08-24T13:25:23.164Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-05-16 15:41:46'
+  postUpdate: '2022-08-24 21:25:23'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《深入浅出MySQL》笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-20T02:42:23.000Z" title="发表于 2020-12-20 10:42:23">2020-12-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-16T07:41:46.198Z" title="更新于 2022-05-16 15:41:46">2022-05-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>42分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《深入浅出MySQL》笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录《深入浅出MySQL》里面的知识要点，以备再次查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《深入浅出MySQL》笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-20T02:42:23.000Z" title="发表于 2020-12-20 10:42:23">2020-12-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-24T13:25:23.164Z" title="更新于 2022-08-24 21:25:23">2022-08-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>42分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《深入浅出MySQL》笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录《深入浅出MySQL》里面的知识要点，以备再次查阅。</p>
 <h2 id="第二章-SQL基础"><a href="#第二章-SQL基础" class="headerlink" title="第二章 SQL基础"></a>第二章 SQL基础</h2><p>MySQL使用入门：</p>
 <ul>
 <li><p>SQL语句分类：DDL，DML，DCL。</p>
@@ -225,12 +225,12 @@
 </tr>
 <tr>
 <td align="left">DECIMAL</td>
-<td align="left">对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
+<td align="left">采用二进制字符串存储，每四个字节存储9位数字</td>
 <td align="left">依赖于M和D的值</td>
 <td align="left">依赖于M和D的值</td>
 </tr>
 </tbody></table>
-<p>对于整形数据，MySQL还支持在类型名称后面的小括号内指定显式宽度。</p>
+<p>对于整形数据，MySQL还支持在类型名称后面的小括号内指定显示宽度。</p>
 <p>日期时间类型：</p>
 <table>
 <thead>
@@ -247,14 +247,14 @@
 <td align="left">3</td>
 <td align="left">1000-01-01&#x2F;9999-12-31</td>
 <td align="left">YYYY-MM-DD</td>
-<td align="left">日期值</td>
+<td align="left">日期值，压缩存储</td>
 </tr>
 <tr>
 <td align="left">TIME</td>
 <td align="left">3</td>
 <td align="left">‘-838:59:59’&#x2F;‘838:59:59’</td>
 <td align="left">HH:MM:SS</td>
-<td align="left">时间值或持续时间</td>
+<td align="left">时间值或持续时间，压缩存储</td>
 </tr>
 <tr>
 <td align="left">YEAR</td>
@@ -268,7 +268,7 @@
 <td align="left">8</td>
 <td align="left">1000-01-01 00:00:00&#x2F;9999-12-31 23:59:59</td>
 <td align="left">YYYY-MM-DD HH:MM:SS</td>
-<td align="left">混合日期和时间值</td>
+<td align="left">混合日期和时间值，字面值存储</td>
 </tr>
 <tr>
 <td align="left">TIMESTAMP</td>
@@ -376,9 +376,9 @@
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
+<th>运算符</th>
+<th>含义</th>
+<th>备注</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -835,7 +835,7 @@
 </thead>
 <tbody><tr>
 <td>IF(cond, t, f)</td>
-<td>如果 cond 为真，返回 t，否则fanhui f</td>
+<td>如果 cond 为真，返回 t，否则返回 f</td>
 </tr>
 <tr>
 <td>CASE cond WHEN value1 THEN result … END</td>
