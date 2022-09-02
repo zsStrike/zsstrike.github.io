@@ -67,6 +67,8 @@ wordcount:
 # medium_zoom: true
 instantpage: true
 
+tag_ui: index
+
 # https://github.com/vinta/pangu.js
 # Insert a space between Chinese character and English character (中英文之間添加空格)
 pangu:
