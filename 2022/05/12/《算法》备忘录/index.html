@@ -157,11 +157,11 @@
 </li>
 <li><p>代入检测法</p>
 </li>
-<li><p>主方法：令 $a \ge 1, b &gt; 1$ 是常数，$f (n)$​ 是一个函数，T (n) 是非负整数上的递推式：<br>  $$<br>  T (n) &#x3D; aT (\frac {n}{b}) + f (n)<br>  $$<br>  T (n) 有以下方法紧确界：</p>
+<li><p>主方法：令 $a \ge 1, b &gt; 1$ 是常数，$f(n)$​ 是一个函数，T(n) 是非负整数上的递推式：<br>  $$<br>  T(n) &#x3D; aT(\frac{n}{b}) + f(n)<br>  $$<br>  T(n) 有以下方法紧确界：</p>
 <ul>
-<li>如果存在 $\epsilon &gt; 0$，使得 $f (n) &#x3D; O (n^{log_ba - \epsilon})$，则 $T (n) &#x3D; \Theta (n^{log_ba})$   </li>
-<li>如果 $f (n) &#x3D; O (n^{log_ba})$，则 $T (n) &#x3D; \Theta (n^{log_ba} lgn)$  </li>
-<li>如果存在 $\epsilon &gt; 0$，使得 $f (n) &#x3D; O (n^{log_ba + \epsilon})$，并且存在 $c &lt; 1$ 和足够大的 n，满足 $af (n&#x2F;b) \le  cf (n)$，则 $T (n) &#x3D; \Theta (f (n))$</li>
+<li>如果存在 $\epsilon &gt; 0$，使得 $f(n) &#x3D; O(n^{log_ba - \epsilon})$，则 $T(n) &#x3D; \Theta(n^{log_ba})$   </li>
+<li>如果 $f(n) &#x3D; O(n^{log_ba})$，则 $T(n) &#x3D; \Theta(n^{log_ba}lgn)$  </li>
+<li>如果存在 $\epsilon &gt; 0$，使得 $f(n) &#x3D; O(n^{log_ba + \epsilon})$，并且存在 $c &lt; 1$ 和足够大的 n，满足 $af(n&#x2F;b) \le  cf(n)$，则 $T(n) &#x3D; \Theta(f(n))$</li>
 </ul>
 </li>
 </ul>
@@ -178,70 +178,70 @@
 </thead>
 <tbody><tr>
 <td align="center">冒泡排序</td>
-<td align="center">$\Theta (n^2)$</td>
-<td align="center">$\Theta (n^2)$</td>
+<td align="center">$\Theta(n^2)$</td>
+<td align="center">$\Theta(n^2)$</td>
 <td align="center">原地</td>
 <td align="center">稳定</td>
 </tr>
 <tr>
 <td align="center">插入排序</td>
-<td align="center">$\Theta (n^2)$</td>
-<td align="center">$\Theta (n^2)$</td>
+<td align="center">$\Theta(n^2)$</td>
+<td align="center">$\Theta(n^2)$</td>
 <td align="center">原地</td>
 <td align="center">稳定</td>
 </tr>
 <tr>
 <td align="center">选择排序</td>
-<td align="center">$\Theta (n^2)$</td>
-<td align="center">$\Theta (n^2)$</td>
+<td align="center">$\Theta(n^2)$</td>
+<td align="center">$\Theta(n^2)$</td>
 <td align="center">原地</td>
 <td align="center">不稳定</td>
 </tr>
 <tr>
 <td align="center">归并排序</td>
-<td align="center">$\Theta (nlgn)$</td>
-<td align="center">$\Theta (nlgn)$</td>
-<td align="center">O (n)</td>
+<td align="center">$\Theta(nlgn)$</td>
+<td align="center">$\Theta(nlgn)$</td>
+<td align="center">O(n)</td>
 <td align="center">稳定</td>
 </tr>
 <tr>
 <td align="center">快速排序</td>
-<td align="center">$\Theta (nlgn)$</td>
-<td align="center">$\Theta (n^2)$</td>
+<td align="center">$\Theta(nlgn)$</td>
+<td align="center">$\Theta(n^2)$</td>
 <td align="center">原地</td>
 <td align="center">不稳定</td>
 </tr>
 <tr>
 <td align="center">堆排序</td>
-<td align="center">$\Theta (nlgn)$</td>
-<td align="center">$\Theta (nlgn)$</td>
+<td align="center">$\Theta(nlgn)$</td>
+<td align="center">$\Theta(nlgn)$</td>
 <td align="center">原地</td>
 <td align="center">不稳定</td>
 </tr>
 <tr>
 <td align="center">希尔排序</td>
-<td align="center">$\Theta (nlgn)$</td>
-<td align="center">$O (n^s), 1&lt;s&lt;2$</td>
+<td align="center">$\Theta(nlgn)$</td>
+<td align="center">$O(n^s), 1&lt;s&lt;2$</td>
 <td align="center">原地</td>
 <td align="center">不稳定</td>
 </tr>
 <tr>
 <td align="center">计数排序</td>
-<td align="center">$\Theta (k+n)$</td>
+<td align="center">$\Theta(k+n)$</td>
 <td align="center"></td>
 <td align="center">非原地</td>
 <td align="center">稳定</td>
 </tr>
 <tr>
 <td align="center">桶排序</td>
-<td align="center">$\Theta (k+n)$</td>
+<td align="center">$\Theta(k+n)$</td>
 <td align="center"></td>
 <td align="center">非原地</td>
 <td align="center">稳定</td>
 </tr>
 <tr>
 <td align="center">基数排序</td>
-<td align="center">$\Theta (d (k+n))$</td>
+<td align="center">$\Theta(d(k+n))$</td>
 <td align="center"></td>
 <td align="center">非原地</td>
 <td align="center">稳定</td>
@@ -260,7 +260,7 @@
 <li>遍历方式：前序遍历，中序遍历，后序遍历</li>
 <li>操作：search，successor，predecessor，insert，delete</li>
 </ul>
-<p>[红黑树](<a target="_blank" rel="noopener" href="https://github.com/wardseptember/notes/blob/master/docs/%">https://github.com/wardseptember/notes/blob/master/docs/%</a> E7% BA% A2% E9% BB%91% E6% A0%91.md)：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/wardseptember/notes/blob/master/docs/%E7%BA%A2%E9%BB%91%E6%A0%91.md">红黑树</a>：</p>
 <ul>
 <li>一种近似平衡的二叉树，可以看作是 2-3 树的实现</li>
 <li>性质：<ul>
