@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-09-25T05:39:45.000Z">
-<meta property="article:modified_time" content="2022-09-25T05:58:41.967Z">
+<meta property="article:modified_time" content="2022-09-27T02:50:35.880Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="Database">
@@ -54,7 +54,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-09-25 13:58:41'
+  postUpdate: '2022-09-27 10:50:35'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -143,7 +143,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《高级数据库系统》笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-25T05:39:45.000Z" title="发表于 2022-09-25 13:39:45">2022-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-25T05:58:41.967Z" title="更新于 2022-09-25 13:58:41">2022-09-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《高级数据库系统》笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于整理《高级数据库系统中》的知识点，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《高级数据库系统》笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-25T05:39:45.000Z" title="发表于 2022-09-25 13:39:45">2022-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-27T02:50:35.880Z" title="更新于 2022-09-27 10:50:35">2022-09-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《高级数据库系统》笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于整理《高级数据库系统中》的知识点，以备查阅。</p>
 <span id="more"></span>
 
 <h2 id="第一章-数据库系统概述"><a href="#第一章-数据库系统概述" class="headerlink" title="第一章 数据库系统概述"></a>第一章 数据库系统概述</h2><p>基本概念：数据，数据库，数据库模式，数据库管理系统，数据库系统。</p>
@@ -157,7 +157,7 @@
 <li>无故障恢复</li>
 </ul>
 <p>数据库模式设计不规范的话会带来很多问题，如数据冗余，更新异常，插入异常，删除异常，可以进行模式分解来解决该问题。</p>
-<p>数据库语言类型：DDL，DML，DCL。</p>
+<p>数据库语言类型：DDL，DML，DCL</p>
 <h2 id="第二章-关系数据库回顾"><a href="#第二章-关系数据库回顾" class="headerlink" title="第二章 关系数据库回顾"></a>第二章 关系数据库回顾</h2><p>ANSI&#x2F;SPARC 体系结构：三级模式结构和两级映像，确保了数据的独立性。</p>
 <p>关系模型中的概念：超码，候选码，主码，替换码，外码</p>
 <p>关系模型的三类完整性：</p>
@@ -237,6 +237,174 @@
 <li>2Q：与 LRU-2 类似，不同之处在于访问 1 次的队列采用 FIFO，而不是 LRU</li>
 <li>Second-Chance LRU：连续两次置换才能将 frame 替换出去</li>
 <li>CLOCK：把 Second-Chance FIFO 组织成环形</li>
+<li>CF-LRU：SSD 上置换算法，减少缓存对闪存的写次数</li>
 </ul>
 <p>缓冲管理器：接受上层的 Frame 请求，对 buffer 进行操作和维护，同时向存储管理器发送 Page 相关请求</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/09/25/%E3%80%8A%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0/">http://blog.zsstrike.tech/2022/09/25/《高级数据库系统》笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><a class="post-meta__tags" href="/tags/Database/">Database</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">第一章 数据库系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9B%9E%E9%A1%BE"><span class="toc-number">2.</span> <span class="toc-text">第二章 关系数据库回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8"><span class="toc-number">3.</span> <span class="toc-text">第三章 存储介质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA"><span class="toc-number">4.</span> <span class="toc-text">第四章 数据表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E7%BC%93%E5%86%B2%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">第五章 缓冲区管理</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<h2 id="第六章-索引结构"><a href="#第六章-索引结构" class="headerlink" title="第六章 索引结构"></a>第六章 索引结构</h2><p>顺序文件上的索引：</p>
+<ul>
+<li>密集索引：空间占用大</li>
+<li>稀疏索引：点查询性能不如密集索引</li>
+<li>多级索引：稀疏二级索引 + 一级索引，一级索引过大时可以再次索引，将二级索引放入内存</li>
+<li>主索引：记录在文件中按照主键存储，根据主键建立的主索引</li>
+<li>密集辅助索引：非主键上建立的索引，重复键值可以使用间接桶</li>
+<li>倒排索引：文档检索</li>
+</ul>
+<p>B+ 树：通常 3 层，节点格式 n 个值，n + 1 个指针</p>
+<ul>
+<li>叶节点：至少 <code>(n + 1) / 2</code> 个指针指向记录，过半记录</li>
+<li>中间节点：至少 <code>(n + 2) / 2</code> 个指针指向子树，过半指针</li>
+<li>根节点：至少两个指针</li>
+<li>相关操作：查找，插入（递归分裂），删除（合并，删除叶节点最小值）</li>
+</ul>
+<p>散列表：</p>
+<ul>
+<li>散列表：查找，插入，删除，注意溢出块的处理</li>
+<li>可扩展散列表：前 i 位用于区分桶，索引成倍增加，但对于某个桶来说，只有必要的时候才会分裂</li>
+<li>线性散列表：后 i 位用于区分桶，线性增加，只会放在 m 桶或者 $m - 2^{i-1}$ （去掉最高位）桶<ul>
+<li>填充率：实际记录总数除以桶数（不包括溢出块数量）</li>
+</ul>
+</li>
+</ul>
+<p>多维索引：</p>
+<ul>
+<li>R-Tree：使用矩形覆盖，建立索引</li>
+<li>网格文件：两个维度上建立索引</li>
+<li>分段哈希函数</li>
+</ul>
+<h2 id="第七章-查询优化"><a href="#第七章-查询优化" class="headerlink" title="第七章 查询优化"></a>第七章 查询优化</h2><p>查询语句的执行流程：语法分析，逻辑计划生成，查询重写，物理计划生成，物理计划评价，执行物理计划</p>
+<p>语法分析：构造语法分析树</p>
+<p>逻辑计划生成：将语法分析数转换为代数表达式（逻辑计划）</p>
+<p>查询重写：将初始逻辑计划按照转换规则转换，如选择连接顺序，优先选择，先投影后选择等，减少 IO </p>
+<p>查询计划代价估计：T(R)，S(R)，V(R, A)，B(R)</p>
+<ul>
+<li>$W &#x3D; R1 × R2$</li>
+<li>$W &#x3D; \sigma_{A\ op\ a}(R)$ </li>
+<li>$ W &#x3D; R1\bowtie R2 $</li>
+</ul>
+<p>物理操作符间参数传递：物化方式，流水线</p>
+<h2 id="第八章-连接算法"><a href="#第八章-连接算法" class="headerlink" title="第八章 连接算法"></a>第八章 连接算法</h2><p>物理操作符：逻辑操作符的特定实现，如 TableScan，SortScan，IndexScan 等</p>
+<p>连接操作的实现算法：嵌套循环连接，归并连接，索引连接，散列连接</p>
+<p>连接算法代价分析：假设记录连续存储，未排序，B(R2) &lt; B(R1)，R1 索引在内存中，buffer 大小 M</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Cost</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nested Loop Join</td>
+<td>(B(R2) &#x2F; M-1) * (M-1 + B(R1))</td>
+<td>$\ge 2$</td>
+</tr>
+<tr>
+<td>Merge Join</td>
+<td>5 (B(R1) + B(R2))</td>
+<td>$\sqrt{B(R1)}$</td>
+</tr>
+<tr>
+<td>Merge Join(Improved)</td>
+<td>3 (B(R1) + B(R2))</td>
+<td>$\sqrt{B(R1) + B(R2)}$</td>
+</tr>
+<tr>
+<td>Index Join</td>
+<td>B(R2) +  T(R2) × T(R1)&#x2F;V(R1, C)</td>
+<td></td>
+</tr>
+<tr>
+<td>Hash Join</td>
+<td>3 (B(R1) + B(R2))</td>
+<td>$\sqrt{B(R2)} + 1$</td>
+</tr>
+</tbody></table>
+<p>连接顺序的选择：</p>
+<ul>
+<li>左右变元：较小的关系作为左变元（驱动表）（除了 index join）</li>
+<li>连接树：给定 n 个关系的连接树数目为 $T(n) * n!$ ，通常选择更加高效的左深树，T(n) 卡特兰数</li>
+<li>动态规划法选择连接顺序：代价函数 $f(n)&#x3D;f(n-1) + T(n - 1)， n \ge 3$</li>
+</ul>
+<h2 id="第九章-日志和恢复"><a href="#第九章-日志和恢复" class="headerlink" title="第九章 日志和恢复"></a>第九章 日志和恢复</h2><p>事务性质：ACID，通过事务可以确保数据库的一致性</p>
+<p>事务原语操作：Input(X)，Output(X)，Read(X, t)，Write(X, t)</p>
+<p>数据库故障：事务故障，介质故障，系统故障</p>
+<p>数据库恢复策略：备份 + 日志（冗余）</p>
+<p>Undo日志：立即更新，内存代价小</p>
+<ul>
+<li>在 x 被写到磁盘之前，对应该修改的日志记录必须已被写到磁盘上</li>
+<li>当事务的所有修改结果都已写入磁盘后，才将 &lt;Commit,T&gt; 日志记录写到磁盘上</li>
+<li>从日志尾部开始恢复那些未提交（没有执行 Commit，Abort）的事务</li>
+</ul>
+<p>Redo日志：延迟更新，恢复代价小</p>
+<ul>
+<li>在 x 被写到磁盘之前，对应该修改的日志记录必须已被写到磁盘上</li>
+<li>在数据写回磁盘前先写 &lt;Commit,T&gt; 日志记录</li>
+<li>从日志首部开始恢复那些已经提交（执行了 Commit）的事务</li>
+</ul>
+<p>Undo&#x2F;Redo 日志：</p>
+<ul>
+<li>在 x 被写到磁盘之前，对应该修改的日志记录必须已被写到磁盘上</li>
+<li>在数据写回磁盘前先写 &lt;Commit,T&gt; 日志记录</li>
+<li>恢复时先 Undo ，再 Redo</li>
+</ul>
+<p>检查点：在检查点时刻，所有的事务都已经执行完毕，所有的数据（日志，数据库数据）都已经被持久化完毕，且在检查点创建时，不允许处理新的事务（非静止检查点除外）</p>
+<p>日志轮转技术：防止日志文件会占用大量的磁盘空间</p>
+<h2 id="第十章-并发控制"><a href="#第十章-并发控制" class="headerlink" title="第十章 并发控制"></a>第十章 并发控制</h2><p>可串化调度（Serializable Schedule）：如果一个调度的结果与某一串行调度（Serial schedule）执行的结果等价，则称该调度是可串化调度，否则是不可串调度</p>
+<p>冲突可串性：如果一个调度满足冲突可串性，则该调度是可串化调度，通常使用优先图来判断冲突可串性</p>
+<p>视图可串性：弱于冲突可串性，但仍可保证调度的可串性，只需要确保读到的值相同，最后数据库状态一致即可，可以使用多重图判断，即对 <code>Wi(A) =&gt; Rj(A)</code>，若存在 Wk(A)，那么 Tk 要么在 Ti 前，要么在 Tj 后</p>
+<p>2PL：</p>
+<ul>
+<li>对任何数据读写前，需要获得该数据上的锁，在释放一个锁之后，事务不再获得任何锁</li>
+<li>相关锁：X Lock，S Lock，U Lock，注意&lt;S, U&gt;是相容的，&lt;U, S&gt;是不相容的</li>
+<li>多粒度锁：在给节点 P 加锁的时候需要判断 P 的上层节点，下层节点和本节点，代价大</li>
+<li>意向锁：对任一结点 P 加 S(X) 锁，必须先对从根结点到 P 的路径上的所有结点加 IS(IX) 锁</li>
+</ul>
+<p>死锁：</p>
+<ul>
+<li>死锁检测：超时，等待图</li>
+<li>死锁预防：按照锁对象的某种顺序加锁，使用时间戳（Wait-Die 和 Wound-Wait）</li>
+</ul>
+<p>OCC：通常分为读阶段，有效性确认阶段，写阶段</p>
+<h2 id="第十一章-NoSQL-数据库"><a href="#第十一章-NoSQL-数据库" class="headerlink" title="第十一章 NoSQL 数据库"></a>第十一章 NoSQL 数据库</h2><p>数据库变迁：SQL，NoSQL，NewSQL</p>
+<p>NoSQL 特点：非关系型的，高扩展性，没有预先定义的模式，CAP</p>
+<p>NoSQL 兴起的原因：</p>
+<ul>
+<li>RDBMS 无法满足 Web 2.0 的需求（海量数据，高并发）</li>
+<li>One size fits all 模式很难适用于截然不同的业务场景（OLTP，OLAP）</li>
+<li>Web 2.0 网站系统通常不要求严格的数据库事务，不要求严格的读写一致性</li>
+</ul>
+<p>混合架构：</p>
+<ul>
+<li>亚马逊对于购物篮这种数据，使用 KV 存储</li>
+<li>对于订单采用关系数据库</li>
+<li>对于历史记录，采用文档数据库</li>
+</ul>
+<p>NoSQL 主要类型：键值数据库、列存储数据库、文档数据库和图数据库</p>
+<p>NoSQL 分布式系统基础：CAP 和 BASE</p>
+<p>LSM-Tree：</p>
+<ul>
+<li>将随机写操作转化为顺序写，支持高吞吐的写，适合写多读少的应用</li>
+<li>需要 Compaction，会带来写放大的问题和系统性能抖动</li>
+<li>Compaction 策略：size-tiered 策略，leveled 策略</li>
+</ul>
+<img src="v2-37576525d52091fd713bb13556c92861_720w-16642469926855.jpg" alt="img" style="zoom: 80%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/09/25/%E3%80%8A%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0/">http://blog.zsstrike.tech/2022/09/25/《高级数据库系统》笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><a class="post-meta__tags" href="/tags/Database/">Database</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">第一章 数据库系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9B%9E%E9%A1%BE"><span class="toc-number">2.</span> <span class="toc-text">第二章 关系数据库回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8"><span class="toc-number">3.</span> <span class="toc-text">第三章 存储介质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA"><span class="toc-number">4.</span> <span class="toc-text">第四章 数据表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E7%BC%93%E5%86%B2%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">第五章 缓冲区管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-number">6.</span> <span class="toc-text">第六章 索引结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">第七章 查询优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E8%BF%9E%E6%8E%A5%E7%AE%97%E6%B3%95"><span class="toc-number">8.</span> <span class="toc-text">第八章 连接算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%97%A5%E5%BF%97%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="toc-number">9.</span> <span class="toc-text">第九章 日志和恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0-%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6"><span class="toc-number">10.</span> <span class="toc-text">第十章 并发控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-NoSQL-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">11.</span> <span class="toc-text">第十一章 NoSQL 数据库</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
