@@ -507,30 +507,30 @@ tags: ["Redis"]
 
 + Redis 的发布与订阅的功能由 PUBLISH，SUBSCRIBE，PSUBSCRIB 等命令组成，每当有其他客户端向被订阅的频道发送消息时，频道的所有订阅者都会收到这个消息。
 
-+ 频道的订阅与退订：Redis 将所有订阅关系保存在RedisServer.pubsub_channels 字典里面，键是某个被订阅的频道，键值则是一个链表，保存着所有订阅这个频道的客户端。
++ 频道的订阅与退订：Redis 将所有订阅关系保存在 RedisServer.pubsub_channels 字典里面，键是某个被订阅的频道，键值则是一个链表，保存着所有订阅这个频道的客户端。
 
   ![image-20201019225402536](Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0/image-20201019225402536.png)
 
   + 订阅频道：如果有频道已经在字典中，直接尾部插入订阅者，否则创建字典项，键为频道，键值为该客户端
   + 退订频道：根据被退订的频道名字，从订阅者链表中删去客户端，如果此时订阅者链表为空，则删除对应的字典项
 
-+ 模式的订阅与退订：Redis 将所有模式的订阅关系保存在RedisServer.pubsub_patterns 属性里面。
++ 模式的订阅与退订：Redis 将所有模式的订阅关系保存在 RedisServer.pubsub_patterns 属性里面。
 
   ![image-20201019225859198](Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0/image-20201019225859198.png)
 
-  + 订阅模式：新建一个pubsubPattern结构，设置好client和pattern属性，然后将其加入到pubsub_patterns 链表的表尾。
-  + 退订模式：从pubsub_patterns中查找对应的被退订的pubsubPattern结构，然后将其删除。
+  + 订阅模式：新建一个 pubsubPattern 结构，设置好 client 和 pattern 属性，然后将其加入到 pubsub_patterns 链表的表尾。
+  + 退订模式：从 pubsub_patterns 中查找对应的被退订的 pubsubPattern 结构，然后将其删除。
 
-+ 发送消息：当执行`PUBLISH <channel> <message>`时候，服务器需要将消息message发送到对应的channel的所有订阅者，另外如果有模式匹配这个channel，那么需要将message发送给pattern模式的订阅者。
++ 发送消息：当执行 `PUBLISH <channel> <message>` 时候，服务器需要将消息 message 发送到对应的 channel 的所有订阅者，另外如果有模式匹配这个 channel，那么需要将 message 发送给 pattern 模式的订阅者。
 
-  + 将消息发送给频道订阅者：从pubsub_channels 字典里面找到订阅者链表，然后将消息发送给名单上的所有客户端
-  + 将消息发送给模式订阅者：遍历pubsub_patterns链表，查找那些与channel频道匹配的模式，并且将消息发送到这些模式的客户端。
+  + 将消息发送给频道订阅者：从 pubsub_channels 字典里面找到订阅者链表，然后将消息发送给名单上的所有客户端
+  + 将消息发送给模式订阅者：遍历 pubsub_patterns 链表，查找那些与 channel 频道匹配的模式，并且将消息发送到这些模式的客户端。
 
-+ 查看订阅消息：PUBSUB命令可以查看频道或者模式的相关信息
++ 查看订阅消息：PUBSUB 命令可以查看频道或者模式的相关信息
 
-  + PUBSUB CHANNELS [pattern]：返回与pattern匹配的频道
-  + PUBSUB NUMSUB [channel-1 channel-2]:返回频道对应订阅者的数量
-  + PUBSUB NUMPAT: 返回当前服务器被订阅模式的数量
+  + PUBSUB CHANNELS [pattern]：返回与 pattern 匹配的频道
+  + PUBSUB NUMSUB [channel-1 channel-2]：返回频道对应订阅者的数量
+  + PUBSUB NUMPAT：返回当前服务器被订阅模式的数量
 
 
 
