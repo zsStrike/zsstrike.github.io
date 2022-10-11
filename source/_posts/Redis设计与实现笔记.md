@@ -632,7 +632,7 @@ tags: ["Redis"]
 
   ![image-20201021171836148](Redis设计与实现笔记/image-20201021171836148.png)
 
-  其中slowlog链表保存所有的慢查询日志。每个节点是一个slowlogEntry：
+  其中 slowlog 链表保存所有的慢查询日志。每个节点是一个 slowlogEntry：
 
   ![image-20201021172036568](Redis设计与实现笔记/image-20201021172036568.png)
 
