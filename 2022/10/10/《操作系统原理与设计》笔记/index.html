@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-10-10T13:57:12.000Z">
-<meta property="article:modified_time" content="2022-10-11T14:13:20.905Z">
+<meta property="article:modified_time" content="2022-10-12T15:01:33.382Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="操作系统">
 <meta property="article:tag" content="Operating System">
@@ -54,7 +54,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-10-11 22:13:20'
+  postUpdate: '2022-10-12 23:01:33'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -143,7 +143,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《操作系统原理与设计》笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-10T13:57:12.000Z" title="发表于 2022-10-10 21:57:12">2022-10-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-11T14:13:20.905Z" title="更新于 2022-10-11 22:13:20">2022-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《操作系统原理与设计》笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于整理《操作系统原理与设计》课程上所使用 Slides 的笔记，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《操作系统原理与设计》笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-10T13:57:12.000Z" title="发表于 2022-10-10 21:57:12">2022-10-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-12T15:01:33.382Z" title="更新于 2022-10-12 23:01:33">2022-10-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《操作系统原理与设计》笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于整理《操作系统原理与设计》课程上所使用 Slides 的笔记，以备查阅。</p>
 <span id="more"></span>
 
 <h2 id="第一章-操作系统概览"><a href="#第一章-操作系统概览" class="headerlink" title="第一章 操作系统概览"></a>第一章 操作系统概览</h2><p>计算机系统概览：</p>
@@ -195,7 +195,7 @@
 <li>模块化：提供可加载的内核模块，更加灵活高效</li>
 <li>混合：结合多种不同的架构</li>
 </ul>
-<h2 id="第三章-进程管理"><a href="#第三章-进程管理" class="headerlink" title="第三章 进程管理"></a>第三章 进程管理</h2><p>程序：指的是一系列代码，将 C 语言编译为可执行文件通常需要：</p>
+<h2 id="第三章-进程"><a href="#第三章-进程" class="headerlink" title="第三章 进程"></a>第三章 进程</h2><p>程序：指的是一系列代码，将 C 语言编译为可执行文件通常需要：</p>
 <ul>
 <li>预处理器：用于处理像 <code>#define, #include, #ifdef</code> 等指令</li>
 <li>编译器：对处理后的代码进行词法语法分析，生成中间码（汇编码）</li>
@@ -260,4 +260,161 @@
 </ul>
 </li>
 </ul>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/10/10/%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/">http://blog.zsstrike.tech/2022/10/10/《操作系统原理与设计》笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="post-meta__tags" href="/tags/Operating-System/">Operating System</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text">第一章 操作系统概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">第二章 操作系统结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">第三章 进程管理</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<h2 id="第四章-线程"><a href="#第四章-线程" class="headerlink" title="第四章 线程"></a>第四章 线程</h2><p>并发和并行：前者表示在某段时间内多个程序在执行，后者则表示在某个时刻多个程序同时在执行</p>
+<p>线程：轻量级进程，是 CPU 运行的基本单位，相对于进程，线程的创建代价更小，而且相同进程下创建的线程还能够共享部分资源，对应的资源消耗也少一些</p>
+<p>相同进程内线程内存共享情况：</p>
+<ul>
+<li>共享：代码段，全局变量，动态内存，文件打开表等</li>
+<li>非共享：栈，程序计数器，寄存器值</li>
+</ul>
+<p>线程优点：更高的响应性，便于数据共享，经济，可扩展性强</p>
+<p>线程模型：用于表示内核态线程和用户态线程之间的关系</p>
+<ul>
+<li>多对一：容易实现，但是一旦调用一个阻塞式系统调用，其他线程将不会得到执行</li>
+<li>一对一：更高的并发度，但是此时并不能创建过多的线程，因为内核态内存有限，Linux 和 Windows 使用<ul>
+<li>基于进程的调度器：只对进程进行调度，但是进程内哪个线程被执行需要库文件提供支持</li>
+<li>基于线程的调度器：只对线程进行调度，linux 内核 2.6 以后支持</li>
+</ul>
+</li>
+<li>多对多：结合上述优点</li>
+</ul>
+<p>多线程编程：</p>
+<ul>
+<li>线程创建：pthread_create，需要定义对应的线程函数</li>
+<li>线程等待：pthread_join，可以等待特定的子线程，和 wait 实现原理相同</li>
+<li>线程标识：pthread_self，返回 pthread_t，结构体</li>
+<li>线程退出：pthread_exit，线程主动退出</li>
+<li>线程中止：pthread_kill，中止正在执行的线程</li>
+<li>隐式多线程：ThreadPool，OpenMP</li>
+</ul>
+<p>线程带来的问题：</p>
+<ul>
+<li>系统调用实现：<ul>
+<li>fork：进程将会复制所有的线程或者只会复制对应的调用者线程</li>
+<li>exec：直接修改进程的代码段，因此所有线程都会被影响</li>
+</ul>
+</li>
+<li>signal：当一个 signal 到来时，应该将其分发给哪个线程，pthread_kill(pthread_t tid, int signal)</li>
+<li>Thread-Local Storage：每个线程独有的存储空间，用于存储特定线程的数据，和 static data 类似</li>
+</ul>
+<h2 id="第五章-进程通信与同步"><a href="#第五章-进程通信与同步" class="headerlink" title="第五章 进程通信与同步"></a>第五章 进程通信与同步</h2><p>进程间通信模型：</p>
+<ul>
+<li>共享内存</li>
+<li>消息传递</li>
+</ul>
+<p>进程间通信方式：</p>
+<ul>
+<li>POSIX 共享内存：通过将内存区域和文件关联起来，主要涉及 shm_open，ftruncate，mmap，shm_unlink</li>
+<li>套接字：通过 IP 和 port 来唯一定义，可以通过套接字实现消息传递</li>
+<li>管道：是一个共享对象，可以用来让进程间间通信<ul>
+<li>普通管道：只用于存在亲缘关系的进程间，单向，在 Unix 中通过 fork，父进程关闭读端，子进程关闭写端，就可以构成该普通管道</li>
+<li>命名管道：可以在不具有亲缘关系的进程间通信，可能有多个写端，半双工，在 Unix 中称为 FIFOs，相关 api 如 mkfifo，open，read，write，close</li>
+</ul>
+</li>
+</ul>
+<p>Race Condition：指的是程序的输出依赖于共享对象的被访问顺序，如 A 进程执行 <code>X += 10</code>，B 进程执行 <code>X -= 10</code>，最终结果可能是 <code>-10, 0, 10</code>，其结果依赖于程序间的执行顺序</p>
+<p>进程互斥：</p>
+<ul>
+<li><p>通过定义临界区方案可以实现进程互斥，其主要定义四个部分：</p>
+<ul>
+<li>进入区：定义了进入临界区前需要的操作，如检查资源是否可用</li>
+<li>临界区：表示此时正在操作共享对象</li>
+<li>退出区：定义了退出临界区后需要的操作，如重新设置访问状态等</li>
+<li>剩余区：程序的其他代码</li>
+</ul>
+</li>
+<li><p>临界区方案需要满足的条件：</p>
+<ul>
+<li>互斥：两个进程不能同时在临界区内</li>
+<li>前进：只有在临界区内的进程才能阻塞其他进程</li>
+<li>有限等待：进程不应该一直等待进入临界区</li>
+</ul>
+</li>
+<li><p>临界区方案的实现方案：</p>
+<ul>
+<li><p>屏蔽中断：和非抢占式内核原理相同，在进入区屏蔽中断，退出区允许中断，这样在临界区内的进程不会发生上下文交换，从而保证了互斥，该方法存在性能损失</p>
+</li>
+<li><p>互斥锁：使用锁来表示是否允许进程进入临界区，通常使用硬件指令，以自旋锁的方式实现，但是存在 CPU 消耗</p>
+</li>
+<li><p>严格轮换：定义一个共享变量，用来表示现在哪个进程被允许进入临界区，但是违背了前进条件，并且不高效</p>
+</li>
+<li><p>Peterson’s solution：先检查其他进程，若其他进程想要进入临界区，则让它们先进入，但是可能存在优先级反转问题，即高优先级的进程一直在让其他进程进入临界区</p>
+</li>
+<li><p>信号量：既可以用于线程互斥，也可以用于线程同步。上面的互斥锁，严格轮换和 Peterson’s solution 在进入区若条件不满足的时候，采用的方案都是 CPU 忙等，会消耗大量 CPU 资源，而是用信号量则不存在该问题，因为其会挂起和唤醒进程</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span> </span><br><span class="line">	<span class="type">int</span> value; </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">process</span> * <span class="title">list</span>;</span></span><br><span class="line">&#125; semaphore;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">down</span><span class="params">(semaphore *s)</span> &#123;</span><br><span class="line">    disable_interrupt();</span><br><span class="line">    <span class="keyword">while</span> (*s == <span class="number">0</span>) &#123;</span><br><span class="line">        enable_interrupt();</span><br><span class="line">        special_sleep();</span><br><span class="line">        disable_interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">    *s = *s - <span class="number">1</span>;</span><br><span class="line">    enable_interrupt();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">up</span><span class="params">(semaphore *s)</span> &#123;</span><br><span class="line">    disable_interrupt();</span><br><span class="line">    <span class="keyword">if</span> (*s == <span class="number">0</span>) &#123;</span><br><span class="line">        special_wakeup();</span><br><span class="line">    &#125;</span><br><span class="line">    *s = *s + <span class="number">1</span>;</span><br><span class="line">    enable_interrupt();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用 disable_interrupt 来保证操作的原子性，在 special_sleep 之前需要 enable_interrupt，因为此时可以让出 CPU 资源给其他应用使用。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>死锁：两个或多个线程由于相互等待而永远被阻塞的情况</p>
+<ul>
+<li>条件：互斥，保持并等待，非抢占，循环等待</li>
+<li>处理：<ul>
+<li>死锁检测和恢复：通过资源分配图，检测其中是否存在环路，然后让其中一个进程释放掉所占用资源</li>
+<li>死锁预防：通过合理的资源分配，防止死锁产生，如银行家算法</li>
+<li>鸵鸟算法：直接忽略死锁问题</li>
+</ul>
+</li>
+<li>死锁与饥饿：饥饿是指一个线程长时间得不到需要的资源而不能执行的现象，并不表示存在死锁</li>
+</ul>
+<p>进程同步问题：</p>
+<ul>
+<li>生产者-消费者问题：通过使用 mutex 信号量实现资源互斥访问，通过 empty 和 full 信号量实现同步</li>
+<li>哲学就就餐问题：<ul>
+<li>最多允许 4 个哲学家同时拿筷子，此时不会存在循环等待</li>
+<li>前四个哲学家先拿左边的筷子，最后一个哲学家先拿右边筷子（或者按照奇偶区分）</li>
+<li>定义拿筷子这个操作是不可分的，定义 mutex &#x3D; 1</li>
+</ul>
+</li>
+<li>读者-写者问题：定义 write 信号量表示是否可写，定义 read_mutex 表示是否可读，同时定义 read_count，在其从 0 变为 1 时，down(&amp;write)，在其从 1 变为 0 时，up(&amp;write)，该方案可能存在写操作进程饥饿的情况</li>
+</ul>
+<h2 id="第六章-进程调度"><a href="#第六章-进程调度" class="headerlink" title="第六章 进程调度"></a>第六章 进程调度</h2><p>进程状态：转移过程图如下，其中在 waiting 状态时，分为可中断和不可中断，可中断则表示程序能够响应像 <code>Ctrl + C</code> 这样的命令，不可中断则表示该程序非常希望得到对应的资源</p>
+<img src="image-20221012222647825.png" alt="image-20221012222647825" style="zoom:50%;" />
+
+<p>进程调度：</p>
+<ul>
+<li><p>发生时刻：</p>
+<ul>
+<li><p>一个新进程被创建</p>
+</li>
+<li><p>一个在正执行的进程被终结或者进入了等待状态</p>
+</li>
+<li><p>一个进程从 waiting 状态转移到 ready 状态</p>
+</li>
+</ul>
+</li>
+<li><p>上下文切换：进程调度决定接下来选择哪个进程执行，而上下文切换则是实际的切换过程，切换过程将会保存当前进程的程序计数器和寄存器值，同时加载新的进程对应的程序计数器和寄存器值到对应寄存器中</p>
+</li>
+<li><p>类型：</p>
+<ul>
+<li>抢占式调度：进程除了主动放弃 CPU 资源外，还可能存在其他事件让其主动放弃 CPU，如分时系统</li>
+<li>非抢占式调度：当一个进程被调度执行，其只有进入终结态或者等待态才会允许其他进程执行</li>
+</ul>
+</li>
+<li><p>性能指标：</p>
+<ul>
+<li>周转时间：从进程提交到结束所花费的时间</li>
+<li>等待时间：进程在 ready_queue 中的等待时间</li>
+<li>响应时间：从进程提交到首次执行的时间</li>
+</ul>
+</li>
+<li><p>调度算法：</p>
+<ul>
+<li>FIFO：非抢占，平均等待时间长</li>
+<li>SJF：既可以是抢占式，也可以是非抢占式，长事务可能被饿死</li>
+<li>RR：抢占式，很难合理控制时间片大小</li>
+<li>Priority Scheduling：抢占式</li>
+<li>多级优先队列：Linux 实际使用的方案，不同优先级上时间片大小不同，调度算法也不同</li>
+<li>实时调度算法：<ul>
+<li>单调速率算法（RMS）：根据周期来定静态优先级，然后进行调度，但是不保证一系列进程能够被正确调度</li>
+<li>最早截至日期调度（EDF）：根据截至日期指定优先级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Linux 调度器：</p>
+<img src="image-20221012230122443.png" alt="image-20221012230122443" style="zoom:50%;" /></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/10/10/%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/">http://blog.zsstrike.tech/2022/10/10/《操作系统原理与设计》笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="post-meta__tags" href="/tags/Operating-System/">Operating System</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text">第一章 操作系统概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">第二章 操作系统结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E8%BF%9B%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">第三章 进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BA%BF%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">第四章 线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E4%B8%8E%E5%90%8C%E6%AD%A5"><span class="toc-number">5.</span> <span class="toc-text">第五章 进程通信与同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="toc-number">6.</span> <span class="toc-text">第六章 进程调度</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
