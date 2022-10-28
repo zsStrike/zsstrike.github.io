@@ -12,7 +12,7 @@ tags: ["Redis"]
 
 
 
-## 01 Redis 数据类型和数据结构
+## 01 Redis 数据结构
 
 Redis 数据类型是其值的数据类型，这些数据类型会使用相应的数据结构来实现，对应关系如下：
 
@@ -41,6 +41,30 @@ quicklist：3.2 版本后，List 对象的底层数据结构。其实际上就�
 listpack：quicklist 并没有完全解决连锁更新的影响，因为其还是用压缩列表来保存元素。listpack 的目的便是取代压缩列表，其最大不同就是每个内部节点不再包含前一个节点的长度，从而避免了连锁更新
 
 ![图片](《REDIS》备忘录/640-16467127765796.png)
+
+
+
+## Redis 数据类型
+
+Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型，后者表示使用的编码，通过 void* ptr 指向对应的真实数据类型，对象类型有：
+
++ String 类型：
+  + 编码：int，raw，embstr
+    + embstr 表示 redisObject 和 SDS 使用连续的内存空间，适用于字符串较短情况
+    + raw 则将 SDS 和 redisObject 分离存储，使用内部 ptr 指向 SDS 对象
+  + 常用指令：SET/MSET，GET/MGET，EXISTS，DEL，INCR/INCRBY，EXPIRE/TTL，SETNX
+  + 应用场景：
+    + 缓存对象：缓存对象的 JSON 格式，或将 key 进行组合进行存储，如 `user:<id>:name` 
+    + 常规计数：通过 INCR/INCRBY
+    + 分布式锁：`SET lock_key unique_value NX PX 10000` ，unique_value 表示某个客户端独占，设置过期时间方式客户端崩溃而不能及时释放资源，解锁可以通过 DEL 命令实现，但是由于需要先判断该锁是否是自己的锁，为了保证原子性，需要使用 LUA 脚本
++ List 类型：
++ Hash 类型：
++ Set 类型：
++ Zset 类型：
++ BitMap 类型：
++ HyperLogLog 类型：
++ GEO 类型：
++ Stream 类型：
 
 
 
