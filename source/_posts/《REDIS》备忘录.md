@@ -58,6 +58,13 @@ Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型�
     + 常规计数：通过 INCR/INCRBY
     + 分布式锁：`SET lock_key unique_value NX PX 10000` ，unique_value 表示某个客户端独占，设置过期时间方式客户端崩溃而不能及时释放资源，解锁可以通过 DEL 命令实现，但是由于需要先判断该锁是否是自己的锁，为了保证原子性，需要使用 LUA 脚本
 + List 类型：
+  + 编码：ziplist，linkedlist，quicklist（3.2 版本）
+  + 常用指令：LPUSH/RPUSH，LPOP/RPOP，LRANGE，BLPUSH/BRPOP
+  + 应用场景：
+    + 消息队列：消息队列三要素：
+      + 消息保序：LPUSH + RPOP，LPUSH + BRPOP
+      + 重复消息处理：生产者自己实现全局唯一 ID
+      + 消息可靠性：使用 BRPOPLPUSH
 + Hash 类型：
 + Set 类型：
 + Zset 类型：
