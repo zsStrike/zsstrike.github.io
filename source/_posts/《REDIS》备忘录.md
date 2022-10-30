@@ -66,7 +66,18 @@ Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型�
       + 重复消息处理：生产者自己实现全局唯一 ID
       + 消息可靠性：使用 BRPOPLPUSH
 + Hash 类型：
+  + 编码：ziplist，hash，listpack（7.0 版本）
+  + 常用命令：HSET/HGET，HDEL，HLEN，HGETALL，HINCRBY
+  + 应用场景：
+    + 缓存对象：field + value 表示对应属性和值，key 则表示对象 id，不过通常使用 String + JSON 方式存储对象，如果对象某些属性变化频繁，可以使用 Hash 类型
+    + 购物车：以用户 id 为 key，商品 id 为 field，商品数量为 value，构成购物车的 3 个要素
 + Set 类型：
+  + 编码：intset，hash
+  + 常用命令：SADD，SREM，SMEMBERS，SCARD，SISMEMBER，SINTER，SUNION，SDIFF
+  + 应用场景：
+    + 点赞：按照文章 id 为 key，用户 id 为 value
+    + 共同关注：主要使用交集运算 SINTER，注意集合运算复杂度较高
+    + 抽奖活动：SRANDMEMBER，SPOP key count
 + Zset 类型：
 + BitMap 类型：
 + HyperLogLog 类型：
