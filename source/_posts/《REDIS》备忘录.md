@@ -79,6 +79,10 @@ Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型�
     + 共同关注：主要使用交集运算 SINTER，注意集合运算复杂度较高
     + 抽奖活动：SRANDMEMBER，SPOP key count
 + Zset 类型：
+  + 编码：ziplist，skiplist，listpack（7.0 版本）
+  + 常用操作：ZADD，ZREM，ZSCORE，ZCARD，ZINCREBY，ZRANGE，ZRANGEBYSCORE，ZRANGEBYLEX，ZUNIONSTORE，ZINTERSTORE
+  +  应用场景：
+    + 排行榜，电话姓名排序
 + BitMap 类型：
 + HyperLogLog 类型：
 + GEO 类型：
