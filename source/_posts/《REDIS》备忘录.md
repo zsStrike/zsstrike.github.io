@@ -97,7 +97,14 @@ Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型�
   + 常用命令：GEOADD，GEOPOS，GEODIST，GEORADIUS
   + 应用场景：嘀嘀打车
 + Stream 类型：
-  + 
+  + 目的：专门为消息队列设计的数据类型，支持自动生成全局唯一 ID，并且以消费组消费数据
+  + 常用命令：XADD，XREAD，XREADGROUP，XPENDING/XACK
+  + 消息队列：
+    + 使用 XADD 会生成全局唯一 ID，如 `1654254953808-0`，通过 XREAD 实现消息读取，XREADGROUP 可以实现负载平衡
+    + Stream 会使用 PENDING list 留存消费组里每个消费者读取的消息，直到收到对应的 XACK；消费者可以在重启后，使用 XPENDING 命令查看已经读取，但尚未确认的消息
+    + 问题：
+      + Redis 队列中间件（Stream）存在数据丢失的问题，主要原因在于 AOF 先执行命令，再写文件，其次主从复制再进行主从切换时，也存在数据丢失的问题
+      + 面对消息积压，内存资源紧张
 
 
 
