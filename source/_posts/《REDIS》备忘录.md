@@ -414,6 +414,21 @@ Redis 处理快速的原因：
   + bio_close_file，bio_aof_fsync，bio_lazy_free：后台线程，处理耗时任务
   + io_thd_1，io_thd_2，io_thd_3：三个 IO 多线程，分担 Redis 的网络 IO 的压力
 
++ Redis 大 key 如何处理？
+
+  大 key：指 key 对应的 value 很大，如 String 类型值大于 10KB，或者元素个数大于 5000 个
+
+  通过以下方法找到大 key：
+
+  + redis-cli --bigkeys：最好在从节点上执行，只能返回每种类型的最大一个 bigkey
+  + 使用 SCAN 命令查找：使用 SCAN 扫描，使用 TYPE 查看类型，最后统计值大小
+  + 使用 RdbTools 工具查找大 key
+
+  删除大 key 的方式：
+
+  + 分批次删除：hscan，pop，sranmember，zremrangebyrank
+  + 异步删除：使用 unlink 代替 del 进行删除，不会造成阻塞
+
 + Redis 给缓存数据设置过期时间有啥用？
 
   内存是有限的，节省内存资源；像 token 这类的数据存在时效性，如果利用传统数据库处理的话，这样更麻烦并且性能更差；在实现分布式锁的时候，可以防止获取了锁资源的进程意外宕机而造成锁资源一直没有释放的问题。
