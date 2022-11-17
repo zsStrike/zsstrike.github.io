@@ -79,7 +79,7 @@ Redis 对象中保存了 type 和 encoding 信息，前者表示对象的类型�
     + 共同关注：主要使用交集运算 SINTER，注意集合运算复杂度较高
     + 抽奖活动：SRANDMEMBER，SPOP key count
 + Zset 类型：
-  + 编码：ziplist，skiplist，listpack（7.0 版本）
+  + 编码：ziplist，skiplist 和 hash，listpack（7.0 版本）
   + 常用操作：ZADD，ZREM，ZSCORE，ZCARD，ZINCREBY，ZRANGE，ZRANGEBYSCORE，ZRANGEBYLEX，ZUNIONSTORE，ZINTERSTORE
   +  应用场景：
     + 排行榜，电话姓名排序
@@ -418,6 +418,8 @@ Redis 处理快速的原因：
 
   大 key：指 key 对应的 value 很大，如 String 类型值大于 10KB，或者元素个数大于 5000 个
 
+  大 key 影响：客户端超时阻塞，引发网络阻塞，阻塞工作线程，内存分布不均（Slot 平均分配）
+
   通过以下方法找到大 key：
 
   + redis-cli --bigkeys：最好在从节点上执行，只能返回每种类型的最大一个 bigkey
@@ -517,6 +519,12 @@ Redis 处理快速的原因：
 + Redis 的 Zset 为什么同时需要字典和跳表来实现？
 
   Zset 是一个有序列表，字典和跳表分别对应两种查询场景，字典用来支持按成员查询数据，跳表则用以实现高效的范围查询，这样两个场景，性能都做到了极致。
+
++ 为什么使用跳表而不是平衡树？
+
+  + 内存占用上，平衡树每个节点 2 个指针，跳表每个节点 1/(1 - p) 个指针，Redis 中 p 为 0.25
+  + 做范围查找的时候，跳表比平衡树操作更加简单
+  + 算法实现上，跳表比平衡树简单
 
 + Redis 如何实现延迟队列？
 
