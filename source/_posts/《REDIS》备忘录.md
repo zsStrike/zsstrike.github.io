@@ -375,5 +375,21 @@ Redis 处理快速的原因：
 
 
 
+## 12 Redis 不同版本特性
+
+Redis 4.0 新增特性：
+
++ PSYNC 2.0：可以在更多种的情况下使用增量复制，减少全量复制的开销，如星形复制和链式复制场景
++ 缓存逐出策略优化：新增了 LFU 逐出策略，同时优化其他策略
++ Lazy Free：添加了 UNLINK 命令，用于异步执行删除操作，防止阻塞主线程，另外可以配置 `lazyfree-lazy-server-del yes` 改变 DEL 默认行为
++ 交换数据库：新增 SWAPDB 命令
++ 混合持久化：通过 `aof-use-rdb-preamble` 开启
++ 内存命令：新增 MEMORY 命令，查看 Redis 的内存使用情况
++ 兼容 NAT 和 Docker：新增了配置项用于支持不工作在 host 模式下的 docker 环境中
+
+
+
+
+
 
 
