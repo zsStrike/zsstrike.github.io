@@ -387,7 +387,15 @@ Redis 4.0 新增特性：
 + 内存命令：新增 MEMORY 命令，查看 Redis 的内存使用情况
 + 兼容 NAT 和 Docker：新增了配置项用于支持不工作在 host 模式下的 docker 环境中
 
+Redis 5.0 新增特性：
 
++ Stream 类型：用于消息队列，支持自动生成消息 ID 和消费组消费
++ 集群管理器更改：集群管理功能移植到 redis-cli 里面
++ Lua 改进：将 Lua 脚本更好地传播到 replicas/AOF
++ RDB 格式改进：增加存储 key 的逐出策略，向下兼容
++ 动态 Hz：平衡 CPU 利用率和响应能力
++ ZPOPMIN 和 ZPOPMAX 命令
++ CLIENT UNBLOCK 命令，用于终端其他客户端的阻塞命令，如 BRPOP
 
 
 
