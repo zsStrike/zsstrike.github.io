@@ -408,5 +408,18 @@ Redis 6.0：
 
 
 
+## 13 Redis 运维监控
+
+Redis 自身状态及命令：
+
++ INFO 命令：查看所有状态信息
++ MONITOR 命令：监视服务端收到的命令
++ LATENCY 命令：监控延迟
+
+Redis 可视化监测工具：
+
++ 可视化工具：redis-stat，RedisLive，redmon
++ 可视化监测工具：基于 redis_exporter，prometheus，grafana
+
 
 
