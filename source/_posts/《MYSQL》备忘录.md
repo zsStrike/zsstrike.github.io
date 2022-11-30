@@ -430,6 +430,36 @@ MySQL 逻辑架构：
 
 
 
+## 15 Buffer Pool
+
+InnoDB 存储引擎提供了 buffer pool，用来提高数据库的读写性能
+
++ 粒度：其以页为单位，通过参数 `innodb_buffer_pool_size` 调整缓存空间大小
++ 缓存信息：数据页，索引页，undo 页，插入缓存页，锁信息等
+
+InnoDB 通过三种链表管理缓存页：
+
++ Free List：管理空闲页
++ Flush List：管理脏页
++ LRU List：管理脏页和干净页，在内存不足时用于淘汰
+
+InnoDB 中的 LRU 优化：
+
++ 预读失效问题：分为 young 区域和 old 区域，加入缓冲区的页被放在 old 区域，只有被访问才会真正放入 young 区域
+
++ Buffer Pool 污染：为进入到 young 区域的页增加了一个停留在 old 区域时间的判断，只有后续访问与第一次访问时间大于某个时间间隔，才会将其移动到 young 区域的头部
+
+  ![图片](《MYSQL》备忘录/640.png)
+
+脏页刷盘时机：
+
++ redo log 日志满了，主动触发
++ Buffer pool 空间不足，逐出脏页，需要刷盘
++ MySQL 认为空闲时，后向线程定期将适量的脏页刷盘
++ MySQL 正常关闭之前，所有脏页都需要刷盘
+
+
+
 ## MySQL 面试题
 
 + 能说下 MyISAM 和 InnoDB 的区别吗？
