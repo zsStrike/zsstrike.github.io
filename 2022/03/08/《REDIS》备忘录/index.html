@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-03-08T02:04:29.000Z">
-<meta property="article:modified_time" content="2022-05-16T07:41:46.167Z">
+<meta property="article:modified_time" content="2022-12-01T02:16:55.998Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-05-16 15:41:46'
+  postUpdate: '2022-12-01 10:16:55'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《REDIS》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-08T02:04:29.000Z" title="发表于 2022-03-08 10:04:29">2022-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-16T07:41:46.167Z" title="更新于 2022-05-16 15:41:46">2022-05-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《REDIS》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录 Redis 相关知识，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《REDIS》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-08T02:04:29.000Z" title="发表于 2022-03-08 10:04:29">2022-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-01T02:16:55.998Z" title="更新于 2022-12-01 10:16:55">2022-12-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《REDIS》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录 Redis 相关知识，以备查阅。</p>
 <span id="more"></span>
 
 
@@ -157,7 +157,7 @@
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/640-16467075697754.png" alt="图片"></p>
 <p>哈希表：采用链式哈希来解决哈希冲突，当 Redis 中的数据过大时，此时就会进行 rehash，其采用的是渐进式 rehash，即在 rehash 进行期间，每次哈希表元素进行新增、删除、查找或者更新操作时，Redis 除了会执行对应的操作之外，还会顺序将哈希表 1 中索引位置上的所有 key-value 迁移到哈希表 2 上，rehash 触发条件和负载因子有关</p>
 <p>整数集合：包含有 (enconding, length, contents) 信息，当 Set 对象只有整数，并且元素数量不大时，就会采用该数据结构，当新的数据远大于已存在的数据时，会执行升级操作，升级后不会降级</p>
-<p>跳表：在 Redis 中只有 Zset 对象底层同时使用了两个数据结构，一个是哈希表，一个就是跳表。跳表实际上是多层的有序链表，通常越高层的跨度越大，跨度还有一个作用，就是计算该节点在跳表中的排位，Redis 实现中，为跳表增加了一个表头，其中有头尾节点，表长度和最大层数等信息，在新增节点的时候，会随机生成每个节点的层数，每一层是 1&#x2F;2 的概率</p>
+<p>跳表：在 Redis 中只有 Zset 对象底层同时使用了两个数据结构，一个是哈希表，一个就是跳表。跳表实际上是多层的有序链表，通常越高层的跨度越大，跨度还有一个作用，就是计算该节点在跳表中的排位，Redis 实现中，为跳表增加了一个表头，其中有头尾节点，表长度和最大层数等信息，在新增节点的时候，会随机生成每个节点的层数，每层高度晋升机会是 0.25，得到的跳跃表更加扁平</p>
 <p>quicklist：3.2 版本后，List 对象的底层数据结构。其实际上就是双向链表和压缩列表的组合，也就是每个链表节点数据元素是压缩列表，为了解决连锁更新的问题，其会控制每个链表节点中的压缩列表的大小或者元素个数，也就是降低连锁更新带来的影响</p>
 <p>listpack：quicklist 并没有完全解决连锁更新的影响，因为其还是用压缩列表来保存元素。listpack 的目的便是取代压缩列表，其最大不同就是每个内部节点不再包含前一个节点的长度，从而避免了连锁更新</p>
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/640-16467127765796.png" alt="图片"></p>
@@ -170,7 +170,7 @@
 <p>但是这样的话存在数据丢失的风险，这和 AOF 日志写回硬盘的时机有关（appendfsync）：</p>
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/640-16467169176718.png" alt="图片"></p>
 <blockquote>
-<p>当调用 IO write 操作时，操作系统实际上会将数据放在内核缓冲区中，其会等待到一定的时机将数据写到硬盘上，或者通过用户的 fsync 的显式调用</p>
+<p>当调用 IO write 操作时，操作系统实际上会将数据放在内核缓冲区中，其会等待到一定的时机将数据写到硬盘上，或者通过用户的 fsync 的显式调用将其数据落盘</p>
 </blockquote>
 <p>AOF 重写机制：为了避免日志文件越来越大，对于设置相同的键，其会先创建一个新文件，在新文件中只会保存每个键最后一次写的日志</p>
 <p>AOF 后台重写：AOF 重写过程是通过后台子进程 bgrewriteaof 来完成的，好处有：</p>
@@ -180,22 +180,24 @@
 <li>子进程修改数据共享内存数据时，直接复制，如果采用线程方式实现，则需要加锁</li>
 </ul>
 <p>为了记录重写过程中新到来的指令，存在一个 AOF 重写缓冲区，用于保存重写过程中的用户指令，该 AOF 缓冲区最终将会追加到新的 AOF 文件中，最终替换原来的 AOF 日志文件</p>
+<blockquote>
+<p>AOF 缓冲区用于保证即使是在子进程发生故障时仍然能够原来的 AOF 时正确的（按照 appendfsync 策略），AOF 重写缓冲区则保证了子进程在替换原来的 AOF 文件后，上面的文件内容能反映数据库当前的状态</p>
+</blockquote>
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/6400201.png" alt="6400201"></p>
 <h2 id="03-RDB-快照"><a href="#03-RDB-快照" class="headerlink" title="03 RDB 快照"></a>03 RDB 快照</h2><p>RDB 快照记录的是某个时间点的内存数据，采用的是全量备份，提供了两个命令用来生成 RDB 文件，分别是 save 和 bgsave，前者会阻塞主线程，后者则创建了一个子进程专门生成 RDB 文件。</p>
 <p>在执行 bgsave 的过程中，由于采用的是子进程处理，并且采用写时复制技术，当有新的命令到来时，此时原来的主进程会复制一块内存用于修改，而子进程读到的还是原来的数据。当系统宕机时，可能会丢失上次快照到现在时刻的数据。</p>
-<p>RDB 和 AOF 结合：RDB 数据恢复的速度快，但是存在大量数据丢失的问题，AOF 虽然解决了大量数据丢失的问题，但是在文件很大的时候，恢复过程缓慢，在 4.0 以后，可以通过配置 aof-use-rdb-preamble 使用混合持久化功能，其在 AOF 重写过程时，先将 RDB 数据写入 AOF 文件中，写入完成后，追加 AOF 重写缓冲区里面的内容即可。</p>
+<p>RDB 和 AOF 结合：RDB 数据恢复的速度快，但是存在大量数据丢失的问题，AOF 虽然解决了大量数据丢失的问题，但是在文件很大的时候，恢复过程缓慢，在 4.0 以后，可以通过配置 aof-use-rdb-preamble 使用混合持久化功能，其在 AOF 重写过程时，先将 RDB 数据写入 AOF 文件中，AOF 文件写入完成后，追加 AOF 重写缓冲区里面的内容即可。</p>
 <h2 id="04-主从复制"><a href="#04-主从复制" class="headerlink" title="04 主从复制"></a>04 主从复制</h2><p>主从复制可以避免单点故障，主服务可以进行读写操作，并且将写操作同步给从服务器，从服务器一般只读，并且执行主服务器传过来的写操作。</p>
 <p>第一次同步过程：使用 replicaof 可以形成主从关系，采用的是全量复制，并且缓存生成 RDB 文件过程中的写操作到 replication buffer 中，之后将其发送给从服务器。</p>
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/640-16468337303744.png" alt="图片"></p>
 <p>分摊主服务器的压力：在第一次同步过程中，耗时过程主要在生成 RDB 文件和传输 RDB 文件，如果一个主服务器有很多从服务器，可能就会占用大量网络带宽。可以让其中一个服务器成为经理角色，其会同步写操作到其负责的从服务器上。</p>
 <p>命令传播：主从服务器完成同步后，双方维护了一个 TCP 连接，该连接是长连接的，这是为了避免 TCP 连接和断开的性能开销。</p>
-<p>增量复制：如果主从服务器网络发生断开，之后又重新连接，此时就会根据 <code>psync &#123;runid&#125; &#123;offset&#125;</code> 来进行增量复制。该实现过程主要通过环形缓冲区 repl_backlog_buffer 实现，主从服务器分别记录自己的 offset，从而实现增量同步，如果从服务器 offset 对应的数据已经被覆盖，则通过全量复制实现，可以通过 repl_backlog_size 设置该环形缓冲区大小。</p>
+<p>增量复制：如果主从服务器网络发生断开，之后又重新连接，此时就会根据 <code>psync &#123;runid&#125; &#123;offset&#125;</code> 来进行增量复制。该实现过程通过环形缓冲区 repl_backlog_buffer 实现，主从服务器分别记录自己的 offset，从而实现增量同步，如果从服务器 offset 对应的数据已经被覆盖，则通过全量复制实现，可以通过 repl_backlog_size 设置该环形缓冲区大小。</p>
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/640-16468351848676.png" alt="图片"></p>
 <h2 id="05-缓存雪崩、击穿、穿透"><a href="#05-缓存雪崩、击穿、穿透" class="headerlink" title="05 缓存雪崩、击穿、穿透"></a>05 缓存雪崩、击穿、穿透</h2><p>Redis 通常用做数据库的缓存中间件，用户先访问 Redis，如果命中直接返回，否则就查询数据库获得数据，并且更新缓存。</p>
 <p>缓存雪崩：大量缓存数据在同一时间过期，或者 Redis 故障宕机时，此时大量的请求访问数据库，从而导致数据库压力骤增，严重的会造成数据库宕机，而造成系统崩溃。对于大量数据在同一时期过期的方案：</p>
 <ul>
 <li>均匀设置过期时间</li>
-<li>互斥锁：保证同一时间内只有一个请求来构建缓存，同时设置超时时间防止死锁</li>
 <li>双 key 策略：主 key 会设置过期时间，备 key 不会过期，如果主 key 失效，则返回备 key 数据</li>
 <li>后台更新缓存：后台工作线程更新缓存</li>
 </ul>
@@ -204,7 +206,11 @@
 <li>服务熔断或请求限流机制</li>
 <li>构建 Redis 缓存高可靠集群</li>
 </ul>
-<p>缓存击穿：如果缓存中的某个热点数据过期，此时大量的请求访问该热点数据，就无法从缓存中读取，直接访问数据库，数据库很容易就被高并发的请求冲垮。缓存击穿是缓存雪崩的子集，可以采用互斥锁解决。</p>
+<p>缓存击穿：如果缓存中的某个热点数据过期，此时大量的请求访问该热点数据，就无法从缓存中读取，直接访问数据库，数据库很容易就被高并发的请求冲垮。</p>
+<ul>
+<li>互斥锁：保证同一时间内只有一个请求来构建缓存，同时设置超时时间防止死锁</li>
+<li>永远不过期：物理层面，逻辑层面（后台线程会定时更新某个 key，存在脏数据的问题）</li>
+</ul>
 <p>缓存穿透：当用户访问的数据，既不在缓存中，也不在数据库中，导致请求在访问缓存时，发现缓存缺失，再去访问数据库时，发现数据库中也没有要访问的数据，没办法构建缓存数据，来服务后续的请求，就到导致服务器的压力骤增。一般是业务误操作或者黑客恶意攻击，常见应对方案： </p>
 <ul>
 <li>非法请求的限制</li>
@@ -214,7 +220,7 @@
 <p>布隆过滤器：使用位图和多个哈希函数快速判断数据是否存在数据库中，查询布隆过滤器说数据存在，并不一定证明数据库中存在这个数据，但是查询到数据不存在，则数据库中一定就不存在这个数据。</p>
 <p><img src="/2022/03/08/%E3%80%8AREDIS%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/640-16468364802018.png" alt="图片"></p>
 <h2 id="06-缓存的读写策略"><a href="#06-缓存的读写策略" class="headerlink" title="06 缓存的读写策略"></a>06 缓存的读写策略</h2><p>更新数据时，不论是先更新数据库，再更新缓存，还是先更新缓存，再更新数据库，都会产生不一致现象。</p>
-<p>Cache Aside 策略：在更新数据时先更新数据库，再删除缓存中的数据，在读取数据时，发现缓存中没了数据之后，再从数据库中读取数据，并更新到缓存中。注意写操作时不能先删除缓存中的数据，在更新数据库，这在写读并发可能带来不一致现象。而在读写并发时，存在极小概率会产生不一致，原因是缓存的写入通常远远快于数据库的写入。</p>
+<p>Cache Aside 策略：在更新数据时先更新数据库，再删除缓存中的数据，在读取数据时，发现缓存中没了数据之后，从数据库中读取数据，并更新到缓存中。注意写操作时不能先删除缓存中的数据，在更新数据库，这在写读并发可能带来不一致现象。而在读写并发时，存在极小概率会产生不一致，原因是缓存的写入通常远远快于数据库的写入。</p>
 <p>由于 Cache Aside 采用 Write Invalidate 策略，可能会对数据命中率产生影响，可以：</p>
 <ul>
 <li>更新数据时同样更新缓存，不过需要加分布式锁</li>
