@@ -434,8 +434,8 @@ MySQL 逻辑架构：
 
 InnoDB 存储引擎提供了 buffer pool，用来提高数据库的读写性能
 
-+ 粒度：其以页为单位，通过参数 `innodb_buffer_pool_size` 调整缓存空间大小
-+ 缓存信息：数据页，索引页，undo 页，插入缓存页，锁信息等
++ 粒度：其以页（16 KB）为单位，通过参数 `innodb_buffer_pool_size` 调整缓存空间大小
++ 缓存信息：数据页，索引页，undo 页，插入缓存页，锁信息等（不包括 redo log buffer）
 
 InnoDB 通过三种链表管理缓存页：
 
@@ -457,6 +457,57 @@ InnoDB 中的 LRU 优化：
 + Buffer pool 空间不足，逐出脏页，需要刷盘
 + MySQL 认为空闲时，后向线程定期将适量的脏页刷盘
 + MySQL 正常关闭之前，所有脏页都需要刷盘
+
+
+
+## 16 MySQL 日志系统
+
+在执行一条更新语句的时候，会涉及到如下三种日志：
+
++ undo log：InnoDB 存储引擎生成的日志，实现了事务的原子性，用于事务回滚和支持 MVCC
++ redo log：InnoDB 存储引擎生成的日志，实现了事务的持久性，主要用故意掉电等故障恢复
++ binlog：Server 层生成的日志，主要用于数据备份和主从复制
+
+redo log 相关问题：
+
++ redo log 产生动机？
+
+  Buffer Pool 为上层应用提供了缓存的功能，脏页并不会立即写到磁盘上，为了防止掉电产生数据不一致的情形，需要先使用 redo log 记录下事务的操作，然后操作内存数据，最后在合适时间点将脏页数据刷到磁盘上，这样就能保证 crash-safe
+
++ 修改 undo 页面，需要记录对应的 redo log 吗？
+
+  需要，需要首先记录修改 undo 页面的 redo log，再真正修改 undo 页面
+
++ redo log 同样需要写到磁盘，数据也要写到磁盘，为什么多此一举？
+
+  redo log 采用的是追加写，磁盘操作是顺序写，而写入数据则需要先找到写入位置，对应磁盘操作是随机写，其将 MySQL 的写操作从磁盘的随机写变为顺序写，提高了系统性能
+
++ 产生的 redo log 是直接写入磁盘吗？
+
+  不是的，首先将操作记录到 redo log buffer 中，后续根据刷盘策略再将其写入到磁盘中
+
++ redo log 什么时候刷盘？
+
+  主要有下面几个时机：
+
+  - MySQL 正常关闭时
+  - 当 redo log buffer 中记录的写入量大于 redo log buffer 内存空间的一半时，会触发落盘
+  - InnoDB 的后台线程每隔 1 秒，将 redo log buffer 持久化到磁盘
+  - 每次事务提交时都将缓存在 redo log buffer 里的 redo log 直接持久化到磁盘（ innodb_flush_log_at_trx_commit = 1）
+
++ innodb_flush_log_at_trx_commit 参数控制什么？
+
+  + 当设置该**参数为 0 时**，表示每次事务提交时 ，还是**将 redo log 留在  redo log buffer 中** ，该模式下在事务提交时不会主动触发写入磁盘的操作，此时 MySQL 进程崩溃将损失上一秒内的事务数据
+  + 当设置该**参数为 1 时**，表示每次事务提交时，都**将缓存在  redo log buffer 里的  redo log 直接持久化到磁盘**，这样可以保证 MySQL 异常重启之后数据不会丢失
+  + 当设置该**参数为 2 时**，表示每次事务提交时，都只是缓存在  redo log buffer 里的  redo log **写到 redo log 文件，注意写入到「 redo log 文件」并不意味着写入到了磁盘**，因为操作系统的文件系统中有个 Page Cache，Page Cache 是专门用来缓存文件数据的，所以写入「 redo log文件」意味着写入到了操作系统的文件缓存，此时 MySQL 进程崩溃不一定会丢失数据，因为操作系统会在合适时机调用 fsync 进行数据落盘
+
++ redo log 文件写满了怎么办？
+
+  InnoDB 存储引擎有一个重做日志文件组，包含两个文件： `ib_logfile0` 和 `ib_logfile1` 。采用循环写的方式，check_point 表示当前要擦除的位置，write_pos 表示下一个 redo log 日志要写入的位置，当 redo log 文件写满了，也就是 write_pos 追上了 check_point，此时 MySQL 不能执行新的更新操作，其会停下来将 buffer pool 中的脏页刷新到磁盘中，以将 check_point 向后推进，使得 MySQL 恢复正常执行
+
+
+
+
 
 
 
