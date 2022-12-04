@@ -505,9 +505,42 @@ redo log 相关问题：
 
   InnoDB 存储引擎有一个重做日志文件组，包含两个文件： `ib_logfile0` 和 `ib_logfile1` 。采用循环写的方式，check_point 表示当前要擦除的位置，write_pos 表示下一个 redo log 日志要写入的位置，当 redo log 文件写满了，也就是 write_pos 追上了 check_point，此时 MySQL 不能执行新的更新操作，其会停下来将 buffer pool 中的脏页刷新到磁盘中，以将 check_point 向后推进，使得 MySQL 恢复正常执行
 
+binglog 相关问题：
 
++ 为什么有了 binlog， 还要有 redo log？
 
+  最初的 MySQL 使用的是 MyISAM 引擎，其只有 binlog，用于归档，InnoDB 以插件形式引入，引入 redo log 是为了 crash-safe 能力
 
++ redo log 和 binlog 有什么区别？
+
+  + 适用对象不同，redo log 只适用于 InnoDB 引擎，而 binlog 所有引擎适用
+  + 文件格式不同
+    + binlog：STATEMENT，ROW，MIXED
+    + redo log：物理日志，记录的是某个数据页做了什么修改
+  + 写入方式不同：redo log 采用循环写，binlog 采用追加写
+  + 用途不同：binlog 用于备份恢复，主从复制，redo log 用于掉电等故障恢复
+
++ 主从复制如何实现？
+
+  MySQL 集群的主从复制过程梳理成 3 个阶段：
+
+  - 写入 Binlog：主库写 binlog 日志，提交事务，并更新本地存储数据
+  - 同步 Binlog：把 binlog 复制到所有从库上，每个从库把 binlog 写到暂存日志（relay log）中
+  - 回放 Binlog：回放 binlog，并更新存储引擎中的数据
+
++ MySQL 主从复制还有哪些模型？
+
+  + 同步复制：MySQL 主库提交事务的线程要等待所有从库的复制成功响应，才返回客户端结果。这种方式在实际项目中，基本上没法用，原因有两个：一是性能很差，因为要复制到所有节点才返回响应；二是可用性也很差，主库和所有从库任何一个数据库出问题，都会影响业务。
+  + 异步复制（默认模型）：MySQL 主库提交事务的线程并不会等待 binlog 同步到各从库，就返回客户端结果。这种模式一旦主库宕机，数据就会发生丢失。
+  + 半同步复制：MySQL 5.7 版本之后增加的一种复制方式，介于两者之间，事务线程不用等待所有的从库复制成功响应，只要一部分复制成功响应回来就行，比如一主二从的集群，只要数据成功复制到任意一个从库上，主库的事务线程就可以返回给客户端。这种半同步复制的方式，兼顾了异步复制和同步复制的优点，即使出现主库宕机，至少还有一个从库有最新的数据，不存在数据丢失的风险。
+
++ 什么时候 binlog cache 会写到 binlog 文件？
+
+  在事务提交的时候，执行器把 binlog cache 里的完整事务写入到 binlog 文件中，并清空 binlog cache。同样地，MySQL 提供一个 sync_binlog 参数来控制数据库的 binlog 刷到磁盘上的频率：
+
+  - sync_binlog = 0 的时候，表示每次提交事务都只 write，不 fsync，后续交由操作系统决定何时将数据持久化到磁盘；
+  - sync_binlog = 1 的时候，表示每次提交事务都会 write，然后马上执行 fsync；
+  - sync_binlog =N(N>1) 的时候，表示每次提交事务都 write，但累积 N 个事务后才 fsync
 
 
 
