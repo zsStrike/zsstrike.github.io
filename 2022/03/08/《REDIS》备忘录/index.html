@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-03-08T02:04:29.000Z">
-<meta property="article:modified_time" content="2022-12-05T08:10:58.760Z">
+<meta property="article:modified_time" content="2022-12-05T09:21:06.900Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-12-05 16:10:58'
+  postUpdate: '2022-12-05 17:21:06'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《REDIS》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-08T02:04:29.000Z" title="发表于 2022-03-08 10:04:29">2022-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-05T08:10:58.760Z" title="更新于 2022-12-05 16:10:58">2022-12-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《REDIS》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录 Redis 相关知识，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《REDIS》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-08T02:04:29.000Z" title="发表于 2022-03-08 10:04:29">2022-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-05T09:21:06.900Z" title="更新于 2022-12-05 17:21:06">2022-12-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《REDIS》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录 Redis 相关知识，以备查阅。</p>
 <span id="more"></span>
 
 
@@ -183,6 +183,7 @@
 <li>编码：ziplist，linkedlist，quicklist（3.2 版本）</li>
 <li>常用指令：LPUSH&#x2F;RPUSH，LPOP&#x2F;RPOP，LRANGE，BLPUSH&#x2F;BRPOP</li>
 <li>应用场景：<ul>
+<li>微博 Timeline：有人发布微博，用 lpush 加入时间轴即可</li>
 <li>消息队列：消息队列三要素：<ul>
 <li>消息保序：LPUSH + RPOP，LPUSH + BRPOP</li>
 <li>重复消息处理：生产者自己实现全局唯一 ID</li>
@@ -241,16 +242,19 @@
 </ul>
 </li>
 <li>Stream 类型：<ul>
-<li>目的：专门为消息队列设计的数据类型，支持自动生成全局唯一 ID，并且以消费组消费数据</li>
+<li>目的：专门为消息队列设计的数据类型，支持自动生成全局唯一 ID，并且以消费组消费数据（通过在消费组内维护上一个处理了的消息 ID 实现）</li>
 <li>常用命令：XADD，XREAD，XREADGROUP，XPENDING&#x2F;XACK</li>
 <li>消息队列：<ul>
 <li>使用 XADD 会生成全局唯一 ID，如 <code>1654254953808-0</code>，通过 XREAD 实现消息读取，XREADGROUP 可以实现负载平衡</li>
-<li>Stream 会使用 PENDING list 留存消费组里每个消费者读取的消息，直到收到对应的 XACK；消费者可以在重启后，使用 XPENDING 命令查看已经读取，但尚未确认的消息</li>
-<li>问题：<ul>
-<li>Redis 队列中间件（Stream）存在数据丢失的问题，主要原因在于 AOF 先执行命令，再写文件，其次主从复制再进行主从切换时，也存在数据丢失的问题</li>
-<li>面对消息积压，内存资源紧张</li>
+<li>消息队列相关问题解决方案：<ul>
+<li>消息 ID 的设计是否考虑了时间回拨的问题：如果发现时间戳后退，则采用时间戳不变而序号增加的方式产生消息 ID</li>
+<li>组内消息读取成功但是处理期间崩溃问题：Stream 会使用 PENDING list 留存消费组里每个消费者读取的消息，直到收到对应的 XACK；消费者可以在重启后，使用 XPENDING 命令查看已经读取，但尚未确认的消息</li>
+<li>消费者读取完消息还未处理就永久下线问题：使用 XCLAIN 实现消息转移</li>
+<li>死信问题：某个消息不能被消费者处理，即使通过消息转移给其他客户端，通过设置 delivery counter 最大阈值判断是否是坏消息，若是，通过 XDEL 删除消息（设置标志位，但是没有实际删除）</li>
+<li>消息积压问题：造成内存紧张，可能引发 OOM，可以通过 XADD 提供最大长度</li>
 </ul>
 </li>
+<li>作为消息队列存在丢失消息的场景： Redis 队列中间件（Stream）存在数据丢失的问题，主要原因在于 AOF 先执行命令，再写文件，其次主从复制再进行主从切换时，也存在数据丢失的问题</li>
 </ul>
 </li>
 </ul>
