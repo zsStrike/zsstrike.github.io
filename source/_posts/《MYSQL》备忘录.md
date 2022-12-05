@@ -542,6 +542,43 @@ binglog 相关问题：
   - sync_binlog = 1 的时候，表示每次提交事务都会 write，然后马上执行 fsync；
   - sync_binlog =N(N>1) 的时候，表示每次提交事务都 write，但累积 N 个事务后才 fsync
 
+两阶段提交问题：
+
++ 为什么需要两阶段提交？
+
+  事务提交后，redo log 和 bin log 都需要持久化到磁盘，但是可能出现半成功的状态，对于命令 `UPDATE t_user SET name = 'xiaolin' WHERE id = 1`：
+
+  + 如果在将 redo log 刷入到磁盘之后， MySQL 突然宕机了，而 binlog 还没有来得及写入。MySQL 重启后，通过 redo log 能将 Buffer Pool 中 id = 1 这行数据的 name 字段恢复到新值 xiaolin，但是 binlog 里面没有记录这条更新语句，在主从架构中，binlog 会被复制到从库，由于 binlog 丢失了这条更新语句，从库的这一行 name 字段是旧值 jay，与主库的值不一致性；
+  + 如果在将 binlog 刷入到磁盘之后， MySQL 突然宕机了，而 redo log 还没有来得及写入。由于 redo log 还没写，崩溃恢复以后这个事务无效，所以 id = 1 这行数据的 name 字段还是旧值 jay，而 binlog 里面记录了这条更新语句，在主从架构中，binlog 会被复制到从库，从库执行了这条更新语句，那么这一行 name 字段是新值 xiaolin，与主库的值不一致性；
+
+  两阶段提交是为了避免出现两份日志之间的逻辑不一致的问题。
+
++ 两阶段提交的过程是怎样的？
+
+  MySQL 使用内部 XA 事务完成两阶段提交，将 redo log 写入拆分成两个步骤：prepare 和 commit，中间再穿插写入 binlog，具体如下：
+
+  - **prepare 阶段**：将 XID（内部 XA 事务的 ID） 写入到 redo log，同时将 redo log 对应的事务状态设置为 prepare，然后将 redo log 刷新到硬盘；
+  - **commit 阶段**：把 XID  写入到 binlog，然后将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为 commit，同样需要写入到磁盘；
+
++ 异常重启会出现什么现象？
+
+  <img src="《MYSQL》备忘录/640-16703317091106.png" alt="图片" style="zoom:50%;" />
+
+  在 MySQL 重启后会按顺序扫描 redo log 文件，碰到处于 prepare 状态的 redo log，就拿着 redo log 中的 XID 去 binlog 查看是否存在此 XID：
+
+  - 如果 binlog 中没有当前内部 XA 事务的 XID，说明 redolog 完成刷盘，但是 binlog 还没有刷盘，则回滚事务。对应时刻 A 崩溃恢复的情况。
+  - 如果 binlog 中有当前内部 XA 事务的 XID，说明 redolog 和 binlog 都已经完成了刷盘，则提交事务。对应时刻 B 崩溃恢复的情况。可以保证主库和备库的一致性。
+
+  可以看到，对于处于 prepare 阶段的 redo log，即可以提交事务，也可以回滚事务，这取决于是否能在 binlog 中查找到与 redo log 相同的  XID，如果有就提交事务，如果没有就回滚事务。
+
++ 事务没提交的时候，redo log 会被持久化到磁盘吗？
+
+  会的，MySQL 后台线程会每隔一秒将 redo log buffer 持久化到磁盘，因此，redo log 可以在事务没提交之前持久化到磁盘，但是 binlog 必须在事务提交之后，才可以持久化到磁盘。
+
+
+
+
+
 
 
 ## MySQL 面试题
