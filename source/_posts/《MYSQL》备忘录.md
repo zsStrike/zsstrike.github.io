@@ -575,9 +575,41 @@ binglog 相关问题：
 
   会的，MySQL 后台线程会每隔一秒将 redo log buffer 持久化到磁盘，因此，redo log 可以在事务没提交之前持久化到磁盘，但是 binlog 必须在事务提交之后，才可以持久化到磁盘。
 
++ 两阶段提交的问题？
 
+  + 磁盘 IO 次数高：对于“双1”配置，每个事务提交都会进行两次 fsync（刷盘），一次是 redo log 刷盘，另一次是 binlog 刷盘。
+  + 锁竞争激烈：两阶段提交虽然能够保证「单事务」两个日志的内容一致，但在「多事务」的情况下，却不能保证两者的提交顺序一致，因此，在两阶段提交的流程基础上，还需要加一个锁（prepare_commit_mutex）来保证提交的原子性，从而保证多事务的情况下，两个日志的提交顺序一致。
 
++ binlog 组提交实现方式？
 
+  MySQL  引入了 binlog 组提交（group commit）机制，当有多个事务提交的时候，会将多个 binlog 刷盘操作合并成一个，从而减少磁盘 I/O 的次数。引入了组提交机制后，prepare 阶段不变，只针对 commit 阶段，将 commit 阶段拆分为三个过程：
+
+  - **flush 阶段**：多个事务按进入的顺序将 binlog 从 cache 写入文件（不刷盘）；
+  - **sync 阶段**：对 binlog 文件做 fsync 操作（多个事务的 binlog 合并一次刷盘）；
+  - **commit 阶段**：各个事务按顺序做 InnoDB commit 操作，将 redo log 状态设置为 commit
+
+  上面的每个阶段都有一个队列，每个阶段有锁进行保护，锁粒度减小，这样就使得多个阶段可以并发执行，从而提升效率。
+
++ 有 binlog 组提交，那有  redo log 组提交吗？
+
+  MySQL 5.6 没有 redo log 组提交，MySQL 5.7 有 redo log 组提交。
+
+  在 MySQL 5.6 的组提交逻辑中，每个事务各自执行 prepare 阶段，也就是各自将  redo log 刷盘，这样就没办法对 redo log 进行组提交。
+
+  所以在 MySQL 5.7 版本中，做了个改进，在 prepare 阶段不再让事务各自执行 redo log 刷盘操作，而是推迟到组提交的 flush 阶段，也就是说 prepare 阶段融合在了  flush 阶段。
+
+  ![image-20221206212224788](《MYSQL》备忘录/image-20221206212224788.png)
+
++ 组提交相关参数？
+
+  + Binlog_group_commit_sync_delay：控制 flush 阶段后 sync 阶段前的等待时间
+  + Binlog_group_commit_sync_no_delay_count：最大组提交中事务的数目
+
++ MySQL 磁盘 IO 很高，优化方法有哪些？
+
+  + 设置组提交的两个参数：binlog_group_commit_sync_delay 和 binlog_group_commit_sync_no_delay_count 参数，延迟 binlog 刷盘的时机，从而减少 binlog 的刷盘次数
+  + 将 sync_binlog 设置为大于 1 的值
+  + 将 innodb_flush_log_at_trx_commit 设置为 2
 
 
 
