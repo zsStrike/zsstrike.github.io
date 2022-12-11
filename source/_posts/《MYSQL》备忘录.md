@@ -325,19 +325,33 @@ next-key 锁锁的是索引，而不是数据本身，如果 update 语句的 wh
 
 ## 09 MySQL 加锁规则
 
+next-key 锁退化原则：在能使用记录锁或者间隙锁就能避免幻读现象的场景下， next-key lock 就会退化成记录锁或间隙锁
+
 唯一索引等值查询：
 
 + 查询的记录存在：退化成记录锁
 + 查询的记录不存在：退化成间隙锁
 
-唯一索引范围查询：首先找到 min 对应的 next-key lock，如果 min 存在，退化成记录锁；最后找到 max 对应的 next-key lock，如果 max 不存在，退化成间隙锁
+唯一索引范围查询（包含）：首先找到 min 对应的 next-key lock，如果 min 存在，退化成记录锁；最后找到 max 对应的 next-key lock，如果 max 不存在，退化成间隙锁
 
-非唯一索引等值查询：
+非唯一索引等值查询：对非唯一索引加锁时，其会同时对主键索引加记录锁
 
 + 查询的记录存在：先加 next-key lock， 另外一把锁退化成间隙锁
 + 查询的记录不存在：退化成间隙锁
 
 非唯一索引范围查询：next-key lock 不会退化
+
+没有加索引的查询：将会使用全表扫描的方式，此时整个索引上都会加上 next-key 锁，相当于锁住全表，因此，在线上在执行 update、delete、select ... for update 等具有加锁性质的语句，一定要检查语句是否走了索引
+
+分析加锁的命令：`select * from performance_schema.data_locks\G` 
+
++ LOCK_TYPE：TABLE，RECORD（行级锁）
++ LOCK_MODE：
+  + X：next_key 锁
+  + X，REC_NOT_GAP：记录锁
+  + X，GAP：间隙锁
+
+
 
 
 
