@@ -640,6 +640,46 @@ binglog 相关问题：
 
 
 
+## 17 MySQL 行记录存储结构
+
+MySQL 数据文件：在 InnoDB 引擎中，按照数据库名称创建对应的目录，然后在对应目录下面存储对应的表数据，如，对于 my_test 数据库，在 /var/lib/mysql/my_test 目录下，存在以下文件：
+
++ db.opt：存储当前数据库的默认字符集和字符校验规则
++ t_order.frm：t_order 的表结构会保存在这个文件
++ t_order.ibd：t_order 的表数据会保存在这个文件
+
+表空间的文件结构：
+
++ 行（row）：数据库表中的记录都是按行进行存放的
++ 页（page）：记录是按照行来存储的，但是 InnoDB 引擎读写是按照页为单位的
++ 区（extent）：在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，可以保证链表中相邻的页物理位置上也相邻
++ 段（segment）：一般分为数据段、索引段和回滚段
+
+InnoDB 行格式：Redundant，Compact，Dynamic 和 Compressed
+
++ Redundant：基本不再使用
++ Compact：紧凑的行格式
++ Dynamic 和 Compressed 两个都是紧凑的行格式，它们的行格式都和 Compact 差不多，因为都是基于 Compact 改进一点东西
+
+Compact 格式：
+
+![image-20221207110311061](《MYSQL》备忘录/image-20221207110311061.png)
+
++ 记录的额外信息：
+  + 变长字段长度列表：用于记录各个变长字段的实际长度，每个长度值 1 到 2 字节
+  + NULL 值列表：记录各个可为 NULL 列的值是否是 NULL，每列使用 1 bit 即可
+  + 记录头信息：delete_mask，next_record，record_type
++ 记录的真实数据
+  + row_id：只有在没有声明主键和唯一约束列，才会存在该列
+  + trx_id：标记哪个事务生成的
+  + roll_pointer：记录上个版本的指针，指向的是额外信息和真实数据之间位置
+
+如何处理溢出：MySQL 支持像 TEXT 和 BLOB 数据，这些数据可能单个数据页放不下，因此需要提供溢出页，用来存储额外数据。Compact 格式的行数据是在真实数据处存放部分数据，再通过溢出页指针找到剩余数据，而 Compressed 和 Dynamic 则直接采用溢出指针的方式存储数据，这样，原来的数据页就能存放更多的行数据了
+
+
+
+
+
 ## MySQL 面试题
 
 + 能说下 MyISAM 和 InnoDB 的区别吗？
