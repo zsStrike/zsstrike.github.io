@@ -308,7 +308,7 @@ CHAR 与 VARCHAR：下表是它们之间的对比，最后一行只适用于 MyS
 
 ![image-20201220145107981](《深入浅出MySQL》笔记/image-20201220145107981.png)
 
-CHAR 长度固定，处理速度快，但是浪费空间存储。对于 MyISAM 和 MEMORY 来说，首选 CHAR，而对于 InnoDB 来说，建议使用VARCHAR类型。
+CHAR 长度固定，处理速度快，但是浪费空间存储，使用空格填充，因此，不能保存空格结尾的字符串。对于 MyISAM 和 MEMORY 来说，首选 CHAR，而对于 InnoDB 来说，建议使用VARCHAR类型。
 
 TEXT 与 BLOB：在保存较大文本时，通常会选择使用TEXT或者BLOB。二者之间的主要差别是BLOB能用来保存二进制数据，比如照片；而TEXT只能保存字符数据，比如一篇文章或者日记。
 
