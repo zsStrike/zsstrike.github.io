@@ -1,0 +1,506 @@
+<!DOCTYPE html><html lang="[&quot;zh-CN&quot;,&quot;en&quot;,&quot;zh-HK&quot;,&quot;zh-TW&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Java 开发 | zsStrike</title><meta name="keywords" content="Java"><meta name="author" content="zsStrike"><meta name="copyright" content="zsStrike"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文记录 Java 开发过程的相关知识，以备查阅。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 开发">
+<meta property="og:url" content="http://blog.zsstrike.tech/2023/01/01/Java-%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="zsStrike">
+<meta property="og:description" content="本文记录 Java 开发过程的相关知识，以备查阅。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
+<meta property="article:published_time" content="2023-01-01T08:18:47.000Z">
+<meta property="article:modified_time" content="2023-01-01T13:48:06.819Z">
+<meta property="article:author" content="zsStrike">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.zsstrike.tech/assets/default_cover.png"><link rel="shortcut icon" href="/assets/avatar.jpg"><link rel="canonical" href="http://blog.zsstrike.tech/2023/01/01/Java-%E5%BC%80%E5%8F%91/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":5000,"languages":{"author":"作者: zsStrike","link":"链接: ","source":"来源: zsStrike","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java 开发',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-01 21:48:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Java 开发</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-01T08:18:47.000Z" title="发表于 2023-01-01 16:18:47">2023-01-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-01T13:48:06.819Z" title="更新于 2023-01-01 21:48:06">2023-01-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java 开发"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文记录 Java 开发过程的相关知识，以备查阅。</p>
+<span id="more"></span>
+
+<h2 id="常用类库"><a href="#常用类库" class="headerlink" title="常用类库"></a>常用类库</h2><p>Apache Commons：对 JDK 的扩展，包含了很多开源工具，常用包如下：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Commons BeanUtils</td>
+<td>针对 Bean 的工具集，使用反射机制实现</td>
+</tr>
+<tr>
+<td>Commons Codec</td>
+<td>编码解码组件，如 DES，SHA1，MD5，Base64 等</td>
+</tr>
+<tr>
+<td>Commons Collections</td>
+<td>集合组件，扩展 Java 标准的 Collections API</td>
+</tr>
+<tr>
+<td>Commons Compress</td>
+<td>压缩解压组件</td>
+</tr>
+<tr>
+<td>Commons Configuration</td>
+<td>配置管理工具</td>
+</tr>
+<tr>
+<td>Commons CSV</td>
+<td>读写 CSV 文件</td>
+</tr>
+<tr>
+<td>Commons Daemon</td>
+<td>将普通的 Java 应用转变为系统的后台服务，如 Tomcat</td>
+</tr>
+<tr>
+<td>Commons DBCP</td>
+<td>数据库连接池</td>
+</tr>
+<tr>
+<td>Commons DBUtils</td>
+<td>对传统操作数据库的类二次封装</td>
+</tr>
+<tr>
+<td>Commons Digester</td>
+<td>是 XML 到 Java 对象的映射工具集</td>
+</tr>
+<tr>
+<td>Commons Email</td>
+<td>邮件操作组件</td>
+</tr>
+<tr>
+<td>Commons Exec</td>
+<td>提供一些常用的方法用来执行外部进程</td>
+</tr>
+<tr>
+<td>Commons FileUpload</td>
+<td>为 Web 应用程序或 Servlet 提供文件上传功能</td>
+</tr>
+<tr>
+<td>Commons IO</td>
+<td>处理 IO 的工具类包</td>
+</tr>
+<tr>
+<td>Commons Lang3</td>
+<td>处理 Java 基本对象方法的工具类包</td>
+</tr>
+<tr>
+<td>Commons Logging</td>
+<td>统一的日志接口，同时兼顾轻量级和不依赖于具体的实现</td>
+</tr>
+<tr>
+<td>Commons Math</td>
+<td>数学和统计计算方法类包</td>
+</tr>
+<tr>
+<td>Commons Net</td>
+<td>封装了各种网络协议的客户端</td>
+</tr>
+<tr>
+<td>Commons Pool</td>
+<td>提供了一整套用于实现对象池化的框架</td>
+</tr>
+<tr>
+<td>Commons Primitives</td>
+<td>对 Java 基本类型的扩展支持</td>
+</tr>
+<tr>
+<td>Commons Validator</td>
+<td>校验器和校验规则</td>
+</tr>
+<tr>
+<td>Apache HttpClient</td>
+<td>提供 HTTP 客户端的相关方法实现</td>
+</tr>
+</tbody></table>
+<p>Google Guava：包含了若干被 Google 中的 Java 项目依赖的核心库，相关组件如下：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Basic Utilities</td>
+<td>让 Java 语言更加舒适，如避免 null，前置条件</td>
+</tr>
+<tr>
+<td>Collections</td>
+<td>对 JDK 集合的扩展，如不可变集合等</td>
+</tr>
+<tr>
+<td>Caches</td>
+<td>本地缓存实现</td>
+</tr>
+<tr>
+<td>Functional idioms</td>
+<td>函数式编程风格，谨慎使用</td>
+</tr>
+<tr>
+<td>Concurrency</td>
+<td>并发</td>
+</tr>
+<tr>
+<td>Strings</td>
+<td>非常有用的字符串工具</td>
+</tr>
+<tr>
+<td>Primitives</td>
+<td>扩展 JDK 未提供的原生类型（如int、char）操作</td>
+</tr>
+<tr>
+<td>Ranges</td>
+<td>可比较类型的区间 API，包括连续和离散类型</td>
+</tr>
+<tr>
+<td>IO</td>
+<td>僵化 IO 流和文件的操作，针对 Java 5 和 6 版本</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>提供比 <code>Object.hashCode()</code> 更复杂的散列实现</td>
+</tr>
+<tr>
+<td>EventBus</td>
+<td>发布-订阅模式的组件通信</td>
+</tr>
+<tr>
+<td>Math</td>
+<td>优化的、充分测试的数学工具类</td>
+</tr>
+<tr>
+<td>Reflection</td>
+<td>Guava 的 Java 反射机制工具类</td>
+</tr>
+</tbody></table>
+<p>Hutool：小而全的 Java 工具类库，通过静态方法封装，提供一下组件：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hutool-aop</td>
+<td>JDK 动态代理封装，提供非 IOC 下的切面支持</td>
+</tr>
+<tr>
+<td>hutool-bloomFilter</td>
+<td>布隆过滤，提供一些 Hash 算法的布隆过滤</td>
+</tr>
+<tr>
+<td>hutool-cache</td>
+<td>简单缓存实现</td>
+</tr>
+<tr>
+<td>hutool-core</td>
+<td>核心，包括 Bean 操作、日期、各种 Util 等</td>
+</tr>
+<tr>
+<td>hutool-cron</td>
+<td>定时任务模块，提供类 Crontab 表达式的定时任务</td>
+</tr>
+<tr>
+<td>hutool-crypto</td>
+<td>加密解密模块，提供对称、非对称和摘要算法封装</td>
+</tr>
+<tr>
+<td>hutool-db</td>
+<td>JDBC 封装后的数据操作，基于 ActiveRecord 思想</td>
+</tr>
+<tr>
+<td>hutool-dfa</td>
+<td>基于 DFA 模型的多关键字查找</td>
+</tr>
+<tr>
+<td>hutool-extra</td>
+<td>扩展模块，封装模板引擎、邮件、Servlet、二维码等</td>
+</tr>
+<tr>
+<td>hutool-http</td>
+<td>基于 HttpUrlConnection 的 Http 客户端封装</td>
+</tr>
+<tr>
+<td>hutool-log</td>
+<td>自动识别日志实现的日志门面</td>
+</tr>
+<tr>
+<td>hutool-script</td>
+<td>脚本执行封装，例如 Javascript</td>
+</tr>
+<tr>
+<td>hutool-setting</td>
+<td>功能更强大的 Setting 配置文件和 Properties 封装</td>
+</tr>
+<tr>
+<td>hutool-system</td>
+<td>系统参数调用封装（JVM 信息等）</td>
+</tr>
+<tr>
+<td>hutool-json</td>
+<td>JSON 实现</td>
+</tr>
+<tr>
+<td>hutool-captcha</td>
+<td>图片验证码实现</td>
+</tr>
+<tr>
+<td>hutool-poi</td>
+<td>针对 POI 中 Excel 的封装</td>
+</tr>
+<tr>
+<td>hutool-socket</td>
+<td>基于 Java 的 NIO 和 AIO 的 Socket 封装</td>
+</tr>
+</tbody></table>
+<p>Spring 常用工具类：可以考虑使用 Spring-core 中的相关 util 包，具体分为以下几类：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内置的 resource 类型</td>
+<td>UrlResource，ServletContextResource 等</td>
+</tr>
+<tr>
+<td>工具类</td>
+<td>AnnotationUtils，PropertiesLoaderUtils 等</td>
+</tr>
+<tr>
+<td>xml 工具</td>
+<td>AbstractXMLReader，DomUtils 等</td>
+</tr>
+<tr>
+<td>其他工具集</td>
+<td>Assert，CollectionUtils，DigestUtils 等</td>
+</tr>
+<tr>
+<td>Web 相关工具集</td>
+<td>CookieGenerator，HtmlUtils，HttpUrlTemplate 等</td>
+</tr>
+</tbody></table>
+<p>日志类库发展：按照时间顺序，可以分为</p>
+<ul>
+<li>Log4j：apache 开源项目，使用最为广泛的日志系统</li>
+<li>JUL（java.util.logging）：sun 官方提供的日志，对标 Log4j，但是性能上存在问题</li>
+<li>JCL（Jakarta Commons Logging）：apache 开源项目，提供统一的日志功能的接口</li>
+<li>Logback：Log4j 创始人开发，提供更好的性能，如异步 logger，filter 等特性</li>
+<li>SLF4J（Simple Logging Facade for Java）：和 JCL 类似，只提供日志的 API 接口</li>
+<li>Log4j2：和 Log4j1 版本不兼容，设计上模仿了 SLF4J&#x2F;Logback，性能得到提升</li>
+</ul>
+<p>推荐使用日志门面（JCL&#x2F;SLF4J）+日志系统（JUL&#x2F;Log4j&#x2F;Log4j2&#x2F;Logback）的组合</p>
+<p>JSON 库：</p>
+<ul>
+<li>FastJson：阿里巴巴开发的 JSON 库，性能优秀，但是源码质量低，漏洞较多，不推荐</li>
+<li>Jackson：社区十分活跃且更新速度很快</li>
+<li>Gson：谷歌开发的 JSON 库，功能十分全面</li>
+</ul>
+<p>Lombok：注解库，常用注解如下：</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>val</td>
+<td>修饰局部变量，相当于定义为 final</td>
+</tr>
+<tr>
+<td>@NotNull</td>
+<td>自动在方法内对该参数进行是否为空的校验</td>
+</tr>
+<tr>
+<td>@Cleanup</td>
+<td>自动管理资源，自动执行清理工作</td>
+</tr>
+<tr>
+<td>@Getter&#x2F;@Setter</td>
+<td>生成对应的 setter 和 getter 方法</td>
+</tr>
+<tr>
+<td>@ToString</td>
+<td>覆写 toString 方法</td>
+</tr>
+<tr>
+<td>@EqualsAndHashCode</td>
+<td>生成 equals 和 hashcode 方法</td>
+</tr>
+<tr>
+<td>@NoArgsConstructor</td>
+<td>无参构造器</td>
+</tr>
+<tr>
+<td>@AllArgsConstructor</td>
+<td>全参构造器</td>
+</tr>
+<tr>
+<td>@Data</td>
+<td>@ToString，@EqualsAndHashCode，@Getter&#x2F;@Setter</td>
+</tr>
+<tr>
+<td>@Value</td>
+<td>是@Data 的不可变形式，只提供 getter 方法</td>
+</tr>
+<tr>
+<td>@SneakyThrows</td>
+<td>自动抛出受检异常</td>
+</tr>
+<tr>
+<td>@Synchronized</td>
+<td>锁对象是私有的属性 $LOCK，而不是 this 或者 class 对象</td>
+</tr>
+<tr>
+<td>@Log</td>
+<td>根据注解生成不同的 log 对象，名称是 log</td>
+</tr>
+<tr>
+<td>@Builder</td>
+<td>生成对象的建造者 builder</td>
+</tr>
+</tbody></table>
+<p>Lombok 原理：注解解析方式有运行时解析和编译时解析，运行时解析需要将 @Retention 设置为 Runtime，这样通过反射就能获取到该注解；编译时解析则提供了 Pluggable Annotation Processing API 标准定义，此时 javac 执行过程如下：</p>
+<p><img src="/2023/01/01/Java-%E5%BC%80%E5%8F%91/dev-package-lombok-2.png" alt="img"></p>
+<p>本质上，Lombok 实现了上述 API，在 javac 生成 AST 后，就能在 AST 中找到对应的注解节点，并且为其增加对应的节点以实现诸如 setter 和 getter 方法等功能</p>
+<p>Lombok 优缺点：</p>
+<ul>
+<li>优点：减少代码量，更简洁</li>
+<li>缺点：对队友不友好，对调试不友好，会破坏封装性，可以考虑 Java14 中的 Record</li>
+</ul>
+<p>MapStruct：解决业务代码中很多 JavaBean 之间的相互转化，比如 PO&#x2F;DTO&#x2F;VO 相互转化，主要通过 @Mapper 和 @Mapping 实现转换。和 Lombok 相似，其同样也是编译时解析，通过 setter 和 getter 实现对象转换过程，相较于反射，其性能较高</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2023/01/01/Java-%E5%BC%80%E5%8F%91/">http://blog.zsstrike.tech/2023/01/01/Java-开发/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">常用类库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
