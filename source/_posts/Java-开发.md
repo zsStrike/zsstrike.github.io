@@ -39,3 +39,21 @@ Apache Commons：对 JDK 的扩展，包含了很多开源工具，常用包如�
 | Commons Validator     | 校验器和校验规则                                   |
 | Apache HttpClient     | 提供 HTTP 客户端的相关方法实现                     |
 
+Google Guava：包含了若干被 Google 中的 Java 项目依赖的核心库，相关组件如下：
+
+| 组件              | 功能                                          |
+| ----------------- | --------------------------------------------- |
+| Basic Utilities   | 让 Java 语言更加舒适，如避免 null，前置条件   |
+| Collections       | 对 JDK 集合的扩展，如不可变集合等             |
+| Caches            | 本地缓存实现                                  |
+| Functional idioms | 函数式编程风格，谨慎使用                      |
+| Concurrency       | 并发                                          |
+| Strings           | 非常有用的字符串工具                          |
+| Primitives        | 扩展 JDK 未提供的原生类型（如int、char）操作  |
+| Ranges            | 可比较类型的区间 API，包括连续和离散类型      |
+| IO                | 僵化 IO 流和文件的操作，针对 Java 5 和 6 版本 |
+| Hash              | 提供比 `Object.hashCode()` 更复杂的散列实现   |
+| EventBus          | 发布-订阅模式的组件通信                       |
+| Math              | 优化的、充分测试的数学工具类                  |
+| Reflection        | Guava 的 Java 反射机制工具类                  |
+
