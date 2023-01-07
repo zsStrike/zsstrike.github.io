@@ -80,3 +80,13 @@ Hutool：小而全的 Java 工具类库，通过静态方法封装，提供一�
 | hutool-poi         | 针对 POI 中 Excel 的封装                        |
 | hutool-socket      | 基于 Java 的 NIO 和 AIO 的 Socket 封装          |
 
+Spring 常用工具类：可以考虑使用 Spring-core 中的相关 util 包，具体分为以下几类：
+
+| 分类                 | 实例                                           |
+| -------------------- | ---------------------------------------------- |
+| 内置的 resource 类型 | UrlResource，ServletContextResource 等         |
+| 工具类               | AnnotationUtils，PropertiesLoaderUtils 等      |
+| xml 工具             | AbstractXMLReader，DomUtils 等                 |
+| 其他工具集           | Assert，CollectionUtils，DigestUtils 等        |
+| Web 相关工具集       | CookieGenerator，HtmlUtils，HttpUrlTemplate 等 |
+
