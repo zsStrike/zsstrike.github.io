@@ -90,3 +90,16 @@ Spring 常用工具类：可以考虑使用 Spring-core 中的相关 util 包，
 | 其他工具集           | Assert，CollectionUtils，DigestUtils 等        |
 | Web 相关工具集       | CookieGenerator，HtmlUtils，HttpUrlTemplate 等 |
 
+
+
+日志类库发展：按照时间顺序，可以分为
+
++ Log4j：apache 开源项目，使用最为广泛的日志系统
++ JUL（java.util.logging）：sun 官方提供的日志，对标 Log4j，但是性能上存在问题
++ JCL（Jakarta Commons Logging）：apache 开源项目，提供统一的日志功能的接口
++ Logback：Log4j 创始人开发，提供更好的性能，如异步 logger，filter 等特性
++ SLF4J（Simple Logging Facade for Java）：和 JCL 类似，只提供日志的 API 接口
++ Log4j2：和 Log4j1 版本不兼容，设计上模仿了 SLF4J/Logback，性能得到提升
+
+推荐使用日志门面（JCL/SLF4J）+日志系统（JUL/Log4j/Log4j2/Logback）的组合。
+
