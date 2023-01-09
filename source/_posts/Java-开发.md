@@ -101,5 +101,21 @@ Spring 常用工具类：可以考虑使用 Spring-core 中的相关 util 包，
 + SLF4J（Simple Logging Facade for Java）：和 JCL 类似，只提供日志的 API 接口
 + Log4j2：和 Log4j1 版本不兼容，设计上模仿了 SLF4J/Logback，性能得到提升
 
-推荐使用日志门面（JCL/SLF4J）+日志系统（JUL/Log4j/Log4j2/Logback）的组合。
+推荐使用日志门面（JCL/SLF4J）+日志系统（JUL/Log4j/Log4j2/Logback）的组合
+
+
+
+JSON 库：
+
++ FastJson：阿里巴巴开发的 JSON 库，性能优秀，但是源码质量低，漏洞较多，不推荐
++ Jackson：社区十分活跃且更新速度很快
++ Gson：谷歌开发的 JSON 库，功能十分全面
+
+
+
+
+
+
+
+
 
