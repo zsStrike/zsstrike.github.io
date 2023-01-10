@@ -113,7 +113,35 @@ JSON 库：
 
 
 
+Lombok：注解库，常用注解如下：
 
+| 注解                | 说明                                                  |
+| ------------------- | ----------------------------------------------------- |
+| val                 | 修饰局部变量，相当于定义为 final                      |
+| @NotNull            | 自动在方法内对该参数进行是否为空的校验                |
+| @Cleanup            | 自动管理资源，自动执行清理工作                        |
+| @Getter/@Setter     | 生成对应的 setter 和 getter 方法                      |
+| @ToString           | 覆写 toString 方法                                    |
+| @EqualsAndHashCode  | 生成 equals 和 hashcode 方法                          |
+| @NoArgsConstructor  | 无参构造器                                            |
+| @AllArgsConstructor | 全参构造器                                            |
+| @Data               | @ToString，@EqualsAndHashCode，@Getter/@Setter        |
+| @Value              | 是@Data 的不可变形式，只提供 getter 方法              |
+| @SneakyThrows       | 自动抛出受检异常                                      |
+| @Synchronized       | 锁对象是私有的属性 $LOCK，而不是 this 或者 class 对象 |
+| @Log                | 根据注解生成不同的 log 对象，名称是 log               |
+| @Builder            | 生成对象的建造者 builder                              |
+
+Lombok 原理：注解解析方式有运行时解析和编译时解析，运行时解析需要将 @Retention 设置为 Runtime，这样通过反射就能获取到该注解；编译时解析则提供了 Pluggable Annotation Processing API 标准定义，此时 javac 执行过程如下：
+
+![img](Java-开发/dev-package-lombok-2.png)
+
+本质上，Lombok 实现了上述 API，在 javac 生成 AST 后，就能在 AST 中找到对应的注解节点，并且为其增加对应的节点以实现诸如 setter 和 getter 方法等功能
+
+Lombok 优缺点：
+
++ 优点：减少代码量，更简洁
++ 缺点：对队友不友好，对调试不友好，会破坏封装性，可以考虑 Java14 中的 Record
 
 
 
