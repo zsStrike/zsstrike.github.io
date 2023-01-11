@@ -145,5 +145,7 @@ Lombok 优缺点：
 
 
 
+MapStruct：解决业务代码中很多 JavaBean 之间的相互转化，比如 PO/DTO/VO 相互转化，主要通过 @Mapper 和 @Mapping 实现转换。和 Lombok 相似，其同样也是编译时解析，通过 setter 和 getter 实现对象转换过程，相较于反射，其性能较高
+
 
 
