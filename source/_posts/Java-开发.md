@@ -164,6 +164,22 @@ Java 开发中的各种 Object：
 
 ## 代码质量
 
+单元测试：主要使用 JUnit 库进行，目前主要有两个版本，对应的注解如下：
+
+| JUnit4       | JUnit5             | 注释                                                         |
+| ------------ | ------------------ | ------------------------------------------------------------ |
+| @Test        | @Test              | 表示该方法是一个测试方法，JUnit5 中不支持参数                |
+| @BeforeClass | @BeforeAll         | 表示使用了该注解的方法应该在当前类中所有测试方法之前执行（只执行一次），并且它必须是 static 方法 |
+| @AfterClass  | @AfterAll          | 表示使用了该注解的方法应该在当前类中所有测试方法之后执行（只执行一次），并且它必须是 static 方法 |
+| @Before      | @BeforeEach        | 表示使用了该注解的方法应该在当前类中每一个测试方法之前执行   |
+| @After       | @AfterEach         | 表示使用了该注解的方法应该在当前类中每一个测试方法之后执行   |
+| @Ignore      | @Disabled          | 用于禁用一个测试类或测试方法                                 |
+| @Category    | @Tag               | 用于声明过滤测试的  tag标签，该注解可以用在方法或类上        |
+| @Runwith     | @Runwith           | 用于参数化测试，测试集（suit）测试等                         |
+| Assert       | Assert             | 断言测试                                                     |
+|              | @RepeatedTest      | 定义重试测试                                                 |
+|              | @ParameterizedTest | 参数化测试                                                   |
+
 
 
 
