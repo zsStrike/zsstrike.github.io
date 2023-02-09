@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-02-04T04:05:45.000Z">
-<meta property="article:modified_time" content="2023-02-08T11:42:33.204Z">
+<meta property="article:modified_time" content="2023-02-09T13:09:51.362Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-08 19:42:33'
+  postUpdate: '2023-02-09 21:09:51'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-08T11:42:33.204Z" title="更新于 2023-02-08 19:42:33">2023-02-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-09T13:09:51.362Z" title="更新于 2023-02-09 21:09:51">2023-02-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
 <span id="more"></span>
 
 
@@ -189,7 +189,7 @@
 </li>
 <li><p>MySQL 有哪些存储引擎（表类型），各自的优缺点分别是什么？</p>
 <ul>
-<li>MyISAM：不支持事务、也不支持外键，支持全文索引，其优势是访问的速度快，对事务完整性没有要求或者以 SELECT、INSERT 为主的应用基本上都可以使用这个引擎创建表</li>
+<li>MyISAM：不支持事务、也不支持外键，其优势是访问的速度快，对事务完整性没有要求或者以 SELECT、INSERT 为主的应用基本上都可以使用这个引擎创建表</li>
 <li>InnoDB：提供了具有提交、回滚和崩溃恢复能力的事务安全，锁粒度可以达到行级锁。但是对比MyISAM 的存储引擎，InnoDB 写的处理效率差一些，并且会占用更多的磁盘空间以保留数据和索引</li>
 <li>MEMORY：使用存在于内存中的内容来创建表。每个MEMORY 表只实际对应一个磁盘文件，格式是 <code>.frm</code>。MEMORY 类型的表访问非常快，因为它的数据是放在内存中的</li>
 </ul>
@@ -202,6 +202,53 @@
 </li>
 <li><p>如何选择日期类型？</p>
 <p>根据实际需要选择能够满足应用的最小存储的日期类型。如果记录的日期需要让不同时区的用户使用，那么最好使用 TIMESTAMP，因为日期类型中只有它能够和实际时区相对应。</p>
+</li>
+<li><p>如何选择字符集？</p>
+<p>如果需要处理各种各样的文字，选择 utf8 编码；如果应用涉及已有数据的导入，需要考虑兼容性；如果需要考虑对字符串的比较排序等操作，可以选择定长的编码集。</p>
+</li>
+<li><p>MySQL 中的字符集和校对规则区别？</p>
+<p>字符集用于定义 MySQL 存储字符串的编码格式，校对规则用来定义字符串的比较方式，通常以字符集开始，以 <code>_ci</code>（大小不敏感），<code>_cs</code> 或者 <code>bin</code> 结束。</p>
+</li>
+<li><p>MySQL 4 个级别的字符集设置？</p>
+<p>服务器级别，数据库级别，标记别和列级别。</p>
+</li>
+<li><p>如果原来的数据库中存在部分数据，想要修改字符集，正确的做法是？</p>
+<p>直接使用 <code>alter database/table</code> 修改字符集并不能修改之前已经插入的字符串，需要先导出数据，然后手动修改字符集，最后再导入即可。</p>
+</li>
+<li><p>BTREE 索引和 HASH 索引区别？</p>
+<p>HASH 索引适用于点查询，BTREE 索引适用于范围查询。</p>
+</li>
+<li><p>为什么说不要过度使用索引？</p>
+<p>每次插入数据的时候需要更新相关索引，造成插入速度变慢；并且还会消耗大量的磁盘空间。</p>
+</li>
+<li><p>MySQL 已经提供了表结构，为什么还提供视图这一概念？</p>
+<p>让终端用户直接使用视图而不是表，可以带来以下优点：简单，安全，数据独立。</p>
+</li>
+<li><p>如何保证用户对视图里面的数据修改操作是合法的，满足视图定义条件的？</p>
+<p>可以添加 <code>WITH [LOCAL | CASCADE] CHECK OPTION</code>，用于是否允许更新数据使记录不再满足视图的条件，LOCAL 只需要满足本视图即可，CASCADE 则必须满足针对该视图的所有视图的条件才可以更新。</p>
+</li>
+<li><p>触发器发生时间，针对的操作以及使用限制？</p>
+<p><code>[BEFORE | AFTER] [INSERT | DELETE | UPDATE]</code>，在触发器中，可以使用 OLD 和 NEW 来引用发生变化的记录。触发器中不能显式或者隐式方式开启事务，并且其可能会影响性能。</p>
+</li>
+<li><p>MySQL 提供的锁定级别有哪些？</p>
+<p>对于 MyISAM 和 MEMORY 引擎，支持表级别锁定；对于 BDB 引擎，支持表数据的页级别锁定；对于 InnoDB 引擎，支持行级锁定。</p>
+</li>
+<li><p>MySQL 是如何支持分布式事务的？</p>
+<p>通常涉及到一个事务管理器和多个资源管理器，采用两阶段提交协议进行提交。</p>
+</li>
+<li><p>SQL 预计中存在的安全问题和应对方式？</p>
+<p>SQL 注入攻击，可以采取以下措施（基本都是进行转义）：</p>
+<ul>
+<li>PrepareStatement + Bind-Variable：通过转义用户输入的参数防护</li>
+<li>使用应用程序提供的转换函数：如 <code>mysql_real_escape_string()</code></li>
+<li>自定义：正则校验，特殊字符转义等</li>
+</ul>
+</li>
+<li><p>SQL Mode 的功能？</p>
+<ul>
+<li>设置不同的 SQL Mode，可以设置不同程度的数据校验，保证准确性</li>
+<li>在数据迁移之前，改变 SQL Mode 为其他数据库的数据格式，可以便于数据迁移</li>
+</ul>
 </li>
 <li><p>能说下 MyISAM 和 InnoDB 的区别吗？</p>
 <p>MyISAM 支持全文索引，压缩表和空间函数等，但是不支持事务和行级锁，通常用于大量查询少量插入的场景，MyISAM 的索引和数据是分开的；InnoDB 采用聚簇索引，其支持事务，外键和行级锁，并且通过 MVCC 来支持高并发。</p>

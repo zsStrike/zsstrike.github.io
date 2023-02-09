@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-12-05T08:09:03.000Z">
-<meta property="article:modified_time" content="2023-02-08T08:25:53.667Z">
+<meta property="article:modified_time" content="2023-02-09T11:36:36.531Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-08 16:25:53'
+  postUpdate: '2023-02-09 19:36:36'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-08T08:25:53.667Z" title="更新于 2023-02-08 16:25:53">2023-02-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-09T11:36:36.531Z" title="更新于 2023-02-09 19:36:36">2023-02-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
 <span id="more"></span>
 
 
@@ -214,7 +214,7 @@
 <p>RDB 快照恢复速度快，但是发生崩溃时会丢失上次 RDB 快照至今的命令数据；AOF 方式虽然解决了大量数据丢失的问题，但是在文件很大时，恢复过程缓慢。因此，可以考虑使用混合持久化，只需要配置 <code>aof-use-rdb-preamble</code> 参数即可。</p>
 </li>
 <li><p>主从复制的意义是什么？</p>
-<p>避免单点故障，为 Redis 服务提供高可用。</p>
+<p>避免单点故障，为 Redis 服务提供高可用所必须的操作。</p>
 </li>
 <li><p>主从复制的具体过程？</p>
 <p>主要分为三个阶段：</p>
@@ -241,6 +241,42 @@
 </li>
 <li><p>从库是否会检查数据是否过期？</p>
 <p>在主从复制中，从节点不会主动删除数据，而是通过主节点控制从节点来删除过期数据；在 Redis 3.2 后，从节点在读取数据的时候，增加了对数据是否过期的判断（惰性删除）。</p>
+</li>
+<li><p>哨兵机制的意义？</p>
+<p>通过部署一系列的哨兵节点，让其时刻监视主从服务节点，在主从节点发生故障时，能够自动进行故障转移的功能。</p>
+</li>
+<li><p>哨兵节点的作用是什么？</p>
+<p>主要作用有三点：监控，选主，通知。</p>
+<ul>
+<li>监控：通过 ping 命令判断主从节点是否发生故障，一旦检测到主观下线，就会和其他哨兵节点协商，达到 quorum 值便可确定其为客观下线</li>
+<li>选主：<ul>
+<li>在已下线主节点的所有从节点中选取一个从节点，将其当作新的主节点：<code>SLAVEOF no one</code></li>
+<li>让已下线主节点的所有其他从节点修改复制目标，修改其为新的主节点：<code>SLAVEOF</code></li>
+<li>将新主节点的 IP 地址和信息，通过发布订阅机制通知给客户端：<code>+switch-master</code></li>
+<li>继续监视原来的旧主节点，但这个旧主节点重新上线时，修改其为从节点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>哨兵节点发现客观下线后，选主的依据是什么？</p>
+<p>首先过滤网络状态不好的节点，其次按照优先级，复制进度和 ID 号挑选新从节点作为新的主节点。</p>
+</li>
+<li><p>哨兵节点发送的 INFO 命令的作用？</p>
+<p>用于获取该节点的角色信息，如其对应的从节点列表等。</p>
+</li>
+<li><p>通常哨兵机制中使用了哨兵集群，如何让哨兵之间互相发现彼此（哨兵发现）？</p>
+<p>通过命令 <code>sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</code> 进行哨兵配置，主节点中存在 <code>__sentinel__:hello</code> 频道，其他哨兵可以通过订阅该频道，用以发现其他哨兵并进行连接。</p>
+</li>
+<li><p>哨兵集群中的哨兵节点如何发现主节点下的从节点？</p>
+<p>通过 INFO 命令，主节点会返回所有的从节点信息。</p>
+</li>
+<li><p>什么是主从集群脑裂现象，产生原因和解决方案？</p>
+<p>产生原因：由于网络问题，导致集群节点之间失去联系，主从节点间数据不同步，哨兵重新选举，产生两个主节点，等待网络恢复，旧主节点会降级为从节点，由于其与新节点进行同步复制的时候，会清空自己的缓冲区，导致之前客户端写入的数据被丢失。</p>
+<p>解决方案：当主节点发现从节点下线或者通信延迟过大时，那么禁止主节点进行写数据，直接把错误返回给客户端，以减少数据丢失，可以通过以下两个参数控制</p>
+<ul>
+<li>min-slaves-to-write x，主节点必须要有至少 x 个从节点连接，如果小于这个数，主节点会禁止写数据</li>
+<li>min-slaves-max-lag x，主从数据复制和同步的延迟不能超过 x 秒，如果超过，主节点会禁止写数据</li>
+</ul>
 </li>
 <li><p>Redis 介绍？</p>
 <p>Redis 是一个内存数据库，不过和传统的 RDBM 不同，Redis 属于 NoSQL，其存储类型为 KV。Redis 被广泛用于缓存方向，同时也可用于分布式锁，高速消息队列和事件发布与订阅等方面。Redis 提供了多种数据类型来支持不同的业务场景，还支持持久化、Lua 脚本、多种集群（主从复制模式，分布式切片集群）方案。</p>
