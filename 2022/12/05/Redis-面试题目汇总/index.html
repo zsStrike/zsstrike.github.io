@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-12-05T08:09:03.000Z">
-<meta property="article:modified_time" content="2023-02-09T11:36:36.531Z">
+<meta property="article:modified_time" content="2023-02-10T07:00:04.781Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-09 19:36:36'
+  postUpdate: '2023-02-10 15:00:04'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-09T11:36:36.531Z" title="更新于 2023-02-09 19:36:36">2023-02-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-10T07:00:04.781Z" title="更新于 2023-02-10 15:00:04">2023-02-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>26分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
 <span id="more"></span>
 
 
@@ -277,6 +277,30 @@
 <li>min-slaves-to-write x，主节点必须要有至少 x 个从节点连接，如果小于这个数，主节点会禁止写数据</li>
 <li>min-slaves-max-lag x，主从数据复制和同步的延迟不能超过 x 秒，如果超过，主节点会禁止写数据</li>
 </ul>
+</li>
+<li><p>为什么需要切片集群模式？</p>
+<p>当 Redis 缓存数据量大到一台服务器无法缓存时，就需要使用切片集群模式，其将数据分布在不同的服务器上，以此降低系统对单节点的依赖，提高读写性能，实际上就是服务器 Sharding 技术。</p>
+</li>
+<li><p>Redis 中，切片集群模式的实现？</p>
+<p>采用哈希槽来处理数据和节点之间的映射关系，一个切片集群共有 16384 个哈希槽，通过 CRC16 和取模实现 key 到哈希槽的映射。可以平均分配哈希槽到服务节点，也可以手动进行分配。</p>
+</li>
+<li><p>哈希槽和一致性哈希？</p>
+<ul>
+<li>哈希槽指的是先将用户数据划分到槽里面，然后将槽划分到不同服务器节点上，可以为不同硬件服务器自定义槽数目大小</li>
+<li>一致性哈希则是将服务器节点划分在一个哈希环上，主要目的是减少新增节点导致的重新哈希的问题，容易产生数据倾斜问题，可以引入虚拟节点映射减轻该问题</li>
+</ul>
+</li>
+<li><p>什么是缓存雪崩，如何应对？</p>
+<p>大量缓存数据在同一时间过期，或者 Redis 故障宕机时，此时大量的请求访问数据库，从而导致数据库压力骤增，严重的会造成数据库宕机，而造成系统崩溃。对于大量数据在同一时间过期，可以均匀设置过期时间，后台更新缓存；对于 Redis 宕机，可以采用服务熔断，请求限流或者构建 Redis 高可用集群。</p>
+</li>
+<li><p>什么是缓存击穿，如何应对？</p>
+<p>如果缓存中的某个热点数据过期，此时大量的请求访问该热点数据，就无法从缓存中读取，直接访问数据库，数据库很容易就被高并发的请求冲垮。可以采用互斥锁来保证同一时间内只有一个请求来构建缓存，同时设置超时时间防止死锁，或者采取永远不过期策略，让后台线程定时更新，抑或是进行缓存预热。</p>
+</li>
+<li><p>什么是缓存穿透，如何应对？</p>
+<p>当用户访问的数据，既不在缓存中，也不在数据库中，导致请求在访问缓存时，发现缓存缺失，再去访问数据库时，发现数据库中也没有要访问的数据，没办法构建缓存数据，来服务后续的请求，就到导致服务器的压力骤增。可以采取限制非法请求，缓存默认值，或者使用布隆过滤器快速判断数据是否存在。</p>
+</li>
+<li><p>布隆过滤器工作原理？</p>
+<p>使用使用位图和多个哈希函数快速判断数据是否存在数据库中，查询布隆过滤器说数据存在，并不一定证明数据库中存在这个数据，但是查询到数据不存在，则数据库中一定就不存在这个数据。</p>
 </li>
 <li><p>Redis 介绍？</p>
 <p>Redis 是一个内存数据库，不过和传统的 RDBM 不同，Redis 属于 NoSQL，其存储类型为 KV。Redis 被广泛用于缓存方向，同时也可用于分布式锁，高速消息队列和事件发布与订阅等方面。Redis 提供了多种数据类型来支持不同的业务场景，还支持持久化、Lua 脚本、多种集群（主从复制模式，分布式切片集群）方案。</p>
