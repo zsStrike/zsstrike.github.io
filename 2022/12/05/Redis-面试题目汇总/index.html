@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-12-05T08:09:03.000Z">
-<meta property="article:modified_time" content="2023-02-13T08:46:19.957Z">
+<meta property="article:modified_time" content="2023-02-16T02:30:24.299Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-13 16:46:19'
+  postUpdate: '2023-02-16 10:30:24'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-13T08:46:19.957Z" title="更新于 2023-02-13 16:46:19">2023-02-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>28分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-16T02:30:24.299Z" title="更新于 2023-02-16 10:30:24">2023-02-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>30分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
 <span id="more"></span>
 
 
@@ -348,6 +348,39 @@
 <li>合理的数据编码：如 String 对象存储数字的时候，采用 int 类型编码，非数字采用 SDS 编码</li>
 <li>合适的线程模型：采用 Reactor 单线程模型，省去了上下文切换的开销（执行命令是单线程）</li>
 </ul>
+</li>
+<li><p>Redis 的过期删除策略？</p>
+<p>对数据库中已经过期的键值对进行删除，存在过期字典用于快速判断，主要采用以下两种策略：</p>
+<ul>
+<li>惰性删除：不主动删除过期键，每次访问 key 的时候，才检查 key 是否过期，通过函数 expireIfNeeded 实现</li>
+<li>定期删除：每隔一段时间从过期字典中挑选一定的数据检查其是否过期，如果过期率大于 25% 并且此次运行时间小于 25ms，则继续上述操作</li>
+</ul>
+</li>
+<li><p>Redis 的内存淘汰策略？</p>
+<p>当运行内存达到最大值时，需要淘汰某些 key 用于缓存新的键值对：</p>
+<ul>
+<li>不进行数据淘汰：noeviction，返回错误通知客户端</li>
+<li>进行数据淘汰：<ul>
+<li>在设置了过期时间的数据中进行淘汰：volatile-random，volatile-ttl，volatile-lru，volatile-lfu</li>
+<li>在所有数据范围内淘汰：allkeys-random，allkeys-lru，allkeys-lfu</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Redis 4 新增特性有哪些？</p>
+<p>新增 LFU 逐出策略，添加了 UNLINK 操作，添加了混合持久化功能，新增 MEMORY 命令。</p>
+</li>
+<li><p>Redis 5 新增特性有哪些？</p>
+<p>Stream 类型，动态 Hz，ZPOPMIN，以及 CLIENT UNBLOCK 命令等。</p>
+</li>
+<li><p>Redis 6 新增特性有哪些？</p>
+<p>多线程处理网络 IO，ACL 支持（之前通过 RENAME），客户端缓存，集群代理等。</p>
+</li>
+<li><p>Redis 查看自身状态的命令？</p>
+<p>INFO，MONITOR，LATENCY。</p>
+</li>
+<li><p>Redis 可视化工具？</p>
+<p>redis-stat，redmon；基于 redis_exporter，prometheus，grafana。</p>
 </li>
 <li><p>Redis 介绍？</p>
 <p>Redis 是一个内存数据库，不过和传统的 RDBM 不同，Redis 属于 NoSQL，其存储类型为 KV。Redis 被广泛用于缓存方向，同时也可用于分布式锁，高速消息队列和事件发布与订阅等方面。Redis 提供了多种数据类型来支持不同的业务场景，还支持持久化、Lua 脚本、多种集群（主从复制模式，分布式切片集群）方案。</p>
