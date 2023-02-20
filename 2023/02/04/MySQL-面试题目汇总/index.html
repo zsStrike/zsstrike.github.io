@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-02-04T04:05:45.000Z">
-<meta property="article:modified_time" content="2023-02-13T11:56:03.513Z">
+<meta property="article:modified_time" content="2023-02-20T13:11:18.463Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-13 19:56:03'
+  postUpdate: '2023-02-20 21:11:18'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-13T11:56:03.513Z" title="更新于 2023-02-13 19:56:03">2023-02-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-20T13:11:18.463Z" title="更新于 2023-02-20 21:11:18">2023-02-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
 <span id="more"></span>
 
 
@@ -337,6 +337,138 @@
 </li>
 <li><p>MySQL 中存在死锁吗？</p>
 <p>MyISAM 是 deadlock free 的，这是因为 MyISAM 一次获取需要的所有锁，而在InnoDB中，锁是逐步获得的。可以使用顺序加锁，申请大粒度锁等情况规避死锁。</p>
+</li>
+<li><p>MySQL 体系概览？</p>
+<p><img src="/2023/02/04/MySQL-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/image-20210309145331858.png" alt="image-20210309145331858"></p>
+</li>
+<li><p>InnoDB log 优化方案？</p>
+<ul>
+<li>innodb_flush_log_at_trx_commit：0 表示 commit 到 innodb 内存，每秒写入disk file，1 表示 commit 到 disk file，2 表示 commit 到 os cache，每秒写入 disk file</li>
+<li>设置 log file size，控制检查点：日志文件切换会导致检查点变化，会导致缓存页小批量刷新，降低性能，通常每半个小时写满一个日志文件较好</li>
+<li>调整 innodb_log_buffer_size：默认 8 MB，对于具有大量更新记录的事务，可以增加该值，减少对磁盘写入次数</li>
+</ul>
+</li>
+<li><p>MySQL 并发相关的参数？</p>
+<ul>
+<li>调整 max connections，提高并发连接</li>
+<li>调整 back_log：积压请求栈大小</li>
+<li>调整 table_open_cache：控制所有 SQL 执行线程可打开表缓存的数量</li>
+<li>调整 thread cache size</li>
+<li>innod lock wait timeout，设置锁超时时间</li>
+</ul>
+</li>
+<li><p>MyISAM 如何进行内存优化？</p>
+<p>MyISAM 使用 key buffer 缓存索引块，对于数据块，则依赖于 IO 缓存，优化策略有：</p>
+<ul>
+<li>调整 key_buffer_size 大小</li>
+<li>调整中点插入策略：对 LRU 的改进</li>
+<li>调整 read_buffer_size 和 read_rnd_buffer_size</li>
+</ul>
+</li>
+<li><p>read_rnd_buffer_size 作用？</p>
+<p>可用于优化 order by 的语句，因为 sort 后的数据是以 key-value 的形式存在的，使用这些行指针去读取数据，将是以指针数据物理的顺序去读取，很大程度上是随机的方式读取数据的。MySQL 从 sort_buffer 中读取这些行指针数据，然后通过指针排序后存入 read_rnd_buffer 中，之后再通过指针读取数据时，基本上都是顺序读取了。</p>
+</li>
+<li><p>InnoDB 内存优化？</p>
+<p>用一块内存区做 IO 缓存池，该缓存池不仅用来缓存 InnoDB 的索引块，而且也用来缓存InnoDB的数据块，缓存池逻辑上由 free list、flush list 和 LRU list 组成。InnoDB 使用的 LRU 算法是类似两级队列的方法</p>
+<ul>
+<li>innodb_buffer_pool_size</li>
+<li>调整 old sublist 大小</li>
+<li>调整 innodb_old_blocks_time 的设置：确定从 old sublist 到 young sublist 的时间</li>
+<li>调整缓存池数量 innodb_buffer_pool_instances</li>
+<li>控制 innodb buffer 刷新，延长数据缓存时间</li>
+<li>调整排序缓存大小 sort_buffer_size 和连接缓存大小 join_buffer_size</li>
+<li>InnoDB doublewrite：原因是 MySQL 的数据页大小（一般是 16KB）与操作系统的 IO 数据页大小（一般是 4KB）不一致，无法保证 InnoDB 缓存页被完整、一致地刷新到磁盘。原理是用系统表空间中的一块连续磁盘空间（100个连续数据页，大小为 2MB）作为 doublewrite buffer，当进行脏页刷新时，首先将脏页的副本写到系统表空间的 doublewrite buffer 中，然后调用 fsync 刷新操作系统 IO 缓存，确保副本被真正写入磁盘。</li>
+</ul>
+</li>
+<li><p>MySQL 如何优化磁盘 IO 速度？</p>
+<ul>
+<li>使用 Symbolic Links 分布 IO：默认情况下，数据库名和表名对应的就是文件系统的目录名和文件名，但是这样不利于多磁盘并发读写的能力，可以使用符号链接将不同的数据库指向不同的物理磁盘，达到分布磁盘 IO 的目的。</li>
+<li>禁止操作系统更新文件的 atime 属性：LINUX 系统下，每次读取一个文件，操作系统就会将读操作的时间写回到磁盘上，这可能会影响 IO 性能。</li>
+<li>使用裸设备存放 InnoDB 的共享表空间：对于 MyISAM，数据文件的读写完全依赖于操作系统，但是对于 InnoDB 来说，其自己实现了数据缓存机制，操作系统的缓存系统可能对其有反作用，可将数据放倒 Raw Device 上。</li>
+</ul>
+</li>
+<li><p>在应用层面上，如何对 MySQL 服务进行优化？</p>
+<ul>
+<li>使用连接池，减少建立销毁连接的开销</li>
+<li>减少对 MySQL 的访问：增加 CACHE 层，使用查询缓存（适用于更新不频繁的表）</li>
+<li>负载均衡：利用 MySQL 复制实现读写分流，采用分布式数据库架构</li>
+</ul>
+</li>
+<li><p>MySQL 常用工具？</p>
+<p>mysql，mysqladmin，mysqlbinlog，mysqldump，mysqlimport，mysqlshow。</p>
+</li>
+<li><p>MySQL 中存在哪些日志？</p>
+<ul>
+<li>错误日志：记录了当mysqld启动和停止时，以及服务器在运行过程中发生任何严重错误时的相关信息</li>
+<li>归档日志：记录了所有的 DDL（数据定义语言）语句和 DML（数据操纵语言）语句，但是不包括数据查询语句。此日志对于灾难时的数据恢复起着极其重要的作用。分为 STATMENT ，ROW，MIXED 格式</li>
+<li>查询日志：查询日志记录了客户端的所有语句，而二进制日志不包含只查询数据的语句</li>
+<li>慢查询日志：记录了所有执行时间超过参数 long_query_time 设置值并且扫描记录数不小于min_examined_row_limit 的所有 SQL 语句的日志。</li>
+</ul>
+</li>
+<li><p>MySQL 日志查询分析工具？</p>
+<p>mysql-explain-slow-log，myprofi，mysqlsla。</p>
+</li>
+<li><p>MySQL 中的逻辑备份和恢复如何实现？</p>
+<p>可以通过 mysqldump&amp;mysqlimport 实现，另外还需要执行日志重做 <code>mysqlbinlog binlog-file | mysql -u root –p***</code>，可以采用基于时间点恢复或者基于位置恢复两种策略。</p>
+</li>
+<li><p>MySQL 中的物理备份和恢复如何实现？</p>
+<ul>
+<li>冷备份：就是停掉数据库服务，cp 数据文件的方法</li>
+<li>热备份：<ul>
+<li>InnoDB：使用 ibbackup 或者 Xtrabackup</li>
+<li>MyISAM：本质是将要备份的表加读锁，然后再复制数据文件到备份目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>MySQL 如何实现表的导出和导入？</p>
+<ul>
+<li><code>SELECT …INTO OUTFILE … &amp; LOAD DATA INFILE…  </code></li>
+<li>mysqldump &amp; mysqlimport</li>
+</ul>
+</li>
+<li><p>MySQL 如何实现权限管理的？</p>
+<p>首先对连接的用户进行身份认证，然后对通过的用户赋予对应权限即可。在 MySQL 内部，存在 user，host 和 db 这三个权限表，对于通过认证的用户要查看某个权限只需要访问对应的权限列即可。</p>
+</li>
+<li><p>忘记 MySQL 的 root 密码怎么办？</p>
+<p>首先手动 kill 掉 MySQL 进程，接着使用–skip-grant-tables选项重启登陆到 MySQL 服务，之后就可以更新密码，并且刷新权限表。</p>
+</li>
+<li><p>mysql.sock 丢失后如何连接数据库？</p>
+<p>使用其他协议如<code>--protocol=TCP|PIPE|SOCKET</code>。</p>
+</li>
+<li><p>MySQL 复制的优点？</p>
+<ul>
+<li>主库出现问题，可以切换到从库提供服务</li>
+<li>可以在从库上执行查询操作，降低主库的访问压力</li>
+<li>可以在从库上执行备份，以避免备份期间影响主库的服务</li>
+</ul>
+</li>
+<li><p>MySQL 如何进行复制的？</p>
+<p>首先，MySQL 主库会在数据变更的时候将其记录在 Binlog 中，主库推送 binlog 中的事件到从库的中继日志 Relay Log，之后从库根据 Relay Log 重做数据变更操作，通过逻辑复制以此达到数据一致。</p>
+<p><img src="/2023/02/04/MySQL-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/image-20210325183741481.png" alt="image-20210325183741481"></p>
+</li>
+<li><p>MySQL 复制的三种架构？</p>
+<ul>
+<li>一主多从复制架构：对实时性要求不是特别高的读请求通过负载均衡分布到多个从库上，降低主库的读取压力</li>
+<li>多级复制架构：解决了一主多从场景下，主库的 I&#x2F;O 负载和网络压力，当然也有缺点：MySQL 的复制是异步复制，多级复制场景下主库的数据是经历两次复制才到达从库</li>
+<li>双主复制：主库 Master1 和 Master2 互为主从，所有 Web Client 客户端的写请求都访问主库 Master1，而读请求可以选择访问主库 Master1 或 Master2</li>
+</ul>
+</li>
+<li><p>MySQL 三种复制模式？</p>
+<ul>
+<li>异步复制：主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，主如果 crash 掉了，此时主上已经提交的事务可能并没有传到从库上，造成数据不一致</li>
+<li>全同步复制：当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响</li>
+<li>半同步复制：主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈</li>
+</ul>
+</li>
+<li><p>MySQL Cluster 如何实现？</p>
+<p>SQL 节点和数据节点。前台应用一定的负载均衡算法将对数据库的访问分散到不同的 SQL 节点上，然后 SQL 节点对数据节点进行数据访问并从数据节点返回结果，最后 SQL 节点将收到的结果返给前台应用。数据节点（NDB 节点）实现了数据的冗余存储。</p>
+</li>
+<li><p>高可用架构有哪些？</p>
+<ul>
+<li>MMM 架构：由于 MMM 无法完全地保证数据一致性，所以 MMM 适用于对数据的一致性要求不是很高，但是又想最大程度的的保证业务可用性的场景；对于那些对数据的一致性要求很高的业务，非常不建议采用 MMM 这种高可用性架构。</li>
+<li>MHA 架构：目前在 MySQL 高可用方面是一个相对成熟的解决方案，MHA能在最大程度上保证数据的一致性，以达到真正意义上的高可用。其从宕机崩溃的 master 保存二进制日志事件，识别含有最新更新的 slave，应用差异的中继日志（relay log）到其他 slave，应用从 master 保存的二进制日志事件，提升一个 slave 为新 master，使其他的 slave 连接新的 master 进行复制。</li>
+</ul>
 </li>
 <li><p>能说下 MyISAM 和 InnoDB 的区别吗？</p>
 <p>MyISAM 支持全文索引，压缩表和空间函数等，但是不支持事务和行级锁，通常用于大量查询少量插入的场景，MyISAM 的索引和数据是分开的；InnoDB 采用聚簇索引，其支持事务，外键和行级锁，并且通过 MVCC 来支持高并发。</p>
