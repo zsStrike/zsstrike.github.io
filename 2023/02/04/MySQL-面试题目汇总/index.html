@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-02-04T04:05:45.000Z">
-<meta property="article:modified_time" content="2023-02-20T13:11:18.463Z">
+<meta property="article:modified_time" content="2023-02-23T07:36:23.192Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-20 21:11:18'
+  postUpdate: '2023-02-23 15:36:23'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-20T13:11:18.463Z" title="更新于 2023-02-20 21:11:18">2023-02-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-23T07:36:23.192Z" title="更新于 2023-02-23 15:36:23">2023-02-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>28分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
 <span id="more"></span>
 
 
@@ -471,7 +471,10 @@
 </ul>
 </li>
 <li><p>能说下 MyISAM 和 InnoDB 的区别吗？</p>
-<p>MyISAM 支持全文索引，压缩表和空间函数等，但是不支持事务和行级锁，通常用于大量查询少量插入的场景，MyISAM 的索引和数据是分开的；InnoDB 采用聚簇索引，其支持事务，外键和行级锁，并且通过 MVCC 来支持高并发。</p>
+<ul>
+<li>MyISAM 支持全文索引，压缩表和空间函数等，但是不支持事务和行级锁，通常用于大量查询少量插入的场景，MyISAM 的索引和数据是分开的；</li>
+<li>InnoDB 采用聚簇索引，其支持事务，外键和行级锁，并且通过 MVCC 来支持高并发。</li>
+</ul>
 </li>
 <li><p>使用 VARCHAR(5) 和 VARCHAR(200) 存储 “hello” 的空间开销是一样的。那么使用更短的列有什么优势吗？</p>
 <p>事实证明有很大的优势。更长的列会消耗更多的内存，因为 MySQL 通常会分配固定大小的内存块来保存内部值。尤其是使用内存临时表进行排序或其他操作时会特别糟糕。在利用磁盘临时表进行排序时也同样糟糕。</p>
@@ -541,6 +544,129 @@
 </li>
 <li><p>查询缓存的作用？</p>
 <p>查询的时候先查询缓存，但是在 MySQL 8.0 后，该功能被移除。缓存虽然能够提升数据库的查询性能，但是缓存同时也带来了额外的开销，每次查询后都要做一次缓存操作，失效后还要销毁。建议设置query_cache_type 变量为 DEMAND。</p>
+</li>
+<li><p>MySQL 引擎为什么采用该 B+ 树而不是 B 树？</p>
+<ul>
+<li>B+ 树磁盘 IO 更低，其内部节点全部是指针，没有实际数据，能够更快找到元素</li>
+<li>B+ 树查询效率更加稳定</li>
+<li>B+ 树遍历效率高（叶子节点通过指针相连）</li>
+</ul>
+</li>
+<li><p>MySQL 中的索引有哪些？</p>
+<p>在存储层实现，不同的存储引擎具有不同的索引类型：</p>
+<ul>
+<li>B+ 树索引：主索引通常是聚簇索引，辅助索引通常需要回表，覆盖索引，组合索引</li>
+<li>哈希索引：只支持点查询，不支持范围查询，同时不支持排序和分组操作</li>
+<li>全文索引：用于查找文本中的关键词，通常采用倒排索引实现</li>
+<li>空间数据索引（R-Tree）：多维索引，可用于存储地理数据</li>
+</ul>
+</li>
+<li><p>如何对查询语句进行优化？</p>
+<ul>
+<li>减少请求的数据量，只返回必要的行数据和列数据</li>
+<li>减少服务器扫描的行数，尽量通过覆盖索引</li>
+<li>重构查询语句：切分大查询，分解大连接查询，将连接任务交给上层</li>
+</ul>
+</li>
+<li><p>事务的特性以及隔离级别？</p>
+<p>ACID；未提交读，提交读，可重复读，可串行化。分别解决了脏读，不可重复读，幻读的问题。不可重复读和幻读容易混淆，不可重复读侧重于数据的修改，幻读侧重于数据的新增或删除。</p>
+</li>
+<li><p>什么是第一，第二类丢失更新问题？</p>
+<p>第一类丢失更新：A 事务撤销时，把已经提交的 B 事务的更新数据覆盖了</p>
+<p>第二类丢失更新：A 事务覆盖 B 事务已经提交的数据，造成 B 事务所做操作丢失</p>
+</li>
+<li><p>InnoDB 引擎中的锁粒度？</p>
+<ul>
+<li>Record Lock：锁定一个记录对应的索引，非主键索引加锁时可能也会对主键索引加锁</li>
+<li>Gap Lock：锁定索引之间的间隙，但是不包含索引本身</li>
+<li>Next-Key Lock：左开右闭区间，Gap Lock + Record Lock，加锁的基本单位</li>
+</ul>
+</li>
+<li><p>InnoDB 如何实现并发控制？</p>
+<p>每个记录后面加上两个隐藏的列：trx_id 和 roll_pointer，修改记录事务号，通过 undo 日志串联版本</p>
+<ul>
+<li>当前读：读取 ReadView 对应下合理的记录</li>
+<li>快照读：读取记录当前的最新版本数据，可通过 <code>lock in share mode, for update</code></li>
+</ul>
+</li>
+<li><p>数据切分的方式以及对应的优缺点？</p>
+<p>垂直切分：可以让数据从大表切分成多个小表，但是获取全部数据可能需要进行 join 连接</p>
+<p>水平切分：可以使用哈希取模，范围划分等方式，可以为表操作提供更高的吞吐率，但是可能需要引入分布式事务（XA 接口），需要在用户程序中进行连接，另外，需要生成唯一 ID，可以使用分布式 ID 生成器</p>
+</li>
+<li><p>MySQL 主从复制过程？</p>
+<p>主要涉及三个线程，binlog dump 线程，IO 线程和 SQL 线程：</p>
+<ul>
+<li>IO 线程会请求 binlog，并且将得到的 binlog 写到本地的 relay-log 文件中</li>
+<li>主库中的 binlog dump 线程会给从库的 IO 线程传送 binlog</li>
+<li>从库中的 SQL 线程会读取 relay-log 文件中的日志，并且将其转换为 sql 语句逐一执行</li>
+</ul>
+</li>
+<li><p>关系数据库设计范式，是否是范式越高越好？</p>
+<ul>
+<li>1NF：每个属性不可分割，可能存在数据冗余问题</li>
+<li>2NF：消除非主属性对码的部分函数依赖</li>
+<li>3NF：消除非主属性对于码的传递函数依赖，基本消除了各种异常</li>
+<li>BCNF：主属性不依赖于主属性</li>
+<li>4NF：消除多值依赖</li>
+</ul>
+<p>并不是范式越高越好，因为当冗余信息有价值或者能大幅度提高查询效率的时候，我们就可以采取反范式设计的优化。</p>
+</li>
+<li><p>explain 语句的作用以及对应的执行列信息？</p>
+<p>可以使用 explain 分析 SQL 语句，查看执行计划，根据该信息进行优化。</p>
+<p>主要包括的列有：select_type，possible_keys，key，rows，type，extra。</p>
+</li>
+<li><p>explain 中的 type 列有哪些值？</p>
+<ul>
+<li>system：只有一条数据的系统表</li>
+<li>const：主键或者唯一索引查询</li>
+<li>eq_ref：在进行联接查询时，使用主键或者唯一索引并且只匹配到一行记录的时候</li>
+<li>ref：使用非唯一索引</li>
+<li>range：索引范围查询</li>
+<li>index：跟全表扫描类似，只是扫表是按照索引顺序进行</li>
+<li>all：全表扫描，不走索引</li>
+</ul>
+</li>
+<li><p>explain 中的 extra 列有哪些值？</p>
+<ul>
+<li>using filesort：需额外的排序操作, 不能通过索引顺序达到排序效果</li>
+<li>using index：使用了覆盖索引</li>
+<li>using where：使用了 where 过滤数据</li>
+<li>using index condition：使用了索引，但是需要回表</li>
+<li>using temporary：建立临时表(temporary table)来暂存中间结果</li>
+<li>using join buffer：需要进行嵌套循环计算</li>
+</ul>
+</li>
+<li><p>使用索引的优缺点？</p>
+<p>优点：提高数据检索的速度，降低 IO 成本；还能对数据进行排序，降低排序查询语句的执行时间</p>
+<p>缺点：会占用部分空间；虽然提高了查询效率，但是降低了数据更新的效率</p>
+</li>
+<li><p>MyISAM 索引和 InnoDB 索引有什么区别？</p>
+<p>MyISAM 索引：索引和数据分开存储在不同的文件中，叶子节点记录的是磁盘地址</p>
+<p>InnoDB 索引：叶子节点存储的数据是整行的数据，称之为聚簇索引，为此，普通索引需要进行回表操作</p>
+</li>
+<li><p>假设存在表 t(a, b, c, d)，其中以 a 创建主键索引，以 (b, c, d) 创建组合索引，语句 select * from t where c &#x3D; 0 执行过程中，有以下问题：</p>
+<ol>
+<li>上述条件查询并不满足最左匹配原则，为什么查询的时候使用了索引？</li>
+<li>为这个表增加 e 字段后，上述查询为什么变为全表扫描？</li>
+</ol>
+<p>联合索引中有查询需要所有数据项，可以使用覆盖索引，但是其并不满足最左匹配，因此 type 是 index，而不是 ref，同时，组合索引中叶子节点信息量更大，主索引通常还包括了版本信息，事务 id，回流指针等等，因此选择组合索引；</p>
+<p>加入 e 字段后，就不能使用覆盖索引了，此时就只能进行全表扫描。</p>
+</li>
+<li><p>SQL 查询语句执行过程？</p>
+<p>通过连接器进行用户权限检查；检查缓存；词法语法分析，检查 SQL 语句正确性；优化器找到最佳的物理执行计划；调用存储引擎接口进行查询，返回结果</p>
+</li>
+<li><p>慢 SQL 是什么，有什么危害，可能有哪些原因造成的，如何预防？</p>
+<p>慢 SQL 就是执行时间远大于正常值的 SQL 语句；在高并发情况下，慢 SQL 出现后会阻塞大量正常的请求，造成大面积的超时和失败；可能由于创建太多索引，造成更新操作效率下降，或者是查询语句发生了索引失效；预防方式是打开慢 SQL 日志，设置慢 SQL 执行时间阈值，之后使用 explain 命令查看原因，今早优化慢 SQL 语句。</p>
+</li>
+<li><p>MySQL 索引失效发生的场景？</p>
+<ul>
+<li>对索引进行运算，使用函数</li>
+<li>对索引使用 &lt;&gt; 、not in 、not exist、!&#x3D;</li>
+<li>对索引进行前导模糊查询</li>
+<li>隐式转换会导致不走索引，如 <code>select &#39;10&#39; &gt; 9</code> 会返回 1，说明字符串转换为数字格式</li>
+<li>非索引字段的 or 连接</li>
+<li>非最左前缀</li>
+</ul>
 </li>
 </ol>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2023/02/04/MySQL-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">http://blog.zsstrike.tech/2023/02/04/MySQL-面试题目汇总/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
