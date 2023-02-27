@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-02-07T06:05:16.000Z">
-<meta property="article:modified_time" content="2023-02-25T14:18:39.954Z">
+<meta property="article:modified_time" content="2023-02-27T05:54:01.838Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-25 22:18:39'
+  postUpdate: '2023-02-27 13:54:01'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,8 +142,10 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Java 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-07T06:05:16.000Z" title="发表于 2023-02-07 14:05:16">2023-02-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-25T14:18:39.954Z" title="更新于 2023-02-25 22:18:39">2023-02-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">11.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>35分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录学习 Java 中遇到的问题，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Java 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-07T06:05:16.000Z" title="发表于 2023-02-07 14:05:16">2023-02-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-27T05:54:01.838Z" title="更新于 2023-02-27 13:54:01">2023-02-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>39分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于记录学习 Java 中遇到的问题，以备查阅。</p>
 <span id="more"></span>
+
+
 
 
 
@@ -640,6 +642,10 @@
 <p>ConcurrentHashMap 在 JDK8 后，若溢出块太多，采用红黑树来管理溢出块，加速访问</p>
 </blockquote>
 </li>
+<li><p>ConcurrentHashMap 为什么不允许键值为 null？</p>
+<p>不允许值为 null：会带来二义性问题，如通过 map.get(key) 返回 null 的时候，可能是 map 中本来就没有这个 key，或者 map 中有这个键，但是键对应的值为 null。在 HashMap 中允许值为 null 是因为可以通过 map.containsKey 来进行判断，但是在多线程中，map.containsKey 不是原子执行的，可能在执行过程中，其他线程进行了 put 动作，导致得到非预期的结果。</p>
+<p>不允许键为 null：在源码中定义的，Dogue Lea 强制规定的，他本人比较讨厌 null。</p>
+</li>
 <li><p>阻塞队列中的 take&amp;put 和 poll&amp;offer 方法有什么区别？</p>
 <p>阻塞队列在实现上是通过 Conditon 接口中的 await&#x2F;signal 实现线程间同步的。</p>
 <p>take 在队列空时会进入等待，会等待下一个生产者通过 signal 唤醒，是可以进入阻塞态的；</p>
@@ -693,6 +699,51 @@
 </li>
 <li><p>CompletionService 的作用？</p>
 <p>将 Executor 与 BlockingQueue 的功能结合在一起，通过将一组 Callable 任务提交给它来执行，然后使用 take 和 poll 等方法来获得已经完成的结果，这些结果会被封装成 Future。ExecutorCompletionService 实现了 CompletionService。</p>
+</li>
+<li><p>什么是守护线程，它有什么作用，适用场景？</p>
+<p>守护线程指的是用来在后台执行任务的线程，如 GC 进程。JVM 在进行关闭的时候只需要看是否存在非守护线程正在运行，如果只有守护线程正在运行，JVM 是可以直接结束并且回收守护线程的，因此，守护线程中最好不要放打开资源的执行语句，以防止资源没有正确关闭。</p>
+</li>
+<li><p>FutureTask 类有什么作用？</p>
+<p>FutureTask 实现了 RunnableFuture 接口，该接口同时继承 Runnable 接口和 Future 接口，可以用于异步取消事务。</p>
+</li>
+<li><p>如何中止正在执行的线程？</p>
+<ul>
+<li>使用中断：每个线程都有一个 boolean 类型的中断状态。它不会真正地中断一个正在运行的线程，而只是发出中断请求，然后由线程在下一个合适的时刻中断自己。Thread.interrupted() 会返回中断状态，并且置空中断状态位</li>
+<li>通过 Future 取消：在使用 ExecutorService 提交任务时，会返回一个 Future 对象，可以通过 cancel 来取消</li>
+<li>通过 Executor 取消：使用 shutdown&#x2F;shutdownNow </li>
+<li>毒丸对象：在基于生产者-消费者模型中，可以添加一个毒丸对象，是指特定的一个放在队列上的对象，当消费者得到这个对象的时候，立刻停止执行</li>
+</ul>
+</li>
+<li><p>shutdownNow 的局限性？</p>
+<p>使用该方法的时候，它将会取消所有正在执行的任务，并且返回所有已经提交但尚未开始的任务。然而，我们并不知道那些任务已经开始但是尚未正常结束。</p>
+</li>
+<li><p>如何对非正常的线程中止进行监控？</p>
+<p>导致线程提前死亡的原因主要就是 RuntimeException。如果没有捕获该异常，程序就会在控制台打印栈信息，然后退出执行。在 Thread 中提供了 UncaughtExceptionHandler，它能检测出某个线程由于未捕获的异常而终结的情况。</p>
+</li>
+<li><p>JVM 关闭时的关闭钩子是什么，守护线程会阻碍 JVM 关闭吗？</p>
+<p>在正常的关闭中，JVM 首先调用所有已注册过的关闭钩子（Shutdown Hook）。JVM 不保证关闭钩子的调用顺序。守护线程并不会阻碍 JVM 关闭，因此不要在守护线程中进行资源打开的操作，以防止资源未正确关闭。</p>
+</li>
+<li><p>如何构建一个自定义线程池？</p>
+<p>可以通过 ThreadPoolExecutor 实现该需求，该类继承自 AbstractExecutorService：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">ThreadPoolExecutor</span><span class="params">(<span class="type">int</span> corePoolSize,</span></span><br><span class="line"><span class="params">                          <span class="type">int</span> maximumPoolSize,</span></span><br><span class="line"><span class="params">                          <span class="type">long</span> keepAliveTime,</span></span><br><span class="line"><span class="params">                          TimeUnit unit,</span></span><br><span class="line"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span><br><span class="line"><span class="params">                          ThreadFactory threadFactory,</span></span><br><span class="line"><span class="params">                          RejectedExecutionHandler handler)</span> &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>handler 用于处理在等待队列满时，应该采取的措施，如中止，抛弃，抛弃最旧的；</p>
+<p>threadFactory 则用于定制化工作，通过实现 ThreadFactory 接口即可；</p>
+<p>另外，也可以继承 ThreadPoolExecutor，并重写 beforeExecute，afterExecute 和 terminated 方法来实现定制。</p>
+</li>
+<li><p>AbstractExecutorService 中的 newTaskFor 作用？</p>
+<p>可以将三类参数转化为 RunnableFuture 对象，是在 Runnable 和 Callable 上的进一步抽象。</p>
+</li>
+<li><p>什么是死锁，如何进行死锁避免和检测？</p>
+<p>死锁：当多个线程相互持有彼此正在等待的锁而又不释放自己已经持有的锁的时候，就会发生死锁。</p>
+<ul>
+<li>支持定时的锁：可以使用 Lock 类的定时 tryLock 功能来代替内置锁机制。当使用内置锁的时候，只要没有获得锁就会一直等待下去，而显式锁则可以指明一个超时时限。</li>
+<li>通过线程转储信息来分析死锁：线程转储信息中包含了加锁信息，例如每个线程持有了哪些锁，在那些栈帧中获得了这些锁，以及被阻塞的线程正在等待哪一个锁。</li>
+</ul>
+</li>
+<li><p>什么是饥饿，什么是活锁？</p>
+<p>饥饿：当线程无法访问它所需要的资源而不能继续执行的时候，就会发生饥饿。引发饥饿的最常见资源就是 CPU 时钟周期。</p>
+<p>活锁：该问题尽管不会阻塞线程，但也不能继续执行，因为线程将不断重复执行相同的操作，而且总会失败。可以通过引入随机性来解决该问题。</p>
 </li>
 </ol>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2023/02/07/Java-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">http://blog.zsstrike.tech/2023/02/07/Java-面试题目汇总/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
