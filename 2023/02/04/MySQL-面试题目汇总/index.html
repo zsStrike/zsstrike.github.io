@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-02-04T04:05:45.000Z">
-<meta property="article:modified_time" content="2023-02-27T11:52:47.871Z">
+<meta property="article:modified_time" content="2023-02-28T13:35:37.489Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-27 19:52:47'
+  postUpdate: '2023-02-28 21:35:37'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-27T11:52:47.871Z" title="更新于 2023-02-27 19:52:47">2023-02-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">11.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>35分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-28T13:35:37.489Z" title="更新于 2023-02-28 21:35:37">2023-02-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">16.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>53分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
 <span id="more"></span>
 
 
@@ -274,8 +274,9 @@
 <li><p>索引失效的常见场景？</p>
 <ul>
 <li>以 % 开头的 LIKE 查询不能够利用 B-Tree 索引</li>
-<li>数据类型出现隐式转换的时候也不会使用索引</li>
-<li>复合索引的情况下，不满足最左原则</li>
+<li>对索引使用函数，或者使用表达式</li>
+<li>对索引隐式类型转换：在遇到字符串和数字比较的时候，会先把字符串转为数字，然后再进行比较</li>
+<li>联合索引非最左匹配</li>
 <li>用 or 分割开的条件，如果 or 前的条件中的列有索引，而后面的列中没有索引</li>
 </ul>
 </li>
@@ -653,7 +654,7 @@
 <p>加入 e 字段后，就不能使用覆盖索引了，此时就只能进行全表扫描。</p>
 </li>
 <li><p>SQL 查询语句执行过程？</p>
-<p>通过连接器进行用户权限检查；检查缓存；词法语法分析，检查 SQL 语句正确性；优化器找到最佳的物理执行计划；调用存储引擎接口进行查询，返回结果</p>
+<p>通过连接器进行用户权限检查；检查缓存（query_cache_type &#x3D; DEMAND）；词法语法分析，检查 SQL 语句正确性；优化器找到最佳的物理执行计划；调用存储引擎接口进行查询，返回结果（增量且逐步返回的过程）</p>
 </li>
 <li><p>慢 SQL 是什么，有什么危害，可能有哪些原因造成的，如何预防？</p>
 <p>慢 SQL 就是执行时间远大于正常值的 SQL 语句；在高并发情况下，慢 SQL 出现后会阻塞大量正常的请求，造成大面积的超时和失败；可能由于创建太多索引，造成更新操作效率下降，或者是查询语句发生了索引失效；预防方式是打开慢 SQL 日志，设置慢 SQL 执行时间阈值，之后使用 explain 命令查看原因，今早优化慢 SQL 语句。</p>
@@ -791,9 +792,348 @@
 </li>
 <li><p>Next-Key Lock：记录锁和间隙锁的组合，用左开右闭区间表示，是加锁的基本单位，但是可能会退化，普通的 select 语句是快照读，只有 <code>select .. in share mode</code> 和 <code>select ... for update</code> 才会加锁</p>
 </li>
-<li><p>插入意向锁：特殊的间隙锁，不同于间隙锁的是，该锁只用于插入操作，一个事务拥有插入意向锁，另外一个事务便不能拥有对应的间隙锁，下图假设 test 中的 id 最大值是 10</p>
+<li><p>插入意向锁：特殊的间隙锁，不同于间隙锁的是，该锁只用于插入操作，一个事务拥有插入意向锁，另外一个事务便不能拥有对应的间隙锁，下图假设 test 中的 id 最大值是 10，由于加锁 （0， +inf）发生死锁：</p>
 <img src="modb_20210628_08209a56-d7b3-11eb-8250-00163e068ecd.png" alt="img" style="zoom: 50%;" /></li>
 </ul>
+</li>
+<li><p>MySQL 中的锁退化是什么？在不同索引类型下如果进行锁退化？</p>
+<p> next-key lock 退化成记录锁或间隙锁便是锁退化，在能使用记录锁或者间隙锁就能避免幻读现象的场景下，就能发生锁退化现象，在不同索引下：</p>
+<ul>
+<li><p>唯一索引等值查询：</p>
+<ul>
+<li>查询的记录存在：退化成记录锁</li>
+<li>查询的记录不存在：退化成间隙锁</li>
+</ul>
+</li>
+<li><p>唯一索引范围查询（包含）：</p>
+<ul>
+<li>首先找到 min 对应的 next-key lock，如果 min 存在，退化成记录锁；最后找到 max 对应的 next-key lock，如果 max 不存在，退化成间隙锁</li>
+</ul>
+</li>
+<li><p>非唯一索引等值查询：<strong>对非唯一索引加锁时，其会同时对主键索引加记录锁</strong></p>
+<ul>
+<li>查询的记录存在：先加 next-key lock， 另外一把锁退化成间隙锁</li>
+<li>查询的记录不存在：退化成间隙锁</li>
+</ul>
+</li>
+<li><p>非唯一索引范围查询：</p>
+<ul>
+<li>next-key lock 不会退化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在 MySQL 中如何分析加锁情况？</p>
+<p>通过 <code>select * from performance_schema.data_locks\G</code> 可以查看当前系统的加锁语句，其中重要的两个参数是 LOCK_TYPE 和 LOCK_MODE：</p>
+<ul>
+<li>LOCK_TYPE：TABLE，RECORD（行级锁）</li>
+<li>LOCK_MODE：<ul>
+<li>X：next_key 锁</li>
+<li>X，REC_NOT_GAP：记录锁</li>
+<li>X，GAP：间隙锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>当执行 update 语句的时候，如果没有带上索引，会发生什么问题，如何缓解？</p>
+<p>可能会走全表扫描，从而导致全表加上了独占锁，导致业务停滞，通常可以使用以下方法避免该情况：</p>
+<ul>
+<li>开启安全更新模式，sql_safe_update 参数设置为 1，此时需要 update 有 where 或者 limit 子句</li>
+<li>如果带上索引，但是优化器选择走全表扫描，可以使用 force index 语句</li>
+</ul>
+</li>
+<li><p>InnoDB 和 MyISAM 执行 select count(*)  有什么不同，为什么？</p>
+<p>执行 count(*) 时，MyISAM 其直接返回表的元信息中 row_count 值，但是由于 InnoDB 支持 MVCC，并不能简单统计当前的行数作为业务的返回值，但当带上条件查询时，两者行为类似。</p>
+</li>
+<li><p>InnoDB 下，不同 count 形式的执行效率？</p>
+<p>count 性能：count(*) &#x3D; count(1) &gt; count(主键字段) &gt; count(字段)</p>
+<ul>
+<li>count(主键字段)：优先走二级索引（减少 IO），没有的话走主键索引，InnoDB 只会返回对应的主键字段</li>
+<li>count(1)：和 count(主键字段) 类似，但是不会读取记录中的任何字段的值</li>
+<li>count(*)：会被优化为 count(0)，执行效率和 count(1) 相同</li>
+<li>count(字段)：会走全表扫描，如果其 NOT NULL，那么 Server 层就不需要额外的判断</li>
+</ul>
+</li>
+<li><p>如何优化 select count(*) 执行效率？</p>
+<ul>
+<li>使用近似值：如 explain select count(*) from table</li>
+<li>额外表保存计数值</li>
+</ul>
+</li>
+<li><p>Insert 语句会加锁吗？</p>
+<p>Insert 语句在正常执行的时候不会生成锁结构的，只有在以下情况才会将隐式锁转换为显式锁：</p>
+<ul>
+<li>如果记录之间加有间隙锁，为了避免幻读，此时是不能插入记录的</li>
+<li>如果 Insert 的记录和已有记录存在唯一键冲突，此时也不能插入记录</li>
+</ul>
+<p>在事务未提交前，将会一直保持有对应的共享的记录锁（插入意向锁），对于唯一二级索引，下图会造成阻塞：</p>
+<img src="640-167033605166311.png" alt="图片" style="zoom: 67%;" />
+</li>
+<li><p>MySQL 中如何进行死锁避免？</p>
+<ul>
+<li>设置事务等待锁的超时时间：innodb_lock_wait_timeout</li>
+<li>开启主动死锁检测：innodb_deadlock_detect</li>
+</ul>
+</li>
+<li><p>MySQL 中的 SQL 层和存储引擎层的作用分别是什么？</p>
+<ul>
+<li>SQL：查询解析，分析，优化，缓存，跨存储引擎的功能在该层实现，如存储过程，触发器</li>
+<li>存储引擎层：负责 MySQL 中的数据存储和提取</li>
+</ul>
+</li>
+<li><p>MySQL 性能优化从哪些方面进行？</p>
+<ul>
+<li>Schema 设计和数据类型优化：通常越小的数据类型越快，占用更小的磁盘</li>
+<li>索引：注意索引失效的情况，覆盖索引，使用索引排序，前缀索引，删除长期未使用索引</li>
+<li>特定类型：优化 count 查询，优化 LIMIT 分页，优化 UNION，优化关联查询（尝试子查询）</li>
+</ul>
+</li>
+<li><p>Buffer pool 有什么作用，哪些数据在 buffer pool 中？</p>
+<p>通过 buffer pool 来提高数据库的读写性能，其以页（16 KB）为单位，通过参数 innodb_buffer_pool_size 调整缓存空间大小，其中存储的数据有：数据页，索引页，undo 页，插入缓存页，锁信息等（不包括 redo log buffer）。</p>
+</li>
+<li><p>InnoDB 是如何管理 buffer pool 中的页的？</p>
+<p>通过三种链表管理缓存页：</p>
+<ul>
+<li>Free List：管理空闲页</li>
+<li>Flush List：管理脏页</li>
+<li>LRU List：管理脏页和干净页，在内存不足时用于淘汰</li>
+</ul>
+</li>
+<li><p>InnoDB 如何对 LRU 进行优化的？</p>
+<ul>
+<li>预读失效：分为 young 区域和 old 区域，加入缓冲区的页首先被放在 old 区域，只有后续真正被访问才会真正放入 young 区域</li>
+<li>缓存污染：为进入到 young 区域的页增加了一个停留在 old 区域时间的判断，只有本次访问与第一次访问时间大于某个时间间隔（innodb_old_blocks_time），才会将其移动到 young 区域的头部</li>
+</ul>
+</li>
+<li><p>InnoDB 中的脏页刷盘时机？</p>
+<ul>
+<li>redo log 日志满了，主动触发</li>
+<li>Buffer pool 空间不足，逐出脏页，需要刷盘</li>
+<li>MySQL 认为空闲时，后向线程定期将适量的脏页刷盘</li>
+<li>MySQL 正常关闭之前，所有脏页都需要刷盘</li>
+</ul>
+</li>
+<li><p>在 InnoDB 引擎中，执行一条更新语句涉及到哪些日志，分别有何作用？</p>
+<p>涉及到 redo log，undo log 和 binlog：</p>
+<ul>
+<li>undo log：InnoDB 存储引擎生成的日志，实现了事务的原子性，用于事务回滚和支持 MVCC</li>
+<li>redo log：InnoDB 存储引擎生成的日志，实现了事务的持久性，主要用故意掉电等故障恢复</li>
+<li>binlog：Server 层生成的日志，主要用于数据备份和主从复制</li>
+</ul>
+</li>
+<li><p>redo log 产生动机？</p>
+<p>Buffer Pool 为上层应用提供了缓存的功能，脏页并不会立即写到磁盘上，为了防止掉电产生数据不一致的情形，需要先使用 redo log 记录下事务的操作，然后操作内存数据，最后在合适时间点将脏页数据刷到磁盘上，这样就能保证 crash-safe。</p>
+</li>
+<li><p>修改 undo 页面，需要记录对应的 redo log 吗？</p>
+<p>需要，需要先记录修改 undo 页面的 redo log，再真正修改 undo 页面</p>
+</li>
+<li><p>redo log 同样需要写到磁盘，数据也要写到磁盘，为什么多此一举？</p>
+<p>redo log 采用的是追加写，磁盘操作是顺序写，而写入数据则需要先找到写入位置，对应磁盘操作是随机写，其将 MySQL 的写操作从磁盘的随机写变为顺序写，提高了系统性能</p>
+</li>
+<li><p>产生的 redo log 是直接写入磁盘吗？</p>
+<p>不是的，首先将操作记录到 redo log buffer 中，后续根据刷盘策略再将其写入到磁盘中</p>
+</li>
+<li><p>redo log 什么时候刷盘？</p>
+<p>主要有下面几个时机：</p>
+<ul>
+<li>MySQL 正常关闭时</li>
+<li>当 redo log buffer 中记录的写入量大于 redo log buffer 内存空间的一半时，会触发落盘</li>
+<li>InnoDB 的后台线程每隔 1 秒，将 redo log buffer 持久化到磁盘</li>
+<li>每次事务提交时都将缓存在 redo log buffer 里的 redo log 直接持久化到磁盘（ innodb_flush_log_at_trx_commit &#x3D; 1）</li>
+</ul>
+</li>
+<li><p>innodb_flush_log_at_trx_commit 参数控制什么？</p>
+<ul>
+<li><p>当设置该参数为 0 时，表示每次事务提交时 ，还是将 redo log 留在 redo log buffer 中 ，该模式下在事务提交时不会主动触发写入磁盘的操作，此时 MySQL 进程崩溃将损失上一秒内的事务数据</p>
+<blockquote>
+<p>InnoDB 的后台线程每隔 1 秒，将 redo log buffer 持久化到磁盘</p>
+</blockquote>
+</li>
+<li><p>当设置该参数为 1 时，表示每次事务提交时，都将缓存在 redo log buffer 里的 redo log 直接持久化到磁盘，这样可以保证 MySQL 异常重启之后数据不会丢失</p>
+</li>
+<li><p>当设置该参数为 2 时，表示每次事务提交时，都只是缓存在 redo log buffer 里的 redo log 写到 redo log 文件，注意写入到「 redo log 文件」并不意味着写入到了磁盘，因为操作系统的文件系统中有个 Page Cache，Page Cache 是专门用来缓存文件数据的，所以写入「 redo log文件」意味着写入到了操作系统的文件缓存，此时 MySQL 进程崩溃不一定会丢失数据，因为操作系统会在合适时机调用 fsync 进行数据落盘</p>
+</li>
+</ul>
+</li>
+<li><p>redo log 文件写满了怎么办？</p>
+<p>InnoDB 存储引擎有一个重做日志文件组，包含两个文件： ib_logfile0 和 ib_logfile1 。采用循环写的方式，check_point 表示当前要擦除的位置，write_pos 表示下一个 redo log 日志要写入的位置，当 redo log 文件写满了，也就是 write_pos 追上了 check_point，此时 MySQL 不能执行新的更新操作，其会停下来将 buffer pool 中的脏页刷新到磁盘中，以将 check_point 向后推进，使得 MySQL 恢复正常执行。</p>
+</li>
+<li><p>为什么有了 binlog， 还要有 redo log？</p>
+<p>最初的 MySQL 使用的是 MyISAM 引擎，其只有 binlog，用于归档，InnoDB 以插件形式引入，引入 redo log 是为了 crash-safe 能力。</p>
+</li>
+<li><p>redo log 和 binlog 有什么区别？</p>
+<ul>
+<li>适用对象不同，redo log 只适用于 InnoDB 引擎，而 binlog 所有引擎适用</li>
+<li>文件格式不同<ul>
+<li>binlog：STATEMENT，ROW，MIXED</li>
+<li>redo log：物理日志，记录的是某个数据页做了什么修改</li>
+</ul>
+</li>
+<li>写入方式不同：redo log 采用循环写，binlog 采用追加写</li>
+<li>用途不同：binlog 用于备份恢复，主从复制，redo log 用于掉电等故障恢复</li>
+</ul>
+</li>
+<li><p>主从复制如何实现？</p>
+<p>MySQL 集群的主从复制过程梳理成 3 个阶段：</p>
+<ul>
+<li>写入 Binlog：主库写 binlog 日志，提交事务，并更新本地存储数据</li>
+<li>同步 Binlog：把 binlog 复制到所有从库上，每个从库把 binlog 写到暂存日志（relay log）中</li>
+<li>回放 Binlog：回放 relay log，并更新存储引擎中的数据</li>
+</ul>
+</li>
+<li><p>MySQL 主从复制还有些模型？</p>
+<ul>
+<li>同步复制：MySQL 主库提交事务的线程要等待所有从库的复制成功响应，才返回客户端结果。这种方式在实际项目中，基本上没法用，原因有两个：一是性能很差，因为要复制到所有节点才返回响应；二是可用性也很差，主库和所有从库任何一个数据库出问题，都会影响业务。</li>
+<li>异步复制（默认模型）：MySQL 主库提交事务的线程并不会等待 binlog 同步到各从库，就返回客户端结果。这种模式一旦主库宕机，数据就会发生丢失。</li>
+<li>半同步复制：MySQL 5.7 版本之后增加的一种复制方式，介于两者之间，事务线程不用等待所有的从库复制成功响应，只要一部分复制成功响应回来就行，比如一主二从的集群，只要数据成功复制到任意一个从库上，主库的事务线程就可以返回给客户端。这种半同步复制的方式，兼顾了异步复制和同步复制的优点，即使出现主库宕机，至少还有一个从库有最新的数据，不存在数据丢失的风险。</li>
+</ul>
+</li>
+<li><p>什么时候 binlog cache 会写到 binlog 文件？</p>
+<p>在事务提交的时候，执行器把 binlog cache 里的完整事务写入到 binlog 文件中，并清空 binlog cache。同样地，MySQL 提供一个 sync_binlog 参数来控制数据库的 binlog 刷到磁盘上的频率：</p>
+<ul>
+<li>sync_binlog &#x3D; 0 的时候，表示每次提交事务都只 write，不 fsync，后续交由操作系统决定何时将数据持久化到磁盘；</li>
+<li>sync_binlog &#x3D; 1 的时候，表示每次提交事务都会 write，然后马上执行 fsync；</li>
+<li>sync_binlog &#x3D;N(N&gt;1) 的时候，表示每次提交事务都 write，但累积 N 个事务后才 fsync</li>
+</ul>
+</li>
+<li><p>为什么需要两阶段提交？</p>
+<p>事务提交后，redo log 和 bin log 都需要持久化到磁盘，但是可能出现半成功的状态，对于命令 UPDATE t_user SET name &#x3D; ‘xiaolin’ WHERE id &#x3D; 1：</p>
+<ul>
+<li>如果在将 redo log 刷入到磁盘之后， MySQL 突然宕机了，而 binlog 还没有来得及写入。MySQL 重启后，通过 redo log 能将 Buffer Pool 中 id &#x3D; 1 这行数据的 name 字段恢复到新值 xiaolin，但是 binlog 里面没有记录这条更新语句，在主从架构中，binlog 会被复制到从库，由于 binlog 丢失了这条更新语句，从库的这一行 name 字段是旧值 jay，与主库的值不一致性；</li>
+<li>如果在将 binlog 刷入到磁盘之后， MySQL 突然宕机了，而 redo log 还没有来得及写入。由于 redo log 还没写，崩溃恢复以后这个事务无效，所以 id &#x3D; 1 这行数据的 name 字段还是旧值 jay，而 binlog 里面记录了这条更新语句，在主从架构中，binlog 会被复制到从库，从库执行了这条更新语句，那么这一行 name 字段是新值 xiaolin，与主库的值不一致性；</li>
+</ul>
+<p>两阶段提交是为了避免出现两份日志之间的逻辑不一致的问题。</p>
+</li>
+<li><p>两阶段提交的过程是怎样的？</p>
+<p>MySQL 使用内部 XA 事务完成两阶段提交，将 redo log 写入拆分成两个步骤：prepare 和 commit，中间再穿插写入 binlog，具体如下：</p>
+<ul>
+<li>prepare 阶段：将 XID（内部 XA 事务的 ID） 写入到 redo log，同时将 redo log 对应的事务状态设置为 prepare，然后将 redo log 写入到硬盘；</li>
+<li>commit 阶段：把 XID 写入到 binlog，然后将 binlog 刷新到磁盘；接着调用引擎的提交事务接口，将 redo log 状态设置为 commit；</li>
+</ul>
+</li>
+<li><p>基于两阶段提交，MySQL 在重启后是如何进行数据恢复的？</p>
+<img src="640-16703317091106.png" alt="图片" style="zoom:50%;" />
+
+<p>在 MySQL 重启后会按顺序扫描 redo log 文件，碰到处于 prepare 状态的 redo log，就拿着 redo log 中的 XID 去 binlog 查看是否存在此 XID：</p>
+<ul>
+<li>如果 binlog 中没有当前内部 XA 事务的 XID，说明 redolog 完成刷盘，但是 binlog 还没有刷盘，则回滚事务。对应时刻 A 崩溃恢复的情况。</li>
+<li>如果 binlog 中有当前内部 XA 事务的 XID，说明 redolog 和 binlog 都已经完成了刷盘，则提交事务。对应时刻 B 崩溃恢复的情况。可以保证主库和备库的一致性。</li>
+</ul>
+<p>可以看到，对于处于 prepare 阶段的 redo log，即可以提交事务，也可以回滚事务，这取决于是否能在 binlog 中查找到与 redo log 相同的 XID，如果有就提交事务，如果没有就回滚事务。</p>
+</li>
+<li><p>事务没提交的时候，redo log 会被持久化到磁盘吗？</p>
+<p>会的，MySQL 后台线程会每隔一秒将 redo log buffer 持久化到磁盘，因此，redo log 可以在事务没提交之前持久化到磁盘，但是 binlog 必须在事务提交之后，才可以持久化到磁盘。</p>
+</li>
+<li><p>两阶段提交的问题？</p>
+<ul>
+<li>磁盘 IO 次数高：对于“双1”配置，每个事务提交都会进行两次 fsync（刷盘），一次是 redo log 刷盘，另一次是 binlog 刷盘。</li>
+<li>锁竞争激烈：两阶段提交虽然能够保证「单事务」两个日志的内容一致，但在「多事务」的情况下，却不能保证两者的提交顺序一致，因此，在两阶段提交的流程基础上，还需要加一个锁（prepare_commit_mutex）来保证提交的原子性，从而保证多事务的情况下，两个日志的提交顺序一致。</li>
+</ul>
+</li>
+<li><p>binlog 组提交实现方式？</p>
+<p>MySQL 引入了 binlog 组提交（group commit）机制，当有多个事务提交的时候，会将多个 binlog 刷盘操作合并成一个，从而减少磁盘 I&#x2F;O 的次数。引入了组提交机制后，prepare 阶段不变，只针对 commit 阶段，将 commit 阶段拆分为三个过程：</p>
+<ul>
+<li><p>flush 阶段：多个事务按进入的顺序将 binlog 从 cache 写入文件（不刷盘）；</p>
+</li>
+<li><p>sync 阶段：对 binlog 文件做 fsync 操作（多个事务的 binlog 合并一次刷盘）；</p>
+</li>
+<li><p>commit 阶段：各个事务按顺序做 InnoDB commit 操作，即设置 redo log 状态为 commit，<strong>不用刷盘</strong></p>
+<blockquote>
+<p>Commit 阶段队列的作用是承接 Sync 阶段的事务，完成最后的引擎提交，使得Sync可以尽早的处理下一组事务，最大化组提交的效率</p>
+</blockquote>
+</li>
+</ul>
+<p>上面的每个阶段都有一个队列，每个阶段有锁进行保护，锁粒度减小，这样就使得多个阶段可以并发执行，从而提升效率。</p>
+</li>
+<li><p>有 binlog 组提交，那有 redo log 组提交吗？</p>
+<p>MySQL 5.6 没有 redo log 组提交，MySQL 5.7 有 redo log 组提交。</p>
+<p>在 MySQL 5.6 的组提交逻辑中，每个事务各自执行 prepare 阶段，也就是各自将 redo log 刷盘，这样就没办法对 redo log 进行组提交。</p>
+<p>所以在 MySQL 5.7 版本中，做了个改进，在 prepare 阶段不再让事务各自执行 redo log 刷盘操作，而是推迟到组提交的 flush 阶段，也就是说 prepare 阶段融合在了 flush 阶段。</p>
+<img src="image-20221206212224788.png" alt="image-20221206212224788" style="zoom:50%;" />
+</li>
+<li><p>组提交相关参数？</p>
+<ul>
+<li>Binlog_group_commit_sync_delay：控制 flush 阶段后 sync 阶段前的等待时间</li>
+<li>Binlog_group_commit_sync_no_delay_count：最大组提交中事务的数目</li>
+</ul>
+</li>
+<li><p>MySQL 磁盘 IO 很高，优化方法有哪些？</p>
+<ul>
+<li>设置组提交的两个参数：binlog_group_commit_sync_delay 和 binlog_group_commit_sync_no_delay_count 参数，延迟 binlog 刷盘的时机，从而减少 binlog 的刷盘次数</li>
+<li>将 sync_binlog 设置为大于 1 的值</li>
+<li>将 innodb_flush_log_at_trx_commit 设置为 2</li>
+</ul>
+</li>
+<li><p>传统的 LRU 算法存在哪些问题？</p>
+<ul>
+<li>预读失效：预先读取下一页数据，但是并没有真正使用，导致热数据被逐出</li>
+<li>缓存污染：使用了顺序扫描，这些页数据只会被读取一次，导致之前的热数据被逐出</li>
+</ul>
+</li>
+<li><p>MySQL 中，InnoDB 提供的 buffer pool，用于缓存数据页，采用的 LRU 有哪些优化？</p>
+<ul>
+<li>预读失效：划分为 young 区域和 old 区域，预读数据被放在 old 区域上</li>
+<li>缓存污染：在内存页被访问的时候，还需判断其是否满足停留在 old 区域中的时间大于 1s</li>
+</ul>
+</li>
+<li><p>Linux 中，在读磁盘时也存在预读机制，将接下来的块读取到 page cache 中，如何解决问题？</p>
+<ul>
+<li>预读失效：实现两个 LRU 链表，即活跃 LRU 链表和非活跃 LRU 链表</li>
+<li>缓存污染：在内存页被访问<strong>第二次</strong>的时候，才将其升级到活跃 LRU 链表中</li>
+</ul>
+</li>
+<li><p>InnoDB 引擎下，其数据文件有哪些？</p>
+<p>在 InnoDB 引擎中，按照数据库名称创建对应的目录，然后在对应目录下面存储对应的表数据，如，对于 my_test 数据库，在 &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;my_test 目录下，存在以下文件：</p>
+<ul>
+<li>db.opt：存储当前数据库的默认字符集和字符校验规则</li>
+<li>t_order.frm：t_order 的表结构会保存在这个文件</li>
+<li>t_order.ibd：t_order 的表数据会保存在这个文件</li>
+</ul>
+</li>
+<li><p>InnoDB 中表空间是如何组织的？</p>
+<ul>
+<li>行（row）：数据库表中的记录都是按行进行存放的</li>
+<li>页（page）：记录是按照行来存储的，但是 InnoDB 引擎读写是按照页为单位的</li>
+<li>区（extent）：在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，可以保证链表中相邻的页物理位置上也相邻</li>
+<li>段（segment）：一般分为数据段、索引段和回滚段</li>
+</ul>
+</li>
+<li><p>InnoDB 行格式？</p>
+<p>Redundant，Compact，Dynamic 和 Compressed：</p>
+<ul>
+<li>Redundant：基本不再使用</li>
+<li>Compact：紧凑的行格式</li>
+<li>Dynamic 和 Compressed 两个都是紧凑的行格式，它们的行格式都和 Compact 差不多，因为都是基于 Compact 改进一点东西</li>
+</ul>
+</li>
+<li><p>Compact 行格式是怎样的？</p>
+<p><img src="/2023/02/04/MySQL-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/image-20221207110311061.png" alt="image-20221207110311061"></p>
+<ul>
+<li>记录的额外信息：<ul>
+<li>变长字段长度列表：用于记录各个变长字段的实际长度，每个长度值 1 到 2 字节</li>
+<li>NULL 值列表：记录各个可为 NULL 列的值是否是 NULL，每列使用 1 bit 即可</li>
+<li>记录头信息：delete_mask，next_record，record_type</li>
+</ul>
+</li>
+<li>记录的真实数据<ul>
+<li>row_id：只有在没有声明主键和唯一约束列，才会存在该列</li>
+<li>trx_id：标记哪个事务生成的</li>
+<li>roll_pointer：记录上个版本的指针，指向的是额外信息和真实数据之间位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>MySQL 如何处理数据单页溢出的？</p>
+<p>MySQL 支持像 TEXT 和 BLOB 数据，这些数据可能单个数据页放不下，因此需要提供溢出页，用来存储额外数据。Compact 格式的行数据是在真实数据处存放部分数据，再通过溢出页指针找到剩余数据，而 Compressed 和 Dynamic 则直接采用溢出指针的方式存储数据，这样，原来的数据页就能存放更多的行数据了</p>
+</li>
+<li><p>MySQL 的 NULL 值是怎么存放的？</p>
+<p>通过 NULL 值列表进行标记，其长度根据可为 NULL 列数目变化</p>
+</li>
+<li><p>MySQL 怎么知道 varchar(n) 实际占用数据的大小？</p>
+<p>通过变长字段长度列表存储实际占用大小</p>
+</li>
+<li><p>varchar(n) 中 n 最大取值为多少？</p>
+<p>MySQL 规定除了 TEXT、BLOBs 这种大对象类型之外，其他所有的列（不包括隐藏列和记录头信息）占用的字节长度加起来不能超过 65535 个字节。如果表只有一个 varchar(n) 字段，允许为 NULL，字符集是 ascii，那么最大值是 65535 - 2 - 1 &#x3D; 65532；如果有多个字段的话，要保证所有字段的长度 + 变长字段字节数列表所占用的字节数 + NULL值列表所占用的字节数 &lt;&#x3D; 65535。注意 n 表示字符数目，而不是字节数目，因此对于 UTF8 格式，n 还需要减少</p>
 </li>
 </ol>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2023/02/04/MySQL-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">http://blog.zsstrike.tech/2023/02/04/MySQL-面试题目汇总/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

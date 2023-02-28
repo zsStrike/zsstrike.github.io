@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-12-05T08:09:03.000Z">
-<meta property="article:modified_time" content="2023-02-27T07:01:17.019Z">
+<meta property="article:modified_time" content="2023-02-28T08:07:49.021Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-02-27 15:01:17'
+  postUpdate: '2023-02-28 16:07:49'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-27T07:01:17.019Z" title="更新于 2023-02-27 15:01:17">2023-02-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>40分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T08:09:03.000Z" title="发表于 2022-12-05 16:09:03">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-28T08:07:49.021Z" title="更新于 2023-02-28 16:07:49">2023-02-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">17.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>53分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 Redis 的相关问题，以便更深入掌握 Redis。</p>
 <span id="more"></span>
 
 
@@ -778,6 +778,160 @@
 <li>辅助实现 min-slaves 选项：可以防止主服务器在不安全的情况下执行写命令，如配置  为 3，那么在从服务器的数量小于 3 时，拒接执行写命令</li>
 <li>检测命令丢失：如果丢包的话，通过 offset 实现一致性</li>
 </ul>
+</li>
+<li><p>Redis 的高可用解决方案如何实现？</p>
+<p>Sentinel 是 Redis 的高可用性解决方案：由一个或多个 Sentinel 实例组成的 Sentinel 系统可以监视任意多个主服务器，以及这些主服务器属下的所有从服务器，当被监视的主服务器进入下线的状态时，自动将下线服务器的某个从服务器升级为新的主服务器，然后由新的主服务器代替已经下线的主服务器处理命令请求，当原来的主服务器又重新上线的时候，将其设置为新的主服务器的一个从服务器。</p>
+</li>
+<li><p>Redis 中的 Sentinel 如何启动和初始化的？</p>
+<ul>
+<li>初始化服务器：Sentinel 本质上是一个运行在特殊模式下的 Redis 服务器，但是初始化的时候不载入数据</li>
+<li>使用 Sentinel 专用代码</li>
+<li>初始化 Sentinel 状态：服务器会初始化一个 sentinelState 结构</li>
+<li>初始化 Sentinel 的 masters 属性：键是被监视主服务器的名字，值是被监视主服务器对应的 sentinelRedisInstance 结构，每个这样的结构代表一个被 Sentinel 监视的实例，可以是主服务器，从服务器，或者另外一个 Sentinel</li>
+<li>创建连向主服务器的网络连接：会创建两个连接，一个是命令链接，另外一个是订阅连接</li>
+</ul>
+</li>
+<li><p>Sentinel 是如何获取主从服务器信息的？</p>
+<ul>
+<li>获取主服务器信息：Sentinel 每十秒一次的频率，向被监视的主服务器发送 INFO 命令，获取当前信息。当 Sentinel 分析 INFO 命令中包含的从服务器的信息的时候，会检查从服务器对应的实例是否存在于其主服务器实例 slaves 字典中，存在的话更新相关信息，否则的话创建新的实例</li>
+<li>获取从服务器信息：Sentinel 每十秒一次的频率，向被监视的从服务器发送 INFO 命令，获取当前信息。会对从服务器实例进行更新</li>
+</ul>
+</li>
+<li><p>Sentinels 之间是如何相互发现的？</p>
+<p>默认情况下，PUBLISH 信息到主从服务器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUBLISH __sentinel__:hello s_ip, s_port, s_runid, s_epoch, m_name, m_ip, m_port, m_epoch</span><br></pre></td></tr></table></figure>
+
+<p>其他 Sentinel 节点，可以根据该信息更新 sentinels 字典，同时创建连接到其他 Sentinel 的命令连接。</p>
+</li>
+<li><p>什么是主观下线，什么是客观下线？</p>
+<p>检测主观下线行为：默认情况下，Sentinel 每秒向其创建了命令连接的实例发送 PING 命令，通过 PONG 回复检测是否在线。如果一个实例在 down-after-millseconds 毫秒内，连续向 Sentinel 返回无效回复，那么 Sentinel 会修改这个实例的结构，将 flags 属性中的 SRI_S_DOWN 设置为真，表示其主观下线。</p>
+<p>检查客观下线状态：当 Sentinel 将一个服务器判断为主观下线之后，为了确保是否真的下线了，需要向其他监视了这个服务器的 Sentinel 进行询问，看他们是否也认为主服务器也已经进入了下线状态。当接收到足够的下线判断之后，Sentinel 就会将从服务器判定为客观下线，并对主服务器执行故障转移操作。</p>
+<p>当一个主服务器被判断为客观下线时，监视这个下线服务器的各个 Sentinel 会进行协商（Raft 算法），选举出一个领头 Sentinel，由领头 Sentinel 对下线服务器执行故障转移操作。</p>
+</li>
+<li><p>故障转移操作流程？</p>
+<p>选出新的主服务器，修改从服务器的复制目标，将旧的主服务器变为从服务器。</p>
+</li>
+<li><p>Redis 如何存储超大量数据，如何实现分布式数据存储？</p>
+<p>Redis 集群是 Redis 提供的分布式数据库方案，集群通过分片（sharding） 来进行数据共享，并提供复制和故障转移功能。</p>
+</li>
+<li><p>Redis 中的节点数据结构，节点间是如何连接的？</p>
+<p>节点实际上就是一个运行在集群模式下的 Redis 服务器，通过 cluster-enabled 选项进行配置。clusterNode 结构保存了一个节点的当前状态，ClusterState 结构记录了在当前节点的视角下，集群目前所处的状态。clusterState.myself 指向本身节点 clusterNode。</p>
+<p>客户端发送 Cluster Meet 命令到 A 节点，A 节点根据参数发送 MEET 命令到 B 节点，然后 B 回复 PONG 信息，A 收到后同样回复 PING 命令，至此完成节点连接。</p>
+</li>
+<li><p>Redis 是如何进行数据和节点间的映射的？</p>
+<p>通过哈希槽实现数据和节点之间的映射，Redis 集群通过分片的方式来保存数据库中的键值对，集群的整个数据库被分为 16384 个槽(slot)，数据库中的每个键都属于这 16384 个槽的其中一个，集群中的每个节点可以处理 0 个或最多 16384 个槽。当数据库中的 16384 个槽都有节点在处理时，集群处于上线状态(ok)；相反地，如果数据库中有任何一个槽没有得到处理，那么集群处于下线状态(fail)。</p>
+</li>
+<li><p>槽的指派信息被记录在何处？</p>
+<p>对于节点来说，在 ClusterNode 节点中存在一个长度为 16384 的 bitmap，用于对指派到该节点上的槽进行标记；在 ClusterState 结构中，存在一个 <code>clsuterNode *slots[16384]</code> 结构，用来快速获取对应指派节点。</p>
+<p>当节点 A 通过消息从节点 B 那里接收到节点 B 的 slots 数组时，节点 A 会在自已的 clusterState.nodes 字典中査找节点 B 对应的 clusterNode 结构，并对结构中的 slots 数组进行保存或者更新。</p>
+</li>
+<li><p>CLUSTER ADDSLOTS 命令的实现？</p>
+<p>首先改动 clusterState.slots 指针，将对应槽指向自己，然后修改 clusterNode.slots 数组，将对应的 slots 置位。</p>
+</li>
+<li><p>Redis 在接收到客户端命令后，如何执行的？</p>
+<ul>
+<li>计算键输入哪个槽：CRC16(key) &amp; 16383</li>
+<li>判断槽是否由当前节点负责处理：clusterState.slots[i] &#x3D;&#x3D; clusterState.myself</li>
+<li>MOVED 错误：当节点发现键所在的槽不由自己处理的时候，返回 <code>MOVED &lt;SLOT&gt; &lt;ip&gt;:&lt;addr&gt;</code>，客户端自动转向到对应的节点，再次发送命令</li>
+</ul>
+</li>
+<li><p>Redis 中的节点数据库和普通服务器数据库有什么不同？</p>
+<p>集群节点保存键值对的方式和单机 Redis 服务器保存方式完全相同。唯一区别是节点只能使用 0 号数据库。另外，节点会使用 clusterState.slots_of_keys 跳跃表保存槽和键之间的关系，命令 <code>CLUSTER GETKEYSINSLOT &lt;slot&gt; &lt;count&gt;</code> 就是建立在该结构上的。</p>
+</li>
+<li><p>Redis 重新分片是什么，对应过程？</p>
+<p>Redis 集群的重新分片操作可以将任意数量已经指派给某个节点(源节点)的槽改为指派给另一个节点(目标节点)，并且相关槽所属的键值对也会从源节点被移动到目标节点。重新分片操作可以在线(online)进行，在重新分片的过程中，集群不需要下线，并且源节点和目标节点都可以继续处理命令请求。以下是对单个槽 slot流程：</p>
+<p><img src="/2022/12/05/Redis-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/image-20201025141051856.png" alt="image-20201025141051856"></p>
+</li>
+<li><p>什么是 ASK 错误？</p>
+<p>当执行分片期间，可能会存在这样一种情况：输入被迁移槽的一部分节点键值对保存在源节点里面，另外一部分保存在目标节点里面。碰到该情况，服务端将会返回 ASK 错误：<code>ASK &lt;SLOT&gt; &lt;ip&gt;:&lt;port&gt;</code>。此时，客户端将会打开 REDIS_ASKING 标示，该标示是一个一次性标示，当成功执行完一次命令的时候，此时该标示就会被移除。</p>
+<p><img src="/2022/12/05/Redis-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/image-20201025142144327.png" alt="image-20201025142144327"></p>
+</li>
+<li><p>ASK 错误和 MOVED 错误的区别？</p>
+<p>前者发生在节点间迁移槽的时候，是一种临时措施；后者发生在槽的负责权已经从一个节点迁移到了另外一个节点。</p>
+</li>
+<li><p>Redis 集群中如何设置从节点？是如何进行故障检测和故障转移的？</p>
+<ul>
+<li>设置从节点：<code>CLUSTER REPLICATE &lt;node_id&gt;</code> 让接受命令的节点成为 node_id 所指向节点的从节点。此时从节点中设置 clusterState.myself.slaveof 属性，主节点设置 clusterNode.slaves 属性。</li>
+<li>故障检测：集群中每个节点定期向其他节点发送 PING 消息，以此检测是否在线，如果超时，标记为 PFAIL（probable fail）。在集群中超过半数的节点都认为某个主节点 PFAIL，那么这个节点会被标记为下线（FAIL），同时广播这条消息。</li>
+<li>故障转移：从 FAIl 的主节点的从节点里面选择一个作为主节点，然后将原来主节点的槽指派给自己，新的主节点广播 PONG 信息，让其他的节点知道这个节点已经选为主节点，最后新的节点开始接收和负责处理自己的槽有关的命令请求，故障转移完成。</li>
+</ul>
+</li>
+<li><p>Redis 集群中的消息有哪几种，分别有何作用？</p>
+<ul>
+<li>MEET 消息：给某个节点发送 MEET 信息，请求该节点加入集群</li>
+<li>PING 消息：每秒钟向 5 个最久没有通信的节点，发送 PING 消息，以检测对应节点是否在线</li>
+<li>PONG 消息：收到 PING&#x2F;MEET 命令的回复消息，可以携带节点的相关信息，也可以主动广播自己的消息</li>
+<li>FAIL 消息：用于广播某个节点已经下线</li>
+<li>PUBLISH 消息：向指定 Channel 发送消息，所有订阅了频道的都能获取到该信息</li>
+</ul>
+</li>
+<li><p>Redis 发布与订阅功能的实现原理？</p>
+<p>主要由 PUBLISH，SUBSCRIBE，PSUBSCRIB 等命令组成，每当有其他客户端向被订阅的频道发送消息时，频道的所有订阅者都会收到这个消息。</p>
+<ul>
+<li>频道的订阅与退订：Redis 将所有订阅关系保存在 RedisServer.pubsub_channels <strong>字典</strong>里面，键是某个被订阅的频道，键值则是一个链表，保存着所有订阅这个频道的客户端。</li>
+<li>模式的订阅与退订：Redis 将所有模式的订阅关系保存在 RedisServer.pubsub_patterns <strong>列表</strong>里面。</li>
+</ul>
+</li>
+<li><p>当执行 <code>PUBLISH &lt;channel&gt; &lt;message&gt;</code> 的时候，Redis 是如何进行处理的？</p>
+<p>服务器需要将消息 message 发送到对应的 channel 的所有订阅者，另外如果有模式匹配这个 channel，那么需要将 message 发送给 pattern 模式的订阅者。</p>
+<ul>
+<li>将消息发送给频道订阅者：从 pubsub_channels 字典里面找到订阅者链表，然后将消息发送给名单上的所有客户端</li>
+<li>将消息发送给模式订阅者：遍历 pubsub_patterns 链表，查找那些与 channel 频道匹配的模式，并且将消息发送到这些模式的客户端</li>
+</ul>
+</li>
+<li><p>Redis 如何查看频道或者模式的相关信息？</p>
+<ul>
+<li>PUBSUB CHANNELS [pattern]：返回与 pattern 匹配的频道</li>
+<li>PUBSUB NUMSUB [channel-1 channel-2]：返回频道对应订阅者的数量</li>
+<li>PUBSUB NUMPAT：返回当前服务器被订阅模式的数量</li>
+</ul>
+</li>
+<li><p>Redis 是如何实现事务的？</p>
+<p>Redis 通过 MULTI，EXEC，WATCH 等命令实现事务功能。在事务执行期间，服务器不会中断事务去执行其他客户端的请求，他会将事务中的命令执行完毕之后才去处理其他的客户端的请求。</p>
+<ul>
+<li>事务开始：MULTI 命令的执行标志者事务的开始，会将执行该命令的客户端从非事务状态转换为事务状态</li>
+<li>命令入队：当客户端处于事务状态之后，如果客户端发送的指令是 EXEC，DISCARD，WATCH，MULTI 命令之一，那么立即执行，否则的话将其放入事务队列之中，然后返回 QUEUED 回复。每个 Redis 客户端都有自己的事务状态 multiState，里面包含一个事务队列，记录了本次事务中的所有命令</li>
+<li>执行事务：当发送 EXEC 命令的时候，此时就开始执行遍历这个客户端的事务队列，执行其中的所有命令，然后将得到的回复返回给客户端</li>
+</ul>
+</li>
+<li><p>Redis 中的 WATCH 命令的作用，如何实现的？</p>
+<p>WATCH 命令是一个乐观锁，它可以在 EXEC 命令执行之前，监视任意数量的数据库键，并且在 EXEC 命令执行的时候，检查被监视的键中是否至少有一个已经被修改过了，如果是的话，服务器将拒绝执行事务，并向客户端返回执行失败的空回复。</p>
+<ul>
+<li>WATCH 命令监视数据库键：每个 Redis 数据库都保存着一个 watched_keys 字典，字典的键是某个数据库键，而字典的值则是一个链表，记录所有的监视相应数据库键的客户端</li>
+<li>监视机制的触发：所有对数据库进行修改的命令，在执行之后会调用 touchWatchKey 函数对监视字典进行检查，如果某个键被修改，会将对应的客户端 REDIS_DIRTY_CAS 标示打开，表示客户端的安全性已经被破坏</li>
+<li>判断事务是否安全：服务器根据客户端的 REDIS_DIRTY_CAS 标识来决定是否执行事务</li>
+</ul>
+</li>
+<li><p>Redis 中的事务满足 ACID 属性吗？</p>
+<p>Redis 中的事务和数据库中的事务并不相同，其更像是批命令，其不满足：</p>
+<ul>
+<li>原子性：当命令出错时，其不会进行回滚，而是继续执行接下来的命令</li>
+<li>持久性：即使采用 AOF 并且 appendfsync 配置为 always，还是可能发生数据丢失。先执行命令，再刷写日志的机制，可能会导致 Redis 丢失一个事件循环里面的内容（没有 redo log 进行宕机后数据恢复）</li>
+</ul>
+</li>
+<li><p>Redis 中的 SORT numbers 命令的实现过程？</p>
+<ul>
+<li>首先创建一个和 numbers 列表长度相同的数组，数组的每一项是 redis.h&#x2F;redisSortObject 结构</li>
+<li>遍历数组，将数组项的 obj 指针指向对应的列表项，一一对应</li>
+<li>遍历数组，将 obj 指针指向的列表项转换为一个 double 类型的浮点数，存到 u.score 中</li>
+<li>根据 u.score 中的值，进行升序排序</li>
+<li>遍历数组，将各个数组项的 obj 指针指向的列表项返回给客户端</li>
+</ul>
+<blockquote>
+<p>通过指针和分数设置，降低了排序所需的空间大小</p>
+</blockquote>
+</li>
+<li><p>Redis 中的监视器的作用，如何实现对应功能的？</p>
+<p>通过执行 MONITOR 命令，客户端可以将自己变为一个监视器，实时接收并打印服务器当前处理的命令请求。</p>
+<p>实现：执行 MONITOR 命令后，客户端的 REDIS_MONITOR 标志会被打开，并且这个客户端会被添加到 redisServer.monitors 链表的表尾。服务器每次执行命令之前，都会调用 replicationFeedMonitor 函数，由这个函数将命令请求信息发送给各个监视器。</p>
+</li>
+<li><p>Redis 中的慢查询日志有什么作用，相关参数有哪些，具体实现？</p>
+<p>记录执行时间超过指定时长的命令请求，用户可以通过该功能产生的日志来对语句进行针对性优化。</p>
+<ul>
+<li>slowlog-log-slower-than: 指定执行时间上限，超过上限的会被记录到日志上</li>
+<li>slowlog-max-len: 记录慢查询日志最大条数</li>
+</ul>
+<p>所有的慢查询日志都被保存在 redisServer.slowlog 列表中，发现慢查询日志后就可以将其头插法插入到链表中，正在执行 SLOWLOG 相关指令的时候，会对该列表进行遍历。</p>
 </li>
 </ol>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/12/05/Redis-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">http://blog.zsstrike.tech/2022/12/05/Redis-面试题目汇总/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Redis/">Redis</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
