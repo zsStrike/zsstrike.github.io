@@ -2,7 +2,7 @@
 title: MySQL 面试题目汇总
 date: 2023-02-04 12:05:45
 tags: ["MySQL"]
-hidden: [true]
+hidden: true
 ---
 
 
