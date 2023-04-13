@@ -470,25 +470,29 @@ tags: ["Cpp"]
 
     最初使用 class 在模板中定义类型，为了避免混淆，引入了 typename 关键词，在模板定义语法中关键字 class 与 typename 的作用完全一样。但是 typename 另外一个作用为：使用嵌套依赖类型(nested depended name)，如下所示：`typedef typename T::LengthType LengthType;` 。
 
-75. decltype 作用？
+75. 模板中的非类型参数的作用？
+
+    `template <typename T, int max_size>`：其中的 max_size 便是非类型参数，表达式参数可以是整型、枚举、引用或指针。构造函数方法使用的是通过 new 和delete 管理的堆内存，而表达式参数方法使用的是为**自动变量维护的内存栈**。这样，执行速度将更快，尤其是在使用了很多小型数组时。
+
+76. decltype 作用？
 
     通过 decltype 来确定对应的变量类型，如 `decltype(expr) var`，还可以被用于后置返回类型中，确保模板正常实例化。
 
-76. C++ 如何确保在同一个文件中只能将同一个头文件包含一次？
+77. C++ 如何确保在同一个文件中只能将同一个头文件包含一次？
 
     + ifndef-define-endif：移植性高
     + #pragma once：通用，不是标准的预处理器
     + _Pragma("once")：C99 中定义，标准，但是使用较少
 
-77. C++ 如何进行信号处理的？
+78. C++ 如何进行信号处理的？
 
     通过 signal(registered signal, signal handler) 来进行注册，handler 便是实际处理的程序，也可以在程序中通过 raise(signal sig) 来生成信号。 
 
-78. C++ thread join 和 detach 的区别？
+79. C++ thread join 和 detach 的区别？
 
     join 表示主线程需要等待从线程结束之后才能继续执行，而 detach 则表示让从线程在后台运行，即说明主线程不会等待子线程运行结束才结束。一般来说，当程序没有使用共享变量或引用之类的话，可以使用 detach 函数，分离线程。否则需要使用 join 来确保共享变量的安全析构。
 
-79. C++ 标准模板库主要有那三个组件？
+80. C++ 标准模板库主要有那三个组件？
 
     | 组件                | 描述                                                         |
     | :------------------ | :----------------------------------------------------------- |
