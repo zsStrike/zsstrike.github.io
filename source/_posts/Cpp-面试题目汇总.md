@@ -593,55 +593,89 @@ tags: ["Cpp"]
     1. 它们被定义时的类型
     2. 整体做为一个表达式的类型（一定是泛左值）
 
-96. 可变参数模板有何作用？
+    正是对于变量有这两种需求的存在，而其它表达式没有这样的问题，所以，才专门为变量定义了两种求类型的方法。而对于其它表达式则两种方式无差别。
 
-    提供了更强的模板功能，可以用于处理不定长，类型不尽相同的数据：
+96. auto 类型推演的语义是什么？
 
-    ```cpp
-    template<typename T>
-    void log(const T& t) {
-    		cout << t << endl;
-    }
-    template<typename T, typename... Args>
-    void log(const T& t, const Args&... args) {
-    		cout << t << " ";
-      	log(args...);
-    }
-    ```
+    在 C++17 之前，使用的都是 `copy/move` 语意，因此，对于任意表达式：`auto v = expr` ：
 
-97. std::function 有何作用？
+    + 首先，`auto` 不可能是一个 **引用** ，无论是 **左值引用** ，还是 **右值引用** ，所以，如果 `expr` 返回类型里 包含任何引用，都会被舍弃。
+    + 其次，所有对值所修饰的 `const` 都会被丢弃。
 
-    封装可调用对象，提供统一的接口，可将 lambda 表达式，函数指针，函数对象赋值给 function 对象，提高程序的
+    到了 `C++17` 之后， 并非所有的场景下，都是 `copy/move` 语意， 比如 `auto v = Foo{1}` ， 其行为完全等价于： `Foo v{1}` 。因而，更准确的说，这不是 `copy/move` 语意，而属于**构造初始化语意**。
 
-98. C++ 如何确保在同一个文件中只能将同一个头文件包含一次？
+97. 如果想要使得自动类型推演得到引用或者 const 语义？
 
-    + ifndef-define-endif：移植性高
-    + #pragma once：通用，不是标准的预处理器
-    + _Pragma("once")：C99 中定义，标准，但是使用较少
+    希望让新定义的变量属于引用类型，或具备 `const` ，则需要明确指定。如 `const auto& ref = foo`。
 
-99. C++11 新增的库有哪些？
+98. 通用引用指的是什么？
 
-    random，chrono，tuple，ratio，regex，atomic，thread，mutex，condition_variable，future，function 等。
+    更为特殊的是 `auto&& v = expr` 的表达式。这并不必然导致 `v` 是一个右值引用。而是取决于 `expr` 的类别。
 
-100. alignof 和 alignas 的作用？
+    - 如果 `expr` 是一个 **左值** 表达式，那么 `v` 将是左值引用类型；
+    - 如果 `expr` 是一个 **右值** 表达式，那么 `v` 将会是右值引用类型。
+
+99. `auto i{1}` 和 `auto v = {1}`  有何区别？
+
+    前者表示 `auto i = 1`，后者等价于 `std::initializer_list<int> v = {1}` 。
+
+100. `decltype(auto)` 有何作用？
+
+     由于 `auto` 推演总是会丢弃 **引用** 及 `const` 信息，明确给出 **引用** 又总是得到一个引用。明确给出 `const` ， 则总是得到一个 `const` 类型。这对于想精确遵从等号后面类型的情况非常不便，尤其在进行泛型编程时，很难通过 auto 符合通用的情况。而 `decltype` 恰恰相反，它总是能准确捕捉右侧表达式的类型，`decltype(auto)` ， 其中 `auto` 是一个自动占位符，代表等号右侧的表达式。
+
+101. auto 关键字还有何作用？
+
+     除了用于类型推演，还可以用于对于普通函数的返回值自动推演，甚至可以使用 auto 参数简化模板，但是 auto 不保证变量类型的一致性。
+
+102. 可变参数模板有何作用？
+
+     提供了更强的模板功能，可以用于处理不定长，类型不尽相同的数据：
+
+     ```cpp
+     template<typename T>
+     void log(const T& t) {
+     		cout << t << endl;
+     }
+     template<typename T, typename... Args>
+     void log(const T& t, const Args&... args) {
+     		cout << t << " ";
+       	log(args...);
+     }
+     ```
+
+103. std::function 有何作用？
+
+     封装可调用对象，提供统一的接口，可将 lambda 表达式，函数指针，函数对象赋值给 function 对象，提高程序的
+
+104. C++ 如何确保在同一个文件中只能将同一个头文件包含一次？
+
+     + ifndef-define-endif：移植性高
+     + #pragma once：通用，不是标准的预处理器
+     + _Pragma("once")：C99 中定义，标准，但是使用较少
+
+105. C++11 新增的库有哪些？
+
+     random，chrono，tuple，ratio，regex，atomic，thread，mutex，condition_variable，future，function 等。
+
+106. alignof 和 alignas 的作用？
 
      C++11 引入的关键字`alignof`，可直接获取类型`T`的内存对齐要求。`alignof`的返回值类型是`size_t`，用法类似于`sizeof`。
 
      alignas 则用于定义一个结构体或者类的对其方式。
 
-101. constexpr 作用？
+107. constexpr 作用？
 
      constexpr 限定在了编译期常量，const 并未区分出编译期常量和运行期常量。在 C++11 以后，建议凡是「常量」语义的场景都使用 constexpr，只对「只读」语义使用 const。
 
-102. C++ 如何进行信号处理的？
+108. C++ 如何进行信号处理的？
 
      通过 signal(registered signal, signal handler) 来进行注册，handler 便是实际处理的程序，也可以在程序中通过 raise(signal sig) 来生成信号。 
 
-103. C++ thread join 和 detach 的区别？
+109. C++ thread join 和 detach 的区别？
 
      join 表示主线程需要等待从线程结束之后才能继续执行，而 detach 则表示让从线程在后台运行，即说明主线程不会等待子线程运行结束才结束。一般来说，当程序没有使用共享变量或引用之类的话，可以使用 detach 函数，分离线程。否则需要使用 join 来确保共享变量的安全析构。
 
-104. C++ 标准模板库主要有那三个组件？
+110. C++ 标准模板库主要有那三个组件？
 
      | 组件                | 描述                                                         |
      | :------------------ | :----------------------------------------------------------- |
@@ -649,7 +683,7 @@ tags: ["Cpp"]
      | 算法（Algorithms）  | 算法作用于容器。它们提供了执行各种操作的方式，包括对容器内容执行初始化、排序、搜索和转换等操作。 |
      | 迭代器（iterators） | 迭代器用于遍历对象集合的元素。这些集合可能是容器，也可能是容器的子集。 |
 
-105. 迭代器类型有哪些？
+111. 迭代器类型有哪些？
 
      + 输入迭代器：来自容器的信息被视为输入，就像来自键盘的信息对程序来说是输入一样。因此，输入迭代器可被程序用来读取容器中的信息。
      + 输出迭代器：用于将信息从程序传输给容器的迭代器，因此程序的输出就是容器的输入。
@@ -657,7 +691,7 @@ tags: ["Cpp"]
      + 双向迭代器：同时支持两种（前缀和后缀）递减运算符
      + 随机访问迭代器：随机访问迭代器具有双向迭代器的所有特性，同时添加了支持随机访问的操作（如指针增加运算）和用于对元素进行排序的关系运算符。
 
-106. emplace_back 和 push_back 区别？
+112. emplace_back 和 push_back 区别？
 
      **push_back**() 向容器尾部添加元素时，首先会创建这个元素，然后再将这个元素拷贝或者移动到容器中（如果是拷贝的话，事后会自行销毁先前创建的这个元素）；而**emplace_back**() 在实现时，则是直接在容器尾部创建这个元素，省去了拷贝或移动元素的过程。
 
