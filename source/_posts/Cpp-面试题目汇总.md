@@ -620,7 +620,7 @@ tags: ["Cpp"]
 
      + auto_ptr：采用所有权转让方式实现赋值运算，避免了两次释放相同地址空间的问题，但是`auto_ptr<string> a = b`会导致 b 丢失所有权，后面使用可能导致异常，因此被 deprecated
      + unique_ptr：和 auto_ptr 类似，但是不支持赋值运算，编译时发现错误
-     + shared_ptr：采用引用计数的方式实现，计数为 0 时自动释放内存
+     + shared_ptr：采用引用计数的方式实现，计数为 0 时自动释放内存，可以通过 make_shared 来消除显式使用的 new
      + weak_ptr：为了配合 shared_ptr 而引入的一种智能指针，它指向一个由shared_ptr 管理的对象而不影响所指对象的生命周期，也就是将一个weak_ptr 绑定到一个 shared_ptr 不会改变 shared_ptr 的引用计数。用于解决循环引用的问题
 
 101. decltype 作用？
