@@ -1135,6 +1135,10 @@ hidden: true
 
      其实，编译器会把我们写的 lambda 表达式翻译成一个类，并重载 operator() 来实现。也就是将 lambda 表达式转换为函数对象，并且在传值和传引用时进行初始化即可。
 
+177. std::enable_shared_from_this 有何作用？
+
+     通过让自定义类继承自该模板类，达到使用 shared_ptr 管理该类的作用。如果只是在类里面定义 std::make_shared(this)，这样生成的 shared_ptr 其 use_count 是独立的，而继承该模板类，其提供了 shared_from_this 方法，这样就达到了所有外部调用者都可以直接使用 shared_ptr 的目的，而不用担心内存被二次释放的问题。
+
 
 
 
