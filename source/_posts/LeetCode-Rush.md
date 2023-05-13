@@ -350,12 +350,29 @@ tags: ["Algorithm"]
 ## Java 编程知识点
 
 + IntegerCache：在自动装箱时，为了提高性能，Java 缓存了 [-128, 127] 的整形值引用，因此，当我们比较两个 Integer 的时候，应该使用 equals 方法，或者借助 intValue 方法，而不是 `==`
+
++ Java 中的数字字面量都是整型，如果需要 long 型，需要增加 L 后缀，下列代码存在问题：
+
+  ```java
+  long a = some_num();
+  // 0xFFFFFFFF 被转为 -1，并非是 2^31 
+  if (a == 0xFFFFFFFF) return false;
+  ```
+
 + random.nextInt() 和 nextInt(upperBound)：不加参数的话，int 类型 32 位都会随机 0 或者 1，可能会产生负数，使用取模可能会产生负数，加参数的话返回 [0, upperBound) 之间的整型
+
 + 在 Java 中使用 int[] 作为 HashMap 的键并不会得到想要的结果，因为其会使用 int[] 的索引作为 hashcode，可以使用 `List<Integer>` 或者重写一个类，该类重新实现 hashcode 和 equals 算法，亦或直接使用 TreeMap
+
 + Object.hashCode 是一个实例方法，不允许 null；Objects.hashCode(obj) 是静态方法，允许 obj 为 null；Objects.hash(obj...) 也是静态方法，接受多个参数，返回所有参数的总的哈希值
+
 + Integer.valueOf() 和 Integer.parseInt() 两者都是对字符串进行解析，不过它们的返回值类型不同，前者是 Integer，后者是 int
+
 + `List<Integer>` 到 `int[]` 类型的转换不能直接使用 toArray，可以借助流：`list.stream().mapToInt(Integer.intValue).toArray()`
+
 + 想要对自定义类实现排序，要么实现 `Comparable<T>` 接口，重写 `compareTo` 方法，或者是排序的时候传入一个 `Comparator<T>` 对象，重写 `compare` 方法
+
 + 想要对 `int[]` 类型进行降序排序，不能直接用 `Arrays.sort`，其只对 `T[]` 提供自定义比较器，可以使用流操作来实现：`Arrays.stream(arr).boxed().sorted((a, b) -> b - a).mapToInt(Integer::intValue).toArray()`
+
 + 在 Java 设计中 Stack 继承自 Vector，这是一种错误的设计，应该使用组合而不是继承关系。官方推荐写法：`Deque<Integer> stack = new ArrayDeque<>()`
+
 + 注意使用三目运算符优先级：`a + b > c ? b : c`，此时判断的是 a+b 和 c 的大小，而不是 b 和 c 的大小。
