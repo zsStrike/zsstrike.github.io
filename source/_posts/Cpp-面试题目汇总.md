@@ -1585,3 +1585,18 @@ hidden: true
 
 
 
+Linux 内存中的 Cache 和 Buffer 指的是什么，有何作用？
+
++ Cache：指的是 Page Cache，通常是按照页为单位来缓存文件系统中的文件，可用于文件数据的快速访问，注意其同样也会缓存文件的写操作，缓存文件写操作就需要 dirty 标识符配合
++ Buffer：指的是 Buffer Cache，用于暂存物理磁盘块，通常用于写操作（写数据到磁盘）进行缓存，但是也可用于读缓存（从磁盘读数据）
++ **Buffers** can be used either as a “cache for data to be written to disk” or as a “cache for data read from disk”.
++ **Cache** can be used either as a “page cache for reading data from files” or as a “page cache for writing files”.
+
+
+
+
+
+
+
+
+
