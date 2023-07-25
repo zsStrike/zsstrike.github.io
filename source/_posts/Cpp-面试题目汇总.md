@@ -11,6 +11,10 @@ hidden: true
 
 
 
+
+
+
+
 本文用于整理学习 C++ 时遇到的疑问和解答，以及一些面试题目，以备查阅。
 
 <!-- More -->
@@ -149,7 +153,7 @@ hidden: true
 
 16. 位域有何作用？
 
-    通常用在结构体中 `struct data {char a : 4; char b : 4;}`，表示某个变量有几位数据，用于节省内存，当然也可以通过整型和位运算实现相同效果（如 Java）。注意，不能对位域取地址，需要特别注意 `vector<bool>` 的使用。
+    通常用在结构体中 `struct data {char a : 4; char b : 4;}`，表示某个变量有几位数据，用于节省内存，当然也可以通过整型和位运算实现相同效果（如 Java）。注意，不能对位域取地址或者引用，需要特别注意 `vector<bool>` 的使用。
 
 17. 下列代码存在问题吗，为什么？
 
@@ -190,7 +194,7 @@ hidden: true
 
     + 递归定义：即定义一个单变量，再定义一个多变量模板
     + 变参展开：可以通过使用 `sizeof...(args) > 0` 来决定是否递归调用
-    + 初始化列表展开：`std::initializer_list<T>{lambda, value}` ，不推荐
+    + 初始化列表展开：`std::initializer_list<T>{(lambda, value)...}` ，需要配合逗号表达式，不推荐
 
 23. 折叠表达式作用？
 
@@ -248,7 +252,7 @@ hidden: true
 
     1. 类型和安全检查不同：宏定义是字符替换，没有数据类型的区别；const 常量是常量的声明，有类型区别，需要在编译阶段进行类型检查
     2. 编译器处理不同：宏定义是一个"编译时"概念，在预处理阶段展开；const 常量是一个"运行时"概念，在程序运行使用，类似于一个只读数据
-    3. 存储方式不同：宏定义是直接替换，不会分配内存，存储于程序的代码段中；const常量需要进行内存分配，存储于程序的数据段中
+    3. 存储方式不同：宏定义是直接替换，不会分配内存，存储于程序的代码段中；const 常量需要进行内存分配，存储于程序的数据段中
     4. 定义后能否取消：宏定义可以通过 #undef 来使之前的宏定义失效，const 常量定义后将在定义域内永久有效
     5. 是否可以做函数参数：宏定义不能作为参数传递给函数；const 常量可以在函数的参数列表中出现
 
@@ -263,9 +267,9 @@ hidden: true
 33. 下面代码的区别是什么？
 
     ```cpp
-    const char *arr = "123"; //1
-    char *arr = "123"; //2
-    const char arr[] = "123"; //3
+    const char *arr = "123"; // 1
+    char *arr = "123"; // 2
+    const char arr[] = "123"; // 3
     char arr[] = "123"; // 4
     ```
 
@@ -276,11 +280,11 @@ hidden: true
     + 悬挂指针：当指针所指向的对象被释放，但是该指针没有任何改变，以至于其仍然指向已经被回收的内存地址，这种情况下该指针被称为悬挂指针； 
     + 野指针：是没有被初始化过的指针，所以不确定指针具体指向，通过 nullptr 避免。
 
-35. 如何避免悬挂指针和野指带来的危害？
+35. 如何避免悬挂指针和野指针带来的危害？
 
-    + 指针变量声明时没有被初始化。解决办法：指针声明时初始化，可以是具体的地址值，也可让它指向 NULL。
-    + 指针 p 被 free 或者 delete 之后，没有置为 NULL。解决办法：指针指向的内存空间被释放后指针应该指向 NULL。
-    + 指针操作超越了变量的作用范围。解决办法：在变量的作用域结束前释放掉变量的地址空间并且让指针指向 NULL。
+    + 指针变量声明时没有被初始化。指针声明时初始化，可以是具体的地址值，也可让它指向 NULL。
+    + 指针 p 被 free 或者 delete 之后，没有置为 NULL。指针指向的内存空间被释放后指针应该指向 NULL。
+    + 指针操作超越了变量的作用范围。在变量的作用域结束前释放掉变量的地址空间并且让指针指向 NULL。
 
 36. C++ 中的类型限定符？
 
@@ -309,7 +313,7 @@ hidden: true
 
 40. 静态内存分配和动态内存分配有什么区别？
 
-    + 静态内存分配是在编译时期完成的，不占用CPU资源；动态内存分配是在运行时期完成的，分配和释放需要占 用CPU资源； 
+    + 静态内存分配是在编译时期完成的，不占用CPU资源；动态内存分配是在运行时期完成的，分配和释放需要占 用 CPU 资源； 
     + 静态内存分配是在栈上分配的；动态内存分配是在堆上分配的； 
     + 静态内存分配不需要指针或引用类型的支持；动态内存分配需要； 
     + 静态内存分配是按计划分配的，在编译前确定内存块的大小；动态内存分配是按需要分配的； 
@@ -325,7 +329,7 @@ hidden: true
 
 42. `extern "C"` 的作用是什么？
 
-    extern "C" 的主要作用就是为了能够正确实现 C++ 代码调用其他 C 语言代码。加上 extern "C" 后，会指示编译器这部分代码按 C 语言（而不是 C++）的方式进行编译：由于 C++ 支持函数重载，因此编译器编译函数的过程中会将函数的 参 数类型也加到编译后的代码中，而不仅仅是函数名；而 C 语言并不支持函数重载，因此编译 C 语言代码的函数时不 会带 上函数的参数类型，一般只包括函数名。
+    extern "C" 的主要作用就是为了能够正确实现 C++ 代码调用其他 C 语言代码。加上 extern "C" 后，会指示编译器这部分代码按 C 语言（而不是 C++）的方式进行编译：由于 C++ 支持函数重载，因此编译器编译函数的过程中会将函数的 参 数类型也加到编译后的代码中，而不仅仅是函数名；而 C 语言并不支持函数重载，因此编译 C 语言代码的函数时不会带上函数的参数类型，一般只包括函数名。
 
     其作用可以实现 C++ 和 C 的混合编程，并且可以更好地兼容原有的 C 语言库。
 
@@ -341,7 +345,7 @@ hidden: true
     + 指针有自己的一块空间，而引用只是一个别名（在编译器内部也是通过指针实现）
     + 使用 sizeof 看一个指针的大小是 4/8，而引用则是被引用对象的大小
     + 指针可以被初始化为 NULL，而引用必须被初始化且必须是一个已有对象的引用
-    + 可以有 const 指针，但是没有 const 引用
+    + 可以有 const 指针，但是没有 const 引用？**存疑**
     + 指针在使用中可以指向其它对象，但是引用只能是一个对象的引用，不能被改变
     + 指针可以有多级指针（**p），而引用只有一级
     + 指针和引用使用 ++ 运算符的意义不一样
@@ -441,6 +445,29 @@ hidden: true
 
     不论参数类型是左值引用还是右值引用，参数始终是左值，在通过该参数调用其他函数时，只会匹配到左引用形参，不可能匹配到右引用形参。所谓完美转发，就是为了让我们在传递参数的时候， 保持原来的参数类型（左引用保持左引用，右引用保持右引用）。 为了解决这个问题，我们应该使用 `std::forward` 来进行参数的转发（传递），其内部实现和 `static_cast<T&&>(v)` 相同，通常使用在通用引用函数模板中。
 
+    下面是 move 和 forward 实现，move 主要借助 remove_reference，forward 借助函数重载和引用坍塌。
+
+    ```cpp
+    template<typename _Tp>
+        constexpr typename std::remove_reference<_Tp>::type&&
+        move(_Tp&& __t) noexcept
+        { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }  
+    
+    template<typename _Tp>
+        constexpr _Tp&&
+        forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+        { return static_cast<_Tp&&>(__t); }
+    
+    template<typename _Tp>
+        constexpr _Tp&&
+        forward(typename std::remove_reference<_Tp>::type&& __t) noexcept
+        {
+          static_assert(!std::is_lvalue_reference<_Tp>::value, "template argument"
+                " substituting _Tp is an lvalue reference type");
+          return static_cast<_Tp&&>(__t);
+        }
+    ```
+
 60. 函数指针 pf 是什么，如何对其进行方法调用？
 
     函数指针是指向函数的指针变量，其值为函数的入口地址。通过 `pf()` 或者 `(*pf)()` 都可以，一种学派认为，由于 pf 是函数指针，而`*pf`是函数，因此应将`(*pf)()`用作函数调用。另一种学派认为，由于函数名是指向该函数的指针，指向函数的指针的行为应与函数名相似，因此应将`pf()`用作函数调用使用。C++ 进行了折衷。
@@ -453,12 +480,12 @@ hidden: true
 
 62. thread_local 作用？
 
-    使用 thread_local 说明符声明的变量仅可在它在其上创建的线程上访问。 变量在创建线程时创建，并在销毁线程时销毁。 每个线程都有其自己的变量副本。可以将 thread_local 仅应用于数据声明和定义，thread_local 不能用于函数声明或定义。
+    使用 thread_local 说明符声明的变量仅可在它在其上创建的线程上访问。 变量在创建线程时创建，并在销毁线程时销毁。 每个线程都有其自己的变量副本。thread_local 仅应用于数据声明和定义，thread_local 不能用于函数声明或定义。
 
 63. 算术运算符 ++d 和 d++ 的区别？
 
-    + **++d** 是**先加**，先对 d 的值加 1，再使用 d 的值执行该行命令。
-    + **d++** 是**后加**，先使用 d 的值执行该行命令，执行完后再对 d 的值加 1。
+    + **++d** 是**先加**，先对 d 的值加 1，再返回 d 值。
+    + **d++** 是**后加**，返回 d 值，执行完后再对 d 的值加 1。
 
 64. C++ 中向函数传参的方式有哪些？
 
@@ -480,7 +507,7 @@ hidden: true
     [=]     // 任何被使用到的外部变量都隐式地以传值方式加以引用。
     [&, x]  // x显式地以传值方式加以引用。其余变量以引用方式加以引用。
     [=, &z] // z显式地以引用方式加以引用。其余变量以传值方式加以引用。
-    [status=std::move(res_status)] //表达式捕获，可对右值进行捕获，其为匿名类成员
+    [status=std::move(res_status)] // 表达式捕获，可对右值进行捕获，其为匿名类成员
     ```
 
     > 对于 [=] 或 [&] 的形式，lambda 表达式可以直接使用 this 指针
@@ -625,7 +652,7 @@ hidden: true
 
 88. 虚函数（virtual）可以是内联函数（inline）吗？
 
-    虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。发生内联条件是编译器在编译时知道所调用的对象是哪个类，这只有在编译器具有实际对象而不是对象的指针或引用时才会发生（如 `baseObj.who()`）。
+    虚函数可以是内联函数，内联是可以修饰虚函数的，但是**当虚函数表现多态性的时候不能内联**。发生内联条件是编译器在编译时知道所调用的对象是哪个类，这只有在编译器具有实际对象而不是对象的指针或引用时才会发生（如 `baseObj.who()`）。
 
 89. 为什么要求基类的析构函数一定是 virtual 声明的？
 
@@ -694,7 +721,7 @@ hidden: true
 
 102. this 指针指代的是什么，当调用成员函数的时候，this 如何传入的？
 
-     this 指向的是调用成员函数的对象，当调用成员函数的时候，this 被当作第一个参数进行传入，从而达到在函数中使用的目的。另外，this 可以当作是一个 `ClassName *const this` ，当执行 `obj.method(a, b)` 时，编译器会将其转换为 `method(this, a, b)` ，其中 this 指向的就是 obj 对象。在 const 成员函数中，this 责备当作是 `const ClassName *const this`。最后，this 并不是一个常规变量，不能对其取地址操作。
+     this 指向的是调用成员函数的对象，当调用成员函数的时候，this 被当作第一个参数进行传入，从而达到在函数中使用的目的。另外，this 可以当作是一个 `ClassName *const this` ，当执行 `obj.method(a, b)` 时，编译器会将其转换为 `method(this, a, b)` ，其中 this 指向的就是 obj 对象。在 const 成员函数中，this 则被当作是 `const ClassName *const this`。最后，this 并不是一个常规变量，不能对其取地址操作。
 
      > 静态成员函数第一个参数则不是 this 指针，其属于类层次的
 
@@ -721,8 +748,8 @@ hidden: true
 107. 多继承存在什么问题？如何消除多继承中的二义性？
 
      + 增加程序的复杂度，使得程序的编写和维护比较困难，容易出错
-     + 在继承时，基类之间或基类与派生类之间发生成员同名时，将出现对成员访问的不确定性，即同名二义性：可以通过 `::` 限定派生类使用那个基类成员，或者在派生类中定义同名成员，覆盖基类中的相关成员；
-     + 当派生类从多个基类派生，而这些基类又从同一个基类派生，则在访问此共同基类的成员时，将产生另一种不确定性，即路径二义性：使用虚继承，使共同基类在内存中只有一份拷贝
+     + 在继承时，基类之间或基类与派生类之间发生成员同名时，将出现对成员访问的不确定性，即**同名二义性**：可以通过 `::` 限定派生类使用那个基类成员，或者在派生类中定义同名成员，覆盖基类中的相关成员；
+     + 当派生类从多个基类派生，而这些基类又从同一个基类派生，则在访问此共同基类的成员时，将产生另一种不确定性，即**路径二义性**：使用虚继承，使共同基类在内存中只有一份拷贝
 
 108. 若存在菱形继承时，需要如何处理？
 
@@ -789,9 +816,6 @@ hidden: true
      重载双引号后缀运算符实现：
 
      ```cpp
-     std::string operator"" _wow1(const char *wow1, size_t len) {
-         return std::string(wow1)+"woooooooooow, amazing";
-     }
      std::string operator"" _wow2(unsigned long long i) {
          return std::to_string(i)+"woooooooooow, amazing";
      }
@@ -799,12 +823,12 @@ hidden: true
 
 117. 哪些运算符不能进行重载？
 
-     - .：成员运算符。
-     - . *：成员指针运算符。
-     - ::：作用域解析运算符。
-     - ?:：三目运算符。
-     - sizeof：sizeof 运算符。
-     - typeid：一个 RTTI 运算符。
+     - `.`：成员运算符。
+     - `.*`：成员指针运算符。
+     - `::`：作用域解析运算符。
+     - `?:`：三目运算符。
+     - `sizeof`：sizeof 运算符。
+     - `typeid`：一个 RTTI 运算符。
      - 类型转换：static_cast，dynamic_cast，reinterpret_cast，const_cast
 
 118. typeid 的作用是什么？
@@ -813,7 +837,7 @@ hidden: true
 
 119. 如何为对象声明 << 重载符号以输出对象内容？
 
-     `ostream& operator<<(ostream& out, Type a)` 可以实现重载。
+     `friend ostream& operator<<(ostream& out, Type a)` 可以实现重载。
 
 120. 转换函数如何定义？
 
@@ -846,7 +870,7 @@ hidden: true
      对应的类内存布局如下：
 
      ```
-     {BaseVtptr, iMem, Base2Vtptr, iBase2Mem, Base3Vtptr, iBase3Mem, iDerivedMem};
+     {BaseVtptr, iBaseMem, Base2Vtptr, iBase2Mem, Base3Vtptr, iBase3Mem, iDerivedMem};
      ```
 
      派生类的虚函数地址存在在 BaseVtptr 的最后表项，按需更新其中的表项。
@@ -876,6 +900,8 @@ hidden: true
 
      主要通过 `try catch throw` 实现，所有的异常继承自 std::exception，其中包含了一个 virtual 方法 what，派生类可以重写该方法来自定义异常产生的原因。
 
+     > C++ 并不支持 finally 子句，相反其提供了 RAII 机制来确保资源的释放
+
 129. 什么是栈解退？
 
      假设函数由于出现异常（而不是由于返回）而终止，则程序也将释放栈中的内存，但不会在释放栈的第一个返回地址后停止，而是继续释放栈，直到找到一个位于 try 块中的返回地址。随后，控制权将转到块尾的异常处理程序，而不是函数调用后面的第一条语句。这个过程被称为栈解退。引发机制的一个非常重要的特性是，和函数返回一样，**对于栈中的自动类对象，类的析构函数将被调用**。
@@ -890,13 +916,13 @@ hidden: true
 
      new 的功能是在堆区新建一个对象，并返回该对象的指针。所谓的**【新建对象】**的意思就是，将调用该类的构造函数，因为如果不构造的话，就不能称之为一个对象。而 malloc 只是机械的分配一块内存，如果用 malloc 在堆区创建一个对象的话，是不会调用构造函数的。malloc 只是申请了一块内存用于存放对象，而 new 不仅申请了内存，还会将对象初始化放入该内存中。
 
-132. new，oprator new 和 placement new 操作符的区别？
+132. new operator，oprator new 和 placement new 操作符的区别？
 
-     + new ：**不能被重载**，其行为总是一致的。它先调用 operator new 分配内存，然后调用构造函数初始化那段内存，最后返回对应指针
+     + new operator：**不能被重载**，其行为总是一致的。它先调用 operator new 分配内存，然后调用构造函数初始化那段内存，最后返回对应指针
      + operator new：要实现不同的内存分配行为，应该重载 operator new，而不是 new，最常见的重载形式为 `void* operator new(size_t size);`。
      + placement new：只是 operator new 重载的一个版本。它并不分配内存，只是返回指向已经分配好的某段内存的一个指针，重载形式为 `void *operator new(size_t size, void *ptr) throw();`;
 
-     通常，new 负责在堆（heap）中找到一个足以能够满足要求的内存块，并进行初始化工作，placement new 让您能够指定要使用的内存位置，可以将其与初始化结合使用。
+     通常，new 负责在堆（heap）中找到一个足以能够满足要求的内存块，并进行初始化工作，placement new 让您能够指定要使用的内存位置，可以将其与初始化结合使用，或者用于事先分配一块内存，然后再使用 placement new 进行重载，实现内存分配器的机制。
 
 133. delete 与 delete[] 区别？
 
@@ -912,12 +938,12 @@ hidden: true
      + malloc 和 free 未成对出现； new/new [] 和 delete/delete [] 未成对出现：
        + 在堆中创建对象分配内存，但未显式释放内存；
        + 在构造函数中动态分配内存，但未在析构函数中正确释放内存；
-     + 类中包含指针成员变量时，未定义拷贝构造函数或未重载赋值运算符，从而造成两次释放相同内存的做法；
      + 没有将基类的析构函数定义为虚函数
+     + 类中包含指针成员变量时，未定义拷贝构造函数或未重载赋值运算符，从而造成两次释放相同内存的做法；
 
-136. 在 C++ 中，使用 malloc 申请的内存能否通过 delete 释放？使用 new 申请的内存能否用free？
+136. 在 C++ 中，使用 malloc 申请的内存能否通过 delete 释放？使用 new 申请的内存能否用 free？
 
-     不能，malloc/free 主要为了兼容 C，new 和 delete 完全可以取代 malloc/free 的。malloc/free 的操作对象都是必须明确大小的。而且不能用在动态类上。new 和 delete 会自动进行类型检查和大小，malloc/free 不能执行构造函数与析构函数，所以动态对象它是不行的。当然从理论上说使用 malloc 申请的内存是可以通过 delete 释放的。不过一般不这样写的。而且也不能保证每个 C++ 的运行时都能正常。
+     不能，malloc/free 主要为了兼容 C，new 和 delete 完全可以取代 malloc/free 的。malloc/free 的操作对象都是必须明确大小的，而且不能用在**多态类**上。new 和 delete 会自动进行类型检查和大小，malloc/free 不能执行构造函数与析构函数，所以动态对象它是不行的。当然从理论上说使用 malloc 申请的内存是可以通过 delete 释放的。不过一般不这样写的。而且也不能保证每个 C++ 的运行时都能正常。
 
 137. malloc、calloc、realloc 作用？
 
@@ -943,11 +969,11 @@ hidden: true
 
 142. 智能指针模板类有哪些，分别有何作用？
 
-     智能指针的作用是管理一个指针（RAII），因为存在以下这种情况：申请的空间在函数结束时忘记释放，造成内存泄漏，或者由于异常，导致 delete 操作未成功。使用智能指针可以很大程度上的避免这个问题，因为智能指针就是一个类，当超出了类的作用域时，类会自动调用析构函数，析构函数会自动释放资源。所以智能指针的作用原理就是在函数结束时自动释放内存空间，不需要手动释放内存空间。
+     智能指针就的作用是管理一个指针（RAII），因为存在以下这种情况：申请的空间在函数结束时忘记释放，造成内存泄漏，或者由于异常，导致 delete 操作未成功。使用智能指针可以很大程度上的避免这个问题，因为智能指针就是一个类，当超出了类的作用域时，类会自动调用析构函数，析构函数会自动释放资源。所以智能指针的作用原理就是在函数结束时自动释放内存空间，不需要手动释放内存空间。
 
      + auto_ptr：采用所有权转让方式实现赋值运算，避免了两次释放相同地址空间的问题，但是 `auto_ptr<string> a = b` 会导致 b 丢失所有权，后面再次使用可能导致异常，**在函数值传参经常会遇到**，因此被 deprecated，并且不能管理数组
      + unique_ptr：和 auto_ptr 类似，但是不支持拷贝语义，是一种在异常时可以帮助避免资源泄漏的智能指针，能确保安全，编译时发现错误，支持移动语义
-     + shared_ptr：采用引用计数的方式实现，计数为 0 时自动释放内存，可以通过 make_shared 来消除显式使用的 new
+     + shared_ptr：采用引用计数的方式实现，计数为 0 时自动释放内存，可以通过 make_shared 来消除显式使用的 new。缺点是不支持数组，需要自定义 deleter；存在循环引用；线程安全带来的原子操作开销。**不要使用同一个原始指针来初始化两个 shared_ptr**
      + weak_ptr：为了配合 shared_ptr 而引入的一种智能指针，它指向一个由 shared_ptr 管理的对象而不影响所指对象的生命周期，也就是将一个 weak_ptr 绑定到一个 shared_ptr 不会改变 shared_ptr 的引用计数。用于解决循环引用的问题，可以和 shared_ptr 相互转换，使用前通过 lock 即可转换为 shared_ptr 对象
 
      > auto_ptr 关键问题在于使用 copy(=) 来实现了移动的语义，这导致在调用函数后，原来的实参里面的内容变为 nullptr，导致出现问题；unique_ptr 则不支持 = 操作符，只支持 move 操作，保证了安全性。
@@ -1053,6 +1079,10 @@ hidden: true
 
      C++ 11 虽然有继承构造函数这一特性，但是实质上是编译器自动生成代码，通过调用父类构造函数来实现，不是真正意义上的继承，仅仅是为了减少代码书写量。
 
+     > - B does not inherit constructors from A; Unless B's ctor explicitely calls *one of* A's ctor, the default ctor from A will be called automatically *before* B's ctor body;
+     > - B does not inherit A's dtor; *After* it exits, B's destructor will automatically call A's destructor.
+     > - So: there's a connection between base and derived constructors and destructors, but it's not like "they're inherited".
+
 157. 为什么构造函数不能是虚函数？
 
      + 创建一个对象必须明确指出它的类型，否则无法创建，一个对象创建成功编译器获得它的实际类型，然后去调用对应的函数，而如果构造函数声明为虚函数，会形成一个死锁，虚函数是在运行才能确定确定其调用哪一个类型的函数，而具体哪一个类型是编译器通过对象的类型去确定的，但是此时对象还未创建也就没法知道其真实类型。
@@ -1069,7 +1099,7 @@ hidden: true
 
      > 当编译器决定隐式定义某个特殊函数( `=defalt` )，但此时，依然会面临无法生成的困境。比如，其某个父类将那个特殊函数删除了，或者访问被禁止了，则系统也会放弃对此特殊函数的生成，而隐式的将其声明为 `delete` 。
 
-159. C++类的内部可以定义引用数据成员吗？
+159. C++ 类的内部可以定义引用数据成员吗？
 
      可以，必须通过构造函数初始化列表初始化类内的引用。
 
@@ -1148,9 +1178,7 @@ hidden: true
 
 170. alignof 和 alignas 的作用？
 
-     C++11 引入的关键字`alignof`，可直接获取类型`T`的内存对齐要求。`alignof`的返回值类型是`size_t`，用法类似于`sizeof`。
-
-     alignas 则用于定义一个结构体或者类的对其方式，GCC 规定了 aligned 属性也可用于规定结构体或者类的对齐方式。
+     C++11 引入的关键字`alignof`，可直接获取类型`T`的内存对齐要求。`alignof`的返回值类型是`size_t`，用法类似于`sizeof`。alignas 则用于定义一个结构体或者类的对其方式，GCC 规定了 aligned 属性也可用于规定结构体或者类的对齐方式。
 
 171. `#pragma pack(n)` 作用是什么？
 
@@ -1222,8 +1250,8 @@ hidden: true
 
 182. vector 中的 reserve 和 resize 的区别？
 
-     + reserve 是直接扩充到已经确定的大小，可以减少多次开辟、释放空间的问题（优化push_back），就可以提高效率，其次还可以减少多次要拷贝数据的问题。
-     + resize() 可以改变有效空间的大小，capacity 的大小可能也会随着改变
+     + reserve 是直接扩充到已经确定的大小（即修改 capacity 大小），可以减少多次开辟、释放空间的问题（优化push_back），就可以提高效率，其次还可以减少多次要拷贝数据的问题。
+     + resize() 可以改变有效空间的大小，capacity 的大小可能也会随着改变（当 n 大于 capacity 时）。
 
 183. vector 的元素类型可以是引用吗？
 
@@ -1271,12 +1299,65 @@ hidden: true
 
      迭代器是连接容器和算法的一种重要桥梁，通过迭代器可以在不了解容器内部原理的情况下遍历容器。它的底层实现包含两个重要的部分：萃取技术和模板偏特化。
 
-     + 萃取技术（traits）可以进行类型推导，根据不同类型可以执行不同的处理流程，比如容器是 vector，那么 traits 必须推导出其迭代器类型为随机访问迭代器，而 list 则为双向迭代器。
-     + 使用萃取技术（traits）进行类型推导的过程中会使用到模板偏特化。模板偏特化可以用来推导参数，如果我们自定义了多个类型，除非我们把这些自定义类型的特化版本写出来，否则我们只能判断他们是内置类型，并不能判断他们具体属于是个类型。
+     + 萃取技术（traits）可以**进行类型推导，根据不同类型可以执行不同的处理流程**，比如容器是 vector，那么 traits 必须推导出其迭代器类型为随机访问迭代器，而 list 则为双向迭代器。
+     + 使用萃取技术（traits）进行类型推导的过程中会使用到**模板偏特化**。模板偏特化可以用来推导参数，如果我们自定义了多个类型，除非我们把这些自定义类型的特化版本写出来，否则我们只能判断他们是内置类型，并不能判断他们具体属于是个类型。在 CPP 实现中就用到了重载的特性保证不同的类型使用不同版本的模板函数。
+
+     ```cpp
+     // 考虑 advance 针对不同的迭代器的实现
+     struct input_iterator_tag {};
+     struct output_iterator_tag {};
+     struct forward_iterator_tag : public input_iterator_tag {};
+     struct bidirectinal_iterator_tag : public forward_iterator_tag {};
+     struct random_access_iterator_tag : public bidirectinal_iterator_tag {};
+     // 模板偏特化
+       template<typename _InputIterator, typename _Distance>
+         inline _GLIBCXX14_CONSTEXPR void
+         __advance(_InputIterator& __i, _Distance __n, input_iterator_tag)
+         {
+           while (__n--)
+     	++__i;
+         }
+     
+       template<typename _BidirectionalIterator, typename _Distance>
+         inline _GLIBCXX14_CONSTEXPR void
+         __advance(_BidirectionalIterator& __i, _Distance __n,
+     	      bidirectional_iterator_tag)
+         {
+           if (__n > 0)
+             while (__n--)
+     	  ++__i;
+           else
+             while (__n++)
+     	  --__i;
+         }
+     
+       template<typename _RandomAccessIterator, typename _Distance>
+         inline _GLIBCXX14_CONSTEXPR void
+         __advance(_RandomAccessIterator& __i, _Distance __n,
+                   random_access_iterator_tag)
+         {
+           if (__builtin_constant_p(__n) && __n == 1)
+     	++__i;
+           else if (__builtin_constant_p(__n) && __n == -1)
+     	--__i;
+           else
+     	__i += __n;
+         }
+     // 用于决定执行哪个版本的代码
+       template<typename _InputIterator, typename _Distance>
+         inline _GLIBCXX17_CONSTEXPR void
+         advance(_InputIterator& __i, _Distance __n)
+         {
+           // concept requirements -- taken care of in __advance
+           typename iterator_traits<_InputIterator>::difference_type __d = __n;
+           std::__advance(__i, __d, std::__iterator_category(__i));
+     ```
+
+     
 
 192. vector 如何释放空间？
 
-     由于 vector 的内存占用空间只增不减，比如你首先分配了 10,000 个字节，然后 erase 掉后面 9,999 个，留下一个有效 元 素，但是内存占用仍为 10,000 个。所有内存空间是在 vector 析构时候才能被系统回收。clear() 可以清空所有元素。但是即使 clear()，vector 所占用的内存空间依然如故，无法保证内存的回收。如果需要空间动态缩小，可以考虑使用 deque。如果 vector，可以用 swap() 来帮助你释放内存 `std::vector<T>(v).swap(v);`，另外的一种方式便是使用 `shrink_to_fit`，但是是否回收取决于实现。
+     由于 vector 的内存占用空间只增不减，比如你首先分配了 10,000 个字节，然后 erase 掉后面 9,999 个，留下一个有效元素，但是内存占用仍为 10,000 个。所有内存空间是在 vector 析构时候才能被系统回收。clear() 可以清空所有元素。但是即使 clear()，vector 所占用的内存空间依然如故，无法保证内存的回收。如果需要空间动态缩小，可以考虑使用 deque。如果 vector，可以用 swap() 来帮助你释放内存 `std::vector<T>(v).swap(v);`，另外的一种方式便是使用 `shrink_to_fit`，但是是否回收取决于实现。
 
 193. emplace_back 和 push_back 区别？
 
@@ -1288,20 +1369,20 @@ hidden: true
 
 195. 已经有了传统数组，为什么要用 `std::array`？
 
-     使用 `std::array` 能够让代码变得更加“现代化”，而且封装了一些操作函数，比如获取数组大小以及检查是否非空，同时还能够友好的使用标准库中的容器算法，比如 `std::sort`。
+     使用 `std::array` 能够让代码变得更加“现代化”，而且封装了一些操作函数，比如获取数组大小以及检查是否非空，同时还能够友好的使用标准库中的容器算法，比如 `std::sort`。可以将其和传统的数组对比，它们都是在栈上分配，内存分配和释放通过编译器执行。
 
 196. std::forward_list 有何作用？
 
      是一个列表容器，使用方法和 `std::list` 基本类似，通过单向链表实现， 提供了 `O(1)` 复杂度的元素插入，不支持快速随机访问，不支持 size() 方法。当不需要双向迭代时，具有比 `std::list` 更高的空间利用率。
 
-197. STL 是如何进行内存空间优化的？
+197. STL 是如何进行内存空间分配？
 
      SGI STL 使用二级内存配置器，用于提高空间利用率：
 
      + 第一级配置器：以 malloc()，free()，realloc() 等 C 函数执行实际的内存配置、释放、重新配置等操作，并且能在内存需求不被满足的时候，调用一个指定的函数。一级空间配置器分配的是大于 128 字节的空间，如果分配不成功，调用句柄释放一部分内存，如果还不能分配成功，抛出异常。
      + 第二级配置器：如果分配的区块小于 128B，则以内存池管理，第二级配置器维护了一个自由链表数组，每次需要分配内存时， 直接从相应的链表上取出一个内存节点就完成工作，效率很高。
-       + 自由链表数组：指针数组，数组中的每个指针元素指向一个链表的起始节点。数组大小为 16， 链表的每个节点就是实际的内存块，相同链表上的内存块大小都相同，不同链表的内存块大小不同，从 8 一直到 128。
-       + 内存分配：allocate 函数内先判断要分配的内存大小，若大于 128 字节，直接调用第一级配置器，否则根据要分配 的内存大小从 16 个链表中选出一个链表，取出该链表的第一个节点。若相应的链表为空，则调用 refill 函数填充该链 表。 默认是取出20个数据块。
+       + 自由链表数组：指针数组，数组中的每个指针元素指向一个链表的起始节点。数组大小为 16， 链表的每个节点就是实际的内存块，相同链表上的内存块大小都相同，不同链表的内存块大小不同，从 8 一直到 128。每个自由链表上的内存块大小是**线性增长**的。
+       + 内存分配：allocate 函数内先判断要分配的内存大小，若大于 128 字节，直接调用第一级配置器，否则根据要分配的内存大小从 16 个链表中选出一个链表，取出该链表的第一个节点。若相应的链表为空，则调用 refill 函数填充该链 表。 默认是取出 20 个数据块。
        + 填充链表 refill：若 allocate 函数内要取出节点的链表为空，则会调用 refill 函数填充该链表。refill 函数内会先调用 chunk_alloc 函数从内存池分配一大块内存，该内存大小默认为 20 个链表节点大小，当内存池的内存也不足时，返回的内存块节点数目会不足 20 个。接着 refill 的工作就是将这一大块内存分成 20 份相同大小的内存块，并将各内存块连接起来形成一个链表。
        + 内存池：chunk_alloc 函数内管理了一块内存池，当 refill 函数要填充链表时，就会调用 chunk_alloc 函数，从内存池取出相应的内存。如何内存池没有空间，则首先合并其他空闲链表，以获取空间，若还是不行，则调用第一级分配器
 
@@ -1313,14 +1394,14 @@ hidden: true
 
      + constructor & destructor：内存分配器的构造函数和析构函数
      + allocate & deallocate：内存分配与释放函数
-     + construct & destroy：用于构造函数和析构函数
+     + construct & destroy：用于构造某类对象和析构某类对象
 
 199. C++ 中类对象只能在堆上分配吗？
 
-     不是的，在 C++ 中，类的对象建立分为两种，一种是静态建立，如`A a`；另一种是动态建立，如`A* ptr=new A`；
+     不是的，在 C++ 中，类的对象建立分为两种，一种是静态建立，如`A a`；另一种是动态建立，如`A* ptr = new A`；
 
      + 静态建立一个类对象，是由编译器为对象在栈空间中分配内存，是通过直接移动栈顶指针，挪出适当的空间，然后在这片内存空间上调用构造函数形成一个栈对象。使用这种方法，**直接调用类的构造函数**。
-     + 动态建立类对象，是使用new运算符将对象建立在堆空间中。这个过程分为两步，第一步是执行operator new()函数，在堆空间中搜索合适的内存并进行分配；第二步是调用构造函数构造对象，初始化这片内存空间。这种方法，**间接调用类的构造函数**。
+     + 动态建立类对象，是使用 new 运算符将对象建立在堆空间中。这个过程分为两步，第一步是执行 operator new() 函数，在堆空间中搜索合适的内存并进行分配；第二步是调用构造函数构造对象，初始化这片内存空间。这种方法，**间接调用类的构造函数**。
 
 200. 如何定义一个只能在堆上（栈上）生成对象的类？
 
@@ -1350,7 +1431,7 @@ hidden: true
 
          ![img](Cpp-面试题目汇总/cppmode-3-11.png)
 
-       + 将 vptr 放在对象的首部：对于多重继承，通过虚指针访问函数表的效率会得到一定提升，但损失了兼容性
+       + 将 vptr 放在对象的首部：对于多重继承，**通过虚指针访问函数表的效率会得到一定提升**，但损失了兼容性
 
          ![img](Cpp-面试题目汇总/cppmode-3-12.png)
 
@@ -1359,9 +1440,9 @@ hidden: true
        + 将 vptr 放在对象的尾端，提供了一种自然多态的形式，基类和派生类的 object 都是从相同的地址开始，因此把一个派生类对象的地址指定给基类的指针或引用时，不需要编译器去调停或修改地址。效率较高
        + 将 vptr 放在对象的首端，如果基类没有 virtual function 而派生类有，那么单一继承的“自然多态”就会被打破。这种情况下把一个派生类 object 转换为其基类型，就需要编译器的介入，用以调整地址
 
-       多重继承的问题主要发生于派生类和其第二或后继基类object之间的转换，对一个多重派生对象，将其地址指定给“最左端基类的指针”，情况将和单一继承时相同，因为二者都指向相同的起始地址。需付出的成本只有地址的指定操作而已；至于第二个或后继的基类的地址指定操作，则需要将地址修改过：加上(或减去，如果downcast的话)介于中间的基类子对象大小。
+       多重继承的问题主要发生于派生类和其第二或后继基类 object 之间的转换，对一个多重派生对象，将其地址指定给“最左端基类的指针”，情况将和单一继承时相同，因为二者都指向相同的起始地址。需付出的成本只有地址的指定操作而已；至于第二个或后继的基类的地址指定操作，则需要将地址修改过：加上(或减去，如果 downcast 的话)介于中间的基类子对象大小。
 
-       假设将vptr放在class object的尾端，类的继承关系和members的布局如下：
+       假设将 vptr 放在 class object 的尾端，类的继承关系和members的布局如下：
 
        <img src="Cpp-面试题目汇总/cppmode-3-8.png" alt="img" style="zoom:67%;" />
 
@@ -1381,7 +1462,7 @@ hidden: true
 
      <img src="Cpp-面试题目汇总/cppmode-4-1-1686566633397-2.png" alt="cppmode-4-1" style="zoom:67%;" />
 
-     + 对于多重继承中的虚函数，其复杂度围绕在第二个及后继的base classes身上，以及“必须在执行期调整this指针”这一点。**在多重继承下，一个derived class内含n-1个"额外"的virtual tables，n表示其上一层base classes的个数（因此，单一继承将不会有额外的virtual tables）**：
+     + 对于多重继承中的虚函数，其复杂度围绕在第二个及后继的 base classes 身上，以及“必须在执行期调整 this 指针”这一点。**在多重继承下，一个 derived class 内含 n-1 个"额外"的 virtual tables，n 表示其上一层 base classes 的个数（因此，单一继承将不会有额外的virtual tables）**：
 
      <img src="Cpp-面试题目汇总/image-20230612184922566.png" alt="image-20230612184922566" style="zoom:67%;" />
 
@@ -1482,6 +1563,8 @@ hidden: true
      | shared_lock | C++14   | 实现可移动的共享互斥体所有权封装器     |
      | scoped_lock | C++17   | 用于多个互斥体的免死锁 RAII 封装器     |
 
+     
+
      | 锁定策略    | C++标准 | 说明                                                |
      | :---------- | :------ | :-------------------------------------------------- |
      | defer_lock  | C++11   | 类型为 `defer_lock_t`，不获得互斥的所有权           |
@@ -1499,7 +1582,7 @@ hidden: true
 
      + async：用于封装异步任务，返回一个 future，可以通过 launch::async 来指定异步任务在新线程中运行
      + packaged_task：主要用于封装一个函数或者可调用对象上，可通过 get_future 获取对应的结果
-     + promise：和 async 和 packaged_task 不同，它们通过返回一个值，该值被封装未一个对象，之后线程结束，如果想要提前告知结果，并且进行一些后台工作，可以使用 promise，当对其使用 set_value 后，对应的 future 对象就会就绪。注意每个就绪的 future 只能被 get 一次，因此如果想要多个线程获取同一个 future 的值，可以使用 shared_future
+     + promise：和 async 和 packaged_task 不同，它们通过返回一个值，该值被封装为一个对象，之后线程结束，如果想要提前告知结果，并且进行一些后台工作，可以使用 promise，当对其使用 set_value 后，对应的 future 对象就会就绪。注意每个就绪的 future 只能被 get 一次，因此如果想要多个线程获取同一个 future 的值，可以使用 shared_future
 
 218. 谈谈 C++ 头文件中的并行算法？
 
@@ -1517,7 +1600,7 @@ hidden: true
 
 220. C++ 内存模型是什么，主要包括哪些内容？
 
-     内存模型描述了并发程序中多个线程访问共享内存时的行为和规则。它主要包含以下几个方面：
+     **内存模型描述了并发程序中多个线程访问共享内存时的行为和规则**。它主要包含以下几个方面：
 
      + 原子操作：C++ 中的原子操作是具有原子性和可见性保证的操作，可以确保多个线程访问共享对象时不会出现竞态条件或未定义的行为。
      + 内存顺序：内存顺序是指程序中内存操作的执行顺序和其影响的可见性。C++ 中提供了多种内存顺序模型，如顺序一致性、弱序、释放-获取顺序等，可以通过 `std::atomic` 和 `std::atomic_thread_fence` 等接口进行设置和控制。
@@ -1549,6 +1632,186 @@ hidden: true
      + memory_order_acq_rel：同一个对象上的原子操作不允许被乱序。release 操作禁止了所有在它之前的读写操作与在它之后的写操作乱序。acquire 操作禁止了所有在它之前的读操作与在它之后的读写操作乱序。
      + memory_order_relaxed：不建立任何同步或者顺序保证，使用此模型只会保证原子性
 
+224. C++ 协程有何作用，如何实现？
+
+     C++ 协程采取的是微软提出并主导的无栈协程，与之相对的便是有栈协程，有栈协程切换的成本是用户态线程切换的成本，而无栈协程切换的成本则相当于函数调用的成本。无栈协程和线程的区别：无栈协程只能被线程调用，本身并不抢占内核调度，而线程则可抢占内核调度。有栈协程比系统级线程轻量很多，但比起无栈协程还是差了许多。总而言之，C++ 协程的出现大大简化了异步编程的难度，将异步代码进行同步方式的编写，同时还保持了异步的高性能。
+
+     > JS 中的 async 和 await 实际上也是将异步编程同步化，其基于 Promise 实现；而 CPP 中的 co_await 和 co_return 同样也是将异步编程同步化，不过其基于协程实现。
+
+     有栈（stackful）协程通常的实现手段是在堆上提前分配一块较大的内存空间（比如 64K），也就是协程所谓的“栈”，参数、return address 等都可以存放在这个“栈”空间上。如果需要协程切换，那么通过 swapcontext 一类的形式来让系统认为这个堆上空间就是普通的栈，这就实现了上下文的切换。有栈协程最大的优势就是侵入性小，使用起来非常简便，已有的业务代码几乎不需要做什么修改，但是 C++20 最终还是选择了使用无栈协程。主要原因是栈空间的限制（太大或者太小都不合适）；协程切换的开销。
+
+225. C++ 中的 SFINAE 指的是什么，有何作用？
+
+     SFINAE 指的是 Substitution failure is not an error，其说明了编译器在进行模板实例化的时候可能会发生参数替换失败的场景，但是这并不是一个错误，编译器会继续匹配名称相同的模板，直到所有模板都不能匹配的时候才进行报错。通过该机制，可以让编译器选择使用那个模板进行实例化，下列代码展示了 SFINAE：
+
+     ```cpp
+     struct X { typedef int type; };
+     
+     struct Y { typedef int type2; };
+     
+     template <typename T> void foo(typename T::type);    // Foo0
+     template <typename T> void foo(typename T::type2);   // Foo1
+     template <typename T> void foo(T);                   // Foo2
+     
+     void callFoo() {
+        foo<Y>(10);   // Foo0: Failed,  Foo1: Succeed, Foo2: Failed
+     }
+     ```
+
+     上述代码 `foo<Y>(10)` 在匹配 Foo0 模板时，参数替换失败，但是编译器并不报错，而是继续尝试，在匹配到 Foo1 的时候，发现可以匹配，从而生成了对应的模板。
+
+     实际上，该机制经常被用来限制泛型参数的类型，最常用的便是 enable_if 这个函数：
+
+     ```cpp
+     template <typename T> void inc_counter(
+       T& counterObj, 
+       typename std::enable_if<
+         is_base_of<T, ICounter>::value
+       >::type* = nullptr );
+     
+     template <typename T> void inc_counter(
+       T& counterInt,
+       typename std::enable_if<
+         std::is_integral<T>::value
+       >::type* = nullptr );
+     ```
+
+     其次，`is_integral<T>::value`返回一个布尔类型的编译器常数，告诉我们它是或者不是一个 integral，`enable_if<C>`的作用就是，如果这个 C 值为 True，那么 type 就会被推断成一个 void 或者是别的什么类型，让整个函数匹配后的类型变成 `void inc_counter<int>(int & counterInt, void* dummy = nullptr)`; 如果这个值为False，那么`enable_if<false>`这个特化形式中，压根就没有这个 ::type，于是 substitution 就失败了，因此，这个函数原型根本就不会被产生出来。enable_if 的实现如下：
+
+     ```cpp
+     // STRUCT TEMPLATE enable_if
+     template <bool _Test, class _Ty = void>
+     struct enable_if {}; // no member "type" when !_Test
+     
+     template <class _Ty>
+     struct enable_if<true, _Ty> { // type is _Ty for _Test
+         using type = _Ty;
+     };
+     
+     template <bool _Test, class _Ty = void>
+     using enable_if_t = typename enable_if<_Test, _Ty>::type;
+     ```
+
+     
+
+226. C++ Concept 为什么出现，有何作用？
+
+     首先明确，Concept 是用来约束模板类型的语法糖，尽管我们知道 SFINAE 机制，其能够实现模板类型参数的约束匹配，但是其存在以下问题：
+
+     + 匹配失败时报错信息难以阅读
+     + 模板本身逻辑耦合在一起，不同地方的匹配可能需要写很多相同模式的约束匹配的代码
+
+     Concept 的出现实际上就是为了解决上述问题，即通过将模板的类型约束抽象出来，然后在模板定义时再使用。这样成功解耦了模板类型约束和模板本身的一些类型逻辑。达到复用模式约束的作用。
+
+     ```cpp
+     // 一个约束T只能是整数类型，并且是有符号的concept
+     template <typename T>
+     concept signed_integral = integral<T> && std::is_signed_v<T>;
+     
+     // 有符号整型才能匹配subtract函数的T
+     template <signed_integral T>
+     T subtract(T a, T b) {
+         return a - b;
+     }
+     
+     // 或者使用 requires 子语句
+     template <typename T>
+     requires my_concept<T>
+     void f(T v);
+     ```
+
+227. Linux 内存中的 Cache 和 Buffer 指的是什么，有何作用，如何进行释放？
+
+     + Cache：指的是 Page Cache，通常是按照页为单位来缓存文件系统中的文件，可用于文件数据的快速访问，注意其同样也会缓存文件的写操作，缓存文件写操作就需要 dirty 标识符配合
+     + Buffer：指的是 Buffer Cache，用于暂存物理磁盘块，通常用于写操作（写数据到磁盘）进行缓存，但是也可用于读缓存（从磁盘读数据）
+     + **Buffers** can be used either as a “cache for data to be written to disk” or as a “cache for data read from disk”.
+     + **Cache** can be used either as a “page cache for reading data from files” or as a “page cache for writing files”.
+
+     简单说来，page cache 用来缓存文件数据，buffer cache 用来缓存磁盘数据。在有文件系统的情况下，对文件操作，那么数据会缓存到 page cache，如果直接采用 dd 等工具对磁盘进行读写，那么数据会缓存到 buffer cache。Buffer(Buffer Cache)以块形式缓冲了块设备的操作，定时或手动的同步到硬盘，它是为了缓冲写操作然后一次性将很多改动写入硬盘，避免频繁写硬盘，提高写入效率。Cache(Page Cache)以页面形式缓存了文件系统的文件，给需要使用的程序读取，它是为了给读操作提供缓冲，避免频繁读硬盘，提高读取效率。
+
+     可以使用以下命令进行释放：
+
+     ```shell
+     sync; echo 1 > /proc/sys/vm/drop_caches # 仅清除页面缓存
+     sync; echo 2 > /proc/sys/vm/drop_caches # 清除目录项和 inode
+     sync; echo 3 > /proc/sys/vm/drop_caches # 清除页面缓存、目录项以及 inode
+     ```
+
+228. Linux 中的 fflush，fsync 和 sync 的作用有何不同？
+
+     `fflush` synchronizes the *user-space buffered* data to *kernel-level* cache (since it's working with `FILE` objects that reside at user-level and are invisible to kernel)，whereas `fsync` or `sync` (working directly with *file descriptors*) synchronize kernel cached data with device.
+
+     <img src="Cpp-面试题目汇总/image-20230715212838054.png" alt="image-20230715212838054" style="zoom:50%;" />
+
+     注意：sync 后实际上依旧可能发生数据丢失的问题，sync 只保证数据到 device 上，但是 device 可能本身也存在缓存，因此，如果突然断电还是存在数据丢失的可能。
+
+229. Linux 中的内存管理机制是怎样的，buddy 系统和 slab 算法分别有何作用？
+
+     Linux 中的内存管理机制是通过分段和分页实现的，但是，MMU 规定了每个段都是从 0 开始，4G 结束，因此屏蔽了段机制，而采用分页机制进行内存管理。
+
+     之所以使用 buddy 系统，是因为对于物理内存经过频繁地申请和释放后会产生外部碎片，另一方面，可以高效的处理频繁申请和释放不同大小的**连续**页框，通过该系统可以解决上述问题。具体而言：
+
+     - 将空闲内存分为 m 个组, 第一组储存2^0个单位的内存块, 第二组储存2^1个单位的内存块, 第三组储存2^2个单位的储存块, 以此类推, 直到m组。m 典型值为 11。
+     - 每个组是一个链表, 用来储存同等大小的内存块。
+     - 伙伴块的大小是固定的, 并且同一个组里面的内存块是伙伴。
+
+     在分配时，如果申请的内存大小是 n 个单位块, 则先将 n 向上取整为 2 的 n 次幂，假设为 s，然后我们从前面的数组中定位到 s，如果该组中有剩余内存块就分配出去，否则向上查找，然后再将该内存块分割出来，并将剩余的块放到数组中去。同样的，还存在内存归并的过程：我们检测归还内存的伙伴内存块是否空闲，如果空闲就合并在一起，不空闲就直接放回到合适的链表中，一般来说，伙伴算法中会使用位图来记录内存块是否被使用，用于伙伴内存的内并。
+
+     伙伴系统的优点是分配和回收内存都十分的方便，可以解决外部碎片的问题，在不断的回收和释放过程中仍然可以保存有较大的内存块。分配内存速度也很快，基本是 O(lgN) 的效率；缺点是导致较大的内部碎片，比如我们需要一个 9 个单位块大小的内存块, 但是按伙伴算法会直接给我们分配一个 16 个单位块大小的内存块, 显然有 7 个单位块大小的内存是被浪费的。
+
+     由于伙伴管理系统分配的基本单元是页，也就是 4KB，因此，伙伴管理系统不太适用于小块内存的分配和回收，这时就需要 slab 机制：
+
+     <img src="Cpp-面试题目汇总/127836300-b01190fe-eaef-4fba-9118-ae7b14ce9409.png" alt="image" style="zoom:75%;" />
+
+     slab 的设计思想就是把若干的页框合在一起形成一大存储块——slab，并在这个 slab 中只存储同一类数据，这样就可以在这个 slab 内部打破页的界限，以该类型数据的大小来定义分配粒度，存放多个数据，这样就可以尽可能地减少页内碎片了。在 Linux 中，多个存储同类数据的 slab 的集合叫做一类对象的缓冲区。
+
+     slab 优点是内核通常依赖于对小对象的分配，它们会在系统生命周期内进行无数次分配。slab 缓存分配器通过对类似大小的对象进行缓存而提供这种功能，从而避免了常见的碎片问题；slab 分配器还支持通用对象的初始化，从而避免了为同一目的而对一个对象重复进行初始化；slab 分配器还可以支持硬件缓存对齐和着色，这允许不同缓存中的对象占用相同的缓存行，从而提高缓存的利用率并获得更好的性能。
+
+230. 谈谈现代的 C/C++ 编译常用工具链，以及使用 GCC 编译的流程？
+
+     现代的 C++ 编译工具链主要有 CMake/Make/GCC，GCC是C/C++语言的编译工具，Make是增量式（编译）批处理工具，CMake 是 Make 脚本生成工具。
+
+     ```
+                   cmake           make       gcc
+     CMakelist.txt -----> Makefile ----> Cmds ---> Binary
+     ```
+
+     使用 GCC 编译程序时，主要分为四个步骤：预处理、编译、汇编、链接：
+
+     ```
+           -E          -S          -c          
+     b.c ------> b.i ------> b.s ------> b.o ------> a.out
+           gcc         gcc         as          ld
+     ```
+
+     GCC 在编译时，其并不管理用户安装的第三方库，因此，如果项目依赖于某个文件，则需要手动进行依赖的说明，使用的比较多的参数如下：
+
+     + `-I` ：预处理阶段使用，指定额外的头文件目录，如果不指定，将报错 `xxx.h: file not found`
+     + `-l`：链接阶段，来指定需要链接的库，不指定将报错 `Undefined symbols `
+     + `-L`：链接阶段，将所要链接的库文件所在的路径告诉 gcc，不指定将报错 `ld: library not found for -lxxx`
+     + 静态链接参数，优化参数，宏相关参数，以及其他参数（`-std, -Werror, -v` 等）
+
+231. 对于非复现的 bug，应该如何进行追踪和调试？
+
+     首先，gdb 提供了反向调试的功能，但是其依赖于 bug 复现率，推荐只在 bug 能够复现的时候进行反向调试。这里推荐使用 rr（Record and Replay Framework） 工具，通过其能够记录下发生异常时程序的运行时状态，从而能够提供一个可以反复反向调试的 debug 环境：
+
+     + `while rr record --chaos ./main; do :; done`：持续运行，知道结束
+     + `rr replay`：回放最新的程序运行时状态，提供 gdb 调试环境
+
+     
+
+     
+
+     
+
+     
+
+     
+
+
+
+
+
 
 
 
@@ -1577,20 +1840,7 @@ hidden: true
 
 9. [C++ memory model Q&A in stackoverflow](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g) 
 
-   
-
-   
-
-+ 小球称重问题：https://zhuanlan.zhihu.com/p/368050985
-
-
-
-Linux 内存中的 Cache 和 Buffer 指的是什么，有何作用？
-
-+ Cache：指的是 Page Cache，通常是按照页为单位来缓存文件系统中的文件，可用于文件数据的快速访问，注意其同样也会缓存文件的写操作，缓存文件写操作就需要 dirty 标识符配合
-+ Buffer：指的是 Buffer Cache，用于暂存物理磁盘块，通常用于写操作（写数据到磁盘）进行缓存，但是也可用于读缓存（从磁盘读数据）
-+ **Buffers** can be used either as a “cache for data to be written to disk” or as a “cache for data read from disk”.
-+ **Cache** can be used either as a “page cache for reading data from files” or as a “page cache for writing files”.
+10. [Linux 内存管理](https://github.com/0voice/kernel_memory_management) 
 
 
 
