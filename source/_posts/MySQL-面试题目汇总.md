@@ -253,7 +253,7 @@ hidden: true
 
 47. InnoDB log 优化方案？
 
-    + innodb_flush_log_at_trx_commit：0 表示 commit 到 innodb 内存，每秒写入 disk file，1 表示 commit 到 disk file，2 表示 commit 到 os cache，每秒写入 disk file
+    + innodb_flush_log_at_trx_commit：0 表示每隔一秒把 log buffer 刷到文件系统中(os buffer)去，并且调用文件系统的“flush”操作将缓存刷新到磁盘上去，1 表示在每次事务提交的时候，都把log buffer刷到文件系统中(os buffer)去，并且调用文件系统的“flush”操作将缓存刷新到磁盘上去，2 表示在每次事务提交的时候会把log buffer刷到文件系统中去，但并不会立即刷写到磁盘。
     + 设置 log file size，控制检查点：日志文件切换会导致检查点变化，会导致缓存页小批量刷新，降低性能，通常每半个小时写满一个日志文件较好
     + 调整 innodb_log_buffer_size：默认 8 MB，对于具有大量更新记录的事务，可以增加该值，减少对磁盘写入次数
 
@@ -318,7 +318,7 @@ hidden: true
 
 57. MySQL 中的逻辑备份和恢复如何实现？
 
-    可以通过 mysqldump&mysqlimport 实现，另外还需要执行日志重做 `mysqlbinlog binlog-file | mysql -u root –p***`，可以采用基于时间点恢复或者基于位置恢复两种策略。
+    可以通过 mysqldump 和 mysqlimport 实现，另外还需要执行日志重做 `mysqlbinlog binlog-file | mysql -u root –p***`，可以采用基于时间点恢复或者基于位置恢复两种策略。
 
 58. MySQL 中的物理备份和恢复如何实现？
 
@@ -364,7 +364,7 @@ hidden: true
 
 66. MySQL 三种复制模式？
 
-    + 异步复制：主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，主如果 crash 掉了，此时主上已经提交的事务可能并没有传到从库上，造成数据不一致
+    + 异步复制：主库在执行完客户端提交的事务后（生成对应的 binlog）会立即将结果返给给客户端，并不关心从库是否已经接收并处理，主如果 crash 掉了，此时主上已经提交的事务可能并没有传到从库上，造成数据不一致
     + 全同步复制：当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响
     + 半同步复制：主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈
 

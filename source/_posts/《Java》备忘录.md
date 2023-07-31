@@ -139,7 +139,7 @@ Java 8 版本新特性：
 6. Nashhorn JavaScript Engine
 7. Concurrent Accumulators
 8. Parallel operations
-9. PermGen Error Removed
+9. PermGen Error Removed：限制了加载类的空间大小，改为元空间，不受限大小
 
 Java 和 C++ 区别：
 
@@ -199,7 +199,7 @@ Java 和 C++ 区别：
   ```java
   // 编译错误，ClassCastException  
   ArrayList<String> list1 = new ArrayList<Object>(); 
-  //编译错误，违背使用泛型的初衷
+  // 编译错误，违背使用泛型的初衷
   ArrayList<Object> list2 = new ArrayList<String>(); 
   ```
 
@@ -228,7 +228,7 @@ class DateInter extends Pair<Date> {
 
 ```
 
-另外，子类中桥接方法`Object getValue()`和`Date getValue()`是同时存在的，虚拟机可以通过返回值和参数类型来区别，但是在编写程序的时候，Java 编译期不允许我们这样做。
+另外，子类中桥接方法 `Object getValue()` 和 `Date getValue()` 是同时存在的，虚拟机可以通过返回值和参数类型来区别，但是在编写程序的时候，Java 编译期不允许我们这样做。
 
 基本类型不能作为泛型类型：无限制泛型擦除后将变为 Obejct，而 Obejct 不能存储 int 等基本类型
 
@@ -303,7 +303,7 @@ class DateInter extends Pair<Date> {
 + try-catch：同一个 catch 可以捕获多种不同的异常，使用 `|` 分割
 + try-catch-finally：不管有没有出现异常，finally 中的语句块始终会被执行，通常 finnaly 里面不要包含 return 语句
 + try-finally：保证资源使用后被关闭
-+ try-with-resource：自动释放资源，需要资源实现了 AutoClaseable 接口的类
++ try-with-resource：自动释放资源，需要资源实现了 AutoCloseable 接口的类
 
 异常实践：
 
@@ -333,7 +333,7 @@ Class 类：Class 类也是一个类，其实例用于表示运行时的类（cl
 
 + 手动编写的类编译后会产生 Class 对象，其被保存在同名 .class 文件中
 + 每个类在内存中只有一个对应的 Class 对象来描述其信息，采用单例模式
-+ Class 类只存在似有构造函数，因此对应的 Class 对象只能通过 JVM 加载和创建
++ Class 类只存在私有构造函数，因此对应的 Class 对象只能通过 JVM 加载和创建
 
 Class 类对象的获取：
 
@@ -416,7 +416,7 @@ LinkedList：底层是带有头尾节点的双向链表，同时实现了 List �
 
 + getFirst，getLast，removeFirst，removeLast，remove，add，addAll，clear，set，get
 + Queue 方法：offer，poll，peek，remove，element
-+ Qeque 方法：offerFirst，offerLast，peekFirst，peekLast，pollFirst，pollLast，removeFirstOccurrence，removeLastOccurrence
++ Deque 方法：offerFirst，offerLast，peekFirst，peekLast，pollFirst，pollLast，removeFirstOccurrence，removeLastOccurrence
 
 Stack：当需要使用栈时，推荐使用更高效的 ArrayDeque
 
@@ -434,7 +434,7 @@ PriorityQueue：优先队列保证每次取出的元素都是队列中权值最�
 
 HashMap：实现了 Map 接口，既允许 key 为 null，也允许 value 为 null，该类未实现线程同步
 
-+ 插入：采用头插法进行插入，为了解决冲突，采用冲突链表方式
++ 插入：为了解决冲突，采用冲突链表方式，采用头插法进行插入
 
 + hashcode 决定了对象会被放到哪个 bucket 中，当多个对象的哈希值冲突时，equals 方法决定了这些对象是否是同一个对象
 
@@ -442,7 +442,7 @@ HashMap：实现了 Map 接口，既允许 key 为 null，也允许 value 为 nu
 
 + Java 7 采用链表和数组实现 HashMap：
 
-    ![HashMap_base](《Java》备忘录/HashMap_base.png)
+    <img src="《Java》备忘录/HashMap_base.png" alt="HashMap_base" style="zoom:50%;" />
 
 + Java 8 采用链表，数组和红黑树实现，主要不同在于当链表中的元素超过 8 个时，会将链表转换为红黑树，使得在进行查找的时候降低时间复杂度
 
@@ -452,7 +452,7 @@ HashSet：对 HashMap 的一个简单封装，对 HashSet 的函数调用都会�
 
 LinkedHashMap：实现了 Map 接口，可以看作是 linkedlist 增强的 hashmap，其采用双向链表的形式将所有的 entry 连接起来，这样是为了保证元素的迭代顺序和插入顺序相同，另外，遍历的时候只需要从 header 开始遍历即可，遍历的时间复杂度和元素个数相同
 
-![LinkedHashMap_base.png](《Java》备忘录/LinkedHashMap_base.png)
+<img src="《Java》备忘录/LinkedHashMap_base.png" alt="LinkedHashMap_base.png" style="zoom:50%;" />
 
 TreeMap：实现了 SortedMap 接口，会按照 key 的大小顺序对 Map 中的元素排序，其底层采用红黑树
 
@@ -600,9 +600,9 @@ DirectByteBuffer：通过 DirectByteBuffer 静态方法 allocateDirect 分配内
 
 FileChannel：用于文件读写，映射和操作的通道，并且是线程安全的
 
-+ tranferTo：把文件里面的源数据写入一个 WritableByteChannel 的目的通道
-+ tranferFrom：把一个源通道 ReadableByteChannel 中的数据读取到当前 FileChannel 的文件里面
-+ tranferTo 底层实现和 sendfile64 相关
++ transferTo：把文件里面的源数据写入一个 WritableByteChannel 的目的通道
++ transferFrom：把一个源通道 ReadableByteChannel 中的数据读取到当前 FileChannel 的文件里面
++ transferTo 底层实现和 sendfile64 相关
 
 RocketMQ 和 Kafka 对比：
 
@@ -631,7 +631,7 @@ RocketMQ 和 Kafka 对比：
 反编译字节码文件：`javac -g <javafile> && javap  -v -p <classfile>`，相关信息解释
 
 + 访问标志：如
-    + ACC_SUPER：是否允许使用invokespecial字节码指令的新语义
+    + ACC_SUPER：是否允许使用 invokespecial 字节码指令的新语义
     + ACC_SYNTHETIC：标志这个类并非由用户代码产生
     + ACC_ANNOTATION：标志这是一个注解
 + 类型信息：基本类型通常首字母表示，但是存在特例：
