@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-02-04T04:05:45.000Z">
-<meta property="article:modified_time" content="2023-03-28T02:58:21.567Z">
+<meta property="article:modified_time" content="2023-07-18T15:35:29.118Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-03-28 10:58:21'
+  postUpdate: '2023-07-18 23:35:29'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,8 +142,16 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-28T02:58:21.567Z" title="更新于 2023-03-28 10:58:21">2023-03-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">16.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>53分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MySQL 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-04T04:05:45.000Z" title="发表于 2023-02-04 12:05:45">2023-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-18T15:35:29.118Z" title="更新于 2023-07-18 23:35:29">2023-07-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">16.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>53分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文整理了 MySQL 的相关问题，以便更深入掌握 MySQL。</p>
 <span id="more"></span>
+
+
+
+
+
+
+
+
 
 
 
@@ -151,10 +159,10 @@
 <li><p>SQL 语句分类？</p>
 <p>主要分为三类，DDL，DML 和 DCL。</p>
 </li>
-<li><p>内连接和外连接的区别？</p>
-<p>内连接只包含符合条件的元组，外连接则还包含了哪些不符合条件的元组。</p>
+<li><p>内连接（INNER JOIN ON）和外连接（OUTER JOIN ON）的区别？</p>
+<p>内连接只包含符合条件的元组，外连接则还包含了哪些不符合连接条件的元组。</p>
 </li>
-<li><p>内连接中自然连接和等值连接的区别？</p>
+<li><p>内连接中自然连接（NATURAL JOIN）和等值连接的区别？</p>
 <p>自然连接会去除相同列，等值连接则不会。</p>
 </li>
 <li><p>Union 和 Union All 的区别？</p>
@@ -163,7 +171,7 @@
 <li><p>MySQL 数值类型有哪些？</p>
 <p>TINYINT，SMALLINT，MEDIUMINT，INT，BIGINT，FLOAT，DOUBLE，DECIMAL。</p>
 </li>
-<li><p>DECIMAL（20，9）需要多少字节表示其数值部分？</p>
+<li><p>DECIMAL(20，9) 需要多少字节表示其数值部分？</p>
 <p>DECIMAL 采用四字节存储 9 位数字的方式进行存储，小数部分需要 4 字节，整数部分共 11 位，低 9 位 4 字节，高 3 位需要 2 字节，一共需要 4 + 4 + 2 &#x3D; 10 字节。DECIMAL 负数存储只需要将每个字节取反即可。</p>
 </li>
 <li><p>INT(5) 和 INT 区别？</p>
@@ -173,7 +181,7 @@
 <p>DATE，TIME，YEAR，DATETIME，TIMESTAMP。</p>
 </li>
 <li><p>在 MySQL 5.6 之前，为什么 DATE，TIME 各自需要 3 个字节，而 DATETIME 需要 8 个字节？</p>
-<p>DATE&#x2F;TIME 是转换到对应天或者秒来计算的，只需要 3 个字节足矣；而 DATETIME 中 DATE 保存方式是 YYYY×10000 + MM×100 + DD，需要四字节，时间整数表示 HH×10000000 + MM×100000 + SS * 1000，同样四字节。</p>
+<p>DATE&#x2F;TIME 是转换到对应天或者秒来计算的，只需要 3 个字节足矣；而 DATETIME 中 DATE 保存方式是 YYYY×10000 + MM×100 + DD，需要四字节，时间整数表示 HH×10000000 + MM×100000 + SS * 1000（毫秒保存），同样四字节。</p>
 </li>
 <li><p>MySQL 中的字符串&#x2F;字节串类型？</p>
 <p>CHAR，VARCHAR，TINYTEXT，TEXT，MEDIUMTEXT，LONGTEXT，TINYBLOB，BLOB，MEDIUMBLOB，LONGBLOB。</p>
@@ -182,7 +190,7 @@
 <p>前者表示定长，数据长度不够时会补空格填充，后者则是变长，严格存储对应长度的字符串，还会记录 1 或 2 个字节的长度值。</p>
 </li>
 <li><p>MySQL 复合类型有哪些？</p>
-<p>ENUM 和 SET。ENUM 规定数据只能在枚举值中，并且存储上按照整数存储，因此 enum(‘male’, ‘female’) 中的 male 实际存储的是 1，female 实际存储的是 2，<code>&#39;&#39;</code> 空字符串存储 0，<code>NULL</code> 将被定义为 NULL。SET 则是定义集合，会自动去除重复值。</p>
+<p><strong>ENUM 和 SET</strong>。ENUM 规定数据只能在枚举值中，并且存储上按照整数存储，因此 enum(‘male’, ‘female’) 中的 male 实际存储的是 1，female 实际存储的是 2，<code>&#39;&#39;</code> 空字符串存储 0，<code>NULL</code> 将被定义为 NULL。SET 则是定义集合，会自动去除重复值。</p>
 </li>
 <li><p>MySQL 中如何获取 DATETIME 类型对应的 DATE？</p>
 <p>可以通过 date_format(datetime, ‘%Y-%m-%d’) 获取对应的字符串，然后通过 str_to_date 即可。</p>
@@ -190,15 +198,15 @@
 <li><p>MySQL 有哪些存储引擎（表类型），各自的优缺点分别是什么？</p>
 <ul>
 <li>MyISAM：不支持事务、也不支持外键，其优势是访问的速度快，对事务完整性没有要求或者以 SELECT、INSERT 为主的应用基本上都可以使用这个引擎创建表</li>
-<li>InnoDB：提供了具有提交、回滚和崩溃恢复能力的事务安全，锁粒度可以达到行级锁。但是对比MyISAM 的存储引擎，InnoDB 写的处理效率差一些，并且会占用更多的磁盘空间以保留数据和索引</li>
-<li>MEMORY：使用存在于内存中的内容来创建表。每个MEMORY 表只实际对应一个磁盘文件，格式是 <code>.frm</code>。MEMORY 类型的表访问非常快，因为它的数据是放在内存中的</li>
+<li>InnoDB：提供了具有提交、回滚和崩溃恢复能力的事务安全，锁粒度可以达到行级锁。但是对比 MyISAM 的存储引擎，InnoDB 写的处理效率差一些，并且会占用更多的磁盘空间以保留数据和索引</li>
+<li>MEMORY：使用存在于内存中的内容来创建表。每个 MEMORY 表只实际对应一个磁盘文件，格式是 <code>.frm</code>。MEMORY 类型的表访问非常快，因为它的数据是放在内存中的</li>
 </ul>
 </li>
 <li><p>TEXT 和 BLOB 的异同点？</p>
 <p>都是用于存储较大的数据，TEXT 用于存储字符数据，如一篇文章或者日记，BLOB 则用于存储二进制文件，如图片。</p>
 </li>
 <li><p>为什么删除 TEXT 和 BLOB 数据后，需要及时使用 <code>OPTIMIZE TABLE</code> 命令？</p>
-<p>在执行删除操作之后，会在数据表中留下很大的空洞，可以定期使用 OPTIMIZE TABLE 来进行碎片整理。另外，可以将 TEXT 和 BLOB 列分离到单独的表中，减少主表的碎片。</p>
+<p>在执行删除操作之后，会在数据表中留下很大的空洞（降低缓存的作用），可以定期使用 OPTIMIZE TABLE 来进行碎片整理。另外，可以将 TEXT 和 BLOB 列分离到单独的表中，减少主表的碎片。</p>
 </li>
 <li><p>如何选择日期类型？</p>
 <p>根据实际需要选择能够满足应用的最小存储的日期类型。如果记录的日期需要让不同时区的用户使用，那么最好使用 TIMESTAMP，因为日期类型中只有它能够和实际时区相对应。</p>
@@ -210,7 +218,7 @@
 <p>字符集用于定义 MySQL 存储字符串的编码格式，校对规则用来定义字符串的比较方式，通常以字符集开始，以 <code>_ci</code>（大小不敏感），<code>_cs</code> 或者 <code>bin</code> 结束。</p>
 </li>
 <li><p>MySQL 4 个级别的字符集设置？</p>
-<p>服务器级别，数据库级别，标记别和列级别。</p>
+<p>服务器级别，数据库级别，表记别和列级别。</p>
 </li>
 <li><p>如果原来的数据库中存在部分数据，想要修改字符集，正确的做法是？</p>
 <p>直接使用 <code>alter database/table</code> 修改字符集并不能修改之前已经插入的字符串，需要先导出数据，然后手动修改字符集，最后再导入即可。</p>
@@ -286,11 +294,12 @@
 <li>把 LIMIIT 查询转换成某个位置的查询，如根据上次的查询的最大 id 计算下一次的最大的值</li>
 </ul>
 </li>
-<li><p>如何使用 SQL 语句提取随即行？</p>
+<li><p>如何使用 SQL 语句提取随机行？</p>
 <p>使用 RAND() 提取随机行：</p>
 <ul>
 <li><code>select * from category order by rand() limit 10</code>，适用于小表</li>
 <li><code>select * from category where rand() &lt;= 0.006 limit 10</code>，适用于大表</li>
+<li><code>select * from category where id &lt; round(rand() * max(id)) limit 1</code>，多次使用</li>
 </ul>
 </li>
 <li><p>如何对数据库进行优化？</p>
@@ -318,12 +327,12 @@
 <p>用于控制并发插入：</p>
 <ul>
 <li>设置为 0 时，不允许并发插入</li>
-<li>设置为 1 时，如果 MyISAM 表中没有空洞(即表的中间没有被删除的行)，MyISAM允许在一个进程读表的同时，另一个进程从表尾插入记录。默认项</li>
+<li>设置为 1 时，如果 MyISAM 表中没有空洞(即表的中间没有被删除的行)，MyISAM 允许在一个进程读表的同时，另一个进程从表尾插入记录。默认项</li>
 <li>设置为 2 时，无论 MyISAM 表中有没有空洞，都允许在表尾并发插入记录</li>
 </ul>
 </li>
 <li><p>MyISAM 中写锁优先还是读锁优先？能否进行配置？</p>
-<p>如果同时存在一个写进程和一个读进程获取相同项的锁，MySQL 会优先将锁给写进程。可以通过调整low-priority-updates变量改变调度行为。</p>
+<p>如果同时存在一个写进程和一个读进程获取相同项的锁，MySQL 会优先将锁给写进程。可以通过调整low-priority-updates 变量改变调度行为。</p>
 </li>
 <li><p>InnoDB 存在哪些锁模式？</p>
 <p>行锁有共享锁和排他锁，表锁（意向锁）有 IS 和 IX 锁，意向锁是自动加的。对于更新操作，会加上 X 锁，对于普通的 SELECT 语句，则不会加任何锁，但是可以通过 SELECT … LOCK IN SHARE MODE 获取 S 锁，通过 SELECT … FOR UPDATE 获取 X 锁。</p>
@@ -344,7 +353,7 @@
 </li>
 <li><p>InnoDB log 优化方案？</p>
 <ul>
-<li>innodb_flush_log_at_trx_commit：0 表示 commit 到 innodb 内存，每秒写入disk file，1 表示 commit 到 disk file，2 表示 commit 到 os cache，每秒写入 disk file</li>
+<li>innodb_flush_log_at_trx_commit：0 表示 commit 到 innodb 内存，每秒写入 disk file，1 表示 commit 到 disk file，2 表示 commit 到 os cache，每秒写入 disk file</li>
 <li>设置 log file size，控制检查点：日志文件切换会导致检查点变化，会导致缓存页小批量刷新，降低性能，通常每半个小时写满一个日志文件较好</li>
 <li>调整 innodb_log_buffer_size：默认 8 MB，对于具有大量更新记录的事务，可以增加该值，减少对磁盘写入次数</li>
 </ul>
@@ -370,7 +379,7 @@
 <p>可用于优化 order by 的语句，因为 sort 后的数据是以 key-value 的形式存在的，使用这些行指针去读取数据，将是以指针数据物理的顺序去读取，很大程度上是随机的方式读取数据的。MySQL 从 sort_buffer 中读取这些行指针数据，然后通过指针排序后存入 read_rnd_buffer 中，之后再通过指针读取数据时，基本上都是顺序读取了。</p>
 </li>
 <li><p>InnoDB 内存优化？</p>
-<p>用一块内存区做 IO 缓存池，该缓存池不仅用来缓存 InnoDB 的索引块，而且也用来缓存InnoDB的数据块，缓存池逻辑上由 free list、flush list 和 LRU list 组成。InnoDB 使用的 LRU 算法是类似两级队列的方法</p>
+<p>用一块内存区做 IO 缓存池，该缓存池不仅用来缓存 InnoDB 的索引块，而且也用来缓存 InnoDB 的数据块，缓存池逻辑上由 free list、flush list 和 LRU list 组成。InnoDB 使用的 LRU 算法是类似两级队列的方法</p>
 <ul>
 <li>innodb_buffer_pool_size</li>
 <li>调整 old sublist 大小</li>
@@ -385,7 +394,7 @@
 <ul>
 <li>使用 Symbolic Links 分布 IO：默认情况下，数据库名和表名对应的就是文件系统的目录名和文件名，但是这样不利于多磁盘并发读写的能力，可以使用符号链接将不同的数据库指向不同的物理磁盘，达到分布磁盘 IO 的目的。</li>
 <li>禁止操作系统更新文件的 atime 属性：LINUX 系统下，每次读取一个文件，操作系统就会将读操作的时间写回到磁盘上，这可能会影响 IO 性能。</li>
-<li>使用裸设备存放 InnoDB 的共享表空间：对于 MyISAM，数据文件的读写完全依赖于操作系统，但是对于 InnoDB 来说，其自己实现了数据缓存机制，操作系统的缓存系统可能对其有反作用，可将数据放倒 Raw Device 上。</li>
+<li>使用裸设备存放 InnoDB 的共享表空间：对于 MyISAM，数据文件的读写完全依赖于操作系统，但是对于 InnoDB 来说，其自己实现了数据缓存机制，操作系统的缓存系统可能对其有反作用，可将数据放在 Raw Device 上。</li>
 </ul>
 </li>
 <li><p>在应用层面上，如何对 MySQL 服务进行优化？</p>
@@ -400,9 +409,9 @@
 </li>
 <li><p>MySQL 中存在哪些日志？</p>
 <ul>
-<li>错误日志：记录了当mysqld启动和停止时，以及服务器在运行过程中发生任何严重错误时的相关信息</li>
+<li>错误日志：记录了当 mysqld 启动和停止时，以及服务器在运行过程中发生任何严重错误时的相关信息</li>
 <li>归档日志：记录了所有的 DDL（数据定义语言）语句和 DML（数据操纵语言）语句，但是不包括数据查询语句。此日志对于灾难时的数据恢复起着极其重要的作用。分为 STATMENT ，ROW，MIXED 格式</li>
-<li>查询日志：查询日志记录了客户端的所有语句，而二进制日志不包含只查询数据的语句</li>
+<li>查询日志：查询日志记录了客户端的所有语句，而归档不包含只查询数据的语句</li>
 <li>慢查询日志：记录了所有执行时间超过参数 long_query_time 设置值并且扫描记录数不小于min_examined_row_limit 的所有 SQL 语句的日志。</li>
 </ul>
 </li>
@@ -432,7 +441,7 @@
 <p>首先对连接的用户进行身份认证，然后对通过的用户赋予对应权限即可。在 MySQL 内部，存在 user，host 和 db 这三个权限表，对于通过认证的用户要查看某个权限只需要访问对应的权限列即可。</p>
 </li>
 <li><p>忘记 MySQL 的 root 密码怎么办？</p>
-<p>首先手动 kill 掉 MySQL 进程，接着使用–skip-grant-tables选项重启登陆到 MySQL 服务，之后就可以更新密码，并且刷新权限表。</p>
+<p>首先手动 kill 掉 MySQL 进程，接着使用 –skip-grant-tables 选项重启登陆到 MySQL 服务，之后就可以更新密码，并且刷新权限表。</p>
 </li>
 <li><p>mysql.sock 丢失后如何连接数据库？</p>
 <p>使用其他协议如<code>--protocol=TCP|PIPE|SOCKET</code>。</p>
@@ -468,7 +477,7 @@
 <li><p>高可用架构有哪些？</p>
 <ul>
 <li>MMM 架构：由于 MMM 无法完全地保证数据一致性，所以 MMM 适用于对数据的一致性要求不是很高，但是又想最大程度的的保证业务可用性的场景；对于那些对数据的一致性要求很高的业务，非常不建议采用 MMM 这种高可用性架构。</li>
-<li>MHA 架构：目前在 MySQL 高可用方面是一个相对成熟的解决方案，MHA能在最大程度上保证数据的一致性，以达到真正意义上的高可用。其从宕机崩溃的 master 保存二进制日志事件，识别含有最新更新的 slave，应用差异的中继日志（relay log）到其他 slave，应用从 master 保存的二进制日志事件，提升一个 slave 为新 master，使其他的 slave 连接新的 master 进行复制。</li>
+<li>MHA 架构：目前在 MySQL 高可用方面是一个相对成熟的解决方案，MHA 能在最大程度上保证数据的一致性，以达到真正意义上的高可用。其从宕机崩溃的 master 保存二进制日志事件，识别含有最新更新的 slave，应用差异的中继日志（relay log）到其他 slave，应用从 master 保存的二进制日志事件，提升一个 slave 为新 master，使其他的 slave 连接新的 master 进行复制。</li>
 </ul>
 </li>
 <li><p>能说下 MyISAM 和 InnoDB 的区别吗？</p>
@@ -483,7 +492,7 @@
 <li><p>说下 MySQL 的索引有哪些吧，聚簇和非聚簇索引又是什么？</p>
 <p>索引按照数据结构来说主要分为 B+Tree 和哈希索引，聚簇索引是索引和数据存放在一起。</p>
 </li>
-<li><p>主键索引自增有什么优点？</p>
+<li><p>主键索引<strong>自增</strong>有什么优点？</p>
 <p>在插入数据的时候，可以直接将数据追加到最后一个数据页里面，不涉及数据在数据页中的移动，如果不使用自增主键，在插入的时候可能会造成页分裂等耗时操作。</p>
 </li>
 <li><p>空闲连接的查看和解决方式？</p>
@@ -498,14 +507,14 @@
 <li><p>你能说下事务的基本特性和隔离级别吗？</p>
 <p>ACID，四种隔离级别分别消除了四种不一致现象。</p>
 </li>
-<li><p>那ACID靠什么保证的呢？</p>
+<li><p>那 ACID 靠什么保证的呢？</p>
 <p>原子性通过 undolog 保证，隔离性通过 MVCC 和锁机制实现，持久性通过 redolog 实现，保证了事务的持久性、原子性、隔离性之后，一致性才能得到保障。</p>
 </li>
-<li><p>那你说说什么是幻读，什么是MVCC？</p>
+<li><p>那你说说什么是幻读，什么是 MVCC？</p>
 <p>幻读是指两次读取中读到了新插入的数据行，MVCC 实际上是为每个版本添加创建时间版本号，过期时间版本号，只有满足一定要求的事务才能读到对应的版本。</p>
 </li>
 <li><p>那你知道什么是 next-key lock 吗？</p>
-<p>next-key lock 是 RR 下才有的锁，结合 MVCC 可以解决幻读的问题，其在一定条件下能够退化成记录锁或间隙锁。</p>
+<p>next-key lock 是 RR 下才有的锁，结合 MVCC 可以解决部分幻读的问题，其在一定条件下能够退化成记录锁或间隙锁。</p>
 </li>
 <li><p>MySQL 记录锁+间隙锁可以防止删除操作而导致的幻读吗？</p>
 <p>可以，在 MySQL 的可重复读隔离级别下，针对「当前读」的查询语句会对索引加记录锁+间隙锁，这样可以避免其他事务执行「增、删、改」时导致幻读的现象。</p>
@@ -535,16 +544,16 @@
 <p>设定不同步长，分布式 ID 如雪花算法，不使用自增主键而是使用其他唯一数据列作为主键。</p>
 </li>
 <li><p>分表后非 sharding_key 的查询怎么处理呢？</p>
-<p>对实时性要求不高的话，可以建立宽表；数据量不是很大的话，可以多线程扫表，然后再聚合结果。</p>
+<p>对实时性要求不高的话，可以建立宽表（逆规范化）；数据量不是很大的话，可以多线程扫表，然后再聚合结果。</p>
 </li>
 <li><p>说说 mysql 主从同步怎么做的吧？</p>
-<p>主服务器写入 binglog 后，会创建 dump 线程推送其到从服务器，从服务器启动 IO 线程读取推送过来的 binglog，记录到 relay log 中继日志中，从服务器开启一个 sql 线程读取 relay log 并且执行，最后从服务器也记录自己的 binlog。主从同步分为全同步复制和半同步复制，前者需要所有从库执行完才返回客户端，后者至少收到一个从库的 ack 即可。</p>
+<p>主服务器写入 binglog 后，会创建 dump 线程推送其到从服务器，从服务器启动 IO 线程读取推送过来的 binglog，记录到 relay log 中继日志中，从服务器开启一个 sql 线程读取 relay log 并且执行，最后从服务器也记录自己的 binlog。主从同步分为全同步复制和半同步复制，前者需要所有从库执行完才返回客户端，后者至少收到一个从库的 ack （从库持久化到 relay log）即可。</p>
 </li>
 <li><p>那主从的延迟怎么解决呢？</p>
 <p>并不能解决，但是能尽量优化，如尽量减少或者不使用长事务。</p>
 </li>
 <li><p>查询缓存的作用？</p>
-<p>查询的时候先查询缓存，但是在 MySQL 8.0 后，该功能被移除。缓存虽然能够提升数据库的查询性能，但是缓存同时也带来了额外的开销，每次查询后都要做一次缓存操作，失效后还要销毁。建议设置query_cache_type 变量为 DEMAND。</p>
+<p>查询的时候先查询缓存，但是在 MySQL 8.0 后，该功能默认被移除。缓存虽然能够提升数据库的查询性能，但是缓存同时也带来了额外的开销，每次查询后都要做一次缓存操作，失效后还要销毁。建议设置 query_cache_type 变量为 DEMAND。</p>
 </li>
 <li><p>MySQL 引擎为什么采用该 B+ 树而不是 B 树？</p>
 <ul>
@@ -592,13 +601,13 @@
 </li>
 <li><p>数据切分的方式以及对应的优缺点？</p>
 <p>垂直切分：可以让数据从大表切分成多个小表，但是获取全部数据可能需要进行 join 连接</p>
-<p>水平切分：可以使用哈希取模，范围划分等方式，可以为表操作提供更高的吞吐率，但是可能需要引入分布式事务（XA 接口），需要在用户程序中进行连接，另外，需要生成唯一 ID，可以使用分布式 ID 生成器</p>
+<p>水平切分：可以使用哈希取模，范围划分等方式，可以为表操作提供更高的吞吐率，但是可能需要引入分布式事务（XA 接口），需要在用户程序中进行连接，另外，需要生成唯一 ID，可以使用分布式 ID 生成器或者使用数据库自己生成（相同 OFFSET + DELTA）</p>
 </li>
 <li><p>MySQL 主从复制过程？</p>
 <p>主要涉及三个线程，binlog dump 线程，IO 线程和 SQL 线程：</p>
 <ul>
-<li>IO 线程会请求 binlog，并且将得到的 binlog 写到本地的 relay-log 文件中</li>
 <li>主库中的 binlog dump 线程会给从库的 IO 线程传送 binlog</li>
+<li>IO 线程会请求 binlog，并且将得到的 binlog 写到本地的 relay-log 文件中</li>
 <li>从库中的 SQL 线程会读取 relay-log 文件中的日志，并且将其转换为 sql 语句逐一执行</li>
 </ul>
 </li>
@@ -629,7 +638,7 @@
 </li>
 <li><p>explain 中的 extra 列有哪些值？</p>
 <ul>
-<li>using filesort：需额外的排序操作, 不能通过索引顺序达到排序效果</li>
+<li>using filesort：需额外的排序操作，不能通过索引顺序达到排序效果</li>
 <li>using index：使用了覆盖索引</li>
 <li>using where：使用了 where 过滤数据</li>
 <li>using index condition：使用了索引，但是需要回表</li>
@@ -654,10 +663,10 @@
 <p>加入 e 字段后，就不能使用覆盖索引了，此时就只能进行全表扫描。</p>
 </li>
 <li><p>SQL 查询语句执行过程？</p>
-<p>通过连接器进行用户权限检查；检查缓存（query_cache_type &#x3D; DEMAND）；词法语法分析，检查 SQL 语句正确性；优化器找到最佳的物理执行计划；调用存储引擎接口进行查询，返回结果（增量且逐步返回的过程）</p>
+<p>通过连接器进行用户权限检查；检查缓存（query_cache_type &#x3D; DEMAND）；词法语法分析，检查 SQL 语句正确性；优化器找到最佳的物理执行计划；调用存储引擎接口进行查询，返回结果（增量且逐步返回的过程）。</p>
 </li>
 <li><p>慢 SQL 是什么，有什么危害，可能有哪些原因造成的，如何预防？</p>
-<p>慢 SQL 就是执行时间远大于正常值的 SQL 语句；在高并发情况下，慢 SQL 出现后会阻塞大量正常的请求，造成大面积的超时和失败；可能由于创建太多索引，造成更新操作效率下降，或者是查询语句发生了索引失效；预防方式是打开慢 SQL 日志，设置慢 SQL 执行时间阈值，之后使用 explain 命令查看原因，今早优化慢 SQL 语句。</p>
+<p>慢 SQL 就是执行时间远大于正常值的 SQL 语句；在高并发情况下，慢 SQL 出现后会阻塞大量正常的请求，造成大面积的超时和失败；可能由于创建太多索引，造成更新操作效率下降，或者是查询语句发生了索引失效；预防方式是打开慢 SQL 日志，设置慢 SQL 执行时间阈值，之后使用 explain 命令查看原因，尽早优化慢 SQL 语句。</p>
 </li>
 <li><p>MySQL 索引失效发生的场景？</p>
 <ul>
@@ -679,7 +688,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t_record where id &gt; last_id  limit 10;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用覆盖索引：不需要进行额外的回表操作，普适性更高</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from t_record where id in</span><br><span class="line">(select id from t_record where age &gt; 10 offset 10000 limit 10）;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from t_record where id in</span><br><span class="line">(select id from t_record where age &gt; 10 offset 10000 limit 10);</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>InnoDB 是如何保证事务的 ACID 属性的？</p>
@@ -917,7 +926,7 @@
 <p>涉及到 redo log，undo log 和 binlog：</p>
 <ul>
 <li>undo log：InnoDB 存储引擎生成的日志，实现了事务的原子性，用于事务回滚和支持 MVCC</li>
-<li>redo log：InnoDB 存储引擎生成的日志，实现了事务的持久性，主要用故意掉电等故障恢复</li>
+<li>redo log：InnoDB 存储引擎生成的日志，实现了事务的持久性，主要用掉电等故障恢复</li>
 <li>binlog：Server 层生成的日志，主要用于数据备份和主从复制</li>
 </ul>
 </li>
@@ -928,10 +937,10 @@
 <p>需要，需要先记录修改 undo 页面的 redo log，再真正修改 undo 页面</p>
 </li>
 <li><p>redo log 同样需要写到磁盘，数据也要写到磁盘，为什么多此一举？</p>
-<p>redo log 采用的是追加写，磁盘操作是顺序写，而写入数据则需要先找到写入位置，对应磁盘操作是随机写，其将 MySQL 的写操作从磁盘的随机写变为顺序写，提高了系统性能</p>
+<p>redo log 采用的是追加写，磁盘操作是顺序写，而写入数据则需要先找到写入位置，对应磁盘操作是随机写，其将 MySQL 的写操作从磁盘的随机写变为顺序写，提高了系统性能。</p>
 </li>
 <li><p>产生的 redo log 是直接写入磁盘吗？</p>
-<p>不是的，首先将操作记录到 redo log buffer 中，后续根据刷盘策略再将其写入到磁盘中</p>
+<p>不是的，首先将操作记录到 redo log buffer 中，后续根据刷盘策略再将其写入到磁盘中。</p>
 </li>
 <li><p>redo log 什么时候刷盘？</p>
 <p>主要有下面几个时机：</p>
@@ -956,7 +965,7 @@
 </ul>
 </li>
 <li><p>redo log 文件写满了怎么办？</p>
-<p>InnoDB 存储引擎有一个重做日志文件组，包含两个文件： ib_logfile0 和 ib_logfile1 。采用循环写的方式，check_point 表示当前要擦除的位置，write_pos 表示下一个 redo log 日志要写入的位置，当 redo log 文件写满了，也就是 write_pos 追上了 check_point，此时 MySQL 不能执行新的更新操作，其会停下来将 buffer pool 中的脏页刷新到磁盘中，以将 check_point 向后推进，使得 MySQL 恢复正常执行。</p>
+<p>InnoDB 存储引擎有一个<strong>重做日志文件组</strong>，包含两个文件： ib_logfile0 和 ib_logfile1 。采用循环写的方式，check_point 表示当前要擦除的位置，write_pos 表示下一个 redo log 日志要写入的位置，当 redo log 文件写满了，也就是 write_pos 追上了 check_point，此时 MySQL 不能执行新的更新操作，其会停下来将 buffer pool 中的脏页刷新到磁盘中，以将 check_point 向后推进，使得 MySQL 恢复正常执行。</p>
 </li>
 <li><p>为什么有了 binlog， 还要有 redo log？</p>
 <p>最初的 MySQL 使用的是 MyISAM 引擎，其只有 binlog，用于归档，InnoDB 以插件形式引入，引入 redo log 是为了 crash-safe 能力。</p>
@@ -981,7 +990,7 @@
 <li>回放 Binlog：回放 relay log，并更新存储引擎中的数据</li>
 </ul>
 </li>
-<li><p>MySQL 主从复制还有些模型？</p>
+<li><p>MySQL 主从复制有哪几种同步方式？</p>
 <ul>
 <li>同步复制：MySQL 主库提交事务的线程要等待所有从库的复制成功响应，才返回客户端结果。这种方式在实际项目中，基本上没法用，原因有两个：一是性能很差，因为要复制到所有节点才返回响应；二是可用性也很差，主库和所有从库任何一个数据库出问题，都会影响业务。</li>
 <li>异步复制（默认模型）：MySQL 主库提交事务的线程并不会等待 binlog 同步到各从库，就返回客户端结果。这种模式一旦主库宕机，数据就会发生丢失。</li>
@@ -1019,7 +1028,7 @@
 <li>如果 binlog 中没有当前内部 XA 事务的 XID，说明 redolog 完成刷盘，但是 binlog 还没有刷盘，则回滚事务。对应时刻 A 崩溃恢复的情况。</li>
 <li>如果 binlog 中有当前内部 XA 事务的 XID，说明 redolog 和 binlog 都已经完成了刷盘，则提交事务。对应时刻 B 崩溃恢复的情况。可以保证主库和备库的一致性。</li>
 </ul>
-<p>可以看到，对于处于 prepare 阶段的 redo log，即可以提交事务，也可以回滚事务，这取决于是否能在 binlog 中查找到与 redo log 相同的 XID，如果有就提交事务，如果没有就回滚事务。</p>
+<p>可以看到，对于处于 prepare 阶段的 redo log，既可以提交事务，也可以回滚事务，这取决于是否能在 binlog 中查找到与 redo log 相同的 XID，如果有就提交事务，如果没有就回滚事务。</p>
 </li>
 <li><p>事务没提交的时候，redo log 会被持久化到磁盘吗？</p>
 <p>会的，MySQL 后台线程会每隔一秒将 redo log buffer 持久化到磁盘，因此，redo log 可以在事务没提交之前持久化到磁盘，但是 binlog 必须在事务提交之后，才可以持久化到磁盘。</p>
@@ -1039,7 +1048,7 @@
 </li>
 <li><p>commit 阶段：各个事务按顺序做 InnoDB commit 操作，即设置 redo log 状态为 commit，<strong>不用刷盘</strong></p>
 <blockquote>
-<p>Commit 阶段队列的作用是承接 Sync 阶段的事务，完成最后的引擎提交，使得Sync可以尽早的处理下一组事务，最大化组提交的效率</p>
+<p>Commit 阶段队列的作用是承接 Sync 阶段的事务，完成最后的引擎提交，使得 Sync 可以尽早的处理下一组事务，最大化组提交的效率</p>
 </blockquote>
 </li>
 </ul>
@@ -1053,8 +1062,8 @@
 </li>
 <li><p>组提交相关参数？</p>
 <ul>
-<li>Binlog_group_commit_sync_delay：控制 flush 阶段后 sync 阶段前的等待时间</li>
-<li>Binlog_group_commit_sync_no_delay_count：最大组提交中事务的数目</li>
+<li>binlog_group_commit_sync_delay：控制 flush 阶段后 sync 阶段前的等待时间</li>
+<li>binlog_group_commit_sync_no_delay_count：最大组提交中事务的数目</li>
 </ul>
 </li>
 <li><p>MySQL 磁盘 IO 很高，优化方法有哪些？</p>
@@ -1124,7 +1133,7 @@
 </ul>
 </li>
 <li><p>MySQL 如何处理数据单页溢出的？</p>
-<p>MySQL 支持像 TEXT 和 BLOB 数据，这些数据可能单个数据页放不下，因此需要提供溢出页，用来存储额外数据。Compact 格式的行数据是在真实数据处存放部分数据，再通过溢出页指针找到剩余数据，而 Compressed 和 Dynamic 则直接采用溢出指针的方式存储数据，这样，原来的数据页就能存放更多的行数据了</p>
+<p>MySQL 支持像 TEXT 和 BLOB 数据，这些数据可能单个数据页放不下，因此需要提供溢出页，用来存储额外数据。Compact 格式的行数据是在真实数据处存放部分数据，再通过溢出页指针找到剩余数据，而 Compressed 和 Dynamic 则直接采用溢出指针的方式存储数据，这样，原来的数据页就能存放更多的行数据了。</p>
 </li>
 <li><p>MySQL 的 NULL 值是怎么存放的？</p>
 <p>通过 NULL 值列表进行标记，其长度根据可为 NULL 列数目变化</p>

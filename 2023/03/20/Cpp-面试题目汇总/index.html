@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2023-03-20T01:32:06.000Z">
-<meta property="article:modified_time" content="2023-06-26T13:11:12.928Z">
+<meta property="article:modified_time" content="2023-08-15T02:29:16.808Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Cpp">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-26 21:11:12'
+  postUpdate: '2023-08-15 10:29:16'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Cpp 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-20T01:32:06.000Z" title="发表于 2023-03-20 09:32:06">2023-03-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-26T13:11:12.928Z" title="更新于 2023-06-26 21:11:12">2023-06-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">33.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>105分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Cpp 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于整理学习 C++ 时遇到的疑问和解答，以及一些面试题目，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Cpp 面试题目汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-20T01:32:06.000Z" title="发表于 2023-03-20 09:32:06">2023-03-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-15T02:29:16.808Z" title="更新于 2023-08-15 10:29:16">2023-08-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">38.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>122分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Cpp 面试题目汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于整理学习 C++ 时遇到的疑问和解答，以及一些面试题目，以备查阅。</p>
 <span id="more"></span>
 
 
@@ -160,6 +160,10 @@
 <p>静态库：将可重定位目标文件以一种特定的方式打包成一个单独的文件，并且在链接生成可执行文件时，从这个单独的文件中“拷贝”它自己需要的内容到最终的可执行文件中。</p>
 <p>动态库：动态库和静态库类似，但是它并不在链接时将需要的二进制代码都“拷贝”到可执行文件中，而是仅仅“拷贝”一些重定位和符号表信息，这些信息可以在程序运行时完成真正的链接过程。gcc 编译时默认使用的方式。</p>
 <p>动态库链接可以减少可执行文件的大小，并且动态库发生修改时，只需要修改动态库即可，而静态库链接则需要重新编译所有可执行程序，静态库唯一的优点是代码执行速度较快，因为运行时不需要进行动态加载过程。</p>
+</li>
+<li><p>动态库全局变量链接的时候占用了几份？</p>
+<p>动态链接的优点是通过复用节省空间，无论是磁盘空间和内存空间都节省。Linux 虚拟空间分为 代码段、数据段、未初始化数据段、堆、栈、内核空间，<strong>动态链接库在内存中共享的是代码段</strong>，而别的段都是每个进程独有的。</p>
+<p>因此，全局变量是需要该动态库所独占的。如果想在进程间依靠动态库来共享全局变量恐怕是不太可能的事情，因为不同进程访问动态库时，是写时拷贝，即如果另外一个进程试图去修改动态库中的全局变量时，系统就会把这个全局变量拷贝一份单独给这个进程，而这个修改操作并不会影响到其他进程中变量的值。</p>
 </li>
 <li><p>谈谈如何将依赖于 cmath 库的 main.cpp 进行编译生成可执行文件的过程？</p>
 <ol>
@@ -200,6 +204,8 @@
 </ul>
 </li>
 <li><p>g++ 常用命令选项？</p>
+</li>
+</ol>
 <table>
 <thead>
 <tr>
@@ -284,7 +290,7 @@
 <td align="left">生成所有警告信息。</td>
 </tr>
 </tbody></table>
-</li>
+<ol start="11">
 <li><p>C++ 标识符起名规则？</p>
 <p>一个标识符以字母或下划线 _ 或美元符 <code>$</code> 开始，后跟零个或多个字母，下划线，数字和美元符 <code>$</code>。注意不能和保留字冲突。</p>
 <blockquote>
@@ -350,7 +356,7 @@
 <p>“\n” 表示内容为一个回车符的字符串。std::endl 是流操作子，输出的作用和输出 “\n” 类似，但可能略有区别。std::endl 输出一个换行符，并立即刷新缓冲区。对于有输出缓冲的流（例如cout、clog），如果不手动进行缓冲区刷新操作，将在缓冲区满后自动刷新输出。不过对于 cout 来说（相对于文件输出流等），缓冲一般体现得并不明显。但是必要情况下使用 endl 代替 ‘\n’ 一般是个好习惯，如果对于性能不是严格要求的话。对于无缓冲的流（例如标准错误输出流cerr），刷新是不必要的，可以直接使用 ‘\n’。</p>
 </li>
 <li><p>位域有何作用？</p>
-<p>通常用在结构体中 <code>struct data &#123;char a : 4; char b : 4;&#125;</code>，表示某个变量有几位数据，用于节省内存，当然也可以通过整型和位运算实现相同效果（如 Java）。注意，不能对位域取地址，需要特别注意 <code>vector&lt;bool&gt;</code> 的使用。</p>
+<p>通常用在结构体中 <code>struct data &#123;char a : 4; char b : 4;&#125;</code>，表示某个变量有几位数据，用于节省内存，当然也可以通过整型和位运算实现相同效果（如 Java）。注意，不能对位域取地址或者引用，需要特别注意 <code>vector&lt;bool&gt;</code> 的使用。</p>
 </li>
 <li><p>下列代码存在问题吗，为什么？</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span>&amp; b : vector_bool_var) &#123; b = !b; &#125;</span><br></pre></td></tr></table></figure>
@@ -387,7 +393,7 @@
 <ul>
 <li>递归定义：即定义一个单变量，再定义一个多变量模板</li>
 <li>变参展开：可以通过使用 <code>sizeof...(args) &gt; 0</code> 来决定是否递归调用</li>
-<li>初始化列表展开：<code>std::initializer_list&lt;T&gt;&#123;lambda, value&#125;</code> ，不推荐</li>
+<li>初始化列表展开：<code>std::initializer_list&lt;T&gt;&#123;(lambda, value)...&#125;</code> ，需要配合逗号表达式，不推荐</li>
 </ul>
 </li>
 <li><p>折叠表达式作用？</p>
@@ -445,7 +451,7 @@
 <ol>
 <li>类型和安全检查不同：宏定义是字符替换，没有数据类型的区别；const 常量是常量的声明，有类型区别，需要在编译阶段进行类型检查</li>
 <li>编译器处理不同：宏定义是一个”编译时”概念，在预处理阶段展开；const 常量是一个”运行时”概念，在程序运行使用，类似于一个只读数据</li>
-<li>存储方式不同：宏定义是直接替换，不会分配内存，存储于程序的代码段中；const常量需要进行内存分配，存储于程序的数据段中</li>
+<li>存储方式不同：宏定义是直接替换，不会分配内存，存储于程序的代码段中；const 常量需要进行内存分配，存储于程序的数据段中</li>
 <li>定义后能否取消：宏定义可以通过 #undef 来使之前的宏定义失效，const 常量定义后将在定义域内永久有效</li>
 <li>是否可以做函数参数：宏定义不能作为参数传递给函数；const 常量可以在函数的参数列表中出现</li>
 </ol>
@@ -461,7 +467,7 @@
 </blockquote>
 </li>
 <li><p>下面代码的区别是什么？</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> *arr = <span class="string">&quot;123&quot;</span>; <span class="comment">//1</span></span><br><span class="line"><span class="type">char</span> *arr = <span class="string">&quot;123&quot;</span>; <span class="comment">//2</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> arr[] = <span class="string">&quot;123&quot;</span>; <span class="comment">//3</span></span><br><span class="line"><span class="type">char</span> arr[] = <span class="string">&quot;123&quot;</span>; <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> *arr = <span class="string">&quot;123&quot;</span>; <span class="comment">// 1</span></span><br><span class="line"><span class="type">char</span> *arr = <span class="string">&quot;123&quot;</span>; <span class="comment">// 2</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> arr[] = <span class="string">&quot;123&quot;</span>; <span class="comment">// 3</span></span><br><span class="line"><span class="type">char</span> arr[] = <span class="string">&quot;123&quot;</span>; <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
 
 <p>语句 1 表示 arr 指向的字符串不可变，但是由于 “123” 本来就存储在常量区，不可更改，因此其和语句 2 作用相同；语句 3 说明 arr 指向的数据内容不可变（本来存储在栈，可能会被优化到常量区），而语句 4 可以修改数据内容。</p>
 </li>
@@ -471,11 +477,11 @@
 <li>野指针：是没有被初始化过的指针，所以不确定指针具体指向，通过 nullptr 避免。</li>
 </ul>
 </li>
-<li><p>如何避免悬挂指针和野指带来的危害？</p>
+<li><p>如何避免悬挂指针和野指针带来的危害？</p>
 <ul>
-<li>指针变量声明时没有被初始化。解决办法：指针声明时初始化，可以是具体的地址值，也可让它指向 NULL。</li>
-<li>指针 p 被 free 或者 delete 之后，没有置为 NULL。解决办法：指针指向的内存空间被释放后指针应该指向 NULL。</li>
-<li>指针操作超越了变量的作用范围。解决办法：在变量的作用域结束前释放掉变量的地址空间并且让指针指向 NULL。</li>
+<li>指针变量声明时没有被初始化。指针声明时初始化，可以是具体的地址值，也可让它指向 NULL。</li>
+<li>指针 p 被 free 或者 delete 之后，没有置为 NULL。指针指向的内存空间被释放后指针应该指向 NULL。</li>
+<li>指针操作超越了变量的作用范围。在变量的作用域结束前释放掉变量的地址空间并且让指针指向 NULL。</li>
 </ul>
 </li>
 <li><p>C++ 中的类型限定符？</p>
@@ -522,9 +528,17 @@
 <li>申请大小限制不同：栈顶和栈底是预设好的，大小固定，但是堆是不连续的内存区域，其大小可以灵活调整</li>
 </ul>
 </li>
+<li><p>堆内存和栈内存的性能差距？</p>
+<p>使用栈内存效率更高：</p>
+<ul>
+<li>内存映射：如果在栈上分配小块内存，因为 cache 和内存映射已经建立，则效率会非常高，远远优于堆分配</li>
+<li>分配和释放：堆在分配和释放时都要调用函数（MALLOC,FREE)，比如分配时会到堆空间去寻找足够大小的空间（因为多次分配释放后会造成空洞），这些都会花费一定的时间，而栈却不需要这些</li>
+<li>访问时间：访问堆的一个具体单元，需要两次访问内存，第一次得取得指针，第二次才是真正得数据，而栈只需访问一次</li>
+</ul>
+</li>
 <li><p>静态内存分配和动态内存分配有什么区别？</p>
 <ul>
-<li>静态内存分配是在编译时期完成的，不占用CPU资源；动态内存分配是在运行时期完成的，分配和释放需要占 用CPU资源； </li>
+<li>静态内存分配是在编译时期完成的，不占用CPU资源；动态内存分配是在运行时期完成的，分配和释放需要占用 CPU 资源； </li>
 <li>静态内存分配是在栈上分配的；动态内存分配是在堆上分配的； </li>
 <li>静态内存分配不需要指针或引用类型的支持；动态内存分配需要； </li>
 <li>静态内存分配是按计划分配的，在编译前确定内存块的大小；动态内存分配是按需要分配的； </li>
@@ -540,7 +554,7 @@
 </ul>
 </li>
 <li><p><code>extern &quot;C&quot;</code> 的作用是什么？</p>
-<p>extern “C” 的主要作用就是为了能够正确实现 C++ 代码调用其他 C 语言代码。加上 extern “C” 后，会指示编译器这部分代码按 C 语言（而不是 C++）的方式进行编译：由于 C++ 支持函数重载，因此编译器编译函数的过程中会将函数的 参 数类型也加到编译后的代码中，而不仅仅是函数名；而 C 语言并不支持函数重载，因此编译 C 语言代码的函数时不 会带 上函数的参数类型，一般只包括函数名。</p>
+<p>extern “C” 的主要作用就是为了能够正确实现 C++ 代码调用其他 C 语言代码。加上 extern “C” 后，会指示编译器这部分代码按 C 语言（而不是 C++）的方式进行编译：由于 C++ 支持函数重载，因此编译器编译函数的过程中会将函数的 参 数类型也加到编译后的代码中，而不仅仅是函数名；而 C 语言并不支持函数重载，因此编译 C 语言代码的函数时不会带上函数的参数类型，一般只包括函数名。</p>
 <p>其作用可以实现 C++ 和 C 的混合编程，并且可以更好地兼容原有的 C 语言库。</p>
 </li>
 <li><p>C++ 存储数据的方案有哪些？</p>
@@ -556,7 +570,7 @@
 <li>指针有自己的一块空间，而引用只是一个别名（在编译器内部也是通过指针实现）</li>
 <li>使用 sizeof 看一个指针的大小是 4&#x2F;8，而引用则是被引用对象的大小</li>
 <li>指针可以被初始化为 NULL，而引用必须被初始化且必须是一个已有对象的引用</li>
-<li>可以有 const 指针，但是没有 const 引用</li>
+<li>可以有 const 指针，但是没有 const 引用？<strong>存疑</strong></li>
 <li>指针在使用中可以指向其它对象，但是引用只能是一个对象的引用，不能被改变</li>
 <li>指针可以有多级指针（**p），而引用只有一级</li>
 <li>指针和引用使用 ++ 运算符的意义不一样</li>
@@ -670,6 +684,8 @@
 </li>
 <li><p>完美转发是什么意思？</p>
 <p>不论参数类型是左值引用还是右值引用，参数始终是左值，在通过该参数调用其他函数时，只会匹配到左引用形参，不可能匹配到右引用形参。所谓完美转发，就是为了让我们在传递参数的时候， 保持原来的参数类型（左引用保持左引用，右引用保持右引用）。 为了解决这个问题，我们应该使用 <code>std::forward</code> 来进行参数的转发（传递），其内部实现和 <code>static_cast&lt;T&amp;&amp;&gt;(v)</code> 相同，通常使用在通用引用函数模板中。</p>
+<p>下面是 move 和 forward 实现，move 主要借助 remove_reference，forward 借助函数重载和引用坍塌。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="keyword">typename</span> std::remove_reference&lt;_Tp&gt;::<span class="function">type&amp;&amp;</span></span><br><span class="line"><span class="function">    <span class="title">move</span><span class="params">(_Tp&amp;&amp; <span class="type">__t</span>)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(<span class="type">__t</span>); &#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">constexpr</span> _Tp&amp;&amp;</span></span><br><span class="line"><span class="function">    <span class="title">forward</span><span class="params">(<span class="keyword">typename</span> std::remove_reference&lt;_Tp&gt;::type&amp; <span class="type">__t</span>)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;_Tp&amp;&amp;&gt;(<span class="type">__t</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">constexpr</span> _Tp&amp;&amp;</span></span><br><span class="line"><span class="function">    <span class="title">forward</span><span class="params">(<span class="keyword">typename</span> std::remove_reference&lt;_Tp&gt;::type&amp;&amp; <span class="type">__t</span>)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="built_in">static_assert</span>(!std::is_lvalue_reference&lt;_Tp&gt;::value, <span class="string">&quot;template argument&quot;</span></span><br><span class="line">            <span class="string">&quot; substituting _Tp is an lvalue reference type&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;_Tp&amp;&amp;&gt;(<span class="type">__t</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>函数指针 pf 是什么，如何对其进行方法调用？</p>
 <p>函数指针是指向函数的指针变量，其值为函数的入口地址。通过 <code>pf()</code> 或者 <code>(*pf)()</code> 都可以，一种学派认为，由于 pf 是函数指针，而<code>*pf</code>是函数，因此应将<code>(*pf)()</code>用作函数调用。另一种学派认为，由于函数名是指向该函数的指针，指向函数的指针的行为应与函数名相似，因此应将<code>pf()</code>用作函数调用使用。C++ 进行了折衷。</p>
@@ -679,12 +695,12 @@
 <p>另外，也可以作用在转换函数上，防止隐式调用转换函数。</p>
 </li>
 <li><p>thread_local 作用？</p>
-<p>使用 thread_local 说明符声明的变量仅可在它在其上创建的线程上访问。 变量在创建线程时创建，并在销毁线程时销毁。 每个线程都有其自己的变量副本。可以将 thread_local 仅应用于数据声明和定义，thread_local 不能用于函数声明或定义。</p>
+<p>使用 thread_local 说明符声明的变量仅可在它在其上创建的线程上访问。 变量在创建线程时创建，并在销毁线程时销毁。 每个线程都有其自己的变量副本。thread_local 仅应用于数据声明和定义，thread_local 不能用于函数声明或定义。</p>
 </li>
 <li><p>算术运算符 ++d 和 d++ 的区别？</p>
 <ul>
-<li><strong>++d</strong> 是<strong>先加</strong>，先对 d 的值加 1，再使用 d 的值执行该行命令。</li>
-<li><strong>d++</strong> 是<strong>后加</strong>，先使用 d 的值执行该行命令，执行完后再对 d 的值加 1。</li>
+<li><strong>++d</strong> 是<strong>先加</strong>，先对 d 的值加 1，再返回 d 值。</li>
+<li><strong>d++</strong> 是<strong>后加</strong>，返回 d 值，执行完后再对 d 的值加 1。</li>
 </ul>
 </li>
 <li><p>C++ 中向函数传参的方式有哪些？</p>
@@ -699,7 +715,7 @@
 </li>
 <li><p>Lambda 函数基本格式是怎样的，捕获列表语法规则？</p>
 <p>捕获列表语法规则如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[capture] (parameters) <span class="keyword">mutable</span> -&gt; <span class="keyword">return</span>-type &#123;body&#125;</span><br><span class="line">[]      <span class="comment">// 沒有定义任何变量。使用未定义变量会引发错误。</span></span><br><span class="line">[x, &amp;y] <span class="comment">// x以传值方式传入（默认），y以引用方式传入。</span></span><br><span class="line">[&amp;]     <span class="comment">// 任何被使用到的外部变量都隐式地以引用方式加以引用。</span></span><br><span class="line">[=]     <span class="comment">// 任何被使用到的外部变量都隐式地以传值方式加以引用。</span></span><br><span class="line">[&amp;, x]  <span class="comment">// x显式地以传值方式加以引用。其余变量以引用方式加以引用。</span></span><br><span class="line">[=, &amp;z] <span class="comment">// z显式地以引用方式加以引用。其余变量以传值方式加以引用。</span></span><br><span class="line">[status=std::<span class="built_in">move</span>(res_status)] <span class="comment">//表达式捕获，可对右值进行捕获，其为匿名类成员</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[capture] (parameters) <span class="keyword">mutable</span> -&gt; <span class="keyword">return</span>-type &#123;body&#125;</span><br><span class="line">[]      <span class="comment">// 沒有定义任何变量。使用未定义变量会引发错误。</span></span><br><span class="line">[x, &amp;y] <span class="comment">// x以传值方式传入（默认），y以引用方式传入。</span></span><br><span class="line">[&amp;]     <span class="comment">// 任何被使用到的外部变量都隐式地以引用方式加以引用。</span></span><br><span class="line">[=]     <span class="comment">// 任何被使用到的外部变量都隐式地以传值方式加以引用。</span></span><br><span class="line">[&amp;, x]  <span class="comment">// x显式地以传值方式加以引用。其余变量以引用方式加以引用。</span></span><br><span class="line">[=, &amp;z] <span class="comment">// z显式地以引用方式加以引用。其余变量以传值方式加以引用。</span></span><br><span class="line">[status=std::<span class="built_in">move</span>(res_status)] <span class="comment">// 表达式捕获，可对右值进行捕获，其为匿名类成员</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>对于 [&#x3D;] 或 [&amp;] 的形式，lambda 表达式可以直接使用 this 指针</p>
@@ -861,7 +877,7 @@
 <p>构造函数可以存在多个，但是析构函数只能存在一个。</p>
 </li>
 <li><p>虚函数（virtual）可以是内联函数（inline）吗？</p>
-<p>虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。发生内联条件是编译器在编译时知道所调用的对象是哪个类，这只有在编译器具有实际对象而不是对象的指针或引用时才会发生（如 <code>baseObj.who()</code>）。</p>
+<p>虚函数可以是内联函数，内联是可以修饰虚函数的，但是<strong>当虚函数表现多态性的时候不能内联</strong>。发生内联条件是编译器在编译时知道所调用的对象是哪个类，这只有在编译器具有实际对象而不是对象的指针或引用时才会发生（如 <code>baseObj.who()</code>）。</p>
 </li>
 <li><p>为什么要求基类的析构函数一定是 virtual 声明的？</p>
 <p>为了防止内存泄漏。 由于类的多态性，基类指针可以指向派生类的对象，如果删除该基类的指针，就会调用该指针指向的派生类析构函 数，而派生类的析构函数又自动调用基类的析构函数，这样整个派生类的对象完全被释放。如果析构函数不被声明成虚函数，则编译器实施静态绑定，在删除基类指针时，只会调用基类的析构函数而不调用派生类析构函数，这样就会造成派生类对象析构不完全，造成内存泄漏。所以将析构函数声明为虚函数是十分必要的。在实现多态时，当用基类操作派生类，在析构时防止只析构基类而不析构派生类的状况发生，要将基类的析构函数声明为虚函数。</p>
@@ -924,7 +940,7 @@
 <p>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员。尽管友元函数的原型有在类的定义中出现过，但是友元函数并不是成员函数。</p>
 </li>
 <li><p>this 指针指代的是什么，当调用成员函数的时候，this 如何传入的？</p>
-<p>this 指向的是调用成员函数的对象，当调用成员函数的时候，this 被当作第一个参数进行传入，从而达到在函数中使用的目的。另外，this 可以当作是一个 <code>ClassName *const this</code> ，当执行 <code>obj.method(a, b)</code> 时，编译器会将其转换为 <code>method(this, a, b)</code> ，其中 this 指向的就是 obj 对象。在 const 成员函数中，this 责备当作是 <code>const ClassName *const this</code>。最后，this 并不是一个常规变量，不能对其取地址操作。</p>
+<p>this 指向的是调用成员函数的对象，当调用成员函数的时候，this 被当作第一个参数进行传入，从而达到在函数中使用的目的。另外，this 可以当作是一个 <code>ClassName *const this</code> ，当执行 <code>obj.method(a, b)</code> 时，编译器会将其转换为 <code>method(this, a, b)</code> ，其中 this 指向的就是 obj 对象。在 const 成员函数中，this 则被当作是 <code>const ClassName *const this</code>。最后，this 并不是一个常规变量，不能对其取地址操作。</p>
 <blockquote>
 <p>静态成员函数第一个参数则不是 this 指针，其属于类层次的</p>
 </blockquote>
@@ -951,8 +967,8 @@
 <li><p>多继承存在什么问题？如何消除多继承中的二义性？</p>
 <ul>
 <li>增加程序的复杂度，使得程序的编写和维护比较困难，容易出错</li>
-<li>在继承时，基类之间或基类与派生类之间发生成员同名时，将出现对成员访问的不确定性，即同名二义性：可以通过 <code>::</code> 限定派生类使用那个基类成员，或者在派生类中定义同名成员，覆盖基类中的相关成员；</li>
-<li>当派生类从多个基类派生，而这些基类又从同一个基类派生，则在访问此共同基类的成员时，将产生另一种不确定性，即路径二义性：使用虚继承，使共同基类在内存中只有一份拷贝</li>
+<li>在继承时，基类之间或基类与派生类之间发生成员同名时，将出现对成员访问的不确定性，即<strong>同名二义性</strong>：可以通过 <code>::</code> 限定派生类使用那个基类成员，或者在派生类中定义同名成员，覆盖基类中的相关成员；</li>
+<li>当派生类从多个基类派生，而这些基类又从同一个基类派生，则在访问此共同基类的成员时，将产生另一种不确定性，即<strong>路径二义性</strong>：使用虚继承，使共同基类在内存中只有一份拷贝</li>
 </ul>
 </li>
 <li><p>若存在菱形继承时，需要如何处理？</p>
@@ -1004,16 +1020,16 @@
 </li>
 <li><p>如何进行自定义字面量？</p>
 <p>重载双引号后缀运算符实现：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::string <span class="keyword">operator</span><span class="string">&quot;&quot;</span> _wow1(<span class="type">const</span> <span class="type">char</span> *wow1, <span class="type">size_t</span> len) &#123;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">string</span>(wow1)+<span class="string">&quot;woooooooooow, amazing&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">std::string <span class="keyword">operator</span><span class="string">&quot;&quot;</span> _wow2(<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> i) &#123;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">to_string</span>(i)+<span class="string">&quot;woooooooooow, amazing&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::string <span class="keyword">operator</span><span class="string">&quot;&quot;</span> _wow2(<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> i) &#123;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">to_string</span>(i)+<span class="string">&quot;woooooooooow, amazing&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>哪些运算符不能进行重载？</p>
 <ul>
-<li>.：成员运算符。</li>
-<li>. *：成员指针运算符。</li>
-<li>::：作用域解析运算符。</li>
-<li>?:：三目运算符。</li>
-<li>sizeof：sizeof 运算符。</li>
-<li>typeid：一个 RTTI 运算符。</li>
+<li><code>.</code>：成员运算符。</li>
+<li><code>.*</code>：成员指针运算符。</li>
+<li><code>::</code>：作用域解析运算符。</li>
+<li><code>?:</code>：三目运算符。</li>
+<li><code>sizeof</code>：sizeof 运算符。</li>
+<li><code>typeid</code>：一个 RTTI 运算符。</li>
 <li>类型转换：static_cast，dynamic_cast，reinterpret_cast，const_cast</li>
 </ul>
 </li>
@@ -1021,7 +1037,7 @@
 <p>typeid 运算符能够获取对象的类型，其能够确定两个对象是否为同种类型，可以接受两种参数，类名和结果为对象的表达式，其返回值是 type_info 类对象，其重载了 <code>==</code>。注意 typeid 能够应用在实现了多态的基类指针上，即返回对应的派生类型，对于没有实现多态的类只会返回对应变量的声明类型。</p>
 </li>
 <li><p>如何为对象声明 &lt;&lt; 重载符号以输出对象内容？</p>
-<p><code>ostream&amp; operator&lt;&lt;(ostream&amp; out, Type a)</code> 可以实现重载。</p>
+<p><code>friend ostream&amp; operator&lt;&lt;(ostream&amp; out, Type a)</code> 可以实现重载。</p>
 </li>
 <li><p>转换函数如何定义？</p>
 <p><code>operator type_name()</code>，可以实现类的转换，添加关键字 explict 可以防止隐式转换。</p>
@@ -1043,7 +1059,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base, <span class="keyword">public</span> Base2, <span class="keyword">public</span> Base3 &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>对应的类内存布局如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;BaseVtptr, iMem, Base2Vtptr, iBase2Mem, Base3Vtptr, iBase3Mem, iDerivedMem&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;BaseVtptr, iBaseMem, Base2Vtptr, iBase2Mem, Base3Vtptr, iBase3Mem, iDerivedMem&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>派生类的虚函数地址存在在 BaseVtptr 的最后表项，按需更新其中的表项。</p>
 </li>
@@ -1069,6 +1085,9 @@
 </li>
 <li><p>C++ 是如何进行异常处理的？</p>
 <p>主要通过 <code>try catch throw</code> 实现，所有的异常继承自 std::exception，其中包含了一个 virtual 方法 what，派生类可以重写该方法来自定义异常产生的原因。</p>
+<blockquote>
+<p>C++ 并不支持 finally 子句，相反其提供了 RAII 机制来确保资源的释放</p>
+</blockquote>
 </li>
 <li><p>什么是栈解退？</p>
 <p>假设函数由于出现异常（而不是由于返回）而终止，则程序也将释放栈中的内存，但不会在释放栈的第一个返回地址后停止，而是继续释放栈，直到找到一个位于 try 块中的返回地址。随后，控制权将转到块尾的异常处理程序，而不是函数调用后面的第一条语句。这个过程被称为栈解退。引发机制的一个非常重要的特性是，和函数返回一样，<strong>对于栈中的自动类对象，类的析构函数将被调用</strong>。</p>
@@ -1080,13 +1099,13 @@
 <li><p>new 和 malloc 内部的实现方式有什么区别？</p>
 <p>new 的功能是在堆区新建一个对象，并返回该对象的指针。所谓的<strong>【新建对象】</strong>的意思就是，将调用该类的构造函数，因为如果不构造的话，就不能称之为一个对象。而 malloc 只是机械的分配一块内存，如果用 malloc 在堆区创建一个对象的话，是不会调用构造函数的。malloc 只是申请了一块内存用于存放对象，而 new 不仅申请了内存，还会将对象初始化放入该内存中。</p>
 </li>
-<li><p>new，oprator new 和 placement new 操作符的区别？</p>
+<li><p>new operator，oprator new 和 placement new 操作符的区别？</p>
 <ul>
-<li>new ：<strong>不能被重载</strong>，其行为总是一致的。它先调用 operator new 分配内存，然后调用构造函数初始化那段内存，最后返回对应指针</li>
+<li>new operator：<strong>不能被重载</strong>，其行为总是一致的。它先调用 operator new 分配内存，然后调用构造函数初始化那段内存，最后返回对应指针</li>
 <li>operator new：要实现不同的内存分配行为，应该重载 operator new，而不是 new，最常见的重载形式为 <code>void* operator new(size_t size);</code>。</li>
 <li>placement new：只是 operator new 重载的一个版本。它并不分配内存，只是返回指向已经分配好的某段内存的一个指针，重载形式为 <code>void *operator new(size_t size, void *ptr) throw();</code>;</li>
 </ul>
-<p>通常，new 负责在堆（heap）中找到一个足以能够满足要求的内存块，并进行初始化工作，placement new 让您能够指定要使用的内存位置，可以将其与初始化结合使用。</p>
+<p>通常，new 负责在堆（heap）中找到一个足以能够满足要求的内存块，并进行初始化工作，placement new 让您能够指定要使用的内存位置，可以将其与初始化结合使用，或者用于事先分配一块内存，然后再使用 placement new 进行重载，实现内存分配器的机制。</p>
 </li>
 <li><p>delete 与 delete[] 区别？</p>
 <p>针对简单类型，使用 new 分配后的不管是数组还是非数组形式内存空间用两种方式均可；但是使用类对象数组，则只能通过 delete[] 来进行释放，否则的话只会释放对象数组的第一个指针指向的内存。最恰当的方式就是如果用了 new ，就用 delete ；如果用了 new [] ，就用 delete [] 。</p>
@@ -1104,12 +1123,12 @@
 <li>在构造函数中动态分配内存，但未在析构函数中正确释放内存；</li>
 </ul>
 </li>
-<li>类中包含指针成员变量时，未定义拷贝构造函数或未重载赋值运算符，从而造成两次释放相同内存的做法；</li>
 <li>没有将基类的析构函数定义为虚函数</li>
+<li>类中包含指针成员变量时，未定义拷贝构造函数或未重载赋值运算符，从而造成两次释放相同内存的做法；</li>
 </ul>
 </li>
-<li><p>在 C++ 中，使用 malloc 申请的内存能否通过 delete 释放？使用 new 申请的内存能否用free？</p>
-<p>不能，malloc&#x2F;free 主要为了兼容 C，new 和 delete 完全可以取代 malloc&#x2F;free 的。malloc&#x2F;free 的操作对象都是必须明确大小的。而且不能用在动态类上。new 和 delete 会自动进行类型检查和大小，malloc&#x2F;free 不能执行构造函数与析构函数，所以动态对象它是不行的。当然从理论上说使用 malloc 申请的内存是可以通过 delete 释放的。不过一般不这样写的。而且也不能保证每个 C++ 的运行时都能正常。</p>
+<li><p>在 C++ 中，使用 malloc 申请的内存能否通过 delete 释放？使用 new 申请的内存能否用 free？</p>
+<p>不能，malloc&#x2F;free 主要为了兼容 C，new 和 delete 完全可以取代 malloc&#x2F;free 的。malloc&#x2F;free 的操作对象都是必须明确大小的，而且不能用在<strong>多态类</strong>上。new 和 delete 会自动进行类型检查和大小，malloc&#x2F;free 不能执行构造函数与析构函数，所以动态对象它是不行的。当然从理论上说使用 malloc 申请的内存是可以通过 delete 释放的。不过一般不这样写的。而且也不能保证每个 C++ 的运行时都能正常。</p>
 </li>
 <li><p>malloc、calloc、realloc 作用？</p>
 <ul>
@@ -1131,11 +1150,11 @@
 <p><code>template &lt;typename T, int max_size&gt;</code>：其中的 max_size 便是非类型参数，表达式参数可以是整型、枚举、引用或指针。可以使用 auto 代替 int 以进行参数推导。构造函数方法使用的是通过 new 和 delete 管理的堆内存，而表达式参数方法使用的目的是为<strong>自动变量维护的内存栈</strong>。这样，执行速度将更快，尤其是在使用了很多小型数组时。</p>
 </li>
 <li><p>智能指针模板类有哪些，分别有何作用？</p>
-<p>智能指针的作用是管理一个指针（RAII），因为存在以下这种情况：申请的空间在函数结束时忘记释放，造成内存泄漏，或者由于异常，导致 delete 操作未成功。使用智能指针可以很大程度上的避免这个问题，因为智能指针就是一个类，当超出了类的作用域时，类会自动调用析构函数，析构函数会自动释放资源。所以智能指针的作用原理就是在函数结束时自动释放内存空间，不需要手动释放内存空间。</p>
+<p>智能指针就的作用是管理一个指针（RAII），因为存在以下这种情况：申请的空间在函数结束时忘记释放，造成内存泄漏，或者由于异常，导致 delete 操作未成功。使用智能指针可以很大程度上的避免这个问题，因为智能指针就是一个类，当超出了类的作用域时，类会自动调用析构函数，析构函数会自动释放资源。所以智能指针的作用原理就是在函数结束时自动释放内存空间，不需要手动释放内存空间。</p>
 <ul>
 <li>auto_ptr：采用所有权转让方式实现赋值运算，避免了两次释放相同地址空间的问题，但是 <code>auto_ptr&lt;string&gt; a = b</code> 会导致 b 丢失所有权，后面再次使用可能导致异常，<strong>在函数值传参经常会遇到</strong>，因此被 deprecated，并且不能管理数组</li>
 <li>unique_ptr：和 auto_ptr 类似，但是不支持拷贝语义，是一种在异常时可以帮助避免资源泄漏的智能指针，能确保安全，编译时发现错误，支持移动语义</li>
-<li>shared_ptr：采用引用计数的方式实现，计数为 0 时自动释放内存，可以通过 make_shared 来消除显式使用的 new</li>
+<li>shared_ptr：采用引用计数的方式实现，计数为 0 时自动释放内存，可以通过 make_shared 来消除显式使用的 new。缺点是不支持数组，需要自定义 deleter；存在循环引用；线程安全带来的原子操作开销。<strong>不要使用同一个原始指针来初始化两个 shared_ptr</strong></li>
 <li>weak_ptr：为了配合 shared_ptr 而引入的一种智能指针，它指向一个由 shared_ptr 管理的对象而不影响所指对象的生命周期，也就是将一个 weak_ptr 绑定到一个 shared_ptr 不会改变 shared_ptr 的引用计数。用于解决循环引用的问题，可以和 shared_ptr 相互转换，使用前通过 lock 即可转换为 shared_ptr 对象</li>
 </ul>
 <blockquote>
@@ -1237,6 +1256,13 @@
 <li><p>构造函数和析构函数能被继承吗？</p>
 <p>不能，不是所有的函数都能自动地从基类继承到派生类中的。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么。所以，在整个层次中的所有的构造函数和析构函数都必须被调用，也就是说，构造函数和析构函数不能被继承。子类的构造函数会显式的调用父类的构造函数或隐式的调用父类的默认的构造函数进行父类部分的初始化。析构函数也一样。它们都是每个类都有的东西，如果能被继承，那就没有办法初始化了。</p>
 <p>C++ 11 虽然有继承构造函数这一特性，但是实质上是编译器自动生成代码，通过调用父类构造函数来实现，不是真正意义上的继承，仅仅是为了减少代码书写量。</p>
+<blockquote>
+<ul>
+<li>B does not inherit constructors from A; Unless B’s ctor explicitely calls <em>one of</em> A’s ctor, the default ctor from A will be called automatically <em>before</em> B’s ctor body;</li>
+<li>B does not inherit A’s dtor; <em>After</em> it exits, B’s destructor will automatically call A’s destructor.</li>
+<li>So: there’s a connection between base and derived constructors and destructors, but it’s not like “they’re inherited”.</li>
+</ul>
+</blockquote>
 </li>
 <li><p>为什么构造函数不能是虚函数？</p>
 <ul>
@@ -1257,7 +1283,7 @@
 <p>当编译器决定隐式定义某个特殊函数( <code>=defalt</code> )，但此时，依然会面临无法生成的困境。比如，其某个父类将那个特殊函数删除了，或者访问被禁止了，则系统也会放弃对此特殊函数的生成，而隐式的将其声明为 <code>delete</code> 。</p>
 </blockquote>
 </li>
-<li><p>C++类的内部可以定义引用数据成员吗？</p>
+<li><p>C++ 类的内部可以定义引用数据成员吗？</p>
 <p>可以，必须通过构造函数初始化列表初始化类内的引用。</p>
 </li>
 <li><p>左值和右值分别是什么，之间有何区别？</p>
@@ -1323,8 +1349,7 @@
 </ul>
 </li>
 <li><p>alignof 和 alignas 的作用？</p>
-<p>C++11 引入的关键字<code>alignof</code>，可直接获取类型<code>T</code>的内存对齐要求。<code>alignof</code>的返回值类型是<code>size_t</code>，用法类似于<code>sizeof</code>。</p>
-<p>alignas 则用于定义一个结构体或者类的对其方式，GCC 规定了 aligned 属性也可用于规定结构体或者类的对齐方式。</p>
+<p>C++11 引入的关键字<code>alignof</code>，可直接获取类型<code>T</code>的内存对齐要求。<code>alignof</code>的返回值类型是<code>size_t</code>，用法类似于<code>sizeof</code>。alignas 则用于定义一个结构体或者类的对其方式，GCC 规定了 aligned 属性也可用于规定结构体或者类的对齐方式。</p>
 </li>
 <li><p><code>#pragma pack(n)</code> 作用是什么？</p>
 <p>用于设定结构体、联合以及类中成员变量以 n 字节方式对齐；</p>
@@ -1401,8 +1426,8 @@
 </li>
 <li><p>vector 中的 reserve 和 resize 的区别？</p>
 <ul>
-<li>reserve 是直接扩充到已经确定的大小，可以减少多次开辟、释放空间的问题（优化push_back），就可以提高效率，其次还可以减少多次要拷贝数据的问题。</li>
-<li>resize() 可以改变有效空间的大小，capacity 的大小可能也会随着改变</li>
+<li>reserve 是直接扩充到已经确定的大小（即修改 capacity 大小），可以减少多次开辟、释放空间的问题（优化push_back），就可以提高效率，其次还可以减少多次要拷贝数据的问题。</li>
+<li>resize() 可以改变有效空间的大小，capacity 的大小可能也会随着改变（当 n 大于 capacity 时）。</li>
 </ul>
 </li>
 <li><p>vector 的元素类型可以是引用吗？</p>
@@ -1451,12 +1476,15 @@
 <li><p>迭代器的底层原理？</p>
 <p>迭代器是连接容器和算法的一种重要桥梁，通过迭代器可以在不了解容器内部原理的情况下遍历容器。它的底层实现包含两个重要的部分：萃取技术和模板偏特化。</p>
 <ul>
-<li>萃取技术（traits）可以进行类型推导，根据不同类型可以执行不同的处理流程，比如容器是 vector，那么 traits 必须推导出其迭代器类型为随机访问迭代器，而 list 则为双向迭代器。</li>
-<li>使用萃取技术（traits）进行类型推导的过程中会使用到模板偏特化。模板偏特化可以用来推导参数，如果我们自定义了多个类型，除非我们把这些自定义类型的特化版本写出来，否则我们只能判断他们是内置类型，并不能判断他们具体属于是个类型。</li>
+<li>萃取技术（traits）可以<strong>进行类型推导，根据不同类型可以执行不同的处理流程</strong>，比如容器是 vector，那么 traits 必须推导出其迭代器类型为随机访问迭代器，而 list 则为双向迭代器。</li>
+<li>使用萃取技术（traits）进行类型推导的过程中会使用到<strong>模板偏特化</strong>。模板偏特化可以用来推导参数，如果我们自定义了多个类型，除非我们把这些自定义类型的特化版本写出来，否则我们只能判断他们是内置类型，并不能判断他们具体属于是个类型。在 CPP 实现中就用到了重载的特性保证不同的类型使用不同版本的模板函数。</li>
 </ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 考虑 advance 针对不同的迭代器的实现</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">input_iterator_tag</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">output_iterator_tag</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">forward_iterator_tag</span> : <span class="keyword">public</span> input_iterator_tag &#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">bidirectinal_iterator_tag</span> : <span class="keyword">public</span> forward_iterator_tag &#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">random_access_iterator_tag</span> : <span class="keyword">public</span> bidirectinal_iterator_tag &#123;&#125;;</span><br><span class="line"><span class="comment">// 模板偏特化</span></span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _InputIterator, <span class="keyword">typename</span> _Distance&gt;</span><br><span class="line">    <span class="keyword">inline</span> _GLIBCXX14_CONSTEXPR <span class="type">void</span></span><br><span class="line">    __advance(_InputIterator&amp; __i, _Distance __n, input_iterator_tag)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">while</span> (__n--)</span><br><span class="line">	++__i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _BidirectionalIterator, <span class="keyword">typename</span> _Distance&gt;</span><br><span class="line">    <span class="keyword">inline</span> _GLIBCXX14_CONSTEXPR <span class="type">void</span></span><br><span class="line">    __advance(_BidirectionalIterator&amp; __i, _Distance __n,</span><br><span class="line">	      bidirectional_iterator_tag)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (__n &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">while</span> (__n--)</span><br><span class="line">	  ++__i;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">while</span> (__n++)</span><br><span class="line">	  --__i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _RandomAccessIterator, <span class="keyword">typename</span> _Distance&gt;</span><br><span class="line">    <span class="keyword">inline</span> _GLIBCXX14_CONSTEXPR <span class="type">void</span></span><br><span class="line">    __advance(_RandomAccessIterator&amp; __i, _Distance __n,</span><br><span class="line">              random_access_iterator_tag)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (__builtin_constant_p(__n) &amp;&amp; __n == <span class="number">1</span>)</span><br><span class="line">	++__i;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (__builtin_constant_p(__n) &amp;&amp; __n == <span class="number">-1</span>)</span><br><span class="line">	--__i;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">	__i += __n;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 用于决定执行哪个版本的代码</span></span><br><span class="line">  <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _InputIterator, <span class="keyword">typename</span> _Distance&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">inline</span> _GLIBCXX17_CONSTEXPR <span class="type">void</span></span></span><br><span class="line"><span class="function">    <span class="title">advance</span><span class="params">(_InputIterator&amp; __i, _Distance __n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// concept requirements -- taken care of in __advance</span></span><br><span class="line">      <span class="keyword">typename</span> iterator_traits&lt;_InputIterator&gt;::difference_type __d = __n;</span><br><span class="line">      std::__advance(__i, __d, std::__iterator_category(__i));</span><br></pre></td></tr></table></figure>
+
+
 </li>
 <li><p>vector 如何释放空间？</p>
-<p>由于 vector 的内存占用空间只增不减，比如你首先分配了 10,000 个字节，然后 erase 掉后面 9,999 个，留下一个有效 元 素，但是内存占用仍为 10,000 个。所有内存空间是在 vector 析构时候才能被系统回收。clear() 可以清空所有元素。但是即使 clear()，vector 所占用的内存空间依然如故，无法保证内存的回收。如果需要空间动态缩小，可以考虑使用 deque。如果 vector，可以用 swap() 来帮助你释放内存 <code>std::vector&lt;T&gt;(v).swap(v);</code>，另外的一种方式便是使用 <code>shrink_to_fit</code>，但是是否回收取决于实现。</p>
+<p>由于 vector 的内存占用空间只增不减，比如你首先分配了 10,000 个字节，然后 erase 掉后面 9,999 个，留下一个有效元素，但是内存占用仍为 10,000 个。所有内存空间是在 vector 析构时候才能被系统回收。clear() 可以清空所有元素。但是即使 clear()，vector 所占用的内存空间依然如故，无法保证内存的回收。如果需要空间动态缩小，可以考虑使用 deque。如果 vector，可以用 swap() 来帮助你释放内存 <code>std::vector&lt;T&gt;(v).swap(v);</code>，另外的一种方式便是使用 <code>shrink_to_fit</code>，但是是否回收取决于实现。</p>
 </li>
 <li><p>emplace_back 和 push_back 区别？</p>
 <p><strong>push_back</strong>() 向容器尾部添加元素时，首先会创建这个临时元素，然后再将这个元素拷贝或者移动到容器中（如果是拷贝的话，事后会自行销毁先前创建的这个元素）；而 <strong>emplace_back</strong>() 在实现时，则是直接在容器尾部创建这个元素，省去了拷贝或移动元素的过程。</p>
@@ -1465,18 +1493,18 @@
 <p>与 <code>std::vector</code> 不同，<code>std::array</code> 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 <code>std::array</code> 容器。 另外由于 <code>std::vector</code> 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 <code>shrink_to_fit()</code> 释放这部分内存。</p>
 </li>
 <li><p>已经有了传统数组，为什么要用 <code>std::array</code>？</p>
-<p>使用 <code>std::array</code> 能够让代码变得更加“现代化”，而且封装了一些操作函数，比如获取数组大小以及检查是否非空，同时还能够友好的使用标准库中的容器算法，比如 <code>std::sort</code>。</p>
+<p>使用 <code>std::array</code> 能够让代码变得更加“现代化”，而且封装了一些操作函数，比如获取数组大小以及检查是否非空，同时还能够友好的使用标准库中的容器算法，比如 <code>std::sort</code>。可以将其和传统的数组对比，它们都是在栈上分配，内存分配和释放通过编译器执行。</p>
 </li>
 <li><p>std::forward_list 有何作用？</p>
 <p>是一个列表容器，使用方法和 <code>std::list</code> 基本类似，通过单向链表实现， 提供了 <code>O(1)</code> 复杂度的元素插入，不支持快速随机访问，不支持 size() 方法。当不需要双向迭代时，具有比 <code>std::list</code> 更高的空间利用率。</p>
 </li>
-<li><p>STL 是如何进行内存空间优化的？</p>
+<li><p>STL 是如何进行内存空间分配？</p>
 <p>SGI STL 使用二级内存配置器，用于提高空间利用率：</p>
 <ul>
 <li>第一级配置器：以 malloc()，free()，realloc() 等 C 函数执行实际的内存配置、释放、重新配置等操作，并且能在内存需求不被满足的时候，调用一个指定的函数。一级空间配置器分配的是大于 128 字节的空间，如果分配不成功，调用句柄释放一部分内存，如果还不能分配成功，抛出异常。</li>
 <li>第二级配置器：如果分配的区块小于 128B，则以内存池管理，第二级配置器维护了一个自由链表数组，每次需要分配内存时， 直接从相应的链表上取出一个内存节点就完成工作，效率很高。<ul>
-<li>自由链表数组：指针数组，数组中的每个指针元素指向一个链表的起始节点。数组大小为 16， 链表的每个节点就是实际的内存块，相同链表上的内存块大小都相同，不同链表的内存块大小不同，从 8 一直到 128。</li>
-<li>内存分配：allocate 函数内先判断要分配的内存大小，若大于 128 字节，直接调用第一级配置器，否则根据要分配 的内存大小从 16 个链表中选出一个链表，取出该链表的第一个节点。若相应的链表为空，则调用 refill 函数填充该链 表。 默认是取出20个数据块。</li>
+<li>自由链表数组：指针数组，数组中的每个指针元素指向一个链表的起始节点。数组大小为 16， 链表的每个节点就是实际的内存块，相同链表上的内存块大小都相同，不同链表的内存块大小不同，从 8 一直到 128。每个自由链表上的内存块大小是<strong>线性增长</strong>的。</li>
+<li>内存分配：allocate 函数内先判断要分配的内存大小，若大于 128 字节，直接调用第一级配置器，否则根据要分配的内存大小从 16 个链表中选出一个链表，取出该链表的第一个节点。若相应的链表为空，则调用 refill 函数填充该链 表。 默认是取出 20 个数据块。</li>
 <li>填充链表 refill：若 allocate 函数内要取出节点的链表为空，则会调用 refill 函数填充该链表。refill 函数内会先调用 chunk_alloc 函数从内存池分配一大块内存，该内存大小默认为 20 个链表节点大小，当内存池的内存也不足时，返回的内存块节点数目会不足 20 个。接着 refill 的工作就是将这一大块内存分成 20 份相同大小的内存块，并将各内存块连接起来形成一个链表。</li>
 <li>内存池：chunk_alloc 函数内管理了一块内存池，当 refill 函数要填充链表时，就会调用 chunk_alloc 函数，从内存池取出相应的内存。如何内存池没有空间，则首先合并其他空闲链表，以获取空间，若还是不行，则调用第一级分配器</li>
 </ul>
@@ -1486,19 +1514,20 @@
 <p>自由链表数组类似 Linux 中的伙伴系统，但是伙伴系统是按照 2 的幂次增长的</p>
 </blockquote>
 </li>
-<li><p>如何自定义内存分配器 allocator？</p>
+<li><p>内存分配器有何作用？如何自定义内存分配器 allocator？</p>
+<p>内存分配器主要目的是将内存分配和对象构造这个过程分开，便于对内存进行池化操作，并且在需要的时候进行对象的构造，通过 placement new 实现。</p>
 <p>内存分配器主要用在容器中，实际上 allocator 可以看作是对 new 的封装，new 又是对 malloc 的封装。可以继承自 std::allocator，然后主要需要实现以下函数：</p>
 <ul>
 <li>constructor &amp; destructor：内存分配器的构造函数和析构函数</li>
 <li>allocate &amp; deallocate：内存分配与释放函数</li>
-<li>construct &amp; destroy：用于构造函数和析构函数</li>
+<li>construct &amp; destroy：用于构造某类对象和析构某类对象</li>
 </ul>
 </li>
 <li><p>C++ 中类对象只能在堆上分配吗？</p>
-<p>不是的，在 C++ 中，类的对象建立分为两种，一种是静态建立，如<code>A a</code>；另一种是动态建立，如<code>A* ptr=new A</code>；</p>
+<p>不是的，在 C++ 中，类的对象建立分为两种，一种是静态建立，如<code>A a</code>；另一种是动态建立，如<code>A* ptr = new A</code>；</p>
 <ul>
 <li>静态建立一个类对象，是由编译器为对象在栈空间中分配内存，是通过直接移动栈顶指针，挪出适当的空间，然后在这片内存空间上调用构造函数形成一个栈对象。使用这种方法，<strong>直接调用类的构造函数</strong>。</li>
-<li>动态建立类对象，是使用new运算符将对象建立在堆空间中。这个过程分为两步，第一步是执行operator new()函数，在堆空间中搜索合适的内存并进行分配；第二步是调用构造函数构造对象，初始化这片内存空间。这种方法，<strong>间接调用类的构造函数</strong>。</li>
+<li>动态建立类对象，是使用 new 运算符将对象建立在堆空间中。这个过程分为两步，第一步是执行 operator new() 函数，在堆空间中搜索合适的内存并进行分配；第二步是调用构造函数构造对象，初始化这片内存空间。这种方法，<strong>间接调用类的构造函数</strong>。</li>
 </ul>
 </li>
 <li><p>如何定义一个只能在堆上（栈上）生成对象的类？</p>
@@ -1526,7 +1555,7 @@
 <li><p>将 vptr 放在对象的尾部：在 C++ 最初问世时，被广泛采用，可以和 C struct 兼容</p>
 <p><img src="/2023/03/20/Cpp-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/cppmode-3-11.png" alt="img"></p>
 </li>
-<li><p>将 vptr 放在对象的首部：对于多重继承，通过虚指针访问函数表的效率会得到一定提升，但损失了兼容性</p>
+<li><p>将 vptr 放在对象的首部：对于多重继承，<strong>通过虚指针访问函数表的效率会得到一定提升</strong>，但损失了兼容性</p>
 <p><img src="/2023/03/20/Cpp-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/cppmode-3-12.png" alt="img"></p>
 </li>
 </ul>
@@ -1536,8 +1565,8 @@
 <li>将 vptr 放在对象的尾端，提供了一种自然多态的形式，基类和派生类的 object 都是从相同的地址开始，因此把一个派生类对象的地址指定给基类的指针或引用时，不需要编译器去调停或修改地址。效率较高</li>
 <li>将 vptr 放在对象的首端，如果基类没有 virtual function 而派生类有，那么单一继承的“自然多态”就会被打破。这种情况下把一个派生类 object 转换为其基类型，就需要编译器的介入，用以调整地址</li>
 </ul>
-<p>多重继承的问题主要发生于派生类和其第二或后继基类object之间的转换，对一个多重派生对象，将其地址指定给“最左端基类的指针”，情况将和单一继承时相同，因为二者都指向相同的起始地址。需付出的成本只有地址的指定操作而已；至于第二个或后继的基类的地址指定操作，则需要将地址修改过：加上(或减去，如果downcast的话)介于中间的基类子对象大小。</p>
-<p>假设将vptr放在class object的尾端，类的继承关系和members的布局如下：</p>
+<p>多重继承的问题主要发生于派生类和其第二或后继基类 object 之间的转换，对一个多重派生对象，将其地址指定给“最左端基类的指针”，情况将和单一继承时相同，因为二者都指向相同的起始地址。需付出的成本只有地址的指定操作而已；至于第二个或后继的基类的地址指定操作，则需要将地址修改过：加上(或减去，如果 downcast 的话)介于中间的基类子对象大小。</p>
+<p>假设将 vptr 放在 class object 的尾端，类的继承关系和members的布局如下：</p>
 <img src="cppmode-3-8.png" alt="img" style="zoom:67%;" />
 </li>
 <li><p>虚继承：先安排好派生类的不变部分，然后再建立其共享部分，不同编译器在于如何实现共享部分</p>
@@ -1558,7 +1587,7 @@
 <img src="cppmode-4-1-1686566633397-2.png" alt="cppmode-4-1" style="zoom:67%;" />
 
 <ul>
-<li>对于多重继承中的虚函数，其复杂度围绕在第二个及后继的base classes身上，以及“必须在执行期调整this指针”这一点。<strong>在多重继承下，一个derived class内含n-1个”额外”的virtual tables，n表示其上一层base classes的个数（因此，单一继承将不会有额外的virtual tables）</strong>：</li>
+<li>对于多重继承中的虚函数，其复杂度围绕在第二个及后继的 base classes 身上，以及“必须在执行期调整 this 指针”这一点。<strong>在多重继承下，一个 derived class 内含 n-1 个”额外”的 virtual tables，n 表示其上一层 base classes 的个数（因此，单一继承将不会有额外的virtual tables）</strong>：</li>
 </ul>
 <img src="image-20230612184922566.png" alt="image-20230612184922566" style="zoom:67%;" />
 
@@ -1718,7 +1747,7 @@
 <ul>
 <li>async：用于封装异步任务，返回一个 future，可以通过 launch::async 来指定异步任务在新线程中运行</li>
 <li>packaged_task：主要用于封装一个函数或者可调用对象上，可通过 get_future 获取对应的结果</li>
-<li>promise：和 async 和 packaged_task 不同，它们通过返回一个值，该值被封装未一个对象，之后线程结束，如果想要提前告知结果，并且进行一些后台工作，可以使用 promise，当对其使用 set_value 后，对应的 future 对象就会就绪。注意每个就绪的 future 只能被 get 一次，因此如果想要多个线程获取同一个 future 的值，可以使用 shared_future</li>
+<li>promise：和 async 和 packaged_task 不同，它们通过返回一个值，该值被封装为一个对象，之后线程结束，如果想要提前告知结果，并且进行一些后台工作，可以使用 promise，当对其使用 set_value 后，对应的 future 对象就会就绪。注意每个就绪的 future 只能被 get 一次，因此如果想要多个线程获取同一个 future 的值，可以使用 shared_future</li>
 </ul>
 </li>
 <li><p>谈谈 C++ 头文件中的并行算法？</p>
@@ -1752,7 +1781,7 @@
 <p>首先，并发编程中的最重要的就是解决数据竞争的问题，可以使用 mutex 来定义临界区，达到互斥效果；其次，单纯使用 mutex 手动进行加锁和解锁会带来精力负担，并且容易加锁后忘记解锁，导致产生问题，为此，根据 RAII 策略，C++ 提供了像 lock_guard 和 unique_lock 等类来缓解该问题；最后，便是并发编程中涉及到的线程同步的方式了，一种方式是使用 condition_variable，其通常和 unique_lock 结合，通过 wait 和 notify 实现同步机制，另外一种方式是使用 future 结构，future 中的 get 方法阻塞直到 future 对象就绪。总而言之，并发编程主要从互斥和同步方面进行考虑。</p>
 </li>
 <li><p>C++ 内存模型是什么，主要包括哪些内容？</p>
-<p>内存模型描述了并发程序中多个线程访问共享内存时的行为和规则。它主要包含以下几个方面：</p>
+<p><strong>内存模型描述了并发程序中多个线程访问共享内存时的行为和规则</strong>。它主要包含以下几个方面：</p>
 <ul>
 <li>原子操作：C++ 中的原子操作是具有原子性和可见性保证的操作，可以确保多个线程访问共享对象时不会出现竞态条件或未定义的行为。</li>
 <li>内存顺序：内存顺序是指程序中内存操作的执行顺序和其影响的可见性。C++ 中提供了多种内存顺序模型，如顺序一致性、弱序、释放-获取顺序等，可以通过 <code>std::atomic</code> 和 <code>std::atomic_thread_fence</code> 等接口进行设置和控制。</li>
@@ -1782,6 +1811,120 @@
 <li>memory_order_relaxed：不建立任何同步或者顺序保证，使用此模型只会保证原子性</li>
 </ul>
 </li>
+<li><p>C++ 协程有何作用，如何实现？</p>
+<p><img src="/2023/03/20/Cpp-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/587e0be17a104375b6b6d2064e4824cetplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp" alt="图片"></p>
+<p>上图展示了协程迭代的实现方案。</p>
+<p>考虑最简单的 Generator，其可以中止函数的执行，并且返回不同的函数值，在最终执行完函数的时候，才真正结束函数的运行。C++ 中有两种类型的协程，分别是无栈协程和有栈协程。其规定了任何包含 <code>co_return</code> <code>co_await</code> <code>co_yield</code> 关键字之一的函数都是一个协程。</p>
+<p>C++ 17 采用的是 Duff Device Hack（使用 switch case 进入到循环体中）实现方式：</p>
+<p><img src="/2023/03/20/Cpp-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/d06365d29ea04ea98dee0d646fd55da9tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp" alt="图片"></p>
+<p>C++ 20 协程实现方式如下：</p>
+<p><img src="/2023/03/20/Cpp-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/44c6a1c1c2654695b0a5a1f30aaf3fe6tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp" alt="图片"></p>
+<p>从图上也能看到, 对比其它语言较精简的 Coroutine 实现, C++20 这套实现, 还是偏复杂的, 这也是我们常调侃的 “库作者向” 实现, 虽然整体使用很灵活, 也能跟泛型很好的搭配, 但我们还是需要在框架层做大量的包装, 同时业务一般需要一个地方对应用中所有的协程做管理, 方便监控应用的整体运行情况等, 这也使得 C++这套特性没法很简单的直接在业务侧进行使用，需要提供一个全局的 Scheduler。</p>
+<p>C++ 协程采取的是微软提出并主导的无栈协程，与之相对的便是有栈协程，有栈协程切换的成本是用户态线程切换的成本，而无栈协程切换的成本则相当于函数调用的成本。无栈协程和线程的区别：无栈协程只能被线程调用，本身并不抢占内核调度，而线程则可抢占内核调度。有栈协程比系统级线程轻量很多，但比起无栈协程还是差了许多。总而言之，C++ 协程的出现大大简化了异步编程的难度，将异步代码进行同步方式的编写，同时还保持了异步的高性能。</p>
+<blockquote>
+<p>JS 中的 async 和 await 实际上也是将异步编程同步化，其基于 Promise 实现；而 CPP 中的 co_await 和 co_return 同样也是将异步编程同步化，不过其基于协程实现。</p>
+</blockquote>
+<p>有栈（stackful）协程通常的实现手段是在堆上提前分配一块较大的内存空间（比如 64K），也就是协程所谓的“栈”，参数、return address 等都可以存放在这个“栈”空间上。如果需要协程切换，那么通过 swapcontext 一类的形式来让系统认为这个堆上空间就是普通的栈，这就实现了上下文的切换。有栈协程最大的优势就是侵入性小，使用起来非常简便，已有的业务代码几乎不需要做什么修改，但是 C++20 最终还是选择了使用无栈协程。主要原因是栈空间的限制（太大或者太小都不合适）；协程切换的开销。</p>
+<blockquote>
+<p>协程资料：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7163829883238350856%EF%BC%8Chttps://zhuanlan.zhihu.com/p/569480618">https://juejin.cn/post/7163829883238350856，https://zhuanlan.zhihu.com/p/569480618</a></p>
+</blockquote>
+</li>
+<li><p>C++ 中的 SFINAE 指的是什么，有何作用？</p>
+<p>SFINAE 指的是 Substitution failure is not an error，其说明了编译器在进行模板实例化的时候可能会发生参数替换失败的场景，但是这并不是一个错误，编译器会继续匹配名称相同的模板，直到所有模板都不能匹配的时候才进行报错。通过该机制，可以让编译器选择使用那个模板进行实例化，下列代码展示了 SFINAE：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> &#123; <span class="keyword">typedef</span> <span class="type">int</span> type; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Y</span> &#123; <span class="keyword">typedef</span> <span class="type">int</span> type2; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">typename</span> T::type)</span></span>;    <span class="comment">// Foo0</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">typename</span> T::type2)</span></span>;   <span class="comment">// Foo1</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(T)</span></span>;                   <span class="comment">// Foo2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">callFoo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="built_in">foo</span>&lt;Y&gt;(<span class="number">10</span>);   <span class="comment">// Foo0: Failed,  Foo1: Succeed, Foo2: Failed</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码 <code>foo&lt;Y&gt;(10)</code> 在匹配 Foo0 模板时，参数替换失败，但是编译器并不报错，而是继续尝试，在匹配到 Foo1 的时候，发现可以匹配，从而生成了对应的模板。</p>
+<p>实际上，该机制经常被用来限制泛型参数的类型，最常用的便是 enable_if 这个函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">inc_counter</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  T&amp; counterObj, </span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="keyword">typename</span> std::enable_if&lt;</span></span></span><br><span class="line"><span class="params"><span class="function">    is_base_of&lt;T, ICounter&gt;::value</span></span></span><br><span class="line"><span class="params"><span class="function">  &gt;::type* = <span class="literal">nullptr</span> )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">void</span> <span class="title">inc_counter</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  T&amp; counterInt,</span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="keyword">typename</span> std::enable_if&lt;</span></span></span><br><span class="line"><span class="params"><span class="function">    std::is_integral&lt;T&gt;::value</span></span></span><br><span class="line"><span class="params"><span class="function">  &gt;::type* = <span class="literal">nullptr</span> )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其次，<code>is_integral&lt;T&gt;::value</code>返回一个布尔类型的编译器常数，告诉我们它是或者不是一个 integral，<code>enable_if&lt;C&gt;</code>的作用就是，如果这个 C 值为 True，那么 type 就会被推断成一个 void 或者是别的什么类型，让整个函数匹配后的类型变成 <code>void inc_counter&lt;int&gt;(int &amp; counterInt, void* dummy = nullptr)</code>; 如果这个值为False，那么<code>enable_if&lt;false&gt;</code>这个特化形式中，压根就没有这个 ::type，于是 substitution 就失败了，因此，这个函数原型根本就不会被产生出来。enable_if 的实现如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// STRUCT TEMPLATE enable_if</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="type">bool</span> _Test, <span class="keyword">class</span> <span class="title class_">_Ty</span> = <span class="type">void</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> enable_if &#123;&#125;; <span class="comment">// no member &quot;type&quot; when !_Test</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">enable_if</span>&lt;<span class="literal">true</span>, _Ty&gt; &#123; <span class="comment">// type is _Ty for _Test</span></span><br><span class="line">    <span class="keyword">using</span> type = _Ty;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="type">bool</span> _Test, <span class="keyword">class</span> <span class="title class_">_Ty</span> = <span class="type">void</span>&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="type">enable_if_t</span> = <span class="keyword">typename</span> enable_if&lt;_Test, _Ty&gt;::type;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>C++ Concept 为什么出现，有何作用？</p>
+<p>首先明确，Concept 是用来约束模板类型的语法糖，尽管我们知道 SFINAE 机制，其能够实现模板类型参数的约束匹配，但是其存在以下问题：</p>
+<ul>
+<li>匹配失败时报错信息难以阅读</li>
+<li>模板本身逻辑耦合在一起，不同地方的匹配可能需要写很多相同模式的约束匹配的代码</li>
+</ul>
+<p>Concept 的出现实际上就是为了解决上述问题，即通过将模板的类型约束抽象出来，然后在模板定义时再使用。这样成功解耦了模板类型约束和模板本身的一些类型逻辑。达到复用模式约束的作用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个约束T只能是整数类型，并且是有符号的concept</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> signed_integral = integral&lt;T&gt; &amp;&amp; std::is_signed_v&lt;T&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有符号整型才能匹配subtract函数的T</span></span><br><span class="line"><span class="keyword">template</span> &lt;signed_integral T&gt;</span><br><span class="line"><span class="function">T <span class="title">subtract</span><span class="params">(T a, T b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者使用 requires 子语句</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">requires</span> my_concept&lt;T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T v)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux 内存中的 Cache 和 Buffer 指的是什么，有何作用，如何进行释放？</p>
+<ul>
+<li>Cache：指的是 Page Cache，通常是按照页为单位来缓存文件系统中的文件，可用于文件数据的快速访问，注意其同样也会缓存文件的写操作，缓存文件写操作就需要 dirty 标识符配合</li>
+<li>Buffer：指的是 Buffer Cache，用于暂存物理磁盘块，通常用于写操作（写数据到磁盘）进行缓存，但是也可用于读缓存（从磁盘读数据）</li>
+<li><strong>Buffers</strong> can be used either as a “cache for data to be written to disk” or as a “cache for data read from disk”.</li>
+<li><strong>Cache</strong> can be used either as a “page cache for reading data from files” or as a “page cache for writing files”.</li>
+</ul>
+<p>简单说来，page cache 用来缓存文件数据，buffer cache 用来缓存磁盘数据。在有文件系统的情况下，对文件操作，那么数据会缓存到 page cache，如果直接采用 dd 等工具对磁盘进行读写，那么数据会缓存到 buffer cache。Buffer(Buffer Cache)以块形式缓冲了块设备的操作，定时或手动的同步到硬盘，它是为了缓冲写操作然后一次性将很多改动写入硬盘，避免频繁写硬盘，提高写入效率。Cache(Page Cache)以页面形式缓存了文件系统的文件，给需要使用的程序读取，它是为了给读操作提供缓冲，避免频繁读硬盘，提高读取效率。</p>
+<p>可以使用以下命令进行释放：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sync; echo 1 &gt; /proc/sys/vm/drop_caches # 仅清除页面缓存</span><br><span class="line">sync; echo 2 &gt; /proc/sys/vm/drop_caches # 清除目录项和 inode</span><br><span class="line">sync; echo 3 &gt; /proc/sys/vm/drop_caches # 清除页面缓存、目录项以及 inode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux 中的 fflush，fsync 和 sync 的作用有何不同？</p>
+<p><code>fflush</code> synchronizes the <em>user-space buffered</em> data to <em>kernel-level</em> cache (since it’s working with <code>FILE</code> objects that reside at user-level and are invisible to kernel)，whereas <code>fsync</code> or <code>sync</code> (working directly with <em>file descriptors</em>) synchronize kernel cached data with device.</p>
+<img src="image-20230715212838054.png" alt="image-20230715212838054" style="zoom:50%;" />
+
+<p>注意：sync 后实际上依旧可能发生数据丢失的问题，sync 只保证数据到 device 上，但是 device 可能本身也存在缓存，因此，如果突然断电还是存在数据丢失的可能。</p>
+</li>
+<li><p>Linux 中的内存管理机制是怎样的，buddy 系统和 slab 算法分别有何作用？</p>
+<p>Linux 中的内存管理机制是通过分段和分页实现的，但是，MMU 规定了每个段都是从 0 开始，4G 结束，因此屏蔽了段机制，而采用分页机制进行内存管理。</p>
+<p>之所以使用 buddy 系统，是因为对于物理内存经过频繁地申请和释放后会产生外部碎片，另一方面，可以高效的处理频繁申请和释放不同大小的<strong>连续</strong>页框，通过该系统可以解决上述问题。具体而言：</p>
+<ul>
+<li>将空闲内存分为 m 个组, 第一组储存2^0个单位的内存块, 第二组储存2^1个单位的内存块, 第三组储存2^2个单位的储存块, 以此类推, 直到m组。m 典型值为 11。</li>
+<li>每个组是一个链表, 用来储存同等大小的内存块。</li>
+<li>伙伴块的大小是固定的, 并且同一个组里面的内存块是伙伴。</li>
+</ul>
+<p>在分配时，如果申请的内存大小是 n 个单位块, 则先将 n 向上取整为 2 的 n 次幂，假设为 s，然后我们从前面的数组中定位到 s，如果该组中有剩余内存块就分配出去，否则向上查找，然后再将该内存块分割出来，并将剩余的块放到数组中去。同样的，还存在内存归并的过程：我们检测归还内存的伙伴内存块是否空闲，如果空闲就合并在一起，不空闲就直接放回到合适的链表中，一般来说，伙伴算法中会使用位图来记录内存块是否被使用，用于伙伴内存的内并。</p>
+<p>伙伴系统的优点是分配和回收内存都十分的方便，可以解决外部碎片的问题，在不断的回收和释放过程中仍然可以保存有较大的内存块。分配内存速度也很快，基本是 O(lgN) 的效率；缺点是导致较大的内部碎片，比如我们需要一个 9 个单位块大小的内存块, 但是按伙伴算法会直接给我们分配一个 16 个单位块大小的内存块, 显然有 7 个单位块大小的内存是被浪费的。</p>
+<p>由于伙伴管理系统分配的基本单元是页，也就是 4KB，因此，伙伴管理系统不太适用于小块内存的分配和回收，这时就需要 slab 机制：</p>
+<img src="127836300-b01190fe-eaef-4fba-9118-ae7b14ce9409.png" alt="image" style="zoom:75%;" />
+
+<p>slab 的设计思想就是把若干的页框合在一起形成一大存储块——slab，并在这个 slab 中只存储同一类数据，这样就可以在这个 slab 内部打破页的界限，以该类型数据的大小来定义分配粒度，存放多个数据，这样就可以尽可能地减少页内碎片了。在 Linux 中，多个存储同类数据的 slab 的集合叫做一类对象的缓冲区。</p>
+<p>slab 优点是内核通常依赖于对小对象的分配，它们会在系统生命周期内进行无数次分配。slab 缓存分配器通过对类似大小的对象进行缓存而提供这种功能，从而避免了常见的碎片问题；slab 分配器还支持通用对象的初始化，从而避免了为同一目的而对一个对象重复进行初始化；slab 分配器还可以支持硬件缓存对齐和着色，这允许不同缓存中的对象占用相同的缓存行，从而提高缓存的利用率并获得更好的性能。</p>
+</li>
+<li><p>谈谈现代的 C&#x2F;C++ 编译常用工具链，以及使用 GCC 编译的流程？</p>
+<p>现代的 C++ 编译工具链主要有 CMake&#x2F;Make&#x2F;GCC，GCC是C&#x2F;C++语言的编译工具，Make是增量式（编译）批处理工具，CMake 是 Make 脚本生成工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">              cmake           make       gcc</span><br><span class="line">CMakelist.txt -----&gt; Makefile ----&gt; Cmds ---&gt; Binary</span><br></pre></td></tr></table></figure>
+
+<p>使用 GCC 编译程序时，主要分为四个步骤：预处理、编译、汇编、链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      -E          -S          -c          </span><br><span class="line">b.c ------&gt; b.i ------&gt; b.s ------&gt; b.o ------&gt; a.out</span><br><span class="line">      gcc         gcc         as          ld</span><br></pre></td></tr></table></figure>
+
+<p>GCC 在编译时，其并不管理用户安装的第三方库，因此，如果项目依赖于某个文件，则需要手动进行依赖的说明，使用的比较多的参数如下：</p>
+<ul>
+<li><code>-I</code> ：预处理阶段使用，指定额外的头文件目录，如果不指定，将报错 <code>xxx.h: file not found</code></li>
+<li><code>-l</code>：链接阶段，来指定需要链接的库，不指定将报错 <code>Undefined symbols </code></li>
+<li><code>-L</code>：链接阶段，将所要链接的库文件所在的路径告诉 gcc，不指定将报错 <code>ld: library not found for -lxxx</code></li>
+<li>静态链接参数，优化参数，宏相关参数，以及其他参数（<code>-std, -Werror, -v</code> 等）</li>
+</ul>
+</li>
+<li><p>对于非复现的 bug，应该如何进行追踪和调试？</p>
+<p>首先，gdb 提供了反向调试的功能，但是其依赖于 bug 复现率，推荐只在 bug 能够复现的时候进行反向调试。这里推荐使用 rr（Record and Replay Framework） 工具，通过其能够记录下发生异常时程序的运行时状态，从而能够提供一个可以反复反向调试的 debug 环境：</p>
+<ul>
+<li><code>while rr record --chaos ./main; do :; done</code>：持续运行，知道结束</li>
+<li><code>rr replay</code>：回放最新的程序运行时状态，提供 gdb 调试环境</li>
+</ul>
+</li>
+<li><p>如何查看代码覆盖率？</p>
+<p>主要分为以下几个工具：gcc &amp; gcov &amp; lcov。需要在编译的时候加入 <code>-fprofile-arcs -ftest-coverage</code> 选项（或者直接增加 <code>--coverage</code>），gcov 会生成对应的代码覆盖报告文件，lcov 会将报告文件生成对应的 html 文件，通过浏览器查看即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--coverage 等同于编译参数 -fprofile-arcs -ftest-coverage 以及在链接时增加 -lgcov</span></span><br><span class="line">gcc --coverage test.c</span><br><span class="line">./a.out </span><br><span class="line">gcov test</span><br><span class="line">cat test.c.gcov</span><br></pre></td></tr></table></figure>
+
+<p>对于 clang 工具链：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clang++ -fprofile-arcs -fcoverage-mapping foo.cc -o foo</span><br><span class="line">LLVM_PROFILE_FILE=&quot;foo.profraw&quot; ./foo</span><br><span class="line">llvm-profdata merge -sparse foo.profraw -o foo.profdata</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">line report</span></span><br><span class="line">llvm-cov show ./foo -instr-profile=foo.profdata</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">file report</span></span><br><span class="line">llvm-cov report ./foo -instr-profile=foo.profdata</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>malloc 进行内存分配时什么时候会使用 sbrk，什么时候会使用 mmap？</p>
+<p>在内存分配小于阈值（M_MMAP_THRESHOLD）的时候，将会调用 brk&#x2F;sbrk，如果内存分配大于阈值时，则会使用 mmap（MAP_ANONYMOUS）：</p>
+<ul>
+<li>int brk(void *addr)：sets the upper limit of the data segment</li>
+<li>void *sbrk(intptr_t increment)：increments it</li>
+<li>mmap with MAP_ANONYMOUS：Anonymous mappings can be pictured as a zeroized virtual file. Anonymous mappings are simply large, zero-filled blocks of memory ready for use.</li>
+</ul>
+<blockquote>
+<p>上面的内存分配只是分配了虚拟内存，在实际第一次访问的时候会产生缺页错误</p>
+</blockquote>
+</li>
+<li></li>
 </ol>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/godsme/understand_modern_cpp">Understanding Modern C++</a> </p>
@@ -1800,17 +1943,9 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://paul.pub/cpp-memory-model/">C++ 内存模型</a> </p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g">C++ memory model Q&amp;A in stackoverflow</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g">C++ memory model Q&amp;A in stackoverflow</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/0voice/kernel_memory_management">Linux 内存管理</a></p>
 </li>
 </ol>
-<ul>
-<li>小球称重问题：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/368050985">https://zhuanlan.zhihu.com/p/368050985</a></li>
-</ul>
-<p>Linux 内存中的 Cache 和 Buffer 指的是什么，有何作用？</p>
-<ul>
-<li>Cache：指的是 Page Cache，通常是按照页为单位来缓存文件系统中的文件，可用于文件数据的快速访问，注意其同样也会缓存文件的写操作，缓存文件写操作就需要 dirty 标识符配合</li>
-<li>Buffer：指的是 Buffer Cache，用于暂存物理磁盘块，通常用于写操作（写数据到磁盘）进行缓存，但是也可用于读缓存（从磁盘读数据）</li>
-<li><strong>Buffers</strong> can be used either as a “cache for data to be written to disk” or as a “cache for data read from disk”.</li>
-<li><strong>Cache</strong> can be used either as a “page cache for reading data from files” or as a “page cache for writing files”.</li>
-</ul>
 <!-- flag of hidden posts --></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2023/03/20/Cpp-%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">http://blog.zsstrike.tech/2023/03/20/Cpp-面试题目汇总/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">相关问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

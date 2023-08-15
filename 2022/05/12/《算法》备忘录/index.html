@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-05-12T14:37:18.000Z">
-<meta property="article:modified_time" content="2023-06-29T06:38:41.486Z">
+<meta property="article:modified_time" content="2023-08-03T05:38:52.985Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-29 14:38:41'
+  postUpdate: '2023-08-03 13:38:52'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,12 +142,16 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《算法》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-12T14:37:18.000Z" title="发表于 2022-05-12 22:37:18">2022-05-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-29T06:38:41.486Z" title="更新于 2023-06-29 14:38:41">2023-06-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>30分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《算法》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于在算法学习过程中，总结相关算法套路以及算法编写经验，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《算法》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-12T14:37:18.000Z" title="发表于 2022-05-12 22:37:18">2022-05-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-03T05:38:52.985Z" title="更新于 2023-08-03 13:38:52">2023-08-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>40分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《算法》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于在算法学习过程中，总结相关算法套路以及算法编写经验，以备查阅。</p>
 <span id="more"></span>
 
 
 
-<h2 id="01-算法复杂度及其分析"><a href="#01-算法复杂度及其分析" class="headerlink" title="01 算法复杂度及其分析"></a>01 算法复杂度及其分析</h2><p>算法复杂度表示方法：</p>
+
+
+
+
+<h2 id="算法复杂度及其分析"><a href="#算法复杂度及其分析" class="headerlink" title="算法复杂度及其分析"></a>算法复杂度及其分析</h2><p>算法复杂度表示方法：</p>
 <ul>
 <li>$O$：表示算法的渐进上界</li>
 <li>$\Omega$：表示算法的渐进下界</li>
@@ -167,7 +171,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="02-排序算法"><a href="#02-排序算法" class="headerlink" title="02 排序算法"></a>02 排序算法</h2><p>常见排序算法：</p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><p>常见排序算法：</p>
 <table>
 <thead>
 <tr>
@@ -249,17 +253,21 @@
 <td align="center">稳定</td>
 </tr>
 </tbody></table>
-<h2 id="03-数据结构"><a href="#03-数据结构" class="headerlink" title="03 数据结构"></a>03 数据结构</h2><p>基本数据结构：</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>基本数据结构：</p>
 <ul>
 <li>数组：存取速度快；插入删除元素效率低下，需要大块连续的内存块</li>
 <li>链表：插入删除操作快，不需要大块连续的空间；访问操作慢</li>
 </ul>
 <p>扩展数据结构：</p>
 <ul>
-<li>散列表：使用哈希函数进行位置索引，快速查找，冲突处理有链接法，开放寻址法</li>
-<li>队列：FIFO 结构，变体如单调队列，主要用于处理滑动窗口最大值最小值问题</li>
-<li>栈：FILO 结构，变体如单调栈，可以找到第一个小于大于当前元素的数字，如接雨水</li>
-<li>树：<ul>
+<li><p>散列表：使用哈希函数进行位置索引，快速查找，冲突处理有链接法，开放寻址法</p>
+</li>
+<li><p>队列：FIFO 结构，变体如单调队列，主要用于处理滑动窗口最大值最小值问题</p>
+</li>
+<li><p>栈：FILO 结构，变体如单调栈，可以找到第一个小于大于当前元素的数字，如接雨水</p>
+</li>
+<li><p>树：</p>
+<ul>
 <li>遍历方式：先序遍历，中序遍历，后序遍历，层次遍历</li>
 <li>遍历方式：BFS + DFS</li>
 <li>动态查找树：<ul>
@@ -278,20 +286,39 @@
 </li>
 </ul>
 </li>
-<li>堆：通常看作是一棵完全二叉树的数组对象，插入时采用上浮，删除时采用下沉操作</li>
-<li>图：<ul>
-<li>图的存储结构：邻接矩阵，邻接链表</li>
-<li>遍历方式：BFS + DFS</li>
-<li>拓扑排序：需要统计入度，只有入度为 0 的节点才能进入队列</li>
-<li>并查集：使用数组表示每个节点的根节点，用于两个节点间的连通性判断</li>
-<li>最短路径：<ul>
-<li>Dijkstra 算法：单源最短路径算法，不能处理带有负权边的图</li>
-<li>Floyd 算法：计算所有点到所有点的最短路径的算法，相当于将每个点当作是中转站</li>
+<li><p>堆：通常看作是一棵完全二叉树的数组对象，插入时采用上浮，删除时采用下沉操作</p>
+</li>
+<li><p>图：</p>
+<ul>
+<li><p>图的存储结构：邻接矩阵，邻接链表</p>
+</li>
+<li><p>遍历方式：BFS + DFS</p>
+</li>
+<li><p>拓扑排序：需要统计入度，只有入度为 0 的节点才能进入队列，并且更新邻接点入度</p>
+</li>
+<li><p>并查集：使用数组表示每个节点的根节点，用于两个节点间的连通性判断</p>
+</li>
+<li><p>二分图：使用着色法进行 dfs 即可，状态有未着色，着色 A，着色 B</p>
+</li>
+<li><p>最短路径：</p>
+<ul>
+<li><p>Dijkstra 算法：单源最短路径算法，不能处理带有负权边的图，每次选择距离源点最小的，并且更新剩余节点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123; <span class="comment">// n 次循环</span></span><br><span class="line">    <span class="type">int</span> u = <span class="number">-1</span>, min = inf;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123; <span class="comment">// 找到最小路径顶点</span></span><br><span class="line">        <span class="keyword">if</span> (!vis[j] &amp;&amp; distance[j] &lt; min) &#123;</span><br><span class="line">            u = j; min = distance[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    vis[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> e : edges[u]) &#123; <span class="comment">// 松弛操作</span></span><br><span class="line">        <span class="type">int</span> v = ed.v, w = ed.w;</span><br><span class="line">        <span class="keyword">if</span> (dis[v] &gt; dis[u] + w) dis[v] = dis[u] + w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Bellman-Ford 算法：单源最短路径算法，可处理带有负权边的图，主要通过松弛操作实现，通过松弛 flag 判断提前退出循环</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> e : edges[j]) &#123;</span><br><span class="line">            <span class="type">int</span> v = ed.v, w = ed.w;</span><br><span class="line">            <span class="keyword">if</span> (dis[v] &gt; dis[j] + w) &#123;</span><br><span class="line">              	dis[v] = dis[j] + w;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Floyd 算法：计算所有点到所有点的最短路径的算法，相当于将每个点当作是中转站，可以存在负边，但是不能存在负环。定义 f[k, x, y] 只允许经过 1 到 k 个节点中 x 到 y 的最短路，通过 3 重循环即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (k = <span class="number">1</span>; k &lt;= n; k++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (x = <span class="number">1</span>; x &lt;= n; x++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (y = <span class="number">1</span>; y &lt;= n; y++) &#123;</span><br><span class="line">      f[k][x][y] = <span class="built_in">min</span>(f[k - <span class="number">1</span>][x][y], f[k - <span class="number">1</span>][x][k] + f[k - <span class="number">1</span>][k][y]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>最小生成树：<ul>
-<li>Kruskal 算法：边加法，每次都挑选最小权值的边，并且该边属于两棵树</li>
-<li>Prim 算法：点加法，从某个点开始，每次挑选树外最小权值的边对应的顶点</li>
+<li><p>最小生成树：</p>
+<ul>
+<li><p>Kruskal 算法：加边法，每次都挑选最小权值的边，并且该边属于两棵树。适用于稀疏图</p>
+<img src="image-20230630111313053.png" alt="image-20230630111313053" style="zoom:50%;" />
+</li>
+<li><p>Prim 算法：加点法，从某个点开始，每次挑选树外最小权值的边对应的顶点，并且更新树外其他顶点到树中顶点的最小距离。适用于稠密图</p>
+<img src="image-20230630111335934.png" alt="image-20230630111335934" style="zoom:50%;" /></li>
 </ul>
 </li>
 </ul>
@@ -346,7 +373,7 @@
 <li><p>和平衡二叉树的区别：平衡二叉树平衡标准较为严格，每个左右子树的高度差不超过 1；而红黑树平衡标准比较宽松：没有一条路径会大于其他路径的 2 倍。</p>
 </li>
 </ul>
-<h2 id="04-算法思想"><a href="#04-算法思想" class="headerlink" title="04 算法思想"></a>04 算法思想</h2><p>分治：将问题划分为互不相交的小问题，递归地解决小问题，再进行组合来解决原问题</p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>分治：将问题划分为互不相交的小问题，递归地解决小问题，再进行组合来解决原问题</p>
 <p>动态规划：和分治类似，不过其应用于具有重叠子问题的情况，关键在于找到递归解定义，然后使用备忘录或者自底向上方法进行解决</p>
 <p>贪心算法：和动态规划类似，不过其在解决问题的过程中，每一步都选择最优解，即小问题的最优解构成了大问题的最优解</p>
 <p>二分法：分治思想的一种，要求原数据是按照关键字有序的</p>
@@ -369,7 +396,7 @@
 <li><p>NPH 问题：满足 NPC 问题定义中的由NP通过规约的条件，但是它本身未必是一个NP问题</p>
 <img src="663d4582b70c79f04caa2c899689bbbc_1440w.png" alt="img" style="zoom:50%;" /></li>
 </ul>
-<h2 id="05-领域算法"><a href="#05-领域算法" class="headerlink" title="05 领域算法"></a>05 领域算法</h2><p>安全算法：</p>
+<h2 id="领域算法"><a href="#领域算法" class="headerlink" title="领域算法"></a>领域算法</h2><p>安全算法：</p>
 <ul>
 <li>摘要算法：用在数字签名上，能够产生长度相同的消息摘要，相关算法有 MD5，SHA 系列算法</li>
 <li>加密算法：将普通的文本和一串数字（密钥）进行结合，产生不可理解的密文的步骤<ul>
@@ -386,12 +413,12 @@
 <li>匹配失败：根据 next 表选择下一个进行匹配的索引</li>
 </ul>
 </li>
-<li>BM 算法：和 KMP 算法类似，需要预先处理模式串，预先生成”坏字符规则之向后位移表”和”好后缀规则之向后位移表”，并且其匹配规则是从模式串后面向前进行匹配的</li>
+<li>BM 算法：和 KMP 算法类似，需要预先处理模式串，预先生成”坏字符规则之向后位移表”和”好后缀规则之向后位移表”，并且其匹配规则是从模式串后面向前进行匹配的，每次匹配失败时，根据位移表进行移动即可</li>
 </ul>
 <p>大数据处理：</p>
 <ul>
-<li>分治&#x2F;hash&#x2F;排序：按照分而治之的思路进行处理，通过 hash 函数将元素范围缩小</li>
-<li>布隆过滤器：高效判断元素是否存在的数据结构，存在误判可能，变体有计数布隆过滤器</li>
+<li>分治&#x2F;hash&#x2F;排序：基本思路便是分而治之&#x2F;Hash映射 + Hash_map统计 + 堆&#x2F;快速&#x2F;归并排序</li>
+<li>布隆过滤器：高效判断元素是否存在的数据结构，存在误判可能，变体有计数布隆过滤器，支持删除</li>
 <li>外排序算法：位图排序法（不允许存在重复元素），多路归并排序</li>
 <li>Map &amp; Reduce：将任务进行划分，然后再将结果进行合并</li>
 </ul>
@@ -403,6 +430,37 @@
 <li>ZAB 算法（Zookeeper Atomic Broadcast）：为分布式应用提供高效且可靠的分布式协调服务，支持崩溃恢复和原子广播</li>
 <li>Snowflake 算法：分布式 ID 生成算法，按照划分空间的方式将 64bit 分割为不同部分，划分为 <code>1bit符号位-41bit时戳-10bit机器ID-12bit序列号</code> ，依赖于机器时钟，如果时钟回拨，只会简单抛出异常，可以考虑百度 <code>UidGenerator</code> 和美团分布式 ID 生成系统 <code>Leaf</code></li>
 </ul>
+<h2 id="智力题"><a href="#智力题" class="headerlink" title="智力题"></a>智力题</h2><p>问题：5 个海盗抢得 100 枚金币后，讨论如何进行公正分配。他们商定的分配原则是:</p>
+<ul>
+<li>(1)抽签确定各人的分配顺序号码(1，2，3，4，5)；</li>
+<li>(2)由抽到1号签的海盗提出分配方案，然后5人进行表决，如果方案得到超过半数的人同意，就按照他的方案进行分配，否则就将1号扔进大海喂鲨鱼；</li>
+<li>(3)如果1号被扔进大海，则由2号提出分配方案，然后由剩余的4人进行表决，当且仅当超过半数的人同意时，才会按照他的提案进行分配，否则也将被扔入大海；</li>
+<li>(4)依此类推。</li>
+</ul>
+<p>这里假设每一个海盗都是绝顶聪明而理性，他们都能够进行严密的逻辑推理，并能很理智的判断自身的得失，即能够在保住性命的前提下得到最多的金币。同时 还假设每一轮表决后的结果都能顺利得到执行，那么抽到1号的海盗应该提出怎样的分配方案才能使自己既不被扔进海里，又可以得到更多的金币呢？</p>
+<p>解答：1:96 2:0 3:0 4:2 5:2 首先，当对3的方案表决时，4会支持3，因为否则的话他就要被5反对，从而死。 因此，如果1，2死了，3的方案肯定是100,0,0，并且一定会得到3和4的支持，此时4，5的收入为0，因此1，2可以贿赂4，5而得到支持。 同时3的期望收入为100，他必定会不顾一切地反对1，2。 而如果1死了，2的方案肯定是98，0，1，1，并且一定会通过。 所以1的最优方案为96，0，0，2，2，并且一定会通过。 其实98，0，0，1，1也可以，并且有可能通过(看4，5的心情和残忍程度而定)。</p>
+<p>问题：1元钱一瓶汽水，喝完后两个空瓶换一瓶汽水，问: 你有20元钱，最多可以喝到几瓶汽水?</p>
+<p>解答：40瓶 20-&gt;10-&gt;5 拿4瓶换两瓶，再换一瓶，这个空瓶与5-4那个空瓶一起再换一瓶, 借一个瓶再喝一瓶还一个瓶子。20+10+5+2+1+1+1&#x3D;40；或者 1元 &#x3D; 1瓶水 &#x3D; 1瓶+ 1水 2瓶 &#x3D; 1瓶水 &#x3D; 1瓶+ 1水 &#x3D;》 1元 &#x3D; 2 水 &#x3D;》 20元 &#x3D; 40 水</p>
+<blockquote>
+<p>本题关键在于能够借瓶子这一操作</p>
+</blockquote>
+<p>问题：在临上刑场前，国王对预言家说: “你不是很会预言吗? 你怎么不能预言到你今天要被处死呢? 我给你一个机会，你可以预言一下今天我将如何处死你。你如果预言对了，我就让你服毒死；否则，我就绞死你。”</p>
+<p>但是聪明的预言家的回答，使得国王无论如何也无法将他处死。 请问，他是如何预言的？</p>
+<p>解答：“你不会毒死我的。”</p>
+<p>问题：有 N 个小球，已知有 1 个小球比其他小球偏重，使用天平，最少要多少次才能确保找到那个小球？（题干改成「偏轻」也可以）</p>
+<p>解答：由于已知问题小球的轻重，我们只要每次各自把 1&#x2F;3 数量（四舍五入）的小球放在天平两端，就可以确保把问题小球的范围缩小为原来的 1&#x2F;3。这里不展开赘述。答案是 $\lceil log_3{N}  \rceil $。</p>
+<p>问题：有 N 个小球，已知有 1 个小球和其他小球质量不同，使用天平，最少要多少次才能确保找到那个质量不同的小球（无需知道它的轻重）？</p>
+<p>解答：答案是 $\lceil log_3{(2N + 1)}  \rceil $。</p>
+<img src="v2-479f16db4854529e4ad8e59506a62587_1440w.webp" alt="img" style="zoom:67%;" />
+
+
+
+
+
+
+
+
+
 <h2 id="06-分布式系统"><a href="#06-分布式系统" class="headerlink" title="06 分布式系统"></a>06 分布式系统</h2><p>分布式系统面临的问题：</p>
 <ul>
 <li>缺乏全局时钟：很难定义两个事件究竟谁先谁后，物理时钟会发生偏移，通常配合逻辑时钟一起使用</li>
@@ -456,8 +514,8 @@
 
 <ul>
 <li>Prepare 阶段：<ul>
-<li>Prepare：Proposer生成全局唯一且递增的Proposal ID (可使用时间戳加Server ID)，向所有Acceptors发送Prepare请求，这里无需携带提案内容，只携带Proposal ID即可</li>
-<li>Promise：Acceptors收到Prepare请求后，做出“两个承诺，一个应答”<ul>
+<li>Prepare：Proposer 生成全局唯一且递增的 Proposal ID (可使用时间戳加Server ID)，向所有Acceptors 发送 Prepare 请求，这里无需携带提案内容，只携带 Proposal ID 即可</li>
+<li>Promise：Acceptors 收到 Prepare 请求后，做出“两个承诺，一个应答”<ul>
 <li>承诺1: 不再接受Proposal ID小于等于(注意: 这里是&lt;&#x3D; )当前请求的Prepare请求;</li>
 <li>承诺2: 不再接受Proposal ID小于(注意: 这里是&lt; )当前请求的Propose请求;</li>
 <li>应答: 不违背以前作出的承诺下，回复已经Accept过的提案中Proposal ID最大的那个提案的Value和Proposal ID，没有则返回空值。</li>
@@ -488,8 +546,8 @@
 </li>
 <li><p>主要改变：</p>
 <ul>
-<li>针对每一个要确定的值，运行一次Paxos算法实例(Instance)，形成决议。每一个Paxos实例使用唯一的Instance ID标识。相当于每次都运行一次 Paxos 实例，其会尽量保证 leader 的 liveness</li>
-<li>在所有Proposers中选举一个Leader，由Leader唯一地提交Proposal给Acceptors进行表决。这样没有Proposer竞争，解决了活锁问题。同时，仅有一个 Leader 进行提交的情况下，可以省略 Prepare 阶段，从而将两阶段转变为一阶段（Accept），提高效率</li>
+<li>针对每一个要确定的值，运行一次 Paxos 算法实例(Instance)，形成决议。每一个 Paxos 实例使用唯一的 Instance ID 标识。相当于每次都运行一次 Paxos 实例，其会尽量保证 leader 的 liveness</li>
+<li>在所有Proposers中选举一个Leader，由 Leader 唯一地提交 Proposal 给 Acceptors 进行表决。这样没有 Proposer 竞争，解决了活锁问题。同时，仅有一个 Leader 进行提交的情况下，可以省略 Prepare 阶段，从而将两阶段转变为一阶段（Accept），提高效率</li>
 </ul>
 <blockquote>
 <p>主要思想是多个 Paxos 算法串联起来，由于只有一个 Leader，如果 Leader 在一轮 Paxos 算法结束时还存在，就不需要重新选 Leader，也不需要 Prepare 阶段了</p>
@@ -502,14 +560,14 @@
 </li>
 <li><p>主要角色：</p>
 <ul>
-<li>Leader：接受客户端请求，并向Follower同步请求日志；当日志同步到大多数节点上后告诉Follower提交日志</li>
-<li>Follower：接受并持久化Leader同步的日志，在Leader通知日志可以提交之后，提交日志</li>
-<li>Candicate：Leader选举过程中的临时角色</li>
+<li>Leader：接受客户端请求，并向 Follower 同步请求日志；当日志同步到大多数节点上后告诉Follower 提交日志</li>
+<li>Follower：接受并持久化 Leader 同步的日志，在 Leader 通知日志可以提交之后，提交日志</li>
+<li>Candicate：Leader 选举过程中的临时角色</li>
 </ul>
 </li>
 <li><p>子问题：</p>
 <ul>
-<li><p>Leader 选举：Leader向所有Followers周期性发送heartbeat。如果Follower在选举超时时间内没有收到Leader的heartbeat，就会等待一段随机的时间后发起一次Leader选举（拥有最新的已提交的log entry的Follower才有资格成为Leader）。Follower将其当前term加一然后转换为Candidate。它首先给自己投票并且给集群中的其他服务器发送 RequestVote RPC，只有当其赢得多数选票，才能成功成为 Leader</p>
+<li><p>Leader 选举：Leader 向所有 Followers 周期性发送 heartbeat。如果 Follower 在选举超时时间内没有收到 Leader 的 heartbeat，就会等待一段随机的时间后发起一次 Leader 选举（拥有最新的已提交的log entry的Follower才有资格成为Leader）。Follower将其当前term加一然后转换为Candidate。它首先给自己投票并且给集群中的其他服务器发送 RequestVote RPC，只有当其赢得多数选票，才能成功成为 Leader</p>
 </li>
 <li><p>日志同步：Leader把请求作为日志条目(Log entries)加入到它的日志中，然后并行的向其他服务器发起 AppendEntries RPC 来复制日志条目，当这条日志被复制到大多数服务器上，Leader将这条日志提交并向客户端返回执行结果。Raft 日志同步保证两点：</p>
 <ul>
@@ -518,7 +576,7 @@
 </ul>
 <p>第二点是通过 AppendEntries 的一个简单的一致性检查，当发送一个 AppendEntries RPC 时，Leader会把新日志条目紧接着之前的条目的log index和term都包含在里面。如果Follower没有在它的日志中找到log index和term都相同的日志，它就会拒绝新的日志条目。Leader会从后往前试，每次AppendEntries失败后尝试前一个日志条目，直到成功找到每个Follower的日志一致位点，然后向后逐条覆盖Followers在该位置之后的条目。</p>
 </li>
-<li><p>日志压缩：Raft采用对整个系统进行snapshot来解决，snapshot之前的日志都可以丢弃。其主要包含日志元数据以及系统的当前状态。当Leader要发给某个日志落后太多的Follower的log entry被丢弃，Leader会将snapshot发给Follower。或者当新加进一台机器时，也会发送snapshot给它。发送snapshot使用InstalledSnapshot RPC。</p>
+<li><p>日志压缩：Raft 采用对整个系统进行 snapshot 来解决，snapshot 之前的日志都可以丢弃。其主要包含日志元数据以及系统的当前状态。当 Leader 要发给某个日志落后太多的Follower的log entry被丢弃，Leader 会将 snapshot 发给 Follower。或者当新加进一台机器时，也会发送 snapshot 给它。发送 snapshot 使用 InstalledSnapshot RPC。</p>
 </li>
 </ul>
 </li>
@@ -592,7 +650,7 @@
 </li>
 <li>UidGenarator（百度）：<ul>
 <li>实现：<ul>
-<li>DefaultUidGenerator：就是正常的根据时间戳和机器位还有序列号的生成方式，和雪花算法很相似，对于时钟回拨也只是抛异常处理。仅有一些不同，如<strong>以秒为为单位</strong>而不再是毫秒和支持Docker等虚拟化环境。</li>
+<li>DefaultUidGenerator：就是正常的根据时间戳和机器位还有序列号的生成方式，和雪花算法很相似，对于时钟回拨也只是抛异常处理。仅有一些不同，如<strong>以秒为为单位</strong>而不再是毫秒和支持 Docker 等虚拟化环境。</li>
 <li>CachedUidGenerator：采用双 RindBuffer 来缓存 UID 和 useFlag，提高性能，为了防止伪共享的发生，采用了 Padding 进行 CacheLine 对齐。RingBuffer 填充时机有初始化填充，阈值填充，周期填充等</li>
 </ul>
 </li>
@@ -618,15 +676,6 @@
 <li>Mist 算法是否存在重复：存在，程序重启会造成按序递增数值回到初始值，但由于中间位和末尾随机值的影响，因此不是必定生成（有大概率生成）重复 ID，但递增态势必定受到影响。尽管会重复，但在实际的应用当中，没有人会将全局唯一 ID 生成算法完全托付给程序，而是会用数据库存储关键值或者所有生成的值。全局唯一 ID 生成算法大多都采用分布式架构或者主备架构提供发号服务，这时候就不用担心它的重复问题</li>
 </ul>
 </li>
-</ul>
-<p>负载均衡算法：</p>
-<ul>
-<li>轮询法：将请求按照顺序轮流分配到后端服务器上</li>
-<li>加权轮询法：和轮询法相似，给配置更好的服务器基于更大的权重</li>
-<li>随机法：随机选择，由概率统计理论知道，随着执行时间增加，该结果和轮询基本相同</li>
-<li>加权随机法：和随机法类似，但增加权重概念</li>
-<li>源地址哈希法：根据获取客户端的 IP 地址进行哈希，得到对应的后端服务器编号</li>
-<li>最小连接数法：动态选择当前积压请求数最少的服务器</li>
 </ul>
 <p>分布式锁的实现方案：</p>
 <ul>
@@ -693,7 +742,86 @@
 </ul>
 </li>
 </ul>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/05/12/%E3%80%8A%E7%AE%97%E6%B3%95%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/">http://blog.zsstrike.tech/2022/05/12/《算法》备忘录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">01 算法复杂度及其分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">02 排序算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">03 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04-%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">04 算法思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05-%E9%A2%86%E5%9F%9F%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">05 领域算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06-%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="toc-number">6.</span> <span class="toc-text">06 分布式系统</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>架构的演进：</p>
+<ul>
+<li>All in One：应用服务器同时也是存储服务器（数据库服务器）</li>
+<li>应用和数据分离</li>
+<li>使用缓存改善网站性能</li>
+<li>使用应用服务器集群改善网站的并发处理能力</li>
+<li>数据库读写分离</li>
+<li>使用反向代理和CDN加上网站相应：既可以实现负载均衡，也可以提供缓存功能</li>
+<li>使用分布式数据库系统</li>
+<li>使用 NoSQL 和搜索引擎</li>
+<li>业务拆分：为了应对日益复杂的业务场景，将网站业务拆分成不同的产品线</li>
+<li>分布式服务：对相同业务如用户管理，session管理等提取出来，独立部署</li>
+</ul>
+<p>限流：</p>
+<ul>
+<li>目的：每个系统都有服务的上线，所以当流量超过服务极限能力时，系统可能会出现卡死、崩溃的情况，所以就有了降级和限流。限流其实就是：当高并发或者瞬时高并发时，为了保证系统的稳定性、可用性，系统以牺牲部分请求为代价或者延迟处理请求为代价，保证系统整体服务可用。</li>
+<li>方案：<ul>
+<li>令牌桶方式：先有一个木桶，系统按照固定速度，往桶里加入Token，如果桶已经满了就不再添加。当有请求到来时，会各自拿走一个Token，取到Token 才能继续进行请求处理，没有Token 就拒绝服务。因此，其支持允许突发流量。</li>
+<li>漏桶方式：水(请求)先进入到漏桶里，漏桶以一定的速度出水(接口有响应速率)，当水流入速度过大会直接溢出（访问频率超过接口响应速率)，然后就拒绝请求，可以看出漏桶算法能强行限制数据的传输速率。该方法对于突发特性的流量缺乏效率。</li>
+<li>计数器方式：AtomicInteger，Semaphore，ThreadPoolExecutor。</li>
+</ul>
+</li>
+</ul>
+<p>降级和熔断：</p>
+<ul>
+<li><p>背景：服务之间的通常存在存在依赖关系，如果 A 服务出现问题，那么依赖 A 服务的哪些服务很有可能因为 A 服务异常出现请求堆积、资源占用，慢慢扩散到所有微服务，引发雪崩效应。</p>
+</li>
+<li><p>基本容错方式：</p>
+<ul>
+<li>主动超时</li>
+<li>限流：限制最大并发数</li>
+<li>熔断：当错误数超过阈值时快速失败，不调用后端服务，同时隔一定时间放几个请求去重试后端服务是否能正常调用，如果成功则关闭熔断状态，失败则继续快速失败，直接返回。</li>
+<li>隔离：把每个依赖或调用的服务都隔离开来，防止级联失败引起整体服务不可用</li>
+<li>降级：服务失败或异常后，返回指定的默认信息</li>
+</ul>
+</li>
+<li><p>熔断：基于断路器思想，当后端服务发生大量故障时，此时进行熔断，对请求直接返回快速失败，减缓后端服务的压力。</p>
+</li>
+<li><p>降级：由于爆炸性的流量冲击，对一些服务进行有策略的放弃，以此缓解系统压力，保证目前主要业务的正常运行。主要分为超时降级，失败次数降级，故障降级，限流降级。</p>
+<blockquote>
+<p>服务熔断一般是某个服务（下游服务）故障引起，而服务降级一般是从整体负荷考虑。</p>
+</blockquote>
+</li>
+</ul>
+<p>负载均衡：</p>
+<ul>
+<li>实现：通常是将用户访问的请求，根据负载均衡算法，分发到集群中的一台处理服务器。其能够解决并发压力，提升系统整体性能，并且方便了网站的扩展性，还提高了系统的安全性。</li>
+<li>分类：<ul>
+<li>DNS 负载均衡：在DNS服务器，配置多个A记录，这些A记录对应的服务器构成一个集群。优点是简单，缺点是可用性低（DNS解析是多级解析，新增&#x2F;修改DNS后，解析时间较长），维护性差。</li>
+<li>IP 负载均衡：在网络层通过修改请求目标地址进行负载均衡。真实物理服务器返回给负载均衡服务器，存在两种方式：（1）负载均衡服务器在修改目的ip地址的同时修改源地址（SNAT）。（2）将负载均衡服务器同时作为真实物理服务器集群的网关服务器。优点是在内核进程完成数据分发，比在应用层分发性能更好；缺点是集群瓶颈在负载均衡节点上。</li>
+<li>链路层负载均衡：在通信协议的数据链路层修改mac地址，进行负载均衡。数据分发时，不修改ip地址，指修改目标mac地址，配置真实物理服务器集群所有机器虚拟ip和负载均衡服务器ip地址一致，达到不修改数据包的源地址和目标地址，进行数据分发的目的。优点是性能好，缺点是配置复杂。</li>
+<li>混合型负载均衡：采用的多种负载均衡种类</li>
+</ul>
+</li>
+<li>常见的负载均衡服务器：<ul>
+<li>四层负载均衡：Nginx，HAProxy，LVS</li>
+<li>七层负载均衡：Nginx，HAProxy，Apache</li>
+</ul>
+</li>
+<li>常见的负载均衡算法：<ul>
+<li>轮询法：将请求按照顺序轮流分配到后端服务器上</li>
+<li>加权轮询法：和轮询法相似，给配置更好的服务器基于更大的权重</li>
+<li>随机法：随机选择，由概率统计理论知道，随着执行时间增加，该结果和轮询基本相同</li>
+<li>加权随机法：和随机法类似，但增加权重概念</li>
+<li>源地址哈希法：根据获取客户端的 IP 地址进行哈希，得到对应的后端服务器编号</li>
+<li>最小连接数法：动态选择当前积压请求数最少的服务器</li>
+</ul>
+</li>
+</ul>
+<p>容灾和备份：</p>
+<ul>
+<li>容灾：为了在遭遇灾害时能保证信息系统能正常运行，帮助企业实现业务连续性的目标；</li>
+<li>备份：为了应对灾难来临时造成的数据丢失问题。</li>
+</ul>
+<p>故障转移与故障恢复：</p>
+<ul>
+<li>故障转移（failover）：即当活动的服务或应用意外终止时，快速启用冗余或备用的服务器、系统、硬件或者网络接替它们工作。</li>
+<li>故障恢复：在计划内或计划外中断解决后<strong>切换回主站点</strong>的过程。故障恢复通常在故障转移之后作为灾难恢复计划的一部分。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/05/12/%E3%80%8A%E7%AE%97%E6%B3%95%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/">http://blog.zsstrike.tech/2022/05/12/《算法》备忘录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">算法复杂度及其分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">排序算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">算法思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%86%E5%9F%9F%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">领域算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%BA%E5%8A%9B%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">智力题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06-%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="toc-number">7.</span> <span class="toc-text">06 分布式系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-number">8.</span> <span class="toc-text">架构</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
