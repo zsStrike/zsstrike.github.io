@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2020-11-12T10:59:12.000Z">
-<meta property="article:modified_time" content="2022-05-16T07:41:46.314Z">
+<meta property="article:modified_time" content="2023-09-01T12:55:13.578Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-05-16 15:41:46'
+  postUpdate: '2023-09-01 20:55:13'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">深入理解JAVA虚拟机笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-12T10:59:12.000Z" title="发表于 2020-11-12 18:59:12">2020-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-16T07:41:46.314Z" title="更新于 2022-05-16 15:41:46">2022-05-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">19.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>59分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="深入理解JAVA虚拟机笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文主要整理由周志明编写的《深入理解Java虚拟机》第三版书籍的整理笔记。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">深入理解JAVA虚拟机笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-12T10:59:12.000Z" title="发表于 2020-11-12 18:59:12">2020-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-01T12:55:13.578Z" title="更新于 2023-09-01 20:55:13">2023-09-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">19.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>59分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="深入理解JAVA虚拟机笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文主要整理由周志明编写的《深入理解Java虚拟机》第三版书籍的整理笔记。</p>
 <span id="more"></span>
 
 
@@ -155,7 +155,7 @@
 <li>本地方法栈：同虚拟机栈，只不过本地方法栈是为本地方法服务的。</li>
 <li>堆：几乎所有的对象实例都会在这里面分配。</li>
 <li>方法区：用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。<ul>
-<li>运行时常量池：是方法区的一部分，常量池表，Class文件中描述信息会放在此处。</li>
+<li>运行时常量池：是方法区的一部分，常量池表，Class 文件中描述信息会放在此处。</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +163,7 @@
 <p>对象的创建：当Java虚拟机遇到一条字节码new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。在类加载检查通过后，接下来虚拟机将为新生对象分配内存。分配方式有指针碰撞和空闲列表两种方式。接下来，就需要执行构造函数了，也就是Class文件中的<code>&lt;init&gt;()</code>方法。</p>
 <p>对象的内存布局：对象在堆里面的内存布局分为三部分：对象头，实例数据，对齐填充</p>
 <ul>
-<li>对象头：第一类用于存储对象自身的运行时数据，如哈希码，GC分代年龄等，第二部分是类型指针，用于确定该对象是那个类的实例。</li>
+<li>对象头：第一部分用于存储对象自身的运行时数据，如哈希码，GC分代年龄等，第二部分是类型指针，用于确定该对象是那个类的实例。</li>
 <li>实例数据：从父类继承和该类中定义的数据。</li>
 <li>对齐填充：用于保证对象是8字节对齐的。</li>
 </ul>
@@ -251,11 +251,11 @@
 <p><img src="/2020/11/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/image-20201127203047510.png" alt="image-20201127203047510"></p>
 <p>最重要三个阶段是并发标记、并发回收、并发引用更新。</p>
 </li>
-<li><p>ZCG收集器：Z Garbage Collector，是由Oracle公司研发的。ZGC和Shenandoah的目标是高度相似的，都希望在尽可能对吞吐量影响不太大的前提下[2]，实现在任意堆内存大小下都可以把垃圾收集的停顿时间限制在十毫秒以内的低延迟。ZGC也采用基于Region的堆内存布局，但与它们不同的是，ZGC的Region（在一些官方资料中将它称为Page或者ZPage，本章为行文一致继续称为Region）具有动态性——动态创建和销毁，以及动态的区域容量大小。Shenandoah使用转发指针和读屏障来实现并发整理，ZGC虽然同样用到了读屏障，但用的却是一条与Shenandoah完全不同，更加复杂精巧的解题思路：染色指针技术。分为四个阶段：并发标记，并发预备重分配，并发重分配，并发重映射。</p>
+<li><p>ZGC收集器：Z Garbage Collector，是由Oracle公司研发的。ZGC和Shenandoah的目标是高度相似的，都希望在尽可能对吞吐量影响不太大的前提下[2]，实现在任意堆内存大小下都可以把垃圾收集的停顿时间限制在十毫秒以内的低延迟。ZGC也采用基于Region的堆内存布局，但与它们不同的是，ZGC的Region（在一些官方资料中将它称为Page或者ZPage，本章为行文一致继续称为Region）具有动态性——动态创建和销毁，以及动态的区域容量大小。Shenandoah使用转发指针和读屏障来实现并发整理，ZGC虽然同样用到了读屏障，但用的却是一条与Shenandoah完全不同，更加复杂精巧的解题思路：染色指针技术。分为四个阶段：并发标记，并发预备重分配，并发重分配，并发重映射。</p>
 <p><img src="/2020/11/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/image-20201127203846223.png" alt="image-20201127203846223"></p>
 </li>
 </ul>
-<p>Epsilon收集器：这是一款以不能够进行垃圾收集为“卖点”的垃圾收集器，要负责堆的管理与布局、对象的分配、与解释器的协作、与编译器的协作、与监控子系统协作等职责，其中至少堆的管理和对象的分配这部分功能是Java虚拟机能够正常运作的必要支持，是一个最小化功能的垃圾收集器也必须实现的内容。对弈比较小的应用有用武之地。</p>
+<p>Epsilon收集器：这是一款以不能够进行垃圾收集为“卖点”的垃圾收集器，要负责堆的管理与布局、对象的分配、与解释器的协作、与编译器的协作、与监控子系统协作等职责，其中至少堆的管理和对象的分配这部分功能是Java虚拟机能够正常运作的必要支持，是一个最小化功能的垃圾收集器也必须实现的内容。对于比较小的应用有用武之地。</p>
 <h2 id="第四章-虚拟机性能监控、故障处理工具"><a href="#第四章-虚拟机性能监控、故障处理工具" class="headerlink" title="第四章 虚拟机性能监控、故障处理工具"></a>第四章 虚拟机性能监控、故障处理工具</h2><p>基础故障处理工具：</p>
 <ul>
 <li>jps：虚拟机进程状况工具，可以列出正在运行的虚拟机进程，并显示虚拟机执行主类（Main Class，main()函数所在的类）名称以及这些进程的本地虚拟机唯一ID（LVMID，Local Virtual Machine Identifier）。</li>
@@ -280,9 +280,9 @@
 </li>
 <li><p>Class文件采用一种类似C语言的言结构体的伪结构来存储数据，这种伪结构中只有两种数据类型：“无符号数”和“表”。</p>
 <ul>
-<li><p>无符号数属于基本的数据类型，以u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节和8个<br>字节的无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串<br>值。</p>
+<li><p>无符号数属于基本的数据类型，以u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节和8个字节的无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串值。</p>
 </li>
-<li><p>表是由多个无符号数或者其他表作为数据项构成的复合数据类型，为了便于区分，所有表的命名<br>都习惯性地以“_info”结尾。整个Class文件本质上也可以视作是一张表：</p>
+<li><p>表是由多个无符号数或者其他表作为数据项构成的复合数据类型，为了便于区分，所有表的命名都习惯性地以“_info”结尾。整个Class文件本质上也可以视作是一张表：</p>
 <p><img src="/2020/11/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/image-20201128230232765.png" alt="image-20201128230232765"></p>
 <p>无论是无符号数还是表，当需要描述同一类型但数量不定的多个数据时，经常会使用一个前置的容量计数器加若干个连续的数据项的形式，这时候称这一系列连续的某一类型的数据为某一类型的“集合”。</p>
 </li>
@@ -357,7 +357,7 @@
 <li>遇到new、getstatic、putstatic或invokestatic这四条字节码指令时，如果类型没有进行过初始化，则需要先触发其初始化阶段。如使用new关键字，读取或设置一个类的静态字段，调用一个类的静态方法。</li>
 <li>使用java.lang.reflect包的方法对类型进行反射调用的时候，如果类型没有进行过初始化，则需要先触发其初始化。</li>
 <li>当初始化类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</li>
-<li>当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。</li>
+<li>当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。 </li>
 <li>如果一个java.lang.invoke.MethodHandle实例最后的解析结果为REF_getStatic、REF_putStatic、REF_invokeStatic、REF_newInvokeSpecial四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</li>
 <li>当一个接口中定义了JDK 8新加入的默认方法（被default关键字修饰的接口方法）时，如果有这个接口的实现类发生了初始化，那该接口要在其之前被初始化。</li>
 </ol>
@@ -398,12 +398,13 @@
 <li>扩展类加载器：负责加载<JAVA_HOME>\lib\ext目录中，或者被java.ext.dirs系统变量所指定的路径中所有的类库。</li>
 <li>应用程序类加载器：由于应用程序类加载器是ClassLoader类中的getSystemClassLoader()方法的返回值，所以有些场合中也称它为“系统类加载器”。它负责加载用户类路径（ClassPath）上所有的类库，开发者同样可以直接在代码中使用这个类加载器。</li>
 </ul>
-<p>JDK 9之前的Java应用都是由这三种类加载器互相配合来完成加载的，如果用户认为有必要，还可<br>以加入自定义的类加载器来进行拓展：</p>
-<p><img src="/2020/11/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/image-20201129130856054.png" alt="image-20201129130856054"></p>
-</li>
-<li><p>双亲委派模型：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到最顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去完成加载。好处是Java中的类随着它的类加载器一起具备了一种带有优先级的层次关系。</p>
+<p>JDK 9之前的Java应用都是由这三种类加载器互相配合来完成加载的，如果用户认为有必要，还可以加入自定义的类加载器来进行拓展：</p>
 </li>
 </ul>
+<p><img src="/2020/11/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/image-20201129130856054.png" alt="image-20201129130856054">
+  </p>
+</li>
+<li><p>双亲委派模型：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到最顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去完成加载。好处是Java中的类随着它的类加载器一起具备了一种带有优先级的层次关系。</p>
 </li>
 </ul>
 <p>Java模块化系统：</p>
@@ -477,7 +478,7 @@
 <li>Reflection API的设计目标是只为Java语言服务的，而MethodHandle则设计为可服务于所有Java虚拟机之上的语言。</li>
 </ul>
 </li>
-<li><p>invokedynamic指令：作为Java诞生以来唯一一条新加入的字节码指令，都是为了解决原有4条“invoke*”指令方法分派规则完全固化在虚拟机之中的问题，把如何查找目标方法的决定权从虚拟机转嫁到具体用户代码之中。invokedynamic指令的第一个参数不再是代表方法符号引用的CONSTANT_Methodref_info常量，而是变为JDK 7<br>时新加入的CONSTANT_InvokeDynamic_info常量，从这个新常量中可以得到3项信息：引导方法<br>（Bootstrap Method，该方法存放在新增的BootstrapMethods属性中）、方法类型（MethodType）和<br>名称。</p>
+<li><p>invokedynamic指令：作为Java诞生以来唯一一条新加入的字节码指令，都是为了解决原有4条“invoke*”指令方法分派规则完全固化在虚拟机之中的问题，把如何查找目标方法的决定权从虚拟机转嫁到具体用户代码之中。invokedynamic指令的第一个参数不再是代表方法符号引用的CONSTANT_Methodref_info常量，而是变为JDK 7<br>时新加入的CONSTANT_InvokeDynamic_info常量，从这个新常量中可以得到3项信息：引导方法（Bootstrap Method，该方法存放在新增的BootstrapMethods属性中）、方法类型（MethodType）和名称。</p>
 </li>
 <li><p>掌控方法分派规则：子类方法不能直接调用祖父类方法，可以通过MethodHandle来进行访问，如遇到权限问题，可以使用<code>lookupImpl.setAccessible(true)</code>来解决。</p>
 </li>
@@ -580,7 +581,7 @@
 <li><p>主内存与工作内存：规定了所有的变量都存储在主内存（Main Memory）中，每条线程还有自己的工作内存（Working Memory，可与前面讲的处理器高速缓存类比），线程的工作内存中保存了被该线程使用的变量的主内存副本，线程对变量的所有操作（读取、赋值等）都必须在工作内存中进行，而不能直接读写主内存中的数据。</p>
 <p><img src="/2020/11/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/image-20201205185323393.png" alt="image-20201205185323393"></p>
 </li>
-<li><p>内存间交互操作：lock，unlock，read，load，store，write，use，assign。伤处操作都是原子的，不可再分的。</p>
+<li><p>内存间交互操作：lock，unlock，read，load，store，write，use，assign。伤上述操作都是原子的，不可再分的。</p>
 </li>
 <li><p>对于volatile型变量的特殊规则：当一个变量被volatile定义的时候，将具有：</p>
 <ul>

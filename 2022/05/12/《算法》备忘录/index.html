@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://blog.zsstrike.tech/assets/default_cover.png">
 <meta property="article:published_time" content="2022-05-12T14:37:18.000Z">
-<meta property="article:modified_time" content="2023-08-03T05:38:52.985Z">
+<meta property="article:modified_time" content="2023-09-15T01:44:03.228Z">
 <meta property="article:author" content="zsStrike">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-08-03 13:38:52'
+  postUpdate: '2023-09-15 09:44:03'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -142,7 +142,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《算法》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-12T14:37:18.000Z" title="发表于 2022-05-12 22:37:18">2022-05-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-03T05:38:52.985Z" title="更新于 2023-08-03 13:38:52">2023-08-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>40分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《算法》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于在算法学习过程中，总结相关算法套路以及算法编写经验，以备查阅。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/avatar.jpg" onerror="onerror=null;src='/assets/default_cover.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zsStrike</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">《算法》备忘录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-12T14:37:18.000Z" title="发表于 2022-05-12 22:37:18">2022-05-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-15T01:44:03.228Z" title="更新于 2023-09-15 09:44:03">2023-09-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">15.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>49分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《算法》备忘录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>本文用于在算法学习过程中，总结相关算法套路以及算法编写经验，以备查阅。</p>
 <span id="more"></span>
 
 
@@ -159,9 +159,11 @@
 </ul>
 <p>递归算法复杂度分析：</p>
 <ul>
-<li><p>递归树方法</p>
+<li><p>递归树方法：节点的总个数就是这个算法的时间复杂度</p>
 </li>
-<li><p>代入检测法</p>
+<li><p>代入检测法：猜测时间复杂度，然后代入看是否满足题意，最后归纳总结</p>
+</li>
+<li><p>差分方程法：首先计算出对应的齐次方程解，然后代入初始值求解常数项目</p>
 </li>
 <li><p>主方法：令 $a \ge 1, b &gt; 1$ 是常数，$f(n)$​ 是一个函数，T(n) 是非负整数上的递推式：<br>  $$<br>  T(n) &#x3D; aT(\frac{n}{b}) + f(n)<br>  $$<br>  T(n) 有以下方法紧确界：</p>
 <ul>
@@ -393,7 +395,7 @@
 </li>
 <li><p>NPC 问题：存在一个NP问题，使得所有的该类NP问题都可以<strong>多项式时间地规约</strong> 为NPC问题。根据规约的传递性，对NP问题进行一层接一层地规约，最终可以得到一个足够泛化的NP问题，即NPC问题。由此可知 NPC 问题一定是 NP 问题</p>
 </li>
-<li><p>NPH 问题：满足 NPC 问题定义中的由NP通过规约的条件，但是它本身未必是一个NP问题</p>
+<li><p>NPH 问题：满足 NPC 问题定义中的由 NP 通过规约的条件，但是它本身未必是一个 NP 问题</p>
 <img src="663d4582b70c79f04caa2c899689bbbc_1440w.png" alt="img" style="zoom:50%;" /></li>
 </ul>
 <h2 id="领域算法"><a href="#领域算法" class="headerlink" title="领域算法"></a>领域算法</h2><p>安全算法：</p>
@@ -417,7 +419,7 @@
 </ul>
 <p>大数据处理：</p>
 <ul>
-<li>分治&#x2F;hash&#x2F;排序：基本思路便是分而治之&#x2F;Hash映射 + Hash_map统计 + 堆&#x2F;快速&#x2F;归并排序</li>
+<li>分治&#x2F;hash&#x2F;排序：基本思路便是分而治之&#x2F;Hash映射 + Hash_map 统计 + 堆&#x2F;快速&#x2F;归并排序</li>
 <li>布隆过滤器：高效判断元素是否存在的数据结构，存在误判可能，变体有计数布隆过滤器，支持删除</li>
 <li>外排序算法：位图排序法（不允许存在重复元素），多路归并排序</li>
 <li>Map &amp; Reduce：将任务进行划分，然后再将结果进行合并</li>
@@ -455,13 +457,53 @@
 
 
 
-
-
-
-
-
-
-<h2 id="06-分布式系统"><a href="#06-分布式系统" class="headerlink" title="06 分布式系统"></a>06 分布式系统</h2><p>分布式系统面临的问题：</p>
+<p>问题：N个人要晚上过桥，在任何时候最多两个人一组过桥，每组要有一只手电筒。在这N个人中只有一个手电筒能用，因此要安排以某种往返的方式来返还手电筒，使得所有人过桥时间最短。</p>
+<p>解答：具体有两种方案：</p>
+<ul>
+<li>让第1个人分别带第n-1个人和第n个人过桥：cost[n-1]+cost[n]+2*cost[1]</li>
+<li>让第1个人和第2个人先过桥，然后第n和第n-1个人再过桥：cost[n]+cost[1]+2*cost[2]</li>
+</ul>
+<p>只需要在每次选择中，选择上述两种方案中的一种即可。</p>
+<p>问题：有 25 匹马和 5 条赛道，赛马过程无法进行计时，只能知道相对快慢。问最少需要几场赛马可以知道前 3 名。</p>
+<p>解答：先把 25 匹马分成 5 组，进行 5 场赛马，得到每组的排名。再将每组的第 1 名选出，进行 1 场赛马，按照这场的排名将 5 组先后标为 A、B、C、D、E。可以知道，A 组的第 1 名就是所有 25 匹马的第 1 名。而第 2、3 名只可能在 A 组的 2、3 名，B 组的第 1、2 名，和 C 组的第 1 名，总共 5 匹马，让这 5 匹马再进行 1 场赛马，前两名就是第 2、3 名。所以总共是 5+1+1&#x3D;7 场赛马。</p>
+<p>问题：有 20 瓶药丸，其中 19 瓶药丸质量相同为 1 克，剩下一瓶药丸质量为 1.1 克。瓶子中有无数个药丸。要求用一次天平找出药丸质量 1.1 克的药瓶。</p>
+<p>解答：可以从药丸的数量上来制造差异：从第 i 瓶药丸中取出 i 个药丸，然后一起称重。可以知道，如果第 i 瓶药丸重 1.1 克&#x2F;粒，那么称重结果就会比正常情况下重 0.1 * i 克。</p>
+<p>问题：一栋楼有 100 层，在第 N 层或者更高扔鸡蛋会破，而第 N 层往下则不会。给 2 个鸡蛋，求 N，要求最差的情况下扔鸡蛋的次数最少。</p>
+<p>解答：可以将楼层划分成多个区间，第一个鸡蛋 E1 用来确定 N 属于哪个区间，第二个鸡蛋 E2 按顺序遍历该区间找到 N。那么问题就转换为怎么划分区间满足最坏情况下扔鸡蛋次数最少。<br>E1 需要从第一个区间开始遍历到最后一个区间。如果按等大小的方式划分区间，即 E2 的遍历次数固定。那么最坏的情况是 N 在最后一个区间，此时 E1 遍历的次数最多。为了使最坏情况下 E1 和 E2 总共遍历的次数比较少，那么后面的区间大小要比前面的区间更小。具体来说，E1 每多遍历一次，E2 要少遍历一次，才使得 N 无论在哪个区间，总共遍历的次数一样。设第一个区间大小为 X，那么第二个区间的大小为 X-1，以此类推。那么 X + (X-1) + (X-2) + … + 1 &#x3D; 100，得到 X (X + 1) &#x2F; 2 &#x3D; 100 ，即 X &#x3D; 14。我们先从14层开始，然后是27层，接着是39层，依此类推，最差情况下鸡蛋要扔14次。</p>
+<p>问题：一硬币，一面向上概率0.7，一面0.3，如何公平？</p>
+<p>解答：抛两次， 正反 A胜， 反正 B胜。</p>
+<p>问题：1000瓶药水，1瓶有毒药，服用后一小时毒发，毒药可以无限稀释，那么一小时内用几只小白鼠能够找出毒药？</p>
+<p>解答：每个小白鼠编上号码，喝对应 bit 上为 1 的混合毒药，看小白鼠是否中毒，因此需要 10 只小白鼠。</p>
+<p>问题：如果可以测两轮，那么可以测多少瓶水中的一瓶毒药？</p>
+<p>解答：首先是第一轮死掉的小鼠不能被replace的情况，小鼠有三种状态，第一轮死，第二轮死，和两轮都没死，那么三种状态可以类比为3进制，小鼠的量程为3^10即59049瓶，具体操作方式为对编码为2的位数，第二轮混合喂。然后是第一轮死掉的小鼠可以被replace的情况，将每1024瓶混合为1滴做第一轮，选定组别后第二轮确定瓶子编码，量程为2^10 * 2^10即1048576瓶。对不能replace的N轮，量程为（N+1）^10，能replace的N轮，量程为2^(10*N)。</p>
+<p>问题：如果1000瓶里有2瓶毒药，需要多少只小鼠？</p>
+<p>解答：1000瓶里1瓶毒药有1000种可能性，而1000瓶2瓶毒药则有C(1000,2)，即499500种可能性，那么log2(499500) 为18.93，即需要19只小鼠。具体实现方式为以两两混合法将1000瓶拆成499500滴，并用题目1中的方法测得。</p>
+<p>问题：有16瓶水1瓶有毒，用多少只小白鼠能测出14瓶无毒的水？</p>
+<p>解答：将16瓶药水用二进制XXXX表示，取3只小白鼠来测，测出的状态为XXX，那么毒在XXX0或XXX1中，剩下14瓶无毒。</p>
+<p>问题：30枚面值不全相同的硬币摆成一排，甲、乙两个人轮流选择这排硬币的其中一端，并取走最外边的那枚硬币。如果你先取硬币，能保证得到的钱不会比对手少吗？</p>
+<p>解答：先取者可以让自己总是取奇数位置上的硬币或者总是取偶数位置上的硬币。数一数是奇数位置上的面值总和多还是偶数位置上的面值总和多，然后总是取这些位置上的硬币就可以了。</p>
+<p>问题：有7克、2克砝码各一个，天平一只，如何只用这些物品五次内将140克的盐分成50、90克各一份？</p>
+<p>解答：第一次：先分成70和70<br>第二次：通过7和2砝码将70分成9和61<br>第三次：通过9克盐和2砝码将61分成50和11</p>
+<p>问题：你有两个罐子，每个罐子各有若干红色弹球和蓝色弹球，两个罐子共有50个红色弹球，50个蓝色弹球，随机选出一个罐子，随机从中选取出一个弹球，要使取出的是红球的概率最大，一开始两个罐子应放几个红球，几个蓝球？在你的计划中，得到红球的准确几率是多少？</p>
+<p>解答：一个罐子放1红，一个罐子放49红和50蓝，这样得到红球的概率接近3&#x2F;4。</p>
+<p>问题：54张扑克牌，其中有十张是翻过来的。现在把你的眼睛蒙上，让你把扑克牌分成两叠（两叠的多少可以不一样）。要求在两叠中翻过来的扑克牌是相等的。请问该怎么做？</p>
+<p>解答：第一步，你在这54张牌中任意取出10张，现在，扑克牌分成了两叠。44张和10张；第二步，44张那叠不动，将10张这叠每张都翻过来，便得到了符合条件的两叠牌。<br>解释：第一步之后，设44张那叠中正面牌x张，10张那叠中正面牌则为10-x张。第二步之后，44张那叠中正面牌保持x张，10张那叠反过来了：反面牌为10-x张，正面牌x张。</p>
+<p>问题：1，11，21，1211，111221，下一个数是什么？</p>
+<p>解答：下行是对上一行的解释 所以新的应该是3个1 2个2 1个1 ：312211。</p>
+<p>问题：3个箱子里面放了 苹果，梨子，苹果加梨子，标签全错误，只能选择查看一箱的水果来改正所有标签</p>
+<p>解答：查看贴苹果和梨标签那一个，如果拿出来的是苹果，代表这一箱只有苹果，因为如果是苹果和梨就代表标签没错了。那么剩下的两箱就是梨，苹果和梨，剩下的标签是梨，苹果，由于标签全错，所以贴着苹果的是梨，贴着梨的是苹果和梨。<br>如果拿出来的是梨，同理代表这一箱只有梨。那么剩下的两箱就是苹果，苹果和梨，剩下的标签就是苹果，梨。由于标签全错，贴着苹果的就是苹果和梨，贴着梨的就是苹果。</p>
+<p>问题：某种药方要求非常严格，你每天需要同时服用A、B两种药片各一颗，不能多也不能少。这种药非常贵，你不希望有任何一点的浪费。一天，你打开装药片A的药瓶，倒出一粒药片放在手心；然后打开另一个药瓶，但不小心倒出了两粒药片。现在，你手心上有一颗药片A，两颗药片B，并且你无法区别哪个是A，哪个是B。你如何才能严格遵循药方服用药片，并且不能有任何的浪费？</p>
+<p>解答：把手上的三片药各自切成两半，分成两堆摆放。再取出一粒药片A，也把它切成两半，然后在每一堆里加上半片的A。现在，每一堆药片恰好包含两个半片的A和两个半片的B。一天服用其中一堆即可。</p>
+<p>问题：如何用一枚硬币等概率地产生一个1到3之间的随机整数？如果这枚硬币是不公正的呢？</p>
+<p>解答：如果是公正的硬币，则投掷两次，“正反”为1，“反正”为2，“正正”为3，“反反”重来。<br>如果是不公正的硬币，注意到出现“正反”和“反正”的概率一样，因此令“正反反正”、“反正正反”、“正反正反”分别为1、2、3，其余情况重来。另一种更妙的办法是，投掷三次硬币，“正反反”为1，“反正反”为2，“反反正”为3，其余情况重来。</p>
+<p>问题：在房里有三盏灯，房外有三个开关，在房外看不见房内的情况，你只能进门一次，你用什么方法来区分那个开关控制那一盏灯？</p>
+<p>解答：打开一个开关。过10分钟后关掉开关，并打开另一个开关。进屋确认可知：<br>亮的灯是由第二次打开的开关控制；<br>摸上去发热的不发亮的灯是由第一次打开的开关控制<br>剩下的第三盏灯是由未操作过的开关控制。</p>
+<p>问题：盲人都各自买了两对黑袜和两对白袜，八对袜了的布质、大小完全相同，而每对袜了都有一张商标纸连着。两位盲人不小心将八对袜了混在一起。 他们每人怎样才能取回黑袜和白袜各两对呢？</p>
+<p>解答：每一对分开，一人拿一只，因为袜子不分左右脚。</p>
+<p>问题：圆桌，两个人，轮流放硬币，不能重叠，半径为1，某一方不能放下去，则为输。问先手赢 后手赢。</p>
+<p>解答：先手赢。圆桌对称，先手放一个，后手都能找到对称的位置放，但是除了圆心。</p>
+<p>问题：100本书,两个人轮流拿,每次拿1~5本,你先拿,有没有啥策略可以保证你可以拿到最后一本书?<br>解答：第一次拿4个,之后对方1个,我拿5个,对方拿2个,我拿3个,总是对方拿n个,我拿6-n个.<br>因为第一次以后剩下96个,每次使得两个人拿的总数是6,那么最后就是我拿的</p>
+<h2 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h2><p>分布式系统面临的问题：</p>
 <ul>
 <li>缺乏全局时钟：很难定义两个事件究竟谁先谁后，物理时钟会发生偏移，通常配合逻辑时钟一起使用</li>
 <li>网络异常：如出现网络分区，消息乱序（序列号）等</li>
@@ -479,9 +521,9 @@
 <ul>
 <li>内容：CAP 理论是分布式系统、特别是分布式存储领域中被讨论的最多的理论。其中 C 代表一致性 (Consistency)，A 代表可用性 (Availability)，P 代表分区容错性 (Partition tolerance)。CAP 理论告诉我们C、A、P三者不能同时满足，最多只能满足其中两个。但是 CAP 理论的作者对此提出了质疑，因为如果选择了 AP 分布式模型，可用性虽然不能达到 100%，但是可以达到 99.999%。</li>
 <li>理解：考虑两个副本处于网络分区的两侧，即两个副本不能通信：<ul>
-<li>如果允许其中一个副本更新，则会导致数据不一致，即丧失了C性质。</li>
-<li>如果为了保证一致性，将分区某一侧的副本设置为不可用，那么又丧失了A性质。</li>
-<li>除非两个副本可以互相通信，才能既保证C又保证A，这又会导致丧失P性质。</li>
+<li>如果允许其中一个副本更新，则会导致数据不一致，即丧失了 C 性质。</li>
+<li>如果为了保证一致性，将分区某一侧的副本设置为不可用，那么又丧失了 A 性质。</li>
+<li>除非两个副本可以互相通信，才能既保证 C 又保证 A，这又会导致丧失 P 性质。</li>
 </ul>
 </li>
 </ul>
@@ -507,7 +549,7 @@
 <li>Acceptor：决策者，参与决策，回复 Proposer 的提案，Proposer 只需要收到大多数决议者的接收即可</li>
 <li>Learner：不参与决策，从提议者&#x2F;参与者学习最新达成一致的提案（value）</li>
 </ul>
-<p>注意，在多副本状态机中，每个副本同时具有Proposer、Acceptor、Learner三种角色。</p>
+<p>注意，在多副本状态机中，每个副本同时具有 Proposer、Acceptor、Learner 三种角色。</p>
 </li>
 <li><p>3 个阶段：</p>
 <img src="alg-dst-paxos-2.jpg" alt="img" style="zoom:67%;" />
@@ -516,15 +558,15 @@
 <li>Prepare 阶段：<ul>
 <li>Prepare：Proposer 生成全局唯一且递增的 Proposal ID (可使用时间戳加Server ID)，向所有Acceptors 发送 Prepare 请求，这里无需携带提案内容，只携带 Proposal ID 即可</li>
 <li>Promise：Acceptors 收到 Prepare 请求后，做出“两个承诺，一个应答”<ul>
-<li>承诺1: 不再接受Proposal ID小于等于(注意: 这里是&lt;&#x3D; )当前请求的Prepare请求;</li>
-<li>承诺2: 不再接受Proposal ID小于(注意: 这里是&lt; )当前请求的Propose请求;</li>
-<li>应答: 不违背以前作出的承诺下，回复已经Accept过的提案中Proposal ID最大的那个提案的Value和Proposal ID，没有则返回空值。</li>
+<li>承诺1: 不再接受 Proposal ID 小于等于(注意: 这里是&lt;&#x3D; )当前请求的 Prepare 请求;</li>
+<li>承诺2: 不再接受 Proposal ID 小于(注意: 这里是&lt; )当前请求的 Propose 请求;</li>
+<li>应答: 不违背以前作出的承诺下，回复已经 Accept 过的提案中 Proposal ID 最大的那个提案的 Value 和 Proposal ID，没有则返回空值。</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Accept 阶段：<ul>
-<li>Propose：Proposer 收到多数Acceptors的Promise应答后，从应答中选择Proposal ID最大的提案的Value，作为本次要发起的提案。如果所有应答的提案Value均为空值，则可以自己随意决定提案Value。然后携带当前Proposal ID，向所有Acceptors发送Propose请求。</li>
+<li>Propose：Proposer 收到多数 Acceptors 的 Promise 应答后，从应答中选择Proposal ID最大的提案的Value，作为本次要发起的提案。如果所有应答的提案Value均为空值，则可以自己随意决定提案Value。然后携带当前Proposal ID，向所有Acceptors发送Propose请求。</li>
 <li>Accept：Acceptor收到Propose请求后，在不违背自己之前作出的承诺下，接受并持久化当前Proposal ID和提案Value。</li>
 </ul>
 </li>
@@ -821,7 +863,7 @@
 <li>故障转移（failover）：即当活动的服务或应用意外终止时，快速启用冗余或备用的服务器、系统、硬件或者网络接替它们工作。</li>
 <li>故障恢复：在计划内或计划外中断解决后<strong>切换回主站点</strong>的过程。故障恢复通常在故障转移之后作为灾难恢复计划的一部分。</li>
 </ul>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/05/12/%E3%80%8A%E7%AE%97%E6%B3%95%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/">http://blog.zsstrike.tech/2022/05/12/《算法》备忘录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">算法复杂度及其分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">排序算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">算法思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%86%E5%9F%9F%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">领域算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%BA%E5%8A%9B%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">智力题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06-%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="toc-number">7.</span> <span class="toc-text">06 分布式系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-number">8.</span> <span class="toc-text">架构</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech">zsStrike</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.zsstrike.tech/2022/05/12/%E3%80%8A%E7%AE%97%E6%B3%95%E3%80%8B%E5%A4%87%E5%BF%98%E5%BD%95/">http://blog.zsstrike.tech/2022/05/12/《算法》备忘录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.zsstrike.tech" target="_blank">zsStrike</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post_share"><div class="social-share" data-image="/assets/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/avatar.jpg" onerror="this.onerror=null;this.src='/assets/default_cover.png'" alt="avatar"/></div><div class="author-info__name">zsStrike</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zsStrike"><i class="fab fa-github"></i><span>Github</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%8F%8A%E5%85%B6%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">算法复杂度及其分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">排序算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">算法思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%86%E5%9F%9F%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">领域算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%BA%E5%8A%9B%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">智力题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="toc-number">7.</span> <span class="toc-text">分布式系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-number">8.</span> <span class="toc-text">架构</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By zsStrike</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
